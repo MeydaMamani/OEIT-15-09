@@ -1,0 +1,32 @@
+.piepagina {
+    flex-direction: column;
+    padding: 5% 12%;
+}
+
+.cajacolumna {
+    flex-direction: column;
+}
+.cajacolumna .cajatext1, .cajatext2{
+    margin: .5% 0;
+}
+
+.barramenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin: 0 auto;
+}
+ .menu-content .content-menu .menu .first-deslice .first-iten .second-deslice .second-iten {
+    width: auto;
+    background-color: #0f1540;
+    padding-left: 1rem;
+    border-bottom: 0 solid white;
+  }
+.cajaslider{
+    padding: 0;
+}
+.cajaslider .slider1{
+    height: 300px;
+}

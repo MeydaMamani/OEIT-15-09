@@ -1,0 +1,28 @@
+.gridbodycolumna1 {
+    grid-template-columns: repeat(1,1fr);
+}
+
+.cajageneral3{
+    flex-direction: column;
+}
+.cajacontiene2{
+    justify-content: center;
+}
+
+.cajacontiene{
+    padding-left: initial;
+}
+.cajabuscar input#buscar{
+    width: auto;
+}
+.form_covid {
+    width: 320px;
+    min-height: 280px;
+    height: auto;
+    border-radius: 5px;
+    margin: 2% auto;
+    box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+    padding: 2%;
+    background-image: linear-gradient(-225deg, #506FF2 50%, #663CE5 50%);
+   
+}
