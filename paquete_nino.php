@@ -5,7 +5,7 @@
     <title>OEIT - DIRESA</title>
     <meta name="description" content="PAGINA DIRESA PASCO">
     <meta name="keywords" content="OEIT DIRESA-PASCO">
-    <link rel="shortcut icon" href="./IMG/logo.jpg">
+    <link rel="shortcut icon" href="./img/logo.jpg">
     <link rel="stylesheet" type="text/css" href="./inicio.css" media="screen, handheld">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" media="(max-width: 1100px)" href="max-width-810.css" />
@@ -23,7 +23,7 @@
         <div class="cajacolumna">
           <div class="cajacontiene1">
             <div class="cajalogo">
-              <img class="logo" src="./IMG/diresa1.jpeg">
+              <img class="logo" src="./img/diresa1.jpeg">
             </div>
             <div class="cajanombre">
               <span class="nomlogo">DIRESA-PASCO</span>
@@ -33,7 +33,7 @@
         <div class="cajacolumna">
           <div class="cajacontiene2">
             <div class="cajalogo2">
-              <img class="logo2" src="./IMG/gorepa1.png">
+              <img class="logo2" src="./img/gorepa1.png">
             </div>
           </div><!--Caja Vacia solo para colocar botones de ingreso u otros-->
         </div>
@@ -45,7 +45,7 @@
   <nav class="content-menu">
 
       <label for="toggle" class="res-menu">
-          <img src="IMG/menu.png" alt="menu">
+          <img src="img/menu.png" alt="menu">
       </label>
       <input type="checkbox" id="toggle">
       <div class="menu">

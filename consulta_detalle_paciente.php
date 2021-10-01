@@ -4,151 +4,158 @@ require ('abrir.php');
    
 if (isset($_POST['Buscar'])) {
 global $conex;
- header('Content-Type: text/html; charset=ISO-8859-1');
+//  header('Content-Type: text/html; charset=ISO-8859-1');
+ include('./base.php');
 ?>
-<!DOCTYPE HTML>
-<html lang="es">
-<head> <!--mi Cabecera, icono, titulo y meta-->
-    <meta charset="UTF-8">
-    <title>OEIT - DIRESA</title>
-    <meta name="description" content="PAGINA DIRESA PASCO">
-    <meta name="keywords" content="OEIT DIRESA-PASCO">
-    <link rel="shortcut icon" href="./IMG/logo.jpg">
-    <link rel="stylesheet" type="text/css" href="./inicio.css" media="screen, handheld">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" media="(max-width: 1100px)" href="max-width-810.css" />
-    <link rel="stylesheet" media="(max-width: 700px)" href="max-width-700.css" />
-    <link rel="stylesheet" media="(max-width: 612px)" href="max-width-612.css" />
-    <link rel="stylesheet" media="(max-width: 450px)" href="max-width-450.css" />
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-</head>
-<body>
-<header>
-  <div class="cajageneral cajaheader">
-    <div class="cajavarios">
-      <div class="cajageneral3">  <!--Logo y Otros-->
-        <div class="cajacolumna">
-          <div class="cajacontiene1">
-            <div class="cajalogo">
-              <img class="logo" src="./IMG/diresa1.jpeg">
-            </div>
-            <div class="cajanombre">
-              <span class="nomlogo">DIRESA-PASCO</span>
-            </div>
-          </div>
-        </div>
-        <div class="cajacolumna">
-          <div class="cajacontiene2">
-            <div class="cajalogo2">
-              <img class="logo2" src="./IMG/oeit.png">
-            </div>
-          </div><!--Caja Vacia solo para colocar botones de ingreso u otros-->
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<main class="menu-content">
-  <nav class="content-menu">
+<style>
+  .profiletimeline {
+    position: relative;
+    padding-left: 40px;
+    margin-right: 10px;
+    border-left: 1px solid rgba(120, 130, 140, 0.13);
+    margin-left: 30px;
+  }
+  .profiletimeline .sl-item {
+    margin-top: 8px;
+    margin-bottom: 15px;
+  }
+  .profiletimeline .sl-left {
+    float: left;
+    margin-left: -31px;
+    z-index: 1;
+    margin-right: 15px;
+  }
+  .size-icon-information-person{
+        max-width: 32px !important;
+      margin-left: -20px;  
+    }
 
-      <label for="toggle" class="res-menu">
-          <img src="IMG/menu.png" alt="menu">
-      </label>
-      <input type="checkbox" id="toggle">
-      <div class="menu">
-          <ul class="first-deslice">
-              <li class="first-iten"><a class="first-link" href="Inicio.php">INICIO</a></li>
-              
-              <li class="first-iten"><a class="first-link">COVID-19</a>
-                  <ul class="second-deslice">
-                      <li class="second-iten"><a class="second-link" href="vacuna_covid.php">CONSULTA TU VACUNACION</a></li>
-                      <li class="second-iten"><a class="second-link" href="http://200.10.69.226/consultas/inicio_padron.php">CONSULTA PADRON</a></li>
-                      <li class="second-iten"><a class="second-link" href="#">DESCARGUE SU CONSENTIMIENTO</a></li>
-                      <li class="second-iten"><a class="second-link" href="#">SISCOVID</a></li>
-                  </ul>
-              </li>
-              <li class="first-iten"><a class="first-link">GESTANTE</a>
-                <ul class="second-deslice">
-                    <li class="second-iten"><a class="second-link" href="bateria_completa.php">BATERIA COMPLETA</a></li>
-                    
-                </ul>
-              </li>
-              <li class="first-iten"><a class="first-link">PACIENTE</a>
-                <ul class="second-deslice">
-                    <li class="second-iten"><a class="second-link" href="detalle_paciente.php">DETALLE PACIENTE</a></li>
-                    <li class="second-iten"><a class="second-link" href="#"></a></li>
-                </ul>
-              </li>
-              <li class="first-iten"><a class="first-link" href="#">NIÑO</a>
-                <ul class="second-deslice">
-                    <li class="second-iten"><a class="second-link" href="prematuros.php">NIÑOS PREMATUROS</a></li>
-                    <li class="second-iten"><a class="second-link" href="4_meses.php">4 MESES</a></li>
-                    <li class="second-iten"><a class="second-link" href="6-8_meses.php">6 - 8 MESES</a></li>
-                </ul>
-              </li>
-          </ul>
-      </div>
-  </nav>
-</main>
-<section class="cajaslider"><!--slider*/-->
-  <center >
+    .information-person-text {
+        font-size: 14px;
+        font-weight: 600;
+        color: #383838;
+    }
+</style>
       <?php 
-
         $doc = $_POST['doc'];
         $resultado = "SELECT t.Provincia_Establecimiento,t.Distrito_Establecimiento,t.Nombre_Establecimiento, t.Tipo_Doc_Paciente,
                       t.Numero_Documento_Paciente,t.Fecha_Nacimiento_Paciente, t.Id_Cita, t.Fecha_Atencion,t.Tipo_Diagnostico, t.Codigo_Item, t.Valor_Lab, t.Descripcion_Item
                       from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t 
                       where Numero_Documento_Paciente='$doc' and anio='2021' and Fecha_Nacimiento_Paciente>='1979-01-01'
                       order by Fecha_Atencion DESC,id_cita;";
-        $consulta2 = sqlsrv_query($conn, $resultado);
-          echo "<br>";
-          echo "<br>";
-          echo "<br>";
-          echo "<br>";
-          echo "<br>";
-          echo "<font color=\"BLACK\">BIENVENIDO</font>";
-          echo ":";
-          echo $doc;
-          echo "<br>";
+
+              $consulta2 = sqlsrv_query($conn, $resultado);
           ?>
-          <div class="container_paciente">
-           <table class="tabla" text="#FCFAFA" background="red" width="50%" border="1" bordercolor="#335DFF" >
-         <thead>
-            <tr>
-              <th>ESTABLECIMIENTO</th>
-              <th>FECHA NACIMIENTO</th>
-              <th>ID CITA</th>
-              <th>FECHA ATENCION</th>
-              <th>TIPO DIAGNOSTICO</th>
-              <th>CODIGO ITEM</th>
-              <th>VALOR LAB</th> 
-              <th>DESCRIPCION ITEM</th>
-            </tr>
-          </thead>
-                  <?php  while ($consulta = sqlsrv_fetch_array($consulta2)){  
+        <br>
+        <div class="container">
+            <div class="row mb-4">
+              <div class="col-lg-10">
+                <h4 class="m-b-30"> INFORMACIÓN - <?php echo $doc; ?></h4>
+              </div>
+              <div class="col-lg-2 text-end">
+                <button type="submit" name="Limpiar" class="btn btn-outline-info btn-sm 1btn_buscar" onclick="location.href='detalle_paciente.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+              </div>
+            </div>
+            <?php  while ($consulta = sqlsrv_fetch_array($consulta2)){  
                 $newdate = $consulta['Fecha_Nacimiento_Paciente'] -> format('d/m/y');
                 $newdate2 = $consulta['Fecha_Atencion'] -> format('d/m/y');?>
-          <tbody>
-      <tr>
-        <td><?php echo $consulta['Nombre_Establecimiento']; ?></th>
-        <td><?php echo $newdate; ?></td>
-        <td><?php echo $consulta['Id_Cita']; ?></td>
-        <td><?php echo $newdate2; ?></td>
-        <td><?php echo $consulta['Tipo_Diagnostico']; ?></td>
-        <td><?php echo $consulta['Codigo_Item']; ?></td>
-        <td><?php echo $consulta['Valor_Lab']; ?></td>
-        <td><?php echo $consulta['Descripcion_Item']; ?></td>
-      </tr>
-          
-  <?php
-        ;}
- 
-        include("cerrar.php");
-    ?>
-    </tbody>
-    </table>
-    </div>
-     <input type="submit" name="Limpiar" class="btn_buscar" value="Cancelar" onclick="location.href='detalle_paciente.php';">
-    </center>
+            <div class="border border-primary">
+              <div class="row pt-3">
+                  <div class="col-4">
+                    <div class="profiletimeline">
+                        <div class="sl-item">
+                          <div class="sl-left"><img src="./img/icon-information.png" width="50" alt="user" class="img-circle size-icon-information-person"></div>
+                          <div class="sl-right">
+                            <div>
+                              <label class="information-person-text">Establecimiento</label>
+                              <p class="font-13"><?php echo $consulta['Nombre_Establecimiento']; ?></p>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="sl-item">
+                          <div class="sl-left"><img src="./img/icon-information.png" width="100" alt="user" class="img-circle size-icon-information-person"></div>
+                          <div class="sl-right">
+                            <div>
+                              <label class="information-person-text">Fecha de Atención</label>
+                              <p class="font-13"><?php echo $newdate2; ?></p>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="sl-item">
+                          <div class="sl-left"><img src="./img/icon-information.png" width="100" alt="user" class="img-circle size-icon-information-person"></div>
+                          <div class="sl-right">
+                            <div>
+                              <label class="information-person-text">Valor Lab</label>
+                              <p class="font-13"><?php echo $consulta['Valor_Lab']; ?></p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="profiletimeline">
+                      <div class="sl-item">
+                        <div class="sl-left"><img src="./img/icon-information.png" width="100" alt="user" class="img-circle size-icon-information-person"></div>
+                        <div class="sl-right">
+                          <div>
+                            <label class="information-person-text">Fecha de Nacimiento</label>
+                            <p class="font-13"><?php echo $newdate; ?></p>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="sl-item">
+                        <div class="sl-left"><img src="./img/icon-information.png" width="100" alt="user" class="img-circle size-icon-information-person"></div>
+                        <div class="sl-right">
+                          <div>
+                            <label class="information-person-text">Tipo de Diagnóstico</label>
+                            <p class="font-13"><?php echo $consulta['Tipo_Diagnostico']; ?></p>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="sl-item">
+                        <div class="sl-left"><img src="./img/icon-information.png" width="100" alt="user" class="img-circle size-icon-information-person"></div>
+                        <div class="sl-right">
+                          <div>
+                            <label class="information-person-text">Descripción Item</label>
+                            <p class="font-13"><?php echo $consulta['Descripcion_Item']; ?></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                      <div class="profiletimeline">
+                        <div class="sl-item">
+                          <div class="sl-left"><img src="./img/icon-information.png" width="100" alt="user" class="img-circle size-icon-information-person"></div>
+                          <div class="sl-right">
+                            <div>
+                              <label class="information-person-text">Id Cita</label>
+                              <p class="font-13"><?php echo $consulta['Id_Cita']; ?></p>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="sl-item">
+                          <div class="sl-left"><img src="./img/icon-information.png" width="100" alt="user" class="img-circle size-icon-information-person"></div>
+                          <div class="sl-right">
+                            <div>
+                              <label class="information-person-text">Código Item</label>
+                              <p class="font-13"><?php echo $consulta['Codigo_Item']; ?></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <br>
+                  <?php
+                      ;}              
+                      include("cerrar.php");
+                  ?>
+        </div>
     <?php } ?>
-</section>

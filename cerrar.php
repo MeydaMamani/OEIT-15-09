@@ -1,3 +1,3 @@
 <?php 
-sqlsrv_close($conn);
- ?>
+    sqlsrv_close($conn);
+?>
