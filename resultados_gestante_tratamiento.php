@@ -63,7 +63,7 @@
                             <th class="align-middle">Gestantes Atendidas</th>
                             <th class="align-middle" id="fields_gestante_tratamiento_head">Tamizaje Violencia</th>
                             <th class="align-middle" id="fields_gestante_tratamiento_head">Problemas relacionados con violencia</th> 
-                            <th class="align-middle" id="fields_gestante_tratamiento_head">Diagnóstico Tratamiento</th>
+                            <th class="align-middle" id="fields_gestante_tratamiento_head">Diagnóstico Inicio de Tratamiento</th>
                         </tr>
                     </thead>
                     <div class="float-end pb-4">

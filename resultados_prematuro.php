@@ -1,11 +1,10 @@
 <?php 
     require('abrir.php');
     require('abrir2.php');
-    require('abrir3.php');
-    
+    require('abrir3.php');    
     if (isset($_POST['Buscar'])) {
-    global $conex;
-    include('./base.php');
+        global $conex;
+        include('./base.php');
 ?>
 
 <?php 
@@ -70,9 +69,9 @@
                             <th class="align-middle">Se Atiende</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-4 table_no_fed">
+                    <div class="float-end pb-3 table_no_fed">
                         <div class="form-group">
-                            <div id="inputbus" class="input-group">
+                            <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
                             </div>
@@ -198,7 +197,7 @@
                     </thead>
                     <div class="float-end pb-4 table_fed" style="display: none;">
                         <div class="form-group">
-                            <div id="inputbus" class="input-group">
+                            <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
                             </div>
@@ -211,9 +210,8 @@
 
                         while ($consulta = sqlsrv_fetch_array($consulta2)){  
                             // ojo ver si en caso no es dos numeros------------------------------------------OJOOOOOO
-                            // echo gettype($consulta['TIPO_SEGURO']);
-                            if($consulta['TIPO_SEGURO'] === '2,') {
-                                echo 'SOYYYYY -----', $consulta['TIPO_SEGURO'], '<br>';
+                            if($consulta['TIPO_SEGURO'] == 2) {
+                                // echo 'SOYYYYY -----', $consulta['TIPO_SEGURO'], '<br>';
                             }
 
                             if($consulta['TIPO_SEGURO'] != 2){

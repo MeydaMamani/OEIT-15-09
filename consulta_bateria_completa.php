@@ -68,6 +68,7 @@
                         GROUP BY Provincia_Establecimiento, Distrito_Establecimiento, Nombre_Establecimiento, Abrev_Tipo_Doc_Paciente,
                               Numero_Documento_Paciente, Fecha_Nacimiento_Paciente ) b
                         WHERE GES_CAPT_OPO is not null";
+
         }
         else if($dist_1 != 'TODOS'){
           $dist=$dist_1;
