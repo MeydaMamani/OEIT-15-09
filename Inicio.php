@@ -4,13 +4,13 @@
     <div id="carousel1" class="carousel slide carousel-fade" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-               <img src="./img/diresa.jpg" alt="" width="1363" height="500">
+               <img src="./img/diresa.jpg" alt="" width="1535" height="500">
             </div>
             <div class="carousel-item">
-				<img src="./img/dires1.jpg" alt="" width="1363" height="500">
+				<img src="./img/dires1.jpg" alt="" width="1535" height="500">
             </div>
             <div class="carousel-item">
-				<img src="./img/dires2.png" alt="" width="1363" height="500">
+				<img src="./img/dires2.png" alt="" width="1535" height="500">
             </div>
             </div>
             

@@ -17,7 +17,7 @@
       ?>
         <div class="container">
             <div class="text-center p-3">
-              <h3>Gestantes Usuarias Nuevas con Tamizaje de Violencia</h3>
+              <h3>Gestantes Usuarias Nuevas con TMZ Violencia - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="row mb-3 mt-3">
                 <div class="col-4"><b class="align-middle font-14">Cantidad de Registros: <b class="datos"><?php echo $row_cnt ?></b></b></div>
