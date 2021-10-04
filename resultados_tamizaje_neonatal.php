@@ -18,11 +18,11 @@
 
         <div class="container">
             <div class="text-center p-3">
-              <h4>Tamizaje Neonatal - CG02</h4>
+              <h4>Tamizaje Neonatal (CG02) - <?php echo $nombre_mes; ?> </h4>
             </div>
             <div class="row mb-3 mt-3">
                 <div class="col-4"><b class="align-middle">Cantidad de Registros: <?php echo $contador; ?></b></div>
-                <!-- <div class="col-8 d-flex justify-content-end">
+                <div class="col-8 d-flex justify-content-end">
                   <ul class="list-group list-group-horizontal-sm">
                     <li class="list-group-item font-14">Tratamiento <span class="badge bg-success rounded-pill"></span></li>
                     <li class="list-group-item font-14">Violencia <span class="badge bg-danger rounded-pill"></span></li>
@@ -34,8 +34,8 @@
             </div>
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
-                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button>
-                <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Informacion</button> -->
+                <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button>
+                <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Informacion</button>
                 <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='tamizaje_neonatal.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
               </div>
             </div>
