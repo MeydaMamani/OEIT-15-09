@@ -37,7 +37,7 @@
                                         <option value="3">MARZO</option>
                                         <option value="4">ABRIL</option>
                                         <option value="5">MAYO</option>
-                                        <option value="6">JUNIO</option>
+                                        <option value="6">JUNIO</option>A MI ME ABRIO EL NAVEGAR DE MICROSOFT
                                         <option value="7">JULIO</option>
                                         <option value="8">AGOSTO</option>
                                         <option value="9">SETIEMBRE</option>
