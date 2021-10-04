@@ -24,10 +24,20 @@
                 <div class="col-4"><b class="align-middle">Cantidad de Registros: <?php echo $contador; ?></b></div>
                 <div class="col-8 d-flex justify-content-end">
                   <ul class="list-group list-group-horizontal-sm">
-                    <li class="list-group-item font-14">Tratamiento <span class="badge bg-success rounded-pill"></span></li>
-                    <li class="list-group-item font-14">Violencia <span class="badge bg-danger rounded-pill"></span></li>
+                    <li class="list-group-item font-14">Correctos <span class="badge bg-success rounded-pill"><?php echo $correctos; ?></span></li>
+                    <li class="list-group-item font-14">Incorrectos <span class="badge bg-danger rounded-pill"><?php echo $incorrectos; ?></span></li>
                     <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill">
-                      </span>
+                    <?php 
+                        if($correctos == 0 and $incorrectos == 0){
+                          echo '0 %';
+                        }else{
+                          echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%';
+                        }
+                        ?>
+
+                    </div>
+                    </div>    
+                  </span>
                     </li>
                   </ul>
                 </div>
@@ -42,7 +52,7 @@
             <div class="col-12 table-responsive">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="20">
                     <thead>
-                        <tr class="text-center font-12" style="background: #c8e7c9;">
+                        <tr class="text-center font-12" style="background: #AED6F1;">
                             <th class="align-middle">#</th>
                             <th class="align-middle">Provincia</th>
                             <th class="align-middle">Distrito</th>
@@ -55,6 +65,7 @@
                             <th class="align-middle">Nombre ESS</th>
                             <th class="align-middle">Fecha Atención</th>
                             <th class="align-middle">Lugar de Tamizaje</th>
+                            <th class="align-middle">Resultado</th>
                         </tr>
                     </thead>
                     <div class="float-end pb-4">
@@ -132,7 +143,7 @@
                                 <td class="align-middle"><?php echo $newdate2; ?></td>
                                 <td class="align-middle"><?php echo $newdate3; ?></td>
                                 <td class="align-middle"><?php echo $newdate4; ?></td>
-                                <td class="align-middle"><?php echo $newdate5; ?></td>
+                               
                                 <td class="align-middle"><?php echo $newdate6; ?></td>
                                 <td class="align-middle"><?php echo $newdate7; ?></td>
                                 <td class="align-middle"><?php echo $newdate8; ?></td>
