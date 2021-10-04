@@ -49,7 +49,7 @@
                             <th class="align-middle">Documento</th>
                             <th class="align-middle">Tipo de Seguro</th>
                             <th class="align-middle">Fecha de Nacimiento</th>
-                            <th class="align-middle">A Medir</th>
+                            <!-- <th class="align-middle">A Medir</th> -->
                             <th class="align-middle">Apellidos y Nombres</th>
                             <th class="align-middle">Menor Encontrado</th>
                             <th class="align-middle">Nombre ESS</th>
