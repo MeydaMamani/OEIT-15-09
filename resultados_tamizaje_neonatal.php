@@ -49,7 +49,7 @@
                             <th class="align-middle">Documento</th>
                             <th class="align-middle">Tipo de Seguro</th>
                             <th class="align-middle">Fecha de Nacimiento</th>
-                            <!-- <th class="align-middle">A Medir</th> -->
+                            <th class="align-middle">A Medir</th>
                             <th class="align-middle">Apellidos y Nombres</th>
                             <th class="align-middle">Menor Encontrado</th>
                             <th class="align-middle">Nombre ESS</th>
@@ -94,14 +94,14 @@
                                 else{
                             $newdate4 = $consulta['fecha_nacimiento_nino'] -> format('d/m/y');}
                 
-                            if(is_null ($consulta['A_medir']) ){
-                                $newdate5 = '  -'; }
-                                else{
-                            $newdate5 = $consulta['A_medir'] -> format('d/m/y');}
+                            // if(is_null ($consulta['A_medir']) ){
+                                // $newdate5 = '  -'; }
+                                // else{
+                            // $newdate5 = $consulta['A_medir'] -> format('d/m/y');}
 
                             if(is_null ($consulta['apellidos_nino']) ){
-                                $newdate6 = '  -'; }
-                                else{
+                               $newdate6 = '  -'; }
+                               else{
                             $newdate6 = $consulta['apellidos_nino'];}
 
                             if(is_null ($consulta['MENOR_ENCONTRADO']) ){
