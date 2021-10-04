@@ -30,7 +30,7 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p style="font-size: 13px;" class="text-start"><b>Seleccione un mes: </b></p>
+                                    <p style="font-size: 13px;" class="text-start"><b>Seleccione mes de evaluación: </b></p>
                                     <select class="select_gestante form-select" name="mes" id="mes" aria-label="Default select example">
                                         <option value="1">ENERO</option>
                                         <option value="2">FEBRERO</option>

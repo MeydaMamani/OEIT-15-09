@@ -60,7 +60,7 @@
 				<li class="submenu">
 					<a href="#"><span class="icon-reddit"></span>Niño<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
-						<li><a href="prematuros.php">Niños Prematuros<span class="icon-dot"></span></a></li>
+						<li><a href="prematuros.php">Niños Prematuros - CG<span class="icon-dot"></span></a></li>
 						<li><a href="tamizaje_neonatal.php">Tamizaje Neonatal - CG02<span class="icon-dot"></span></a></li>
 						<li><a href="4_meses.php">4 Meses <span class="icon-dot"></span></a></li>
 						<li><a href="6-8_meses.php">6 - 8 Meses<span class="icon-dot"></span></a></li>

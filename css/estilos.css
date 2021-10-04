@@ -215,6 +215,10 @@ a:hover{
 	color: #d2b01a;
 	border: 1px solid #d2b01a;
 }
+.bg-notmeasure{
+	color: #1b1b19;
+	border: 1px solid #1b1b19;
+}
 
 li a, a{
 	text-decoration: none;
@@ -263,4 +267,20 @@ li a, a{
 
 #fields_68_meses_body {
 	background: #94cbe12b;
+}
+
+#color_prematuro_head {
+	background: #a3c8d7;
+}
+
+#color_prematuro_body {
+	background: #a3c8d717;
+}
+
+#color_fed_head {
+	background: #a7a7a7;
+}
+
+#color_fed_body {
+	background: #a7a7a73d;
 }

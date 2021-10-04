@@ -9,14 +9,10 @@
     ini_set("default_charset", "UTF-8");
     mb_internal_encoding("UTF-8");
     include('./base.php');
-?>
-<?php
     include('consulta_6_8_meses.php');
-    $cont=0;
-    $cumple=0;
-    $no_cumple=0;
+    $row_cont=0; $cumple=0; $no_cumple=0;
     while ($consulta = sqlsrv_fetch_array($consulta4)){
-        $cont++;
+        $row_cont++;
         if(!is_null ($consulta['HEMOGLOBINA']) && !is_null ($consulta['D50X']) && !is_null ($consulta['U310_SF1']) && is_null ($consulta['SUPLE'])){
             if($consulta['HEMOGLOBINA'] == $consulta['D50X'] && $consulta['HEMOGLOBINA'] == $consulta['U310_SF1']){
                 $cumple++;
@@ -62,15 +58,15 @@
               <h3>Niños de 6 a 8 Meses - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="row mb-3 mt-3">
-                <div class="col-4"><b class="align-middle">Cantidad de Registros: <?php echo $cont; ?></b></div>
+                <div class="col-4"><b class="align-middle">Cantidad de Registros: <?php echo $row_cont; ?></b></div>
                 <div class="col-8 d-flex justify-content-end">
                   <ul class="list-group list-group-horizontal-sm">
                     <li class="list-group-item font-14">Cumple <span class="badge bg-success rounded-pill"><?php echo $cumple; ?></span></li>
                     <li class="list-group-item font-14">No Cumple <span class="badge bg-danger rounded-pill"><?php echo $no_cumple; ?></span></li>
                     <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill">
                         <?php 
-                            if($cumple == 0 and $no_cumple == 0){ echo '0 %'; }
-                            else{  echo number_format((float)(($cumple/$cont)*100), 2, '.', ''), '%';
+                            if($cumple == 0 and $row_cont == 0){ echo '0 %'; }
+                            else{  echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%';
                             }
                         ?>
                         </span>
@@ -123,85 +119,55 @@
                         $i=1;
                         while ($consulta = sqlsrv_fetch_array($consulta4)){
                         
-                            if(is_null ($consulta['PROVINCIA']) ){
-                                $newdate3 = '  -'; }
-                                else{
-                            $newdate3 = $consulta['PROVINCIA'] ;}
+                            if(is_null ($consulta['PROVINCIA']) ){ $newdate3 = '  -'; }
+                            else{ $newdate3 = $consulta['PROVINCIA'] ;}
+
+                            if(is_null ($consulta['DISTRITO']) ){ $newdate4 = '  -'; }
+                            else{ $newdate4 = $consulta['DISTRITO'];}
                 
-                            if(is_null ($consulta['DISTRITO']) ){
-                                $newdate4 = '  -'; }
-                                else{
-                            $newdate4 = $consulta['DISTRITO'];}
+                            if(is_null ($consulta['MENOR_VISITADO']) ){ $newdate5 = '  -'; }
+                            else{ $newdate5 = $consulta['MENOR_VISITADO'];}
                 
-                            if(is_null ($consulta['MENOR_VISITADO']) ){
-                                $newdate5 = '  -'; }
-                                else{
-                            $newdate5 = $consulta['MENOR_VISITADO'];}
+                            if(is_null ($consulta['MENOR_ENCONTRADO']) ){ $newdate6 = '  -'; }
+                            else{ $newdate6 = $consulta['MENOR_ENCONTRADO'];}
                 
-                            if(is_null ($consulta['MENOR_ENCONTRADO']) ){
-                                $newdate6 = '  -'; }
-                                else{
-                            $newdate6 = $consulta['MENOR_ENCONTRADO'];}
-                
-                            if(is_null ($consulta['NUM_CNV']) ){
-                                $newdate8 = '  -'; }
-                                else{
-                            $newdate8 = $consulta['NUM_CNV'];}
+                            if(is_null ($consulta['NUM_CNV']) ){ $newdate8 = '  -'; }
+                            else{ $newdate8 = $consulta['NUM_CNV'];}
                
-                            if(is_null ($consulta['FECHA_NACIMIENTO_NINO']) ){
-                                $newdate9 = '  -'; }
-                                else{
-                            $newdate9 = $consulta['FECHA_NACIMIENTO_NINO'] -> format('d/m/y');}                      
+                            if(is_null ($consulta['FECHA_NACIMIENTO_NINO']) ){ $newdate9 = '  -'; }
+                            else{ $newdate9 = $consulta['FECHA_NACIMIENTO_NINO'] -> format('d/m/y');}                      
                 
-                            if(is_null ($consulta['DOCUMENTO']) ){
-                                $newdate10 = '  -'; }
-                                else{ 
-                                $newdate10 = $consulta['DOCUMENTO'];}
+                            if(is_null ($consulta['DOCUMENTO']) ){ $newdate10 = '  -'; }
+                            else{ $newdate10 = $consulta['DOCUMENTO'];}
                                         
-                            if(is_null ($consulta['TIPO_DOC']) ){
-                                $newdate11 = '  -'; }
-                                else{
-                                $newdate11 = $consulta['TIPO_DOC'];}
+                            if(is_null ($consulta['TIPO_DOC']) ){ $newdate11 = '  -'; }
+                            else{ $newdate11 = $consulta['TIPO_DOC'];}
                 
-                            if(is_null ($consulta['APELLIDOS_NOMBRES']) ){
+                            if(is_null ($consulta['APELLIDOS_NOMBRES']) ){ 
                                 $newdate12 = '  -'; }
-                                else{
-                                $newdate12 = $consulta['APELLIDOS_NOMBRES'];}
+                            else{ $newdate12 = $consulta['APELLIDOS_NOMBRES'];}
                 
-                            if(is_null ($consulta['TIPO_SEGURO']) ){
-                                $newdate13 = '  -'; }
-                                else{
-                                $newdate13 = $consulta['TIPO_SEGURO'];}
+                            if(is_null ($consulta['TIPO_SEGURO']) ){ $newdate13 = '  -'; }
+                            else{ $newdate13 = $consulta['TIPO_SEGURO'];}
                 
-                            if(is_null ($consulta['PN_ULTIMO_LUGAR']) ){
-                                $newdate14 = '  -'; }
-                                else{
-                                $newdate14 = $consulta['PN_ULTIMO_LUGAR'];}
+                            if(is_null ($consulta['PN_ULTIMO_LUGAR']) ){ $newdate14 = '  -'; }
+                            else{ $newdate14 = $consulta['PN_ULTIMO_LUGAR'];}
                 
-                            if(is_null ($consulta['ESTAB_ACTIVIDAD']) ){
-                                $newdate15 = '  -'; }
-                                else{
-                                $newdate15 = $consulta['ESTAB_ACTIVIDAD'];}
+                            if(is_null ($consulta['ESTAB_ACTIVIDAD']) ){ $newdate15 = '  -'; }
+                            else{ $newdate15 = $consulta['ESTAB_ACTIVIDAD'];}
             
-                            if(is_null ($consulta['HEMOGLOBINA']) ){
-                                        $newdate16 = '  -'; }
-                                        else{
-                                        $newdate16 = $consulta['HEMOGLOBINA'] -> format('d/m/y');}
+                            if(is_null ($consulta['HEMOGLOBINA']) ){ $newdate16 = '  -'; }
+                            else{ $newdate16 = $consulta['HEMOGLOBINA'] -> format('d/m/y');}
             
-                            if(is_null ($consulta['D50X']) ){
-                                        $newdate17 = '  -'; }
-                                        else{
-                                        $newdate17 = $consulta['D50X'] -> format('d/m/y');}
+                            if(is_null ($consulta['D50X']) ){ $newdate17 = '  -'; }
+                            else{ $newdate17 = $consulta['D50X'] -> format('d/m/y');}
                     
-                            if(is_null ($consulta['U310_SF1']) ){
-                                        $newdate18 = '  -'; }
-                                        else{
-                                        $newdate18 = $consulta['U310_SF1'] -> format('d/m/y');}
+                            if(is_null ($consulta['U310_SF1']) ){ $newdate18 = '  -'; }
+                            else{ $newdate18 = $consulta['U310_SF1'] -> format('d/m/y');}
                     
-                            if(is_null ($consulta['SUPLE']) ){
-                                        $newdate19 = '  -'; }
-                                        else{
-                                        $newdate19 = $consulta['SUPLE'] -> format('d/m/y');}
+                            if(is_null ($consulta['SUPLE']) ){ $newdate19 = '  -'; }
+                            else{ $newdate19 = $consulta['SUPLE'] -> format('d/m/y');}
+
                             ?>
                             <tr style="font-size: 12px; text-align: center;">
                                 <td class="align-middle"><?php echo $i++; ?></td>
