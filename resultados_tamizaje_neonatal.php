@@ -18,7 +18,7 @@
 
         <div class="container">
             <div class="text-center p-3">
-              <h4>Tamizaje Neonatal (CG02) - <?php echo $nombre_mes; ?> </h4>
+              <h4>TMZ Neonatal (CG02) - <?php echo $nombre_mes; ?> </h4>
             </div>
             <div class="row mb-3 mt-3">
                 <div class="col-4"><b class="align-middle">Cantidad de Registros: <?php echo $contador; ?></b></div>
