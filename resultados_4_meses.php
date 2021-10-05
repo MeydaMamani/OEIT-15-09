@@ -256,7 +256,7 @@
                             include('consulta_4_meses.php');
                             $i_fed=1; $cumple_fed=0; $no_cumple_fed=0; $observado_fed=0;
                             while ($consulta = sqlsrv_fetch_array($consulta5)){  
-                                // $tipo = strval('2,');
+                                // $tipo = strval('2,');4
                                 $tipo = strval($consulta['TIPO_SEGURO']);
                                 $tipo2 = strpos($tipo, '2');
                                 $tipo0 = strpos($tipo, '0');

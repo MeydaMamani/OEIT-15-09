@@ -64,7 +64,7 @@
 						<li><a href="tamizaje_neonatal.php">TMZ Neonatal - CG02<span class="icon-dot"></span></a></li>
 						<li><a href="4_meses.php">4 Meses <span class="icon-dot"></span></a></li>
 						<li><a href="6-8_meses.php">6 - 8 Meses<span class="icon-dot"></span></a></li>
-						<li><a href="">CRED<span class="icon-dot"></span></a></li>
+						<li><a href="cred.php">CRED<span class="icon-dot"></span></a></li>
 						<li><a href="">Paquete<span class="icon-dot"></span></a></li>
 						
 						

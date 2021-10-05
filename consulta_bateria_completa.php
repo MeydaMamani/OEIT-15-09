@@ -114,8 +114,6 @@
         $row_cnt = sqlsrv_num_rows($consulta2);
 
         $correctos=0;
-        $incorrectos=0;
-
-        
+        $incorrectos=0;        
   }    
 ?>
