@@ -25,9 +25,7 @@
                 $fecha_anemia_7_dias = strtotime(date("d-m-Y", strtotime($nuevo_formato_anemia."+ 7 days")));
 
                 if($fecha_anemia < $fecha_hemoglobina_7_dias && $fecha_anemia > $nuevo_formato_hemoglobina) {
-                    if($fecha_tratamiento < $fecha_anemia_7_dias && $fecha_tratamiento > $nuevo_formato_anemia ) {
-                        $cumple++;
-                    }
+                    $cumple++;
                 }
                 else{
                     $no_cumple++;
@@ -201,9 +199,7 @@
                                                 $fecha_anemia_7_dias = strtotime(date("d-m-Y", strtotime($nuevo_formato_anemia."+ 7 days")));
 
                                                 if($fecha_anemia < $fecha_hemoglobina_7_dias && $fecha_anemia > $nuevo_formato_hemoglobina) {
-                                                    if($fecha_tratamiento < $fecha_anemia_7_dias && $fecha_tratamiento > $nuevo_formato_anemia ) {
-                                                        echo "<span class='badge bg-correct'>Si</span>";
-                                                    }
+                                                    echo "<span class='badge bg-correct'>Si</span>";
                                                 }
                                                 else{
                                                     echo "<span class='badge bg-incorrect'>No</span>";

@@ -256,13 +256,30 @@
                             include('consulta_4_meses.php');
                             $i_fed=1; $cumple_fed=0; $no_cumple_fed=0; $observado_fed=0;
                             while ($consulta = sqlsrv_fetch_array($consulta5)){  
+                                // $tipo = strval('2,');
                                 $tipo = strval($consulta['TIPO_SEGURO']);
                                 $tipo2 = strpos($tipo, '2');
                                 $tipo0 = strpos($tipo, '0');
                                 $tipo1 = strpos($tipo, '1');
                                 $tipo3 = strpos($tipo, '3');
-                                $tipo4 = strpos($tipo, '4');                            
-                                if(($tipo2 != '' && ($tipo == '' || $tipo0 != '' || $tipo1 != '' || $tipo3 != '' || $tipo4 != '')) || ($tipo == '' || $tipo0 != '' || $tipo1 != '' || $tipo3 != '' || $tipo4 != '')){
+                                $tipo4 = strpos($tipo, '4');
+                                // echo '0 --', $tipo0, '<br>';
+                                // echo '1 --', $tipo1, '<br>';
+                                // echo '2 --', $tipo2, '<br>';
+                                // echo '3 --', $tipo3, '<br>';
+                                // echo '4 --', $tipo4, '<br>';
+                                // if(($tipo2 === 0 || $tipo2 > 0) && (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))
+                                //     || (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
+                                //     echo 'SOY SOLO 2', '<br>';
+                                // }
+                                // if(($tipo2 >= 0 && $tipo0 >= 0) || ($tipo2 >= 0 && $tipo1 >= 0) || ($tipo2 >= 0 && $tipo3 >= 0) || ($tipo2 >= 0 && $tipo4 >= 0) 
+                                //     || ($tipo2 == '' && $tipo0 >= 0) || ($tipo2 == '' && $tipo1 >= 0) || ($tipo2 == '' && $tipo3 >= 0) || ($tipo2 == '' && $tipo4 >= 0)){
+                                //     echo 'SOY TIPO ACOMPAÑADO ---', $i_fed, '****', $tipo,'<br>';
+                                // }
+
+                                if(($tipo2 === 0 || $tipo2 > 0) && (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))
+                                    || (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
+
                                     if(is_null ($consulta['NOMBRE_PROV']) ){
                                         $newdate3 = '  -'; }
                                         else{
@@ -404,7 +421,7 @@
                 $(".cumple").text(<?php echo $cumple_fed; ?>);
                 $(".no_cumple").text(<?php echo $no_cumple_fed; ?>);
                 $(".observado").text(<?php echo $observado_fed; ?>);
-                $(".avance").text(<?php if($cumple==0 && $i_fed == 0){ echo '0 %'; }
+                $(".avance").text(<?php if($cumple_fed==0 && $i_fed-1 == 0){ echo "'0 %'"; }
                     else{ $porcentaje = number_format((float)(($cumple/($i_fed-1))*100), 2, '.', '');
                             echo "'$porcentaje %'"; }?>);
                 $(".table_fed").show();
@@ -415,7 +432,7 @@
                 $(".cumple").text(<?php echo $cumple; ?>);
                 $(".no_cumple").text(<?php echo $no_cumple; ?>);
                 $(".observado").text(<?php echo $observado; ?>);
-                $(".avance").text(<?php if($cumple == 0 and $row_cont == 0){ echo '0 %'; }
+                $(".avance").text(<?php if($cumple == 0 and $row_cont == 0){ echo "'0 %'"; }
                     else{ $porcentaje = number_format((float)(($cumple/$row_cont)*100), 2, '.', '');
                             echo "'$porcentaje %'"; }?>);
                 $(".table_fed").hide();
