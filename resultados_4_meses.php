@@ -53,15 +53,18 @@
             </div>
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
-                <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button>
+                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
                 <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Informacion</button>
                 <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='4_meses.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
               </div>
             </div>
+
             <button class="btn btn-outline-dark btn-sm btn_fed"><i class="fa fa-clone"></i> FED</button>
-            <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Todo</button>
+            <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Todos</button>
+            <!-- <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> ESSALUD</button>
+            <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Minsa</button> -->
             <div class="col-12 table-responsive table_no_fed">
-                <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="20">
+                <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="text-center font-12" style="background: #c9d0e2;">
                             <th class="align-middle">#</th>
@@ -222,7 +225,7 @@
             </div>
             <!-- TABLA FED -->
             <div class="col-12 table-responsive table_fed" style="display: none;">
-                <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="20">
+                <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="text-center font-12" style="background: #d9d9d9;">
                             <th class="align-middle">#</th>
@@ -409,6 +412,18 @@
                     </tfoot>
                 </table>
             </div>
+        </div>
+
+        <!-- MODAL INFORMACION-->
+        <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <img src="./img/inf_4meses.png" style="width: 100%;">
+              </div>
+            </div>
+          </div>
         </div>
     <?php } ?>
     

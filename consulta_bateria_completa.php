@@ -111,9 +111,8 @@
         $params = array(); 
         $options = array("Scrollable" => SQLSRV_CURSOR_KEYSET);
         $consulta2 = sqlsrv_query($conn, $resultado, $params, $options);
-        $row_cnt = sqlsrv_num_rows($consulta2);
-
-        $correctos=0;
-        $incorrectos=0;        
+        // $row_cnt = sqlsrv_num_rows($consulta2);
+        // $correctos=0;
+        // $incorrectos=0;        
   }    
 ?>

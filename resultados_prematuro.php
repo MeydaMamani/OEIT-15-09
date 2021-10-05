@@ -39,7 +39,7 @@
             </div>
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
-                <button type="button" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button>
+                <!-- <button type="button" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
                 <button type="button" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Información</button>
                 <button type="button" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='prematuros.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
               </div>
@@ -47,7 +47,7 @@
             <button class="btn btn-outline-dark btn-sm btn_fed"><i class="fa fa-clone"></i> FED</button>
             <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Todo</button>
             <div class="col-12 table-responsive table_no_fed">
-                <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="20">
+                <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="font-12 text-center" style="background: #e0eff5;">
                             <th class="align-middle">#</th>
@@ -173,7 +173,7 @@
             </div>
             <!-- TABLA FED -->
             <div class="col-12 table-responsive table_fed" style="display: none;">
-                <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="20">
+                <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="text-center font-12" style="background: #d9d9d9;">
                             <th class="align-middle">#</th>
@@ -211,7 +211,10 @@
                                 $tipo1 = strpos($tipo, '1');
                                 $tipo3 = strpos($tipo, '3');
                                 $tipo4 = strpos($tipo, '4');
-                                if((strlen($tipo2) >= 1 && ($tipo0 != '' || $tipo1 != '' || $tipo3 != '' || $tipo4 != '')) || strlen($tipo2) < 1)  {
+                                // if((strlen($tipo2) >= 1 && ($tipo0 != '' || $tipo1 != '' || $tipo3 != '' || $tipo4 != '')) || strlen($tipo2) < 1)  {
+                                if(($tipo2 === 0 || $tipo2 > 0) && (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))
+                                    || (($tipo == '') || ($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){    
+
                                     if(is_null ($consulta['Provnacido']) ){
                                         $newdate2 = '  -'; }
                                         else{
@@ -309,6 +312,18 @@
                     </tfoot>
                 </table>
             </div>
+        </div>
+
+        <!-- MODAL INFORMACION-->
+        <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <img src="./img/inf_prematuros.png" style="width: 100%;">
+              </div>
+            </div>
+          </div>
         </div>
     <?php } ?>
     <script src="./plugin/footable/js/footable-init.js"></script>

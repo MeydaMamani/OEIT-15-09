@@ -8,17 +8,17 @@
         $mes = $_POST['mes'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
-            else if($mes == 2){ $nombre_mes = 'Febrero'; }
-            else if($mes == 3){ $nombre_mes = 'Marzo'; }
-            else if($mes == 4){ $nombre_mes = 'Abril'; }
-            else if($mes == 5){ $nombre_mes = 'Mayo'; }
-            else if($mes == 6){ $nombre_mes = 'Junio'; }
-            else if($mes == 7){ $nombre_mes = 'Julio'; }
-            else if($mes == 8){ $nombre_mes = 'Agosto'; }
-            else if($mes == 9){ $nombre_mes = 'Setiembre'; }
-            else if($mes == 10){ $nombre_mes = 'Octubre'; }
-            else if($mes == 11){ $nombre_mes = 'Noviembre'; }
-            else if($mes == 12){ $nombre_mes = 'Diciembre'; }
+        else if($mes == 2){ $nombre_mes = 'Febrero'; }
+        else if($mes == 3){ $nombre_mes = 'Marzo'; }
+        else if($mes == 4){ $nombre_mes = 'Abril'; }
+        else if($mes == 5){ $nombre_mes = 'Mayo'; }
+        else if($mes == 6){ $nombre_mes = 'Junio'; }
+        else if($mes == 7){ $nombre_mes = 'Julio'; }
+        else if($mes == 8){ $nombre_mes = 'Agosto'; }
+        else if($mes == 9){ $nombre_mes = 'Setiembre'; }
+        else if($mes == 10){ $nombre_mes = 'Octubre'; }
+        else if($mes == 11){ $nombre_mes = 'Noviembre'; }
+        else if($mes == 12){ $nombre_mes = 'Diciembre'; }
         
 
         if ($red_1 == 1) {
@@ -94,6 +94,6 @@
         $params = array(); 
         $options = array("Scrollable" => SQLSRV_CURSOR_KEYSET);
         $consulta2 = sqlsrv_query($conn, $resultado, $params, $options);
-        $row_cnt = sqlsrv_num_rows($consulta2);
+        // $row_cnt = sqlsrv_num_rows($consulta2);
   }    
 ?>

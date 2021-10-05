@@ -2,11 +2,11 @@
   require ('abrir.php');    
   if (isset($_POST['Buscar'])) {
     global $conex;
-  include('./base.php');
-?>
-      <?php 
+    include('./base.php');
+     $row_cnt=0; $correctos=0; $incorrectos=0;
         include('consulta_bateria_completa.php');
         while ($consulta = sqlsrv_fetch_array($consulta2)){  
+          $row_cnt++;
           if ($consulta['CAPTADA'] == $consulta['TMZ_ANEMIA'] AND $consulta['CAPTADA'] == $consulta['SIFILIS'] AND $consulta['CAPTADA'] == $consulta['VIH'] AND $consulta['CAPTADA'] == $consulta['BACTERIURIA']) {
             $correctos++;
           } 
@@ -20,14 +20,14 @@
               <h3>Gestantes de Bateria Completa (Indicador 1 - CG) - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="row mb-3 mt-3">
-                <div class="col-4"><b class="align-middle font-14">Cantidad de Registros: <b class="datos"><?php echo $row_cnt ?></b></b></div>
+                <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cnt; ?></b></div>
                 <div class="col-8 d-flex justify-content-end">
                   <ul class="list-group list-group-horizontal-sm">
-                    <li class="list-group-item font-14">Correctos <span class="badge bg-success rounded-pill"><?php echo $correctos; ?></span></li>
-                    <li class="list-group-item font-14">Incorrectos <span class="badge bg-danger rounded-pill"><?php echo $incorrectos; ?></span></li>
-                    <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill">
+                    <li class="list-group-item font-14">Correctos <span class="badge bg-success rounded-pill correcto"><?php echo $correctos; ?></span></li>
+                    <li class="list-group-item font-14">Incorrectos <span class="badge bg-danger rounded-pill incorrecto"><?php echo $incorrectos; ?></span></li>
+                    <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill avance">
                       <?php 
-                        if($correctos == 0 and $incorrectos == 0){
+                        if($correctos == 0 and $row_cnt == 0){
                           echo '0 %';
                         }else{
                           echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%';
@@ -48,7 +48,7 @@
             <button class="btn btn-outline-dark btn-sm btn_fed"><i class="fa fa-clone"></i> FED</button>
             <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Todo</button>
             <div class="col-12 table-responsive table_no_fed">
-              <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="20">
+              <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                 <thead>
                   <tr class="text-center font-12" style="background: #c9d0e2;">
                     <th class="align-middle">#</th>
@@ -64,7 +64,7 @@
                     <th class="align-middle" id="fields_bateria_head">Sifilis</th>
                     <th class="align-middle" id="fields_bateria_head">VIH</th>
                     <th class="align-middle" id="fields_bateria_head">Bacteriuria</th>
-                    <th class="align-middle">Resultado</th>
+                    <th class="align-middle">Cumple</th>
                   </tr>
                 </thead>
                 <div>
@@ -158,9 +158,9 @@
 
             <!-- tabla fed -->
             <div class="col-12 table-responsive table_fed" style="display: none;">
-              <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="20">
+              <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                 <thead>
-                  <tr class="text-center font-12" style="background: #c9d0e2;">
+                  <tr class="font-12 text-center" style="background: #d9d9d9;">
                     <th class="align-middle">#</th>
                     <th class="align-middle">Provincia</th>
                     <th class="align-middle">Distrito</th>
@@ -170,11 +170,11 @@
                     <th class="align-middle">Fecha Nacimiento Paciente</th>
                     <th class="align-middle">Captada</th>
                     <th class="align-middle">TMZ VIF</th>
-                    <th class="align-middle" id="fields_bateria_head">TMZ Anemia</th>
-                    <th class="align-middle" id="fields_bateria_head">Sifilis</th>
-                    <th class="align-middle" id="fields_bateria_head">VIH</th>
-                    <th class="align-middle" id="fields_bateria_head">Bacteriuria</th>
-                    <th class="align-middle">Resultado</th>
+                    <th class="align-middle" id="color_fed_head">TMZ Anemia</th>
+                    <th class="align-middle" id="color_fed_head">Sifilis</th>
+                    <th class="align-middle" id="color_fed_head">VIH</th>
+                    <th class="align-middle" id="color_fed_head">Bacteriuria</th>
+                    <th class="align-middle">Cumple</th>
                   </tr>
                 </thead>
                 <div>
@@ -190,7 +190,7 @@
                 <tbody>
                   <?php 
                     include('consulta_fed_bateria_completa.php');
-                    $i=1;
+                    $i_fed=1; $correctos_fed=0; $incorrectos_fed=0;
                     while ($consulta_fed = sqlsrv_fetch_array($consulta_fed2)){  
                       
                         // $resultado = 'CORRECTO';
@@ -225,14 +225,16 @@
 
                           if ($consulta_fed['CAPTADA'] == $consulta_fed['TMZ_ANEMIA'] AND $consulta_fed['CAPTADA'] == $consulta_fed['SIFILIS'] AND $consulta_fed['CAPTADA'] == $consulta_fed['VIH'] AND $consulta_fed['CAPTADA'] == $consulta_fed['BACTERIURIA']) {
                             $resultado = 'CORRECTO';
+                            $correctos_fed++;
                           } 
                           else{
                             $resultado = 'INCORRECTO';
+                            $incorrectos_fed++;
                           }
   
                   ?>
                     <tr class="text-center font-12" id="table_fed">
-                      <td class="align-middle" id="cantidad"><?php echo $i++; ?></td>
+                      <td class="align-middle" id="cantidad"><?php echo $i_fed++; ?></td>
                       <td class="align-middle"><?php echo utf8_encode($consulta_fed['PROVINCIA']); ?></td>
                       <td class="align-middle"><?php echo utf8_encode($consulta_fed['DISTRITO']); ?></td>
                       <td class="align-middle"><?php echo utf8_encode($consulta_fed['IPRESS']); ?></td>
@@ -241,10 +243,10 @@
                       <td class="align-middle"><?php echo $newdate; ?></td>
                       <td class="align-middle"><?php echo $newdate2; ?></td>                      
                       <td class="align-middle"><?php echo $newdate7; ?></td>
-                      <td class="align-middle" id="fields_bateria_body"><?php echo $newdate3; ?></td>
-                      <td class="align-middle" id="fields_bateria_body"><?php echo $newdate4; ?></td>
-                      <td class="align-middle" id="fields_bateria_body"><?php echo $newdate5; ?></td>
-                      <td class="align-middle" id="fields_bateria_body"><?php echo $newdate6; ?></td>
+                      <td class="align-middle" id="color_fed_body"><?php echo $newdate3; ?></td>
+                      <td class="align-middle" id="color_fed_body"><?php echo $newdate4; ?></td>
+                      <td class="align-middle" id="color_fed_body"><?php echo $newdate5; ?></td>
+                      <td class="align-middle" id="color_fed_body"><?php echo $newdate6; ?></td>
                       <td class="align-middle"><?php 
                         if ($resultado == 'CORRECTO'){
                           echo "<span class='badge bg-correct'>$resultado</span>"; 
@@ -356,16 +358,22 @@
 <script>
    $(function(){
     $(".btn_fed").click(function(){
-      console.log('me diste click fed');
-      var data = $(".datos").text();
-      console.log('MIS DATOS ', data);
-      // $(".datos").text('260');
+      $(".total").text(<?php echo $i_fed-1; ?>);
+      $(".correcto").text(<?php echo $correctos_fed; ?>);
+      $(".incorrecto").text(<?php echo $incorrectos_fed; ?>);
+      $(".avance").text(<?php if($correctos_fed==0 && $i_fed-1 == 0){ echo "'0 %'"; }
+          else{ $porcentaje = number_format((float)(($correctos_fed/($i_fed-1))*100), 2, '.', '');
+                  echo "'$porcentaje %'"; }?>);
       $(".table_fed").show();
       $(".table_no_fed").hide();
     });
     $(".btn_all").click(function(){
-      console.log('Me diste click boton todo');
-      // $(".datos").text('283');
+      $(".total").text(<?php echo $row_cnt; ?>);
+      $(".correcto").text(<?php echo $correctos; ?>);
+      $(".incorrecto").text(<?php echo $incorrectos; ?>);
+      $(".avance").text(<?php if($correctos == 0 and $row_cont == 0){ echo "'0 %'"; }
+          else{ $porcentaje = number_format((float)(($correctos/$row_cnt)*100), 2, '.', '');
+                  echo "'$porcentaje %'"; }?>);
       $(".table_fed").hide();
       $(".table_no_fed").show();
     });

@@ -6,29 +6,33 @@
 ?>
       <?php 
         include('consulta_gestante_usuarias_nuevas.php');
-        // while ($consulta = sqlsrv_fetch_array($consulta2)){  
-        //   if ($consulta['CAPTADA'] == $consulta['TMZ_ANEMIA'] AND $consulta['CAPTADA'] == $consulta['SIFILIS'] AND $consulta['CAPTADA'] == $consulta['VIH'] AND $consulta['CAPTADA'] == $consulta['BACTERIURIA']) {
-        //     $correctos++;
-        //   } 
-        //   else{
-        //     $incorrectos++;
-        //   }
-        // }  
+        $row_cont=0; $cumple=0; $no_cumple=0;
+        while ($consulta = sqlsrv_fetch_array($consulta2)){  
+          $row_cont++;
+          if($consulta['Codigo_Item'] != '' and !is_null ($consulta['Codigo_Item'])){
+            $cumple++;
+          }else{
+            $no_cumple++;
+          }
+        }  
       ?>
         <div class="container">
             <div class="text-center p-3">
               <h3>Gestantes Usuarias Nuevas con TMZ Violencia - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="row mb-3 mt-3">
-                <div class="col-4"><b class="align-middle font-14">Cantidad de Registros: <b class="datos"><?php echo $row_cnt ?></b></b></div>
+                <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
                 <div class="col-8 d-flex justify-content-end">
                   <ul class="list-group list-group-horizontal-sm">
-                    <!-- <li class="list-group-item font-14">Correctos <span class="badge bg-success rounded-pill"></span></li>
-                    <li class="list-group-item font-14">Incorrectos <span class="badge bg-danger rounded-pill"></span></li>
-                    <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill">
-                      2
-                        </span>
-                    </li> -->
+                    <li class="list-group-item font-14">Cumple <span class="badge bg-success rounded-pill cumple"><?php echo $cumple; ?></span></li>
+                    <li class="list-group-item font-14">No Cumple <span class="badge bg-danger rounded-pill no_cumple"><?php echo $no_cumple; ?></span></li>
+                    <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill avance">
+                        <?php 
+                            if($cumple == 0 and $row_cont == 0){ echo '0 %'; }
+                            else{  echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%';
+                            }
+                        ?> </span>
+                    </li>
                   </ul>
                 </div>
             </div>
@@ -55,6 +59,7 @@
                     <th class="align-middle">Edad</th>
                     <th class="align-middle">Fecha Atención</th>
                     <th class="align-middle">Código</th>
+                    <th class="align-middle">Cumple</th>
                   </tr>
                 </thead>
                 <div>
@@ -129,6 +134,13 @@
                       <td class="align-middle"><?php echo $newdate7; ?></td>                      
                       <td class="align-middle"><?php echo $newdate8; ?></td>
                       <td class="align-middle"><?php echo $newdate9; ?></td>
+                      <td class="align-middle"><?php 
+                        if($consulta['Codigo_Item'] != '' and !is_null ($consulta['Codigo_Item'])){
+                          echo "<span class='badge bg-correct'>Si</span>";
+                        }else{
+                          echo "<span class='badge bg-incorrect'>No</span>";
+                        }
+                       ?></td>
                     </tr>
                   <?php
                       ;}              
