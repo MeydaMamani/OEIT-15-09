@@ -56,7 +56,7 @@
               <h3>Niños de 6 a 8 Meses - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="row mb-3 mt-3">
-            <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
+                <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
                 <div class="col-8 d-flex justify-content-end">
                   <ul class="list-group list-group-horizontal-sm">
                     <li class="list-group-item font-14">Cumple <span class="badge bg-success rounded-pill cumple"><?php echo $cumple; ?></span></li>
@@ -82,7 +82,7 @@
             <button class="btn btn-outline-dark btn-sm btn_fed"><i class="fa fa-clone"></i> FED</button>
             <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Todo</button>
             <div class="col-12 table-responsive table_no_fed">
-                <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="20">
+                <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="font-12 text-center" style="background: #e0eff5;">
                             <th class="align-middle">#</th>
@@ -245,7 +245,7 @@
             </div>
             <!-- TABLA FEDDD -->
             <div class="col-12 table-responsive table_fed" style="display: none;">
-                <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="20">
+                <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="font-12 text-center" style="background: #d9d9d9;">
                             <th class="align-middle">#</th>
@@ -289,7 +289,7 @@
                             $tipo4 = strpos($tipo, '4');
 
                             if(($tipo2 === 0 || $tipo2 > 0) && (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))
-                                    || (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
+                                    || (($tipo == '') || ($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
                         
                                 if(is_null ($consulta['PROVINCIA']) ){ $newdate3 = '  -'; }
                                 else{ $newdate3 = $consulta['PROVINCIA'] ;}
@@ -445,7 +445,7 @@
                 $(".cumple").text(<?php echo $cumple_fed; ?>);
                 $(".no_cumple").text(<?php echo $no_cumple_fed; ?>);
                 $(".avance").text(<?php if($cumple_fed==0 && $i_fed-1 == 0){ echo "'0 %'"; }
-                    else{ $porcentaje = number_format((float)(($cumple/($i_fed-1))*100), 2, '.', '');
+                    else{ $porcentaje = number_format((float)(($cumple_fed/($i_fed-1))*100), 2, '.', '');
                             echo "'$porcentaje %'"; }?>);
                 $(".table_fed").show();
                 $(".table_no_fed").hide();
