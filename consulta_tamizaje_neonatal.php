@@ -26,6 +26,8 @@
 
         if (strlen($mes) == 1){
             $mes2 = '0'.$mes;
+        }else{
+          $mes2 = $mes;
         }
 
         if ($red_1 == 1) {

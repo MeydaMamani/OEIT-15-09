@@ -6,26 +6,26 @@
     
     if (isset($_POST['Buscar'])) {
     global $conex;
+    header('Content-Type: text/html; charset=UTF-8');
     include('./base.php');
-?>
-<?php
-  include('consulta_tamizaje_neonatal.php');
-  $row_cont=0; $cumple=0; $no_cumple=0; $observado=0; 
-  while ($consulta = sqlsrv_fetch_array($consulta3)){
-    $row_cont++;
-    if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
-      $observado++;
-    }else {
-      $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
-      $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
-      $intvl = $fecha_nacimiento->diff($fecha_atencion);
-        if($intvl->days <= 6 && $intvl->days >=0){
-          $cumple++;
-        }else if($intvl->days > 6){
-          $no_cumple++;
-        }
+
+    include('consulta_tamizaje_neonatal.php');
+    $row_cont=0; $cumple=0; $no_cumple=0; $observado=0; 
+    while ($consulta = sqlsrv_fetch_array($consulta3)){
+      $row_cont++;
+      if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
+        $observado++;
+      }else {
+        $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
+        $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
+        $intvl = $fecha_nacimiento->diff($fecha_atencion);
+          if($intvl->days <= 6 && $intvl->days >=0){
+            $cumple++;
+          }else if($intvl->days > 6){
+            $no_cumple++;
+          }
+      }
     }
-  }
 ?>
 
         <div class="container">
@@ -147,9 +147,9 @@
                                 <td class="align-middle"><?php echo $newdate2; ?></td>
                                 <td class="align-middle" id="color_neonatal_body"><?php echo $newdate3; ?></td>
                                 <td class="align-middle"><?php echo $newdate4; ?></td>                               
-                                <td class="align-middle"><?php echo $newdate6; ?></td>
+                                <td class="align-middle"><?php echo utf8_encode($newdate6); ?></td>
                                 <td class="align-middle" id="color_neonatal_body"><?php echo $newdate7; ?></td>
-                                <td class="align-middle"><?php echo $newdate8; ?></td>
+                                <td class="align-middle"><?php echo utf8_encode($newdate8); ?></td>
                                 <td class="align-middle"><?php echo $newdate9; ?></td>
                                 <td class="align-middle"><?php echo $newdate10; ?></td>
                                 <td class="align-middle">
@@ -293,14 +293,17 @@
                                 <td class="align-middle">
                                   <?php
                                     if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
+                                      echo "<span class='badge bg-observed'>Observado</span>";
                                       $observado_fed++;
                                     }else {
                                       $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
                                       $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
                                       $intvl = $fecha_nacimiento->diff($fecha_atencion);
                                         if($intvl->days <= 6 && $intvl->days >=0){
+                                          echo "<span class='badge bg-correct'>Si</span>";
                                           $cumple_fed++;
                                         }else if($intvl->days > 6){
+                                          echo "<span class='badge bg-incorrect'>No</span>";
                                           $no_cumple_fed++;
                                         }
                                     }
@@ -400,7 +403,7 @@
             <div class="modal-content">
               <div class="modal-body">
                 <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <img src="./img/Screenshot_94.png" width="465" alt="">
+                <img src="./img/inf_tamizaje_neonatal.png" style="width: 100%;">
               </div>
             </div>
           </div>
