@@ -7,8 +7,7 @@
     if (isset($_POST['Buscar'])) {
     global $conex;
     header('Content-Type: text/html; charset=UTF-8');
-    include('./base.php');
- 
+    include('./base.php'); 
     include('consulta_4_meses.php');
     $row_cont=0; $cumple=0; $no_cumple=0; $observado=0;
     while ($consulta = sqlsrv_fetch_array($consulta5)){
@@ -281,7 +280,7 @@
                                 // }
 
                                 if(($tipo2 === 0 || $tipo2 > 0) && (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))
-                                    || (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
+                                    || (($tipo == '') || ($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
 
                                     if(is_null ($consulta['NOMBRE_PROV']) ){
                                         $newdate3 = '  -'; }
