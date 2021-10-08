@@ -17,7 +17,7 @@
       ?>
         <div class="container">
             <div class="text-center p-3">
-              <h3>Gestantes de Bateria Completa (Indicador 1 - CG) - <?php echo $nombre_mes; ?></h3>
+              <h3>Gestantes de Bateria Completa (Indicador 1 - CG01) - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="row mb-3 mt-3">
                 <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cnt; ?></b></div>

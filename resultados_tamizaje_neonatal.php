@@ -155,16 +155,15 @@
                                 <td class="align-middle">
                                   <?php
                                     if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
-                                      echo "<span class='badge bg-observed'>Observado</span>";
+                                      echo "<span class='badge bg-incorrect'>No</span>";
                                     }else {
                                       $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
                                       $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
                                       $intvl = $fecha_nacimiento->diff($fecha_atencion);
-                                      // echo $intvl->days . " days ";
                                         if($intvl->days <= 6 && $intvl->days >=0){
                                           echo "<span class='badge bg-correct'>Si</span>";
                                         }else if($intvl->days > 6){
-                                          echo "<span class='badge bg-incorrect'>No</span>";
+                                          echo "<span class='badge bg-observed'>Observado</span>";
                                         }
                                     }
                                   ?>

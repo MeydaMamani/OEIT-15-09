@@ -339,20 +339,20 @@
                             drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes11";
     }
    
-        $consulta = sqlsrv_query($conn2, $resultado);
-        $consulta2 = sqlsrv_query($conn, $resultado2);
-        $consulta3 = sqlsrv_query($conn, $resultado3);
-        $consulta4 = sqlsrv_query($conn, $resultado4);
-        $consulta5 = sqlsrv_query($conn, $resultado5);
-        $consulta6 = sqlsrv_query($conn, $resultado6);
-        $consulta7 = sqlsrv_query($conn, $resultado7);
-        $consulta8 = sqlsrv_query($conn, $resultado8);
-        $consulta9 = sqlsrv_query($conn, $resultado9);
-        $consulta10 = sqlsrv_query($conn, $resultado10);
-        $consulta11 = sqlsrv_query($conn, $resultado11);
-        $consulta12 = sqlsrv_query($conn, $resultado12);
-        $consulta13 = sqlsrv_query($conn, $resultado13);
-        $consulta14 = sqlsrv_query($conn, $resultado14);
-        $consulta15 = sqlsrv_query($conn4, $resultado15);
+    $consulta = sqlsrv_query($conn2, $resultado);
+    $consulta2 = sqlsrv_query($conn, $resultado2);
+    $consulta3 = sqlsrv_query($conn, $resultado3);
+    $consulta4 = sqlsrv_query($conn, $resultado4);
+    $consulta5 = sqlsrv_query($conn, $resultado5);
+    $consulta6 = sqlsrv_query($conn, $resultado6);
+    $consulta7 = sqlsrv_query($conn, $resultado7);
+    $consulta8 = sqlsrv_query($conn, $resultado8);
+    $consulta9 = sqlsrv_query($conn, $resultado9);
+    $consulta10 = sqlsrv_query($conn, $resultado10);
+    $consulta11 = sqlsrv_query($conn, $resultado11);
+    $consulta12 = sqlsrv_query($conn, $resultado12);
+    $consulta13 = sqlsrv_query($conn, $resultado13);
+    $consulta14 = sqlsrv_query($conn, $resultado14);
+    $consulta15 = sqlsrv_query($conn4, $resultado15);
   }
 ?>

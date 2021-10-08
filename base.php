@@ -60,22 +60,20 @@
 				<li class="submenu">
 					<a href="#"><span class="icon-reddit"></span>Niño<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
-						<li><a href="prematuros.php">Niños Prematuros - CG<span class="icon-dot"></span></a></li>
-						<li><a href="tamizaje_neonatal.php">TMZ Neonatal - CG02<span class="icon-dot"></span></a></li>
-						<li><a href="4_meses.php">4 Meses <span class="icon-dot"></span></a></li>
-						<li><a href="6-8_meses.php">6 - 8 Meses<span class="icon-dot"></span></a></li>
-						<li><a href="cred.php">CRED<span class="icon-dot"></span></a></li>
+						<li><a href="prematuros.php">Niños Prematuros (CG SI-03)<span class="icon-dot"></span></a></li>
+						<li><a href="tamizaje_neonatal.php">TMZ Neonatal (CG SI-02)<span class="icon-dot"></span></a></li>
+						<li><a href="4_meses.php">4 Meses (CG SI-04)<span class="icon-dot"></span></a></li>
+						<li><a href="6-8_meses.php">6 - 8 Meses (CG SI-05)<span class="icon-dot"></span></a></li>
+						<li><a href="cred.php">CRED (SI-CG06)<span class="icon-dot"></span></a></li>
 						<li><a href="">Paquete<span class="icon-dot"></span></a></li>
-						
-						
 					</ul>
 				</li>
 				<li class="submenu">
 					<a href="#"><i class="fa fa-female"></i> Gestante<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
-						<li><a href="bateria_completa.php">Bateria Completa (I1 - CG)<span class="icon-dot"></span></a></li>
-						<li><a href="gestante_tratamiento.php">Gestante con TMZ e Inicio de Tratamiento por Violencia - CG<span class="icon-dot"></span></a></li>
-						<li><a href="gestante_usuarias_nuevas.php">Gestante Usuarias Nuevas con TMZ de Violencia<span class="icon-dot"></span></a></li>
+						<li><a href="bateria_completa.php">Bateria Completa (CG SI-01)<span class="icon-dot"></span></a></li>
+						<li><a href="gestante_tratamiento.php">Gestante con TMZ e Inicio de Tratamiento por Violencia (CG VI-01)<span class="icon-dot"></span></a></li>
+						<li><a href="gestante_usuarias_nuevas.php">Gestante Usuarias Nuevas con TMZ de Violencia (CG VI-02)<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 				<li class="submenu">

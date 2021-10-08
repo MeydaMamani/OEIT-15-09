@@ -15,7 +15,7 @@
 
         <div class="container">
             <div class="text-center p-3">
-              <h3>CRED - <?php echo $nombre_mes; ?></h3>
+              <h3>CRED CG06 - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="row mb-3 mt-3">
                 <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
