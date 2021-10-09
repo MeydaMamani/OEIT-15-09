@@ -25,6 +25,7 @@
 	<!-- archivos creados -->
 	<link rel="stylesheet" href="./css/estilos.css">
 	<link rel="stylesheet" href="./css/fonts.css">
+	<link rel="stylesheet" href="./css/ventana_inicio.css">
 	<script src="./js/main.js"></script>
 	
 	<!-- link paginacion -->
@@ -91,12 +92,9 @@
 						<li><a href="detalle_paciente.php">Detalle Paciente<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
-				<!-- <li class="submenu">
-					<a href="#"><span class="icon-user"></span>Operaciones<span class="caret icon-arrow-down6"></span></a>
-					<ul class="children">
-						<li><a href="nuevo.php">Detalle Paciente<span class="icon-dot"></span></a></li>
-					</ul>
-				</li> -->
+				<li class="submenu">
+					<a href="acerca.php"><i class="fa fa-cog"></i> Acerca de<span class="caret icon-arrow-down6"></span></a>
+				</li>	
 			</ul>
 		</nav>
 	</header>

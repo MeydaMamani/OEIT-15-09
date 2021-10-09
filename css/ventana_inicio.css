@@ -13,37 +13,13 @@
     
 }
 
-.btn-abrir{
-    background: #0063a5;
-    color:#fff;
-    padding: 10px;
-    display: inline-block;
-    border: none;
-    cursor: pointer;
-}
-
 /* VENTANA MODAL */
-
-.pop-up{
-    background: rgba(48, 48, 48, 0.5);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-}
 
 .pop-up-wrap{
     display: flex;
     align-items: center;
-    width: 90%;
-    max-width: 950px;
-    transform: scale(0.6);
-    opacity: 0;
+    width: 100%;
+    transform: scale(0.9);
     transition: .3s ease all;
 }
 
@@ -177,15 +153,6 @@
     width: 100%;
     height: 20px;
     background: #1F4068;
-}
-
-#close{
-    position: absolute;
-    top: 40px;
-    right: 25px;
-    font-size: 25px;
-    color: #1bc59b;
-    cursor: pointer;
 }
 
 .pop-up.show{
