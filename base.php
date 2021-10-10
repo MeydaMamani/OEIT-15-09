@@ -66,7 +66,7 @@
 						<li><a href="4_meses.php">4 Meses (CG SI-04)<span class="icon-dot"></span></a></li>
 						<li><a href="6-8_meses.php">6 - 8 Meses (CG SI-05)<span class="icon-dot"></span></a></li>
 						<li><a href="cred.php">CRED (SI-CG06)<span class="icon-dot"></span></a></li>
-						<li><a href="">Paquete<span class="icon-dot"></span></a></li>
+						<li><a href="paquete_nino.php">Paquete<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 				<li class="submenu">
