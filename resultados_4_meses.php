@@ -58,8 +58,16 @@
               </div>
             </div>
 
-            <button class="btn btn-outline-dark btn-sm btn_fed"><i class="fa fa-clone"></i> FED</button>
-            <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Todos</button>
+            <div class="d-flex">
+                <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
+                <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>
+                <form action="impresion_4_meses.php" method="POST">
+                    <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                    <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                    <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir Excel</button>
+                </form>
+            </div>
             <!-- <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> ESSALUD</button>
             <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Minsa</button> -->
             <div class="col-12 table-responsive table_no_fed">

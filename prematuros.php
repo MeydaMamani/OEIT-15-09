@@ -65,6 +65,13 @@
         var mes =$("#mes").val();
         if (red != 0 && distrito!='-' && mes!=''){
             document.getElementById("btn_buscar").type = "submit";
+            var red = $("#red").val();
+            var distrito = $("#distrito").val();
+            var mes = $("#mes").val();
+            console.log(red);
+            $.post("impresion.php", {red: red, distrito: distrito, mes: mes}, function(resp){
+                console.log(resp);
+            });
         }else if(red == 0){
             toastr.error('Seleccione una Red', null, {"closeButton": true, "progressBar": true});
         }else if(distrito == '-'){

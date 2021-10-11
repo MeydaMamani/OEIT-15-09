@@ -3,6 +3,8 @@
     require('abrir2.php');
     require('abrir3.php');
     if (isset($_POST['Buscar'])) {
+        header("Content-Type: text/html; charset=UTF-16LE");
+        header('Content-Type: text/html; charset=UTF-8');
         global $conex;
         include('./base.php');
 
@@ -44,8 +46,17 @@
                 <button type="button" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='prematuros.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
               </div>
             </div>
-            <button class="btn btn-outline-dark btn-sm btn_fed"><i class="fa fa-clone"></i> FED</button>
-            <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Todo</button>
+            <div class="d-flex">
+                <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
+                <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>
+                <form action="impresion_prematuro.php" method="POST">
+                    <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                    <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                    <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir Excel</button>
+                </form>
+            </div>
+
             <div class="col-12 table-responsive table_no_fed">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
@@ -74,71 +85,71 @@
                         </div>
                     </div>
                     <tbody>
-                    <?php
-                        include('consulta_prematuro.php');
-                        $i=1;
-                        while ($consulta = sqlsrv_fetch_array($consulta2)){
-                            if(is_null ($consulta['Provnacido']) ){
-                                $newdate2 = '  -'; }
-                                else{
-                            $newdate2 = $consulta['Provnacido'];}
+                        <?php
+                            include('consulta_prematuro.php');
+                            $i=1;
+                            while ($consulta = sqlsrv_fetch_array($consulta2)){
+                                if(is_null ($consulta['Provnacido']) ){
+                                    $newdate2 = '  -'; }
+                                    else{
+                                $newdate2 = $consulta['Provnacido'];}
 
-                            if(is_null ($consulta['Distnacido']) ){
-                                $newdate3 = '  -'; }
-                                else{
-                            $newdate3 = $consulta['Distnacido'] ;}
+                                if(is_null ($consulta['Distnacido']) ){
+                                    $newdate3 = '  -'; }
+                                    else{
+                                $newdate3 = $consulta['Distnacido'] ;}
 
-                            if(is_null ($consulta['Establecimiento']) ){
-                                $newdate4 = '  -'; }
-                                else{
-                            $newdate4 = $consulta['Establecimiento'];}
+                                if(is_null ($consulta['Establecimiento']) ){
+                                    $newdate4 = '  -'; }
+                                    else{
+                                $newdate4 = $consulta['Establecimiento'];}
 
-                            if(is_null ($consulta['MENOR_ENCONTRADO']) ){
-                                $newdate5 = '  -'; }
-                                else{
-                            $newdate5 = $consulta['MENOR_ENCONTRADO'];}
+                                if(is_null ($consulta['MENOR_ENCONTRADO']) ){
+                                    $newdate5 = '  -'; }
+                                    else{
+                                $newdate5 = $consulta['MENOR_ENCONTRADO'];}
 
-                            if(is_null ($consulta['FECNACIDO']) ){
-                                $newdate6 = '  -'; }
-                                else{
-                            $newdate6 = $consulta['FECNACIDO'] -> format('d/m/y');}
+                                if(is_null ($consulta['FECNACIDO']) ){
+                                    $newdate6 = '  -'; }
+                                    else{
+                                $newdate6 = $consulta['FECNACIDO'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['Numcnv']) ){
-                                $newdate7 = '  -'; }
-                                else{
-                            $newdate7 = $consulta['Numcnv'];}
+                                if(is_null ($consulta['Numcnv']) ){
+                                    $newdate7 = '  -'; }
+                                    else{
+                                $newdate7 = $consulta['Numcnv'];}
 
-                            if(is_null ($consulta['NOMBRES_MENOR']) ){
-                                $newdate8 = '  -'; }
-                                else{
-                            $newdate8 = $consulta['NOMBRES_MENOR'];}
+                                if(is_null ($consulta['NOMBRES_MENOR']) ){
+                                    $newdate8 = '  -'; }
+                                    else{
+                                $newdate8 = $consulta['NOMBRES_MENOR'];}
 
-                            if(is_null ($consulta['PREMATURO']) ){
-                                $newdate10 = '  -'; }
-                                else{
-                            $newdate10 = $consulta['PREMATURO'];}
+                                if(is_null ($consulta['PREMATURO']) ){
+                                    $newdate10 = '  -'; }
+                                    else{
+                                $newdate10 = $consulta['PREMATURO'];}
 
-                            if(is_null ($consulta['SUPLEMENTADO']) ){
-                                $newdate11 = 'No'; }
-                                else{
-                            $newdate11 = 'Si';}
+                                if(is_null ($consulta['SUPLEMENTADO']) ){
+                                    $newdate11 = 'No'; }
+                                    else{
+                                $newdate11 = 'Si';}
 
-                            if(is_null ($consulta['Tipo_Doc_Paciente']) ){
-                                $newdate12 = '  -'; }
-                                else{
-                            $newdate12 = $consulta['Tipo_Doc_Paciente'];}
+                                if(is_null ($consulta['Tipo_Doc_Paciente']) ){
+                                    $newdate12 = '  -'; }
+                                    else{
+                                $newdate12 = $consulta['Tipo_Doc_Paciente'];}
 
-                            if(is_null ($consulta['TIPO_SEGURO']) ){
-                                $newdate13 = '  -'; }
-                                else{
-                            $newdate13 = $consulta['TIPO_SEGURO'];}
+                                if(is_null ($consulta['TIPO_SEGURO']) ){
+                                    $newdate13 = '  -'; }
+                                    else{
+                                $newdate13 = $consulta['TIPO_SEGURO'];}
 
-                            if(is_null ($consulta['SE_ATIENDE']) ){
-                                $newdate14 = '  -'; }
-                                else{
-                            $newdate14 = $consulta['SE_ATIENDE'];}
+                                if(is_null ($consulta['SE_ATIENDE']) ){
+                                    $newdate14 = '  -'; }
+                                    else{
+                                $newdate14 = $consulta['SE_ATIENDE'];}
 
-                    ?>
+                        ?>
                         <tr class="text-center font-12">
                             <td class="align-middle"><?php echo $i++; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
@@ -326,9 +337,18 @@
           </div>
         </div>
     <?php } ?>
+    
     <script src="./plugin/footable/js/footable-init.js"></script>
     <script src="./plugin/footable/js/footable.all.min.js"></script>
     <script>
+        // $("#export_data").click(function(e){
+        //     event.preventDefault();
+        //     var excel = $("#export_data").val();
+        //     console.log(excel);
+        //     $.post("consulta_prematuro.php", {archivo: excel}, function(resp){
+        //         console.log(resp);
+        //     });
+        // });
         $(function(){
             $(".btn_fed").click(function(){
                 $(".total").text(<?php echo $fed-1; ?>);

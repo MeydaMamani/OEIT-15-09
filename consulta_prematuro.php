@@ -101,5 +101,6 @@
 
         $consulta1 = sqlsrv_query($conn2, $resultado);
         $consulta2 = sqlsrv_query($conn3, $resultado2);
+
     }
 ?>

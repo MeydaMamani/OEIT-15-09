@@ -9,7 +9,7 @@
                 <div class="card" style="border-color: #337ab7;">
                     <h5 class="card-header text-white" style="background: #337ab7;">Paquete Niño</h5>
                     <div class="card-body">
-                        <form name="f1" action="resultados_prematuro.php" method="post" class="_form_gestante">
+                        <form name="f1" action="resultados_paquete_nino.php" method="post" class="_form_gestante">
                             <div class="row">
                                 <div class="col-md">
                                     <p style="font-size: 13px;" class="text-start"><b>Ingrese Red: </b></p>

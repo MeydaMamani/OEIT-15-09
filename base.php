@@ -83,7 +83,7 @@
 						<li><a href="vacuna_covid.php">Consulta tu Vacunación<span class="icon-dot"></span></a></li>
 						<li><a href="#">Consulta Padrón <span class="icon-dot"></span></a></li>
 						<li><a href="https://drive.google.com/file/d/1qR2KiCh3DRyp1OyiJZ2xjBJMpZQxmaSi/view" target="_blank">Descargue su Consentimiento <span class="icon-dot"></span></a></li>
-						<li><a href="#">Sis-Covid<span class="icon-dot"></span></a></li>
+						<li><a href="sis_covid.php">Sis-Covid<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 				<li class="submenu">

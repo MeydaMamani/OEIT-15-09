@@ -1,300 +1,551 @@
 <?php 
-
-require ('abrir.php');
-   
-if (isset($_POST['Buscar'])) {
-global $conex;
- header('Content-Type: text/html; charset=ISO-8859-1');
-?>
-<!DOCTYPE HTML>
-<html lang="es">
-<head> <!--mi Cabecera, icono, titulo y meta-->
-    <meta charset="UTF-8">
-    <title>OEIT - DIRESA</title>
-    <meta name="description" content="PAGINA DIRESA PASCO">
-    <meta name="keywords" content="OEIT DIRESA-PASCO">
-    <link rel="shortcut icon" href="./img/logo.jpg">
-    <link rel="stylesheet" type="text/css" href="./inicio.css" media="screen, handheld">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" media="(max-width: 1100px)" href="max-width-810.css" />
-    <link rel="stylesheet" media="(max-width: 700px)" href="max-width-700.css" />
-    <link rel="stylesheet" media="(max-width: 612px)" href="max-width-612.css" />
-    <link rel="stylesheet" media="(max-width: 450px)" href="max-width-450.css" />
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-</head>
-<body>
-<header>
-  <div class="cajageneral cajaheader">
-    <div class="cajavarios">
-      <div class="cajageneral3">  <!--Logo y Otros-->
-        <div class="cajacolumna">
-          <div class="cajacontiene1">
-            <div class="cajalogo">
-              <img class="logo" src="./img/diresa1.jpeg">
-            </div>
-            <div class="cajanombre">
-              <span class="nomlogo">DIRESA-PASCO</span>
-            </div>
-          </div>
-        </div>
-        <div class="cajacolumna">
-          <div class="cajacontiene2">
-            <div class="cajalogo2">
-              <img class="logo2" src="./img/gorepa1.png">
-            </div>
-          </div><!--Caja Vacia solo para colocar botones de ingreso u otros-->
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<main class="menu-content">
-  <nav class="content-menu">
-
-      <label for="toggle" class="res-menu">
-          <img src="img/menu.png" alt="menu">
-      </label>
-      <input type="checkbox" id="toggle">
-      <div class="menu">
-          <ul class="first-deslice">
-              <li class="first-iten"><a class="first-link" href="Inicio.php">INICIO</a></li>
-              
-              <li class="first-iten"><a class="first-link">COVID-19</a>
-                  <ul class="second-deslice">
-                      <li class="second-iten"><a class="second-link" href="vacuna_covid.php">CONSULTA TU VACUNACION</a></li>
-                      <li class="second-iten"><a class="second-link" href="http://200.10.69.226/consultas/inicio_padron.php">CONSULTA PADRON</a></li>
-                      <li class="second-iten"><a class="second-link" href="#">DESCARGUE SU CONSENTIMIENTO</a></li>
-                      <li class="second-iten"><a class="second-link" href="#">SISCOVID</a></li>
-                  </ul>
-              </li>
-              <li class="first-iten"><a class="first-link">GESTANTE</a>
-                <ul class="second-deslice">
-                    <li class="second-iten"><a class="second-link" href="bateria_completa.php">BATERIA COMPLETA</a></li>
-                    
-                </ul>
-              </li>
-              <li class="first-iten"><a class="first-link">PACIENTE</a>
-                <ul class="second-deslice">
-                    <li class="second-iten"><a class="second-link" href="detalle_paciente.php">DETALLE PACIENTE</a></li>
-                    <li class="second-iten"><a class="second-link" href="#"></a></li>
-                </ul>
-              </li>
-              <li class="first-iten"><a class="first-link" href="#">NIÑO</a>
-                <ul class="second-deslice">
-                    <li class="second-iten"><a class="second-link" href="prematuros.php">NIÑOS PREMATUROS</a></li>
-                    <li class="second-iten"><a class="second-link" href="4_meses.php">4 MESES</a></li>
-                    <li class="second-iten"><a class="second-link" href="6-8_meses.php">6 - 8 MESES</a></li>
-                </ul>
-              </li>
-          </ul>
-      </div>
-  </nav>
-</main>
-<section class="cajaslider"><!--slider*/-->
- <center >
-      <?php 
-
+    require('abrir.php');
+    require('abrir2.php');
+    require('abrir3.php');    
+    if (isset($_POST['Buscar'])) {
+        global $conex;        
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
 
+        if($mes == 1){ $nombre_mes = 'Enero'; }
+        else if($mes == 2){ $nombre_mes = 'Febrero'; }
+        else if($mes == 3){ $nombre_mes = 'Marzo'; }
+        else if($mes == 4){ $nombre_mes = 'Abril'; }
+        else if($mes == 5){ $nombre_mes = 'Mayo'; }
+        else if($mes == 6){ $nombre_mes = 'Junio'; }
+        else if($mes == 7){ $nombre_mes = 'Julio'; }
+        else if($mes == 8){ $nombre_mes = 'Agosto'; }
+        else if($mes == 9){ $nombre_mes = 'Setiembre'; }
+        else if($mes == 10){ $nombre_mes = 'Octubre'; }
+        else if($mes == 11){ $nombre_mes = 'Noviembre'; }
+        else if($mes == 12){ $nombre_mes = 'Diciembre'; }
+        
+        if (strlen($mes) == 1){
+            $mes2 = '0'.$mes;
+        }else{
+            $mes2 = $mes;
+        }
+
         if ($red_1 == 1) {
-          $red = 'DANIEL ALCIDES CARRION';
-          $redt = '';
+            $red = 'DANIEL ALCIDES CARRION';
         }
         elseif ($red_1 == 2) {
-          $red = 'OXAPAMPA';
-          $redt = '';
+            $red = 'OXAPAMPA';
         }
         elseif ($red_1 == 3) {
-          $red = 'PASCO';
-          $redt = '';
+            $red = 'PASCO';
         }
         elseif ($red_1 == 4) {
-          $redt = 'PASCO';
-          $red = '';
+            $redt = 'PASCO';
         }
         
-           
-        if ($dist_1 == 'TODOS') {
-          $dist = '';
-          $resultado = "SELECT
-A.Provincia_Establecimiento AS PROVINCIA,
-A.Distrito_Establecimiento AS DISTRITO,
-A.Nombre_Establecimiento AS EESS,
-A.Abrev_Tipo_Doc_Paciente AS TIPO_DOC,
-A.Numero_Documento_Paciente AS NUM_DOC,
-A.Fecha_Nacimiento_Paciente AS FECHA_NACIMIENTO,
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and Tipo_Diagnostico='D' AND Codigo_Item='90585' )THEN A.Fecha_Atencion ELSE NULL END)'BCG',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and Tipo_Diagnostico='D' AND Codigo_Item='90744' )THEN A.Fecha_Atencion ELSE NULL END)'HVB',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and ((Codigo_Item='Z001' AND Valor_Lab='1' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='1' AND Tipo_Diagnostico='D') ) )THEN A.Fecha_Atencion ELSE NULL END)'CRED1',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=5 AND Dia_Actual_Paciente<=14 ) and((Codigo_Item='Z001' AND Valor_Lab='2' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='2' AND Tipo_Diagnostico='D') ) )THEN A.Fecha_Atencion ELSE NULL END)'CRED2',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=10 AND Dia_Actual_Paciente<=24 ) and ((Codigo_Item='Z001' AND Valor_Lab='3' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='3' AND Tipo_Diagnostico='D') ) )THEN A.Fecha_Atencion ELSE NULL END)'CRED3',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actuasl_Paciente='0' and (Dia_Actual_Paciente>=10 AND Dia_Actual_Paciente<=29) and ((Codigo_Item='Z001' AND Valor_Lab='4' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='4' AND Tipo_Diagnostico='D') ) )THEN A.Fecha_Atencion ELSE NULL END)'CRED4',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='1' and Codigo_Item='Z001' AND Valor_Lab='1' AND Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'CRED1MES'
+        $resultado = "SELECT NOMBRE_PROV, NOMBRE_DIST, NOMBRE_EESS_NACIMIENTO,NOMBRE_EESS, MENOR_VISITADO, MENOR_ENCONTRADO, TIPO_SEGURO, FECHA_NACIMIENTO_NINO,
+                        'DOCUMENTO' = CASE 
+                              WHEN pn.NUM_DNI IS NOT NULL
+                              THEN pn.NUM_DNI
+                              ELSE pn.NUM_CNV
+                          END,
+                          CONCAT(pn.APELLIDO_PATERNO_NINO,' ',pn.APELLIDO_MATERNO_NINO,' ', pn.NOMBRE_NINO) APELLIDOS_NOMBRES
+                          into BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred
+                        FROM NOMINAL_PADRON_NOMINAL PN
+                        WHERE YEAR(FECHA_NACIMIENTO_NINO)='2021' AND MONTH(FECHA_NACIMIENTO_NINO)='$mes'  AND MES='2021$mes2';
+                        with c as ( select DOCUMENTO,  ROW_NUMBER() over(partition by DOCUMENTO order by DOCUMENTO) as duplicado
+                        from BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred )
+                        delete  from c
+                        where duplicado >1";
 
-FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A
-       WHERE
-          ( (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and Tipo_Diagnostico='D' AND Codigo_Item='90585' ) OR
-      (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and Tipo_Diagnostico='D' AND Codigo_Item='90744' ) OR
-      (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and ((Codigo_Item='Z001' AND Valor_Lab='1' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='1' AND Tipo_Diagnostico='D') ))OR 
-            (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=5 AND Dia_Actual_Paciente<=14 ) and((Codigo_Item='Z001' AND Valor_Lab='2' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='2' AND Tipo_Diagnostico='D') ) ) OR
-              (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=10 AND Dia_Actual_Paciente<=24 ) and ((Codigo_Item='Z001' AND Valor_Lab='3' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='3' AND Tipo_Diagnostico='D') ) )OR 
-              (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=10 AND Dia_Actual_Paciente<=29) and ((Codigo_Item='Z001' AND Valor_Lab='4' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='4' AND Tipo_Diagnostico='D') ) )OR
-        (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='1' and Codigo_Item='Z001' AND Valor_Lab='1' AND Tipo_Diagnostico='D' )) AND
-        (anio='2021' and month(Fecha_Nacimiento_Paciente)= '$mes' AND (Provincia_Establecimiento IN('$red') OR Departamento_Establecimiento = '$redt') AND ((Distrito_Establecimiento IN ('$dist') OR Provincia_Establecimiento='$red') OR Departamento_Establecimiento = '$redt'))
+        // ------------  CRED RN  1er y 2do control
+        $resultado2 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                        Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                        OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA 
+                        into BDHIS_MINSA_EXTERNO.dbo.cred_rn1_2
+                        from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and Fecha_Atencion<= DATEADD(DD,14,Fecha_Nacimiento_Paciente)
+                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // --------------- CRED  3ER Y 4TO CONTROL RN
+        $resultado3 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                        Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                        OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                        into BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
+                        from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,15,Fecha_Nacimiento_Paciente) and dateadd(dd,28,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ------  CRED MENSULIZADO POR PERIOROD SEGUN FICHA  CRED1 
+        $resultado4 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                        Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                        OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                        into BDHIS_MINSA_EXTERNO.dbo.cred_mes1
+                        from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,29,Fecha_Nacimiento_Paciente) and dateadd(dd,59,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ----------  CRED 2
+        $resultado5 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                        Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                        OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                        into BDHIS_MINSA_EXTERNO.dbo.cred_mes2
+                        from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,60,Fecha_Nacimiento_Paciente) and dateadd(dd,89,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ----------  CRED 3
+        $resultado6 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                        Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                        OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                        into BDHIS_MINSA_EXTERNO.dbo.cred_mes3
+                        from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,90,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        order by Numero_Documento_Paciente, Fecha_Atencion";
         
-GROUP BY
-A.Provincia_Establecimiento,
-A.Abrev_Tipo_Doc_Paciente,
-A.Numero_Documento_Paciente,
-A.Distrito_Establecimiento,
-A.Nombre_Establecimiento,
-A.Fecha_Nacimiento_Paciente
-ORDER BY
-A.Distrito_Establecimiento DESC, A.Nombre_Establecimiento, Numero_Documento_Paciente;";
+        // ----------  CRED 4
+        $resultado7 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                        Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                        OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                        into BDHIS_MINSA_EXTERNO.dbo.cred_mes4
+                        from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,120,Fecha_Nacimiento_Paciente) and dateadd(dd,159,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ----------  CRED 5
+        $resultado8 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                        Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                        OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                        into BDHIS_MINSA_EXTERNO.dbo.cred_mes5
+                        from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,150,Fecha_Nacimiento_Paciente) and dateadd(dd,179,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ----------  CRED 6
+        $resultado9 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                        Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                        OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                        into BDHIS_MINSA_EXTERNO.dbo.cred_mes6
+                        from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,180,Fecha_Nacimiento_Paciente) and dateadd(dd,209,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ----------  CRED 7
+        $resultado10 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                          OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                          into BDHIS_MINSA_EXTERNO.dbo.cred_mes7
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,210,Fecha_Nacimiento_Paciente) and dateadd(dd,239,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ----------  CRED 8
+        $resultado11 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                          OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                          into BDHIS_MINSA_EXTERNO.dbo.cred_mes8
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,240,Fecha_Nacimiento_Paciente) and dateadd(dd,269,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ----------  CRED 9
+        $resultado12 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                          OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                          into BDHIS_MINSA_EXTERNO.dbo.cred_mes9
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,270,Fecha_Nacimiento_Paciente) and dateadd(dd,299,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ----------  CRED 10
+        $resultado13 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                          OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                          into BDHIS_MINSA_EXTERNO.dbo.cred_mes10
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,300,Fecha_Nacimiento_Paciente) and dateadd(dd,329,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ----------  CRED 11
+        $resultado14 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS, ROW_NUMBER()
+                          OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
+                          into BDHIS_MINSA_EXTERNO.dbo.cred_mes11
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,330,Fecha_Nacimiento_Paciente) and dateadd(dd,364,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ---------------  ANTINEUMOCOCICA  90670.....--1
+        $resultado15 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
+                          into BDHIS_MINSA_EXTERNO.dbo.v90670_1
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90670' 
+                          and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-01-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ---------------  ANTINEUMOCOCICA  90670.....--2
+        $resultado16 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
+                          into BDHIS_MINSA_EXTERNO.dbo.v90670_2
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90670' 
+                          and (Fecha_Atencion between dateadd(dd,119,Fecha_Nacimiento_Paciente) and dateadd(dd,159,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-01-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ---------------   90681.....--1
+        $resultado17 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
+                          into BDHIS_MINSA_EXTERNO.dbo.v90681_1
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90681' 
+                          and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-01-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ---------------   90681.....--2
+        $resultado18 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
+                          into BDHIS_MINSA_EXTERNO.dbo.v90681_2
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90681' 
+                          and (Fecha_Atencion between dateadd(dd,119,Fecha_Nacimiento_Paciente) and dateadd(dd,159,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-01-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ---------------   90712  -  90713.....--1
+        $resultado19 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
+                          into BDHIS_MINSA_EXTERNO.dbo.v90712_13_1
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item in('90712','90713')
+                          and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-01-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ---------------   90712  -  90713.....--2
+        $resultado20 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
+                          into BDHIS_MINSA_EXTERNO.dbo.v90712_13_2
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item in('90712','90713')
+                          and (Fecha_Atencion between dateadd(dd,119,Fecha_Nacimiento_Paciente) and dateadd(dd,169,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-01-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ---------------   90712  -  90713.....--3
+        $resultado21 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
+                          into BDHIS_MINSA_EXTERNO.dbo.v90712_13_3
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item in('90712','90713')
+                          and (Fecha_Atencion between dateadd(dd,170,Fecha_Nacimiento_Paciente) and dateadd(dd,209,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-01-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ---------------   90723.....--1
+        $resultado22 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
+                          into BDHIS_MINSA_EXTERNO.dbo.v90723_1
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90723' 
+                          and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-01-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        // ---------------------  90723  2    77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        $resultado23 = "SELECT Nombre_Establecimiento, Fecha_Nacimiento_Paciente,Tipo_Doc_Paciente,Numero_Documento_Paciente, Valor_Lab,
+                          Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
+                          into BDHIS_MINSA_EXTERNO.dbo.v90723_2
+                          from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                          where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90723' 
+                          and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
+                          and Fecha_Nacimiento_Paciente>='2021-01-01'
+                          order by Numero_Documento_Paciente, Fecha_Atencion";
+
+        if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
+          $resultado24 = "SELECT NOMBRE_PROV,NOMBRE_DIST,MENOR_ENCONTRADO,APELLIDOS_NOMBRES,DOCUMENTO,TIPO_SEGURO, FECHA_NACIMIENTO_NINO,	PRIMER_CNTRL,SEG_CNTRL,
+                          CASE WHEN DATEDIFF(dd,primer_cntrl,SEG_CNTRL) BETWEEN 3 AND 7 THEN 'CUMPLE' END CUMPLE_1,
+                          TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,CUARTO_CNTRL_MES,
+                          QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES, NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,
+                          ONCEAVO_CNTRL_MES
+                          FROM ( SELECT P.NOMBRE_PROV,P.NOMBRE_DIST,P.MENOR_ENCONTRADO,P.APELLIDOS_NOMBRES,P.DOCUMENTO,P.TIPO_SEGURO, P.FECHA_NACIMIENTO_NINO,
+                                  Max(CASE WHEN ((a.NUMEROFILA='1') )THEN A.Fecha_Atencion ELSE NULL END)'PRIMER_CNTRL',
+                                  Max(CASE WHEN ((a.NUMEROFILA='2') )THEN A.Fecha_Atencion ELSE NULL END)'SEG_CNTRL',
+                                  Max(CASE WHEN ((a.NUMEROFILA='1') )THEN A1.Fecha_Atencion ELSE NULL END)'TERCER_CNTRL',
+                                  Max(CASE WHEN ((a.NUMEROFILA='2') )THEN A1.Fecha_Atencion ELSE NULL END)'CUARTO_CNTRL',
+                                  Max(CASE WHEN ((C1.NUMEROFILA='1') )THEN C1.Fecha_Atencion ELSE NULL END)'PRIMER_CNTRL_MES',
+                                  Max(CASE WHEN ((C2.NUMEROFILA='1') )THEN C2.Fecha_Atencion ELSE NULL END)'SEGUNDO_CNTRL_MES',
+                                  Max(CASE WHEN ((C3.NUMEROFILA='2') )THEN C3.Fecha_Atencion ELSE NULL END)'TERCER_CNTRL_MES',
+                                  Max(CASE WHEN ((C4.NUMEROFILA='2') )THEN C4.Fecha_Atencion ELSE NULL END)'CUARTO_CNTRL_MES',
+                                  Max(CASE WHEN ((C5.NUMEROFILA='2') )THEN C5.Fecha_Atencion ELSE NULL END)'QUINTO_CNTRL_MES',
+                                  Max(CASE WHEN ((C6.NUMEROFILA='2') )THEN C6.Fecha_Atencion ELSE NULL END)'SEXTO_CNTRL_MES',
+                                  Max(CASE WHEN ((C7.NUMEROFILA='2') )THEN C7.Fecha_Atencion ELSE NULL END)'SEPTIMO_CNTRL_MES',
+                                  Max(CASE WHEN ((C8.NUMEROFILA='2') )THEN C8.Fecha_Atencion ELSE NULL END)'OCTAVO_CNTRL_MES',
+                                  Max(CASE WHEN ((C9.NUMEROFILA='2') )THEN C9.Fecha_Atencion ELSE NULL END)'NOVENO_CNTRL_MES',
+                                  Max(CASE WHEN ((C10.NUMEROFILA='2') )THEN C10.Fecha_Atencion ELSE NULL END)'DECIMO_CNTRL_MES',
+                                  Max(CASE WHEN ((C11.NUMEROFILA='2') )THEN C11.Fecha_Atencion ELSE NULL END)'ONCEAVO_CNTRL_MES',
+                                  v1.Fecha_Atencion VAntineumo1, v2.Fecha_Atencion VAntineumo2, v3.Fecha_Atencion VAnt3,
+                                  v4.Fecha_Atencion VAnt23, v5.Fecha_Atencion VA9072, v6.Fecha_Atencion VA90nt2,
+                                  v7.Fecha_Atencion VA90723, v8.Fecha_Atencion v90723_1, v9.Fecha_Atencion v90723_2    
+                              FROM BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred P  
+                                  LEFT JOIN  BDHIS_MINSA_EXTERNO.dbo.cred_rn1_2 A on P.DOCUMENTO=A.numero_documento_paciente
+                                  left JOIN BDHIS_MINSA_EXTERNO.dbo.cred_rn3_4 a1 ON P.DOCUMENTO=A1.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES1 C1 ON  P.DOCUMENTO=C1.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES2 C2 ON  P.DOCUMENTO=C2.numero_documento_paciente
+                                  LEFt JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES3 C3 ON P.DOCUMENTO=C3.numero_documento_paciente
+                                  LEFt JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes4 C4 ON  P.DOCUMENTO=C4.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES5 C5 ON  P.DOCUMENTO=C5.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes6 C6 ON  P.DOCUMENTO=C6.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes7 C7 ON  P.DOCUMENTO=C7.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes8 C8 ON  P.DOCUMENTO=C8.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes9 C9 ON  P.DOCUMENTO=C9.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES10 C10 ON  P.DOCUMENTO=C10.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES11 C11 ON  P.DOCUMENTO=C11.numero_documento_paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90670_1 v1 on p.DOCUMENTO=v1.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90670_1 v2 on p.DOCUMENTO=v2.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90681_1 v3 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90681_2 v4 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90712_13_1 v5 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90712_13_1 v6 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90712_13_1 v7 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90723_1 v8 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90723_1 v9 on p.DOCUMENTO=v3.Numero_Documento_Paciente            
+                              GROUP BY P.NOMBRE_PROV,P.NOMBRE_DIST,P.DOCUMENTO, P.TIPO_SEGURO,P.FECHA_NACIMIENTO_NINO,P.MENOR_ENCONTRADO,P.APELLIDOS_NOMBRES,
+                                v1.Fecha_Atencion,v2.Fecha_Atencion, v3.Fecha_Atencion, v4.Fecha_Atencion, v5.Fecha_Atencion,
+                                v6.Fecha_Atencion, v7.Fecha_Atencion, v8.Fecha_Atencion , v9.Fecha_Atencion  ) A WHERE NOMBRE_PROV = '$red' 
+                          group by NOMBRE_PROV,NOMBRE_DIST,MENOR_ENCONTRADO,APELLIDOS_NOMBRES,DOCUMENTO,TIPO_SEGURO, FECHA_NACIMIENTO_NINO,	PRIMER_CNTRL,SEG_CNTRL
+                            ,		TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,CUARTO_CNTRL_MES,
+                            QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES, NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,
+                            ONCEAVO_CNTRL_MES
+                            
+                            drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn1_2 
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
+                            drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES1
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes2
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes3
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes4
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes5
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes6
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes7
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes8
+                            drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES9
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes10
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes11
+
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90670_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90670_2
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90681_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90681_2
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90712_13_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90712_13_2
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90712_13_3
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90723_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90723_2";
         }
+        else if ($red_1 == 4 and $dist_1 == 'TODOS') {
+          // -----------CRUZANDO INDICADOR
+        $resultado24 = "SELECT NOMBRE_PROV,NOMBRE_DIST,MENOR_ENCONTRADO,APELLIDOS_NOMBRES,DOCUMENTO,TIPO_SEGURO, FECHA_NACIMIENTO_NINO,	PRIMER_CNTRL,SEG_CNTRL,
+                          CASE WHEN DATEDIFF(dd,primer_cntrl,SEG_CNTRL) BETWEEN 3 AND 7 THEN 'CUMPLE' END CUMPLE_1,
+                          TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,CUARTO_CNTRL_MES,
+                          QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES, NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,
+                          ONCEAVO_CNTRL_MES
+                          FROM ( SELECT P.NOMBRE_PROV,P.NOMBRE_DIST,P.MENOR_ENCONTRADO,P.APELLIDOS_NOMBRES,P.DOCUMENTO,P.TIPO_SEGURO, P.FECHA_NACIMIENTO_NINO,
+                                  Max(CASE WHEN ((a.NUMEROFILA='1') )THEN A.Fecha_Atencion ELSE NULL END)'PRIMER_CNTRL',
+                                  Max(CASE WHEN ((a.NUMEROFILA='2') )THEN A.Fecha_Atencion ELSE NULL END)'SEG_CNTRL',
+                                  Max(CASE WHEN ((a.NUMEROFILA='1') )THEN A1.Fecha_Atencion ELSE NULL END)'TERCER_CNTRL',
+                                  Max(CASE WHEN ((a.NUMEROFILA='2') )THEN A1.Fecha_Atencion ELSE NULL END)'CUARTO_CNTRL',
+                                  Max(CASE WHEN ((C1.NUMEROFILA='1') )THEN C1.Fecha_Atencion ELSE NULL END)'PRIMER_CNTRL_MES',
+                                  Max(CASE WHEN ((C2.NUMEROFILA='1') )THEN C2.Fecha_Atencion ELSE NULL END)'SEGUNDO_CNTRL_MES',
+                                  Max(CASE WHEN ((C3.NUMEROFILA='2') )THEN C3.Fecha_Atencion ELSE NULL END)'TERCER_CNTRL_MES',
+                                  Max(CASE WHEN ((C4.NUMEROFILA='2') )THEN C4.Fecha_Atencion ELSE NULL END)'CUARTO_CNTRL_MES',
+                                  Max(CASE WHEN ((C5.NUMEROFILA='2') )THEN C5.Fecha_Atencion ELSE NULL END)'QUINTO_CNTRL_MES',
+                                  Max(CASE WHEN ((C6.NUMEROFILA='2') )THEN C6.Fecha_Atencion ELSE NULL END)'SEXTO_CNTRL_MES',
+                                  Max(CASE WHEN ((C7.NUMEROFILA='2') )THEN C7.Fecha_Atencion ELSE NULL END)'SEPTIMO_CNTRL_MES',
+                                  Max(CASE WHEN ((C8.NUMEROFILA='2') )THEN C8.Fecha_Atencion ELSE NULL END)'OCTAVO_CNTRL_MES',
+                                  Max(CASE WHEN ((C9.NUMEROFILA='2') )THEN C9.Fecha_Atencion ELSE NULL END)'NOVENO_CNTRL_MES',
+                                  Max(CASE WHEN ((C10.NUMEROFILA='2') )THEN C10.Fecha_Atencion ELSE NULL END)'DECIMO_CNTRL_MES',
+                                  Max(CASE WHEN ((C11.NUMEROFILA='2') )THEN C11.Fecha_Atencion ELSE NULL END)'ONCEAVO_CNTRL_MES',
+                                  v1.Fecha_Atencion VAntineumo1, v2.Fecha_Atencion VAntineumo2, v3.Fecha_Atencion VAnt3,
+                                  v4.Fecha_Atencion VAnt23, v5.Fecha_Atencion VA9072, v6.Fecha_Atencion VA90nt2,
+                                  v7.Fecha_Atencion VA90723, v8.Fecha_Atencion v90723_1, v9.Fecha_Atencion v90723_2    
+                              FROM BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred P  
+                                  LEFT JOIN  BDHIS_MINSA_EXTERNO.dbo.cred_rn1_2 A on P.DOCUMENTO=A.numero_documento_paciente
+                                  left JOIN BDHIS_MINSA_EXTERNO.dbo.cred_rn3_4 a1 ON P.DOCUMENTO=A1.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES1 C1 ON  P.DOCUMENTO=C1.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES2 C2 ON  P.DOCUMENTO=C2.numero_documento_paciente
+                                  LEFt JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES3 C3 ON P.DOCUMENTO=C3.numero_documento_paciente
+                                  LEFt JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes4 C4 ON  P.DOCUMENTO=C4.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES5 C5 ON  P.DOCUMENTO=C5.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes6 C6 ON  P.DOCUMENTO=C6.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes7 C7 ON  P.DOCUMENTO=C7.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes8 C8 ON  P.DOCUMENTO=C8.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes9 C9 ON  P.DOCUMENTO=C9.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES10 C10 ON  P.DOCUMENTO=C10.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES11 C11 ON  P.DOCUMENTO=C11.numero_documento_paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90670_1 v1 on p.DOCUMENTO=v1.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90670_1 v2 on p.DOCUMENTO=v2.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90681_1 v3 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90681_2 v4 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90712_13_1 v5 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90712_13_1 v6 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90712_13_1 v7 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90723_1 v8 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90723_1 v9 on p.DOCUMENTO=v3.Numero_Documento_Paciente            
+                              GROUP BY P.NOMBRE_PROV,P.NOMBRE_DIST,P.DOCUMENTO, P.TIPO_SEGURO,P.FECHA_NACIMIENTO_NINO,P.MENOR_ENCONTRADO,P.APELLIDOS_NOMBRES,
+                                v1.Fecha_Atencion,v2.Fecha_Atencion, v3.Fecha_Atencion, v4.Fecha_Atencion, v5.Fecha_Atencion,
+                                v6.Fecha_Atencion, v7.Fecha_Atencion, v8.Fecha_Atencion , v9.Fecha_Atencion  ) A
+                          group by NOMBRE_PROV,NOMBRE_DIST,MENOR_ENCONTRADO,APELLIDOS_NOMBRES,DOCUMENTO,TIPO_SEGURO, FECHA_NACIMIENTO_NINO,	PRIMER_CNTRL,SEG_CNTRL
+                            ,		TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,CUARTO_CNTRL_MES,
+                            QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES, NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,
+                            ONCEAVO_CNTRL_MES
+                            
+                            drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn1_2 
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
+                            drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES1
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes2
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes3
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes4
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes5
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes6
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes7
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes8
+                            drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES9
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes10
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes11
 
-
-
-        else{
-          $dist=$dist_1;
-          $resultado = "SELECT
-A.Provincia_Establecimiento AS PROVINCIA,
-A.Distrito_Establecimiento AS DISTRITO,
-A.Nombre_Establecimiento AS EESS,
-A.Abrev_Tipo_Doc_Paciente AS TIPO_DOC,
-A.Numero_Documento_Paciente AS NUM_DOC,
-A.Fecha_Nacimiento_Paciente AS FECHA_NACIMIENTO,
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and Tipo_Diagnostico='D' AND Codigo_Item='90585' )THEN A.Fecha_Atencion ELSE NULL END)'BCG',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and Tipo_Diagnostico='D' AND Codigo_Item='90744' )THEN A.Fecha_Atencion ELSE NULL END)'HVB',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and ((Codigo_Item='Z001' AND Valor_Lab='1' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='1' AND Tipo_Diagnostico='D') ) )THEN A.Fecha_Atencion ELSE NULL END)'CRED1',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=5 AND Dia_Actual_Paciente<=14 ) and((Codigo_Item='Z001' AND Valor_Lab='2' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='2' AND Tipo_Diagnostico='D') ) )THEN A.Fecha_Atencion ELSE NULL END)'CRED2',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=10 AND Dia_Actual_Paciente<=24 ) and ((Codigo_Item='Z001' AND Valor_Lab='3' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='3' AND Tipo_Diagnostico='D') ) )THEN A.Fecha_Atencion ELSE NULL END)'CRED3',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=10 AND Dia_Actual_Paciente<=29) and ((Codigo_Item='Z001' AND Valor_Lab='4' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='4' AND Tipo_Diagnostico='D') ) )THEN A.Fecha_Atencion ELSE NULL END)'CRED4',
-MAX(CASE WHEN (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='1' and Codigo_Item='Z001' AND Valor_Lab='1' AND Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'CRED1MES'
-
-FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A
-       WHERE
-          ( (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and Tipo_Diagnostico='D' AND Codigo_Item='90585' ) OR
-      (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and Tipo_Diagnostico='D' AND Codigo_Item='90744' ) OR
-      (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and Dia_Actual_Paciente<=11 and ((Codigo_Item='Z001' AND Valor_Lab='1' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='1' AND Tipo_Diagnostico='D') ))OR 
-            (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=5 AND Dia_Actual_Paciente<=14 ) and((Codigo_Item='Z001' AND Valor_Lab='2' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='2' AND Tipo_Diagnostico='D') ) ) OR
-              (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=10 AND Dia_Actual_Paciente<=24 ) and ((Codigo_Item='Z001' AND Valor_Lab='3' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='3' AND Tipo_Diagnostico='D') ) )OR 
-              (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='0' and (Dia_Actual_Paciente>=10 AND Dia_Actual_Paciente<=29) and ((Codigo_Item='Z001' AND Valor_Lab='4' AND Tipo_Diagnostico='D')or (Codigo_Item='99381.01' AND Valor_Lab='4' AND Tipo_Diagnostico='D') ) )OR
-        (Anio_Actual_Paciente='0' and Mes_Actual_Paciente='1' and Codigo_Item='Z001' AND Valor_Lab='1' AND Tipo_Diagnostico='D' )) AND
-        (anio='2021' and month(Fecha_Nacimiento_Paciente)= '$mes' AND (Provincia_Establecimiento IN('$red') OR Departamento_Establecimiento = '$redt') AND ((Distrito_Establecimiento IN ('$dist') AND Provincia_Establecimiento='$red') OR Departamento_Establecimiento = '$redt'))
-       
-        
-GROUP BY
-A.Provincia_Establecimiento,
-A.Abrev_Tipo_Doc_Paciente,
-A.Numero_Documento_Paciente,
-A.Distrito_Establecimiento,
-A.Nombre_Establecimiento,
-A.Fecha_Nacimiento_Paciente
-ORDER BY
-A.Distrito_Establecimiento DESC, A.Nombre_Establecimiento, Numero_Documento_Paciente;";
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90670_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90670_2
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90681_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90681_2
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90712_13_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90712_13_2
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90712_13_3
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90723_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90723_2";
         }
-        
-    $params = array();
-    $options = array("Scrollable" => SQLSRV_CURSOR_KEYSET);
-        $consulta2 = sqlsrv_query($conn, $resultado, $params, $options);
-        $row_cnt = sqlsrv_num_rows($consulta2);
-          echo "<br>";
-          echo "<br>";
-          echo "<br>";
-          echo "<br>";
-          echo "<br>";
-          echo "CANTIDAD DE REGISTRO:";
-          echo $row_cnt;
-          ?>
-          <div class="container">
-            <br>
-           <table class="tabla" text="#FCFAFA" background="red" width="50%" border="1" bordercolor="#335DFF" >
-         <thead>
-            <tr>
-              <th>PROVINCIA</th>
-              <th>DISTRITO</th>
-              <th>IPRESS</th>
-              <th>TIPO DOC</th>
-              <th>DOCUMENTO</th>
-              <th>FECHA NACIMIENTO PACIENTE</th>
-              <th>BCG</th>
-              <th>HVB</th>
-              <th>CRED 1</th>
-              <th>CRED 2</th>
-              <th>CRED 3</th>
-              <th>CRED 4</th>
-              <th>CRED 1 MES</th>
-            </tr>
-          </thead>
-                  <?php  while ($consulta = sqlsrv_fetch_array($consulta2)){  
-                $newdate = $consulta['FECHA_NACIMIENTO'] -> format('d/m/y');
+        else if($dist_1 != 'TODOS'){
+            $dist=$dist_1;
+            $resultado24 = "SELECT NOMBRE_PROV,NOMBRE_DIST,MENOR_ENCONTRADO,APELLIDOS_NOMBRES,DOCUMENTO,TIPO_SEGURO, FECHA_NACIMIENTO_NINO,	PRIMER_CNTRL,SEG_CNTRL,
+                          CASE WHEN DATEDIFF(dd,primer_cntrl,SEG_CNTRL) BETWEEN 3 AND 7 THEN 'CUMPLE' END CUMPLE_1,
+                          TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,CUARTO_CNTRL_MES,
+                          QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES, NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,
+                          ONCEAVO_CNTRL_MES
+                          FROM ( SELECT P.NOMBRE_PROV,P.NOMBRE_DIST,P.MENOR_ENCONTRADO,P.APELLIDOS_NOMBRES,P.DOCUMENTO,P.TIPO_SEGURO, P.FECHA_NACIMIENTO_NINO,
+                                  Max(CASE WHEN ((a.NUMEROFILA='1') )THEN A.Fecha_Atencion ELSE NULL END)'PRIMER_CNTRL',
+                                  Max(CASE WHEN ((a.NUMEROFILA='2') )THEN A.Fecha_Atencion ELSE NULL END)'SEG_CNTRL',
+                                  Max(CASE WHEN ((a.NUMEROFILA='1') )THEN A1.Fecha_Atencion ELSE NULL END)'TERCER_CNTRL',
+                                  Max(CASE WHEN ((a.NUMEROFILA='2') )THEN A1.Fecha_Atencion ELSE NULL END)'CUARTO_CNTRL',
+                                  Max(CASE WHEN ((C1.NUMEROFILA='1') )THEN C1.Fecha_Atencion ELSE NULL END)'PRIMER_CNTRL_MES',
+                                  Max(CASE WHEN ((C2.NUMEROFILA='1') )THEN C2.Fecha_Atencion ELSE NULL END)'SEGUNDO_CNTRL_MES',
+                                  Max(CASE WHEN ((C3.NUMEROFILA='2') )THEN C3.Fecha_Atencion ELSE NULL END)'TERCER_CNTRL_MES',
+                                  Max(CASE WHEN ((C4.NUMEROFILA='2') )THEN C4.Fecha_Atencion ELSE NULL END)'CUARTO_CNTRL_MES',
+                                  Max(CASE WHEN ((C5.NUMEROFILA='2') )THEN C5.Fecha_Atencion ELSE NULL END)'QUINTO_CNTRL_MES',
+                                  Max(CASE WHEN ((C6.NUMEROFILA='2') )THEN C6.Fecha_Atencion ELSE NULL END)'SEXTO_CNTRL_MES',
+                                  Max(CASE WHEN ((C7.NUMEROFILA='2') )THEN C7.Fecha_Atencion ELSE NULL END)'SEPTIMO_CNTRL_MES',
+                                  Max(CASE WHEN ((C8.NUMEROFILA='2') )THEN C8.Fecha_Atencion ELSE NULL END)'OCTAVO_CNTRL_MES',
+                                  Max(CASE WHEN ((C9.NUMEROFILA='2') )THEN C9.Fecha_Atencion ELSE NULL END)'NOVENO_CNTRL_MES',
+                                  Max(CASE WHEN ((C10.NUMEROFILA='2') )THEN C10.Fecha_Atencion ELSE NULL END)'DECIMO_CNTRL_MES',
+                                  Max(CASE WHEN ((C11.NUMEROFILA='2') )THEN C11.Fecha_Atencion ELSE NULL END)'ONCEAVO_CNTRL_MES',
+                                  v1.Fecha_Atencion VAntineumo1, v2.Fecha_Atencion VAntineumo2, v3.Fecha_Atencion VAnt3,
+                                  v4.Fecha_Atencion VAnt23, v5.Fecha_Atencion VA9072, v6.Fecha_Atencion VA90nt2,
+                                  v7.Fecha_Atencion VA90723, v8.Fecha_Atencion v90723_1, v9.Fecha_Atencion v90723_2    
+                              FROM BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred P  
+                                  LEFT JOIN  BDHIS_MINSA_EXTERNO.dbo.cred_rn1_2 A on P.DOCUMENTO=A.numero_documento_paciente
+                                  left JOIN BDHIS_MINSA_EXTERNO.dbo.cred_rn3_4 a1 ON P.DOCUMENTO=A1.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES1 C1 ON  P.DOCUMENTO=C1.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES2 C2 ON  P.DOCUMENTO=C2.numero_documento_paciente
+                                  LEFt JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES3 C3 ON P.DOCUMENTO=C3.numero_documento_paciente
+                                  LEFt JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes4 C4 ON  P.DOCUMENTO=C4.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES5 C5 ON  P.DOCUMENTO=C5.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes6 C6 ON  P.DOCUMENTO=C6.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes7 C7 ON  P.DOCUMENTO=C7.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes8 C8 ON  P.DOCUMENTO=C8.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.cred_mes9 C9 ON  P.DOCUMENTO=C9.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES10 C10 ON  P.DOCUMENTO=C10.numero_documento_paciente
+                                  LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.CRED_MES11 C11 ON  P.DOCUMENTO=C11.numero_documento_paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90670_1 v1 on p.DOCUMENTO=v1.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90670_1 v2 on p.DOCUMENTO=v2.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90681_1 v3 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90681_2 v4 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90712_13_1 v5 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90712_13_1 v6 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90712_13_1 v7 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90723_1 v8 on p.DOCUMENTO=v3.Numero_Documento_Paciente
+                                  left join BDHIS_MINSA_EXTERNO.dbo.v90723_1 v9 on p.DOCUMENTO=v3.Numero_Documento_Paciente            
+                              GROUP BY P.NOMBRE_PROV,P.NOMBRE_DIST,P.DOCUMENTO, P.TIPO_SEGURO,P.FECHA_NACIMIENTO_NINO,P.MENOR_ENCONTRADO,P.APELLIDOS_NOMBRES,
+                                v1.Fecha_Atencion,v2.Fecha_Atencion, v3.Fecha_Atencion, v4.Fecha_Atencion, v5.Fecha_Atencion,
+                                v6.Fecha_Atencion, v7.Fecha_Atencion, v8.Fecha_Atencion , v9.Fecha_Atencion  ) A WHERE NOMBRE_PROV = '$red' AND NOMBRE_DIST = '$dist'
+                          group by NOMBRE_PROV,NOMBRE_DIST,MENOR_ENCONTRADO,APELLIDOS_NOMBRES,DOCUMENTO,TIPO_SEGURO, FECHA_NACIMIENTO_NINO,	PRIMER_CNTRL,SEG_CNTRL
+                            ,		TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,CUARTO_CNTRL_MES,
+                            QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES, NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,
+                            ONCEAVO_CNTRL_MES
+                            
+                            drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn1_2 
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
+                            drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES1
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes2
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes3
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes4
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes5
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes6
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes7
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes8
+                            drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES9
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes10
+                            drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes11
 
-                 if(is_null ($consulta['BCG']) ){
-                    $newdate2 = '  -'; }
-                  else{
-                $newdate2 = $consulta['BCG'] -> format('d/m/y');}
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90670_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90670_2
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90681_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90681_2
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90712_13_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90712_13_2
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90712_13_3
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90723_1
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.v90723_2";
+        }        
 
-                if(is_null ($consulta['HVB']) ){
-                    $newdate3 = '  -'; }
-                  else{
-                $newdate3 = $consulta['HVB'] -> format('d/m/y');}
 
-                if(is_null ($consulta['CRED1']) ){
-                    $newdate4 = '  -'; }
-                  else{
-                $newdate4 = $consulta['CRED1'] -> format('d/m/y');}
+        $consulta1 = sqlsrv_query($conn2, $resultado);
+        $consulta2 = sqlsrv_query($conn, $resultado2);
+        $consulta3 = sqlsrv_query($conn, $resultado3);
+        $consulta4 = sqlsrv_query($conn, $resultado4);
+        $consulta5 = sqlsrv_query($conn, $resultado5);
+        $consulta6 = sqlsrv_query($conn, $resultado6);
+        $consulta7 = sqlsrv_query($conn, $resultado7);
+        $consulta8 = sqlsrv_query($conn, $resultado8);
+        $consulta9 = sqlsrv_query($conn, $resultado9);
+        $consulta10 = sqlsrv_query($conn, $resultado10);
+        $consulta11 = sqlsrv_query($conn, $resultado11);
+        $consulta12 = sqlsrv_query($conn, $resultado12);
+        $consulta13 = sqlsrv_query($conn, $resultado13);
+        $consulta14 = sqlsrv_query($conn, $resultado14);
+        $consulta15 = sqlsrv_query($conn, $resultado15);
+        $consulta16 = sqlsrv_query($conn, $resultado16);
+        $consulta17 = sqlsrv_query($conn, $resultado17);
+        $consulta18 = sqlsrv_query($conn, $resultado18);
+        $consulta19 = sqlsrv_query($conn, $resultado19);
+        $consulta20 = sqlsrv_query($conn, $resultado20);
+        $consulta21 = sqlsrv_query($conn, $resultado21);
+        $consulta22 = sqlsrv_query($conn, $resultado22);
+        $consulta23 = sqlsrv_query($conn, $resultado23);
+        $consulta24 = sqlsrv_query($conn4, $resultado24);
 
-                if(is_null ($consulta['CRED2']) ){
-                    $newdate5 = '  -'; }
-                  else{
-                $newdate5 = $consulta['CRED2'] -> format('d/m/y');}
-
-                if(is_null ($consulta['CRED3']) ){
-                    $newdate6 = '  -'; }
-                  else{
-                $newdate6 = $consulta['CRED3'] -> format('d/m/y');}
-
-                if(is_null ($consulta['CRED4']) ){
-                    $newdate7 = '  -'; }
-                  else{
-                $newdate7 = $consulta['CRED4'] -> format('d/m/y');}
-
-                if(is_null ($consulta['CRED1MES']) ){
-                    $newdate8 = '  -'; }
-                  else{
-                $newdate8 = $consulta['CRED1MES'] -> format('d/m/y');}
-
-                
-                ?>
-          <tbody>
-      <tr>
-        <th><?php echo $consulta['PROVINCIA']; ?></th>
-        <td><?php echo $consulta['DISTRITO']; ?></td>
-        <td><?php echo $consulta['EESS']; ?></td>
-        <td><?php echo $consulta['TIPO_DOC']; ?></td>
-        <td><?php echo $consulta['NUM_DOC']; ?></td>
-        <td><?php echo $newdate; ?></td>
-        <td><?php echo $newdate2; ?></td>
-        <td><?php echo $newdate3; ?></td>
-        <td><?php echo $newdate4; ?></td>
-        <td><?php echo $newdate5; ?></td>
-        <td><?php echo $newdate6; ?></td>
-        <td><?php echo $newdate7; ?></td>
-        <td><?php echo $newdate8; ?></td>
-      </tr>
-
-  <?php
-        ;}
- 
-        include("cerrar.php");
-    ?>
-    </tbody>
-    </table>
-    </div>
-     <input type="submit" name="Limpiar" class="btn_buscar" value="Cancelar" onclick="location.href='paquete_nino.php';">
-    </center>
-</section>
-<?php } ?>
+    }
+?>
