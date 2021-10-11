@@ -9,17 +9,17 @@
                 <div class="card" style="border-color: #337ab7;">
                     <h5 class="card-header text-white" style="background: #337ab7;">Detalle Paciente</h5>
                     <div class="card-body">
-                    <form name="f1" action="consulta_detalle_paciente.php" method="post" class="_form_gestante" style="position: relative;">
-                      <p style="font-size: 13px;" class="text-start"><b>Ingrese DNI: </b></p>
-                      <div class="row">
-                        <div class="col-md">
-                          <input class="form-control validanumericos" type="text" name="doc" id="doc" placeholder="DNI" maxlength="8">
+                      <form name="f1" action="consulta_detalle_paciente.php" method="post" class="_form_gestante" style="position: relative;">
+                        <p style="font-size: 13px;" class="text-start"><b>Ingrese DNI: </b></p>
+                        <div class="row">
+                          <div class="col-md">
+                            <input class="form-control validanumericos" type="text" name="doc" id="doc" placeholder="DNI" maxlength="8">
+                          </div>
+                        </div><br>
+                        <div class="col-12 text-center">
+                          <button type="button" name="Buscar" class="btn text-white" id="btn_buscar" style="background: #337ab7;" placeholder="Buscar"><i class="fa fa-search"></i> Buscar</button>
                         </div>
-                      </div><br>
-                      <div class="col-12 text-center">
-                        <button type="button" name="Buscar" class="btn text-white" id="btn_buscar" style="background: #337ab7;" placeholder="Buscar"><i class="fa fa-search"></i> Buscar</button>
-                      </div>
-                    </form>
+                      </form>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,19 @@
 </div>
 
 <script>
-  $("#btn_buscar").click(function(){
+  
+  // $("#doc").keypress(function() {
+    // var doc = $("#doc").val();
+    // if(doc.length == 8) {
+    //   document.getElementById("btn_buscar").type = "submit";
+    // }
+    // else{
+    //   toastr.warning('La cantidad de dígitos es incorrecto', null, { "closeButton": true, "progressBar": true });
+    // }
+  // });
+  $(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        alert('You pressed enter!');
         var doc = $("#doc").val();
         if(doc.length == 8) {
           document.getElementById("btn_buscar").type = "submit";
@@ -37,7 +49,18 @@
         else{
           toastr.warning('La cantidad de dígitos es incorrecto', null, { "closeButton": true, "progressBar": true });
         }
-    });
+    }
+});
+
+  $("#btn_buscar").click(function(){
+    var doc = $("#doc").val();
+    if(doc.length == 8) {
+      document.getElementById("btn_buscar").type = "submit";
+    }
+    else{
+      toastr.warning('La cantidad de dígitos es incorrecto', null, { "closeButton": true, "progressBar": true });
+    }
+  });
 </script>
 <script language="javascript">  
   onload = function(){ 
