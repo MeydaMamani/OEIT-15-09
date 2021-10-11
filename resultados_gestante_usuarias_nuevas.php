@@ -42,9 +42,19 @@
                 <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Informacion</button>
                 <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='gestante_usuarias_nuevas.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
               </div>
+
+
+              <div class="d-flex">
+                <!--<button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
+                <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>-->
+                <form action="impresion_gestante_usuarias_nuevas.php" method="POST">
+                    <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                    <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                    <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir Excel</button>
+                </form>
             </div>
-            <!-- <button class="btn btn-outline-dark btn-sm btn_fed"><i class="fa fa-clone"></i> FED</button>
-            <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Todo</button> -->
+           
             <div class="col-12 table-responsive table_no_fed">
               <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="20">
                 <thead>

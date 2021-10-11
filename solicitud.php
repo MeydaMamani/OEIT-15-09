@@ -10,9 +10,9 @@
                 <div class="card" style="border-color: #337ab7;">
                     <h5 class="card-header text-white" style="background: #337ab7;">SOLICITUD DE REGISTRO</h5>
                     <div class="card-body p-4">
-                        <form action="save_task.php" method="POST">
+                        <form action="consulta_solicitud.php" method="POST" name="f1">
                             <div class="row">
-                                <div class="col-md p-2">
+                                <div class="col-md">
                                     <p style="font-size: 13px;" class="text-start"><b>Ingrese Red: </b></p>
                                     <select class="select_gestante form-select" name="red" id="red" onchange="cambia_distrito()" aria-label="Default select example">
                                         <option value="0" selected>Seleccione Red</option>
@@ -22,7 +22,7 @@
                                         <option value="4">TODOS</option>
                                     </select>
                                 </div>
-                                <div class="col-md p-2 text-mobile">
+                                <div class="col-md text-mobile">
                                     <p style="font-size: 13px;" class="text-start"><b>Ingrese Distrito: </b></p>
                                     <select class="select_gestante form-select" name="distrito" id="distrito" aria-label="Default select example">
                                         <option value="-">-</option>
@@ -42,7 +42,7 @@
                             <div class="row">
                                 <div class="col-md p-2">
                                     <p class="font-13 text-start" ><b>Ingrese Aplicativo:  </b></p>
-                                    <select class="select_gestante form-select" name="app" id="app"  onchange="cambia_distrito()" aria-label="Default select example">
+                                    <select class="select_gestante form-select" name="app" id="app">
                                         <option value="0"  selected>Seleccione Aplicativo</option>
                                         <option value="1">CRED</option> 
                                         <option value="2">INMUNIZACIONES</option>
@@ -66,11 +66,11 @@
                                     <div class="d-flex">
                                         <div class="col-md-2 col-sm-1"></div>
                                         <div class="form-check col-md-4 col-sm-6">
-                                            <input class="form-check-input" type="radio" name="mig_eli" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="mig_eli" id="mig_eli">
                                             <label class="form-check-label" for="flexRadioDefault1">Migrar</label>
                                         </div>
                                         <div class="form-check col-md-4 col-sm-6">
-                                            <input class="form-check-input" type="radio" name="mig_eli" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="mig_eli" id="mig_eli">
                                             <label class="form-check-label" for="flexRadioDefault2">Eliminar</label>
                                         </div>
                                     </div>
@@ -80,21 +80,21 @@
                                 <p class="font-13 text-start"><b>¿Qué soporte desea?: </b></p>
                                 <div class="col-1"></div>
                                 <div class="form-check col-3 text-start">
-                                    <input class="form-check-input" type="radio" value="todos" id="defaultCheck1" name="select_type">
+                                    <input class="form-check-input" type="radio" value="todos" id="select_type" name="select_type">
                                     <label class="form-check-label" for="defaultCheck1"> Todos</label>
                                 </div>
                                 <div class="form-check col-3 text-start">
-                                    <input class="form-check-input" type="radio" value="parcial" id="defaultCheck2" name="select_type">
+                                    <input class="form-check-input" type="radio" value="parcial" id="select_type" name="select_type">
                                     <label class="form-check-label" for="defaultCheck2">Parcial</label>
                                 </div>
                                 <div class="form-check col-5 text-start">
-                                    <input class="form-check-input" type="radio" value="indicar_c" id="defaultCheck2" name="select_type">
+                                    <input class="form-check-input" type="radio" value="indicar_c" id="select_type" name="select_type">
                                     <label class="form-check-label" for="defaultCheck2">Indicar Cuales</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <p class="font-13 text-start"><b>Ingrese detalle: </b></p>
-                                <textarea class="form-control" placeholder="Ingrese detalles de su solicitud" id="floatingTextarea"></textarea>
+                                <textarea class="form-control" placeholder="Ingrese detalles de su solicitud" id="description" name="description"></textarea>
                             </div>
                             <button name="Buscar" class="btn text-white" type="button" id="btn_buscar" placeholder="Buscar" style="background: #337ab7;"> Registrar</button>
                         </form>
@@ -104,11 +104,26 @@
         </div>
     </div>
 </div>
+<script>
+    $("#btn_buscar").click(function(){
+        var red = $("#red").val();
+        var distrito = $("#distrito").val();
+        var mes =$("#mes").val();
+        if (red != 0 && distrito!='-' && mes!=''){
+            document.getElementById("btn_buscar").type = "submit";
+        }else if(red == 0){
+            toastr.error('Seleccione una Red', null, {"closeButton": true, "progressBar": true});
+        }else if(distrito == '-'){
+            toastr.error('Seleccione un Distrito', null, {"closeButton": true, "progressBar": true});
+        }
+    });
+</script>
 <script language="javascript">  
   var distritos_1=new Array("-","CHACAYAN","GOYLLARISQUIZGA","PAUCAR","SAN PEDRO DE PILLAO","SANTA ANA DE TUSI","TAPUC","VILCABAMBA","YANAHUANCA","TODOS");
   var distritos_2=new Array("-","CHONTABAMBA","CONSTITUCIÓN","HUANCABAMBA","OXAPAMPA","PALCAZU","POZUZO","PUERTO BERMUDEZ","VILLA RICA","TODOS");
   var distritos_3=new Array("-","CHAUPIMARCA","HUACHON","HUARIACA","HUAYLLAY","NINACACA","PALLANCHACRA","PAUCARTAMBO","SAN FCO DE ASIS DE YARUSYACAN","SIMON BOLIVAR","TICLACAYAN","TINYAHUARCO","VICCO","YANACANCHA","TODOS");
   var distritos_4=new Array("TODOS");
+
   var todasDistritos = [
     [],
     distritos_1,
@@ -144,7 +159,7 @@
     } 
     //marco como seleccionada la opción primera de provincia 
     document.f1.distrito.options[0].selected = true 
-}
+  }
 </script>
 </body>
 </html>

@@ -4,8 +4,7 @@
     require('abrir3.php');
     require('abrir4.php');
 
-    if (isset($_POST['Buscar'])) {
-    global $conex;
+    if (isset($_POST['Buscar'])) {ZX
     header('Content-Type: text/html; charset=UTF-8');
     include('./base.php'); 
     include('consulta_4_meses.php');
