@@ -29,9 +29,9 @@
             <nav>
                 <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
                     <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#sospechoso" type="button" role="tab" aria-controls="nav-sospechoso" aria-selected="true">
-                        <img src="./img/coronavirus.png" width="30" alt=""> CASOS SOSPECHOSOS F0</button>
+                        <img src="./img/icon-virus.png" width="30" alt=""> CASOS SOSPECHOSOS F0</button>
                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#prueba" type="button" role="tab" aria-controls="nav-prueba" aria-selected="false">
-                        <img src="./img/covid.png" width="30" alt=""> CASOS SOSPECHOSOS F100</button>
+                        <img src="./img/icons-virus2.png" width="30" alt=""> CASOS SOSPECHOSOS F100</button>
                 </div>
             </nav>
             <!-- Tab panes -->
@@ -51,7 +51,7 @@
                         <div class="table-responsive">
                             <table id="demo-foo-addrow" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
                                 <thead>
-                                    <tr class="text-center font-12" style="background: #e8e9cf;">
+                                    <tr class="text-center font-12" style="background: #21abab2e;">
                                         <th class="align-middle">#</th>
                                         <th class="align-middle">Provincia</th>
                                         <th class="align-middle">Distrito</th>

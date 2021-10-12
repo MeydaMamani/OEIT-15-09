@@ -1,13 +1,13 @@
 body {background:#FEFEFE;}
 
 thead {
-	display: block;
+	/* display: block; */
 }
 
 tbody {
-	display: block;
+	/* display: block;
 	max-height: 470px;
-    overflow-y: auto;
+    overflow-y: auto; */
 }
 
 .menu_bar {

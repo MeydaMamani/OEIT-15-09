@@ -93,10 +93,10 @@
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="acerca.php"><i class="fa fa-cog"></i> Acerca de<span class="caret icon-arrow-down6"></span></a>
+					<a href="acerca.php"><i class="fa fa-cog"></i> Nosotros<span class="caret icon-arrow-down6"></span></a>
 				</li>
 				<li class="submenu">
-					<a href="solicitud.php"><i class="fa fa-cog"></i> Solicitud<span class="caret icon-arrow-down6"></span></a>
+					<a href="solicitud.php"><i class="fa fa-address-card"></i> Solicitud<span class="caret icon-arrow-down6"></span></a>
 				</li>	
 			</ul>
 		</nav>
