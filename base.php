@@ -93,11 +93,17 @@
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="acerca.php"><i class="fa fa-cog"></i> Nosotros<span class="caret icon-arrow-down6"></span></a>
+					<a href="solicitud.php"><i class="fa fa-address-card"></i> Solicitud<span class="caret icon-arrow-down6"></span></a>
 				</li>
 				<li class="submenu">
-					<a href="solicitud.php"><i class="fa fa-address-card"></i> Solicitud<span class="caret icon-arrow-down6"></span></a>
-				</li>	
+					<a href="#"><i class="fa fa-calculator"></i> Seguimiento<span class="caret icon-arrow-down6"></span></a>
+					<ul class="children">
+						<li><a href="seguimiento_neonatal.php">Seguimiento Tamizaje Neonatal<span class="icon-dot"></span></a></li>
+					</ul>
+				</li>
+				<li class="submenu">
+					<a href="acerca.php" style="color: #d8e24e;"><i class="fa fa-cog"></i> Nosotros<span class="caret icon-arrow-down6"></span></a>
+				</li>
 			</ul>
 		</nav>
 	</header>
