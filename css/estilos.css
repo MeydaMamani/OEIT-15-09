@@ -10,6 +10,10 @@ tbody {
     overflow-y: auto; */
 }
 
+.border-rounded{
+	border-radius: 50% !important;
+}
+
 .menu_bar {
 	display:none;
 }
