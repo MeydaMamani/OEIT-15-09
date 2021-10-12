@@ -28,7 +28,7 @@
                                     </select>
                                 </div>
                             </div><br>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6">
                                     <p style="font-size: 13px;" class="text-start"><b>Seleccione mes a evaluar: </b></p>
                                     <select class="select_gestante form-select" name="mes" id="mes" aria-label="Default select example">
@@ -46,7 +46,7 @@
                                         <option value="12">DICIEMBRE</option>
                                     </select>
                                 </div>
-                            </div><br>
+                            </div><br> -->
                             <div class="col-12 text-center">
                                 <button type="button" name="Buscar" class="btn text-white" id="btn_buscar" placeholder="Buscar" style="background: #337ab7;"><i class="fa fa-search"></i> Buscar</button>
                             </div>

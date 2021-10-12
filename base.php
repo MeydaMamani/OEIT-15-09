@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="./img/logo.jpg">
 
     <!-- link para iconos -->
-	<link rel="stylesheet" href="https://i.icomoon.io/public/temp/bb9dd4d651/UntitledProject/style.css">
+	<!-- <link rel="stylesheet" href="https://i.icomoon.io/public/temp/bb9dd4d651/UntitledProject/style.css"> -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 	
 	<!-- bootstrap -->

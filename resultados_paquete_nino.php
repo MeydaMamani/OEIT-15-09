@@ -11,7 +11,7 @@
     include('./base.php');
     include('consulta_paquete_nino.php');
     $row_cont=0; $cumple=0; $no_cumple=0;
-    while ($consulta = sqlsrv_fetch_array($consulta24)){
+    while ($consulta = sqlsrv_fetch_array($consulta27)){
         $row_cont++;
     }
 ?>
@@ -88,7 +88,7 @@
                     <?php  
                         include('consulta_paquete_nino.php');
                         $i=1;
-                        while ($consulta = sqlsrv_fetch_array($consulta24)){
+                        while ($consulta = sqlsrv_fetch_array($consulta27)){
                         
                             if(is_null ($consulta['NOMBRE_PROV']) ){ $newdate = '  -'; }
                             else{ $newdate = $consulta['NOMBRE_PROV'] ;}

@@ -2,11 +2,10 @@
     include('./base.php');
 ?>
 
-<div class="col-12 text-center mb-4">
+<div class="container text-center mb-4">
     <div class="bd-example">
         <div class="d-flex">
-            <div class="col-lg-2 col-sm-2"></div>
-            <div class="col-lg-8 col-sm-8 p-2"><br>
+            <div class="col-lg-5 col-sm-12 p-2"><br>
                 <div class="card" style="border-color: #337ab7;">
                     <h5 class="card-header text-white" style="background: #337ab7;">SOLICITUD DE REGISTRO</h5>
                     <div class="card-body p-4">
@@ -32,47 +31,51 @@
                             <div class="row">
                                 <div class="col-md p-2">
                                     <p class="font-13 text-start"><b>Establecimiento: </b></p>
-                                    <input type="text" class="form-control" id="dni_paciente" name="dni_paciente">
+                                    <input type="text" class="form-control" id="establecimiento" name="establecimiento">
                                 </div>
                                 <div class="col-md p-2">
                                     <p class="font-13 text-start"><b>DNI Usuario: </b></p>
-                                    <input type="text" class="form-control" id="dni_paciente" name="dni_paciente">
+                                    <input type="text" class="form-control" id="dni_user" name="dni_user">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md p-2">
+                                    <p class="font-13 text-start"><b>Password: </b></p>
+                                    <input type="password" class="form-control" id="password" name="password">
+                                </div>
+                                <div class="col-md p-2">
                                     <p class="font-13 text-start" ><b>Ingrese Aplicativo:  </b></p>
                                     <select class="select_gestante form-select" name="app" id="app">
-                                        <option value="0"  selected>Seleccione Aplicativo</option>
-                                        <option value="1">CRED</option> 
-                                        <option value="2">INMUNIZACIONES</option>
-                                        <option value="3">WAWARED</option>
-                                        <option value="4">C-EXT</option>
-                                        <option value="5">REFCON</option>
+                                        <option value="-"  selected>Seleccione Aplicativo</option>
+                                        <option value="CRED">CRED</option> 
+                                        <option value="INMUNIZACIONES">INMUNIZACIONES</option>
+                                        <option value="WAWARED">WAWARED</option>
+                                        <option value="C-EXT">C-EXT</option>
+                                        <option value="REFCON">REFCON</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md p-2">
                                     <p class="font-13 text-start"><b>DNI Paciente: </b></p>
                                     <input type="text" class="form-control" id="dni_paciente" name="dni_paciente">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md p-2">
                                     <p class="font-13 text-start"><b>Fecha Atención: </b></p>
                                     <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion">
                                 </div>
-                                <div class="col-md p-2">
-                                    <p class="font-13 text-start"><b>¿Qué soporte desea?: </b></p>
-                                    <div class="d-flex">
-                                        <div class="col-md-2 col-sm-1"></div>
-                                        <div class="form-check col-md-4 col-sm-6">
-                                            <input class="form-check-input" type="radio" name="mig_eli" id="mig_eli">
-                                            <label class="form-check-label" for="flexRadioDefault1">Migrar</label>
-                                        </div>
-                                        <div class="form-check col-md-4 col-sm-6">
-                                            <input class="form-check-input" type="radio" name="mig_eli" id="mig_eli">
-                                            <label class="form-check-label" for="flexRadioDefault2">Eliminar</label>
-                                        </div>
+                            </div>
+                            <div class="row p-2">
+                                <p class="font-13 text-start"><b>¿Qué soporte desea?: </b></p>
+                                <div class="d-flex">
+                                    <div class="col-md-2 col-sm-1"></div>
+                                    <div class="form-check col-md-4 col-sm-6">
+                                        <input class="form-check-input" type="radio" name="mig_eli" id="mig_eli">
+                                        <label class="form-check-label" for="flexRadioDefault1">Migrar</label>
+                                    </div>
+                                    <div class="form-check col-md-4 col-sm-6">
+                                        <input class="form-check-input" type="radio" name="mig_eli" id="mig_eli">
+                                        <label class="form-check-label" for="flexRadioDefault2">Eliminar</label>
                                     </div>
                                 </div>
                             </div>
@@ -95,12 +98,13 @@
                             <div class="col-12">
                                 <p class="font-13 text-start"><b>Ingrese detalle: </b></p>
                                 <textarea class="form-control" placeholder="Ingrese detalles de su solicitud" id="description" name="description"></textarea>
-                            </div>
+                            </div><br>
                             <button name="Buscar" class="btn text-white" type="button" id="btn_buscar" placeholder="Buscar" style="background: #337ab7;"> Registrar</button>
                         </form>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </div>
