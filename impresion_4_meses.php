@@ -104,7 +104,7 @@
             header("Content-type: text/csv");
             header("Content-Disposition: attachment; filename=".$ficheroExcel);            
             // Vamos a mostrar en las celdas las columnas que queremos que aparezcan en la primera fila, separadas por ; 
-            echo "#;PROVINCIA;DISTRITO;ESTABLECIMIENTO;MENOR_VISITADO;MENOR_ENCONTRADO;DNI;NÚMERO_CNV;FECHA_NACIMIENTO;DOCUMENTO;TIPO_SEGURO;APELLIDOS_Y_NOMBRES;PREMATURO;SUPLEMENTADO(DIAS);ULTIMA_ATE_PN;CUMPLE\n";                    
+            echo "#;PROVINCIA;DISTRITO;ESTABLECIMIENTO;MENOR_VISITADO;MENOR_ENCONTRADO;FECHA_NACIMIENTO;DOCUMENTO;TIPO_SEGURO;APELLIDOS_Y_NOMBRES;PREMATURO;SUPLEMENTADO(DIAS);ULTIMA_ATE_PN;CUMPLE\n";                    
             // Recorremos la consulta SQL y lo mostramos
             $i=1;
             while ($consulta = sqlsrv_fetch_array($consulta5)){
@@ -123,12 +123,6 @@
 
                 if(is_null ($consulta['MENOR_ENCONTRADO']) ){ echo ' - '.";"; }
                 else{ echo $consulta['MENOR_ENCONTRADO'].";" ; }
-
-                if(is_null ($consulta['NUM_DNI']) ){ echo ' - '.";"; }
-                else{ echo $consulta['NUM_DNI'].";" ; }
-
-                if(is_null ($consulta['NUM_CNV']) ){ echo ' - '.";"; }
-                else{ echo $consulta['NUM_CNV'].";" ; }
 
                 if(is_null ($consulta['FECHA_NACIMIENTO_NINO']) ){ echo ' - '.";"; }
                 else{ echo $consulta['FECHA_NACIMIENTO_NINO']-> format('d/m/y').";" ; }
