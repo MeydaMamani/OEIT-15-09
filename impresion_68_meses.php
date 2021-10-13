@@ -190,7 +190,7 @@
                   }
                   else{
                       $nuevo_formato_hemoglobina = date_format($consulta['HEMOGLOBINA'], "d-m-Y");
-                      $fecha_hemoglobina_7_dias = strtotime(date("d-m-Y", strtotime($nuevo_formato_hemoglobina."+ 7 days")));
+                      $fecha_hemoglobina_7_dias = strtotime(date("d-m-Y", strtotime($nuevo_formato_hemoglobina."+ 8 days")));
                       $fecha_suplementacion = strtotime(date_format($consulta['SUPLE'], "d-m-Y"));
                       if($fecha_suplementacion < $fecha_hemoglobina_7_dias && $fecha_suplementacion > $nuevo_formato_hemoglobina) {
                         echo "Si"."\n";
