@@ -27,7 +27,9 @@
         else if($mes == 12){ $nombre_mes = 'Diciembre'; }
         
         if (strlen($mes) == 1){
-            $mes = '0'.$mes;
+            $mes2 = '0'.$mes;
+        }else{
+          $mes2 = '0'.$mes;
         }
         if ($red_1 == 1) {
           $red = 'DANIEL ALCIDES CARRION';
@@ -53,7 +55,7 @@
                             into BDHIS_MINSA.dbo.PADRON_EVALUAR6
                         from NOMINAL_PADRON_NOMINAL AS pn
                         where YEAR (DATEADD(DAY,269,FECHA_NACIMIENTO_NINO))='2021' and month(DATEADD(DAY,269,FECHA_NACIMIENTO_NINO))='$mes'
-                        and mes='2021$mes';
+                        and mes='2021$mes2';
                         with c as ( select DOCUMENTO, nombre_dist, ROW_NUMBER() over(partition by DOCUMENTO order by DOCUMENTO) as duplicado
                         from BDHIS_MINSA.dbo.PADRON_EVALUAR6)
                         delete  from c
@@ -69,7 +71,8 @@
                         --select * from BDHIS_MINSA.dbo.suple6
                         FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA AS A
                         WHERE
-                          ((a.fecha_atencion> '2021-05-01') and (a.fecha_atencion<= CONCAT('2021-$mes-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes/2021'),0)))))) AND
+                          ((a.fecha_atencion> CONVERT(DATE, DATEADD(dd, -170, CONCAT('2021$mes2', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/2021'),0))))))) and 
+                          (a.fecha_atencion<= CONCAT('2021-$mes2-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/2021'),0)))))) AND
                           ( (Codigo_Item ='85018' AND Tipo_Diagnostico='D' AND ANIO='2021' AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) OR
                           (Codigo_Item IN ('D509','D500','D649','D508') AND Tipo_Diagnostico='D'  AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) OR
                           (Codigo_Item IN('U310','99199.17') AND Tipo_Diagnostico='D' AND VALOR_LAB IN ('SF1','PO1','P01') AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) or

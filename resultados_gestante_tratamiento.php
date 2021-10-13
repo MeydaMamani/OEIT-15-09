@@ -52,12 +52,12 @@
               <div class="d-flex">
                 <!--<button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
                 <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>-->
-                <form action="impresion_gestante_tratamiento.php" method="POST">
+                <!-- <form action="impresion_gestante_tratamiento.php" method="POST">
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                     <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                     <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
                     <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
-                </form>
+                </form> -->
 
 
             </div>
