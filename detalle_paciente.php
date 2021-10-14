@@ -41,7 +41,7 @@
   // });
   $(document).on('keypress',function(e) {
     if(e.which == 13) {
-        alert('You pressed enter!');
+        // alert('You pressed enter!');
         var doc = $("#doc").val();
         if(doc.length == 8) {
           document.getElementById("btn_buscar").type = "submit";

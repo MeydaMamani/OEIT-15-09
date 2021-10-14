@@ -14,7 +14,7 @@
     while ($consulta = sqlsrv_fetch_array($consulta3)){
       $row_cont++;
       if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
-        $observado++;
+        $no_cumple++;
       }else {
         $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
         $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
@@ -22,7 +22,7 @@
           if($intvl->days <= 6 && $intvl->days >=0){
             $cumple++;
           }else if($intvl->days > 6){
-            $no_cumple++;
+            $observado++;
           }
       }
     }
@@ -300,8 +300,8 @@
                                 <td class="align-middle">
                                   <?php
                                     if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
-                                      echo "<span class='badge bg-observed'>Observado</span>";
-                                      $observado_fed++;
+                                      echo "<span class='badge bg-incorrect'>No</span>";
+                                      $no_cumple_fed++;
                                     }else {
                                       $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
                                       $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
@@ -310,8 +310,8 @@
                                           echo "<span class='badge bg-correct'>Si</span>";
                                           $cumple_fed++;
                                         }else if($intvl->days > 6){
-                                          echo "<span class='badge bg-incorrect'>No</span>";
-                                          $no_cumple_fed++;
+                                          echo "<span class='badge bg-observed'>Observado</span>";
+                                          $observado_fed++;
                                         }
                                     }
                                   ?>
@@ -415,7 +415,8 @@
             </div>
           </div>
         </div>    
-<?php } ?>
+
+  <?php } ?>
     
   <script src="./js/jquery-3.6.0.min.js"></script>
   <script src="./plugin/footable/js/footable-init.js"></script>

@@ -65,13 +65,13 @@
                             <th class="align-middle">Provincia</th>
                             <th class="align-middle">Distrito</th>
                             <th class="align-middle">Establecimiento</th>
-                            <th class="align-middle" id="color_prematuro_head">Menor Encontrado</th>
-                            <th class="align-middle" id="color_prematuro_head">Fecha Nacido</th>
+                            <th class="align-middle">Tipo Documento</th>
                             <th class="align-middle">Documento</th>
                             <th class="align-middle">Apellidos y Nombres</th>
+                            <th class="align-middle" id="color_prematuro_head">Fecha Nacido</th>
+                            <th class="align-middle" id="color_prematuro_head">Menor Encontrado</th>
                             <th class="align-middle" id="color_prematuro_head">Prematuro</th>
                             <th class="align-middle">Suplementado</th>
-                            <th class="align-middle">Tipo Documento Paciente</th>
                             <th class="align-middle" id="color_prematuro_head">Tipo Seguro</th>
                             <th class="align-middle" id="color_prematuro_head">Se Atiende</th>
                         </tr>
@@ -154,15 +154,15 @@
                             <td class="align-middle"><?php echo $i++; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate4); ?></td>
-                            <td class="align-middle" id="color_prematuro_body"><?php echo $newdate5; ?></td>
-                            <td class="align-middle" id="color_prematuro_body"><?php echo $newdate6; ?></td>
+                            <td class="align-middle"><?php echo ($newdate4); ?></td>
+                            <td class="align-middle"><?php echo $newdate12; ?></td>
                             <td class="align-middle"><?php echo $newdate7; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate8); ?></td>
+                            <td class="align-middle" id="color_prematuro_body"><?php echo $newdate6; ?></td>
+                            <td class="align-middle" id="color_prematuro_body"><?php echo $newdate5; ?></td>
                             <td class="align-middle" id="color_prematuro_body"><?php echo $newdate10; ?></td>
                             <td class="align-middle"><?php if($newdate11 == 'Si'){ echo "<span class='badge bg-correct'>$newdate11</span>"; }
                             else{ echo "<span class='badge bg-incorrect'>$newdate11</span>"; } ?></td>
-                            <td class="align-middle"><?php echo $newdate12; ?></td>
                             <td class="align-middle" id="color_prematuro_body"><?php echo $newdate13; ?></td>
                             <td class="align-middle" id="color_prematuro_body"><?php echo utf8_encode($newdate14); ?></td>
                         </tr>
@@ -191,13 +191,13 @@
                             <th class="align-middle">Provincia</th>
                             <th class="align-middle">Distrito</th>
                             <th class="align-middle">Establecimiento</th>
-                            <th class="align-middle" id="color_fed_head">Menor Encontrado</th>
-                            <th class="align-middle" id="color_fed_head">Fecha Nacido</th>
+                            <th class="align-middle">Tipo Documento</th>
                             <th class="align-middle">Documento</th>
                             <th class="align-middle">Apellidos y Nombres</th>
+                            <th class="align-middle" id="color_fed_head">Fecha Nacido</th>
+                            <th class="align-middle" id="color_fed_head">Menor Encontrado</th>
                             <th class="align-middle" id="color_fed_head">Prematuro</th>
                             <th class="align-middle">Suplementado</th>
-                            <th class="align-middle">Tipo Documento Paciente</th>
                             <th class="align-middle" id="color_fed_head">Tipo Seguro</th>
                             <th class="align-middle" id="color_fed_head">Se Atiende</th>
                         </tr>
@@ -294,14 +294,14 @@
                             <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate4); ?></td>
-                            <td class="align-middle" id="color_fed_body"><?php echo $newdate5; ?></td>
-                            <td class="align-middle" id="color_fed_body"><?php echo $newdate6; ?></td>
+                            <td class="align-middle"><?php echo $newdate12; ?></td>
                             <td class="align-middle"><?php echo $newdate7; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate8); ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate6; ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate5; ?></td>
                             <td class="align-middle" id="color_fed_body"><?php echo $newdate10; ?></td>
                             <td class="align-middle"><?php if($newdate11 == 'Si'){ echo "<span class='badge bg-correct'>$newdate11</span>"; }
                             else{ echo "<span class='badge bg-incorrect'>$newdate11</span>"; } ?></td>
-                            <td class="align-middle"><?php echo $newdate12; ?></td>
                             <td class="align-middle" id="color_fed_body"><?php echo $newdate13; ?></td>
                             <td class="align-middle" id="color_fed_body"><?php echo utf8_encode($newdate14); ?></td>
                         </tr>
