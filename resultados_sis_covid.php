@@ -48,6 +48,16 @@
                                 <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='sis_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
                             </div>
                         </div>
+                        <div class="d-flex">
+                            <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
+                            <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>
+                            <form action="impresion_68_meses.php" method="POST">
+                                <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                                <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                                <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                                <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
+                            </form>
+                        </div>    
                         <div class="table-responsive">
                             <table id="demo-foo-addrow" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
                                 <thead>
@@ -64,26 +74,10 @@
                                         <th class="align-middle">usuario Procedencia</th>
                                         <th class="align-middle">Fecha Registro</th> 
                                         <th class="align-middle">Fecha Seguimiento</th>
-                                        <th class="align-middle">Fecha Entrega</th> 
-                                        <th class="align-middle">Días Seguimiento</th>
-                                        <th class="align-middle">Días MED</th>
-                                        <th class="align-middle">CF300</th>
-                                        <th class="align-middle">CMED</th>
-                                        <th class="align-middle">C_AMBOS</th>
+                                        <th class="align-middle">Fecha Entrega</th>                                        
+                                        <th class="align-middle">Cumple</th>
                                     </tr>
                                 </thead>
-
-                                <div class="d-flex">
-                                    <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
-                                    <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>
-                                    <form action="impresion_68_meses.php" method="POST">
-                                        <input hidden name="red" value="<?php echo $_POST['red']; ?>">
-                                        <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                                        <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                                        <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
-                                    </form>
-                                </div>
-
                                 <div class="float-end pb-4">
                                     <div class="form-group">
                                         <div id="inputbus" class="input-group input-group-sm">
@@ -157,26 +151,6 @@
                                                 else{
                                                 $newdate14 = $consulta['FECHA_ENTREGA']  -> format('d/m/y');}
                                     
-                                            if(is_null ($consulta['DIAS_SEGUIMIENTO']) ){
-                                                $newdate15 = '  -'; }
-                                                else{
-                                                $newdate15 = $consulta['DIAS_SEGUIMIENTO'];}
-                                    
-                                            if(is_null ($consulta['DIAS_MED']) ){
-                                                $newdate16 = '  -'; }
-                                                else{
-                                                $newdate16 = $consulta['DIAS_MED'];}
-
-                                            if(is_null ($consulta['CF300']) ){
-                                                $newdate17 = '  -'; }
-                                            else{
-                                                $newdate17 = $consulta['CF300'];}
-
-                                            if(is_null ($consulta['CMED']) ){
-                                                $newdate18 = '  -'; }
-                                            else{
-                                                $newdate18 = $consulta['CMED'];}
-
                                             if(is_null ($consulta['C_AMBOS']) ){
                                                 $newdate19 = '  -'; }
                                             else{
@@ -197,11 +171,14 @@
                                         <td class="align-middle"><?php echo $newdate12; ?></td>
                                         <td class="align-middle"><?php echo $newdate13; ?></td>
                                         <td class="align-middle"><?php echo $newdate14; ?></td>
-                                        <td class="align-middle"><?php echo $newdate15; ?></td>
-                                        <td class="align-middle"><?php echo $newdate16; ?></td>
-                                        <td class="align-middle"><?php echo $newdate17; ?></td>
-                                        <td class="align-middle"><?php echo $newdate18; ?></td>
-                                        <td class="align-middle"><?php echo $newdate19; ?></td>
+                                        <td class="align-middle"><?php 
+                                            if($newdate19 == 1){
+                                               echo "<span class='badge bg-correct'>CORECTO</span>";
+                                            }else{
+                                                echo "<span class='badge bg-incorrect'>INCORECTO</span>";
+                                            }
+                                            ?>
+                                        </td>
                                     </tr>
                                     <?php
                                         ;}                    
@@ -253,11 +230,7 @@
                                         <th class="align-middle">Fecha Prueba</th>
                                         <th class="align-middle">Fecha Seguimiento</th>
                                         <th class="align-middle">Fecha Entrega</th>
-                                        <th class="align-middle">Días Seguimiento</th>
-                                        <th class="align-middle">Días MED</th>
-                                        <th class="align-middle">CF300</th>
-                                        <th class="align-middle">CMED</th>
-                                        <th class="align-middle">C_AMBOS</th>
+                                        <th class="align-middle">Cumple</th>
                                     </tr>
                                 </thead>
                                 <div class="float-end pb-4">
@@ -348,26 +321,6 @@
                                             else{
                                                 $newdate17 = $consultas['FECHA_ENTREGA'] -> format('d/m/y');}
 
-                                            if(is_null ($consultas['DIAS_SEGUIMIENTO']) ){
-                                                $newdate18 = '  -'; }
-                                            else{
-                                                $newdate18 = $consultas['DIAS_SEGUIMIENTO'];}
-
-                                            if(is_null ($consultas['DIAS_MED']) ){
-                                                $newdate19 = '  -'; }
-                                            else{
-                                                $newdate19 = $consultas['DIAS_MED'];}
-
-                                            if(is_null ($consultas['CF300']) ){
-                                                $newdate20 = '  -'; }
-                                            else{
-                                                $newdate20 = $consultas['CF300'];}
-
-                                            if(is_null ($consultas['CMED']) ){
-                                                $newdate21 = '  -'; }
-                                            else{
-                                                $newdate21 = $consultas['CMED'];}
-
                                             if(is_null ($consultas['C_AMBOS']) ){
                                                 $newdate22 = '  -'; }
                                             else{
@@ -391,11 +344,13 @@
                                         <td class="align-middle"><?php echo $newdate15; ?></td>
                                         <td class="align-middle"><?php echo $newdate16; ?></td>
                                         <td class="align-middle"><?php echo $newdate17; ?></td>
-                                        <td class="align-middle"><?php echo $newdate18; ?></td>
-                                        <td class="align-middle"><?php echo $newdate19; ?></td>
-                                        <td class="align-middle"><?php echo $newdate20; ?></td>
-                                        <td class="align-middle"><?php echo $newdate21; ?></td>
-                                        <td class="align-middle"><?php echo $newdate22; ?></td>
+                                        <td class="align-middle"><?php 
+                                            if($newdate22 == 1){
+                                                echo "<span class='badge bg-correct'>CORECTO</span>";
+                                            }else{
+                                                echo "<span class='badge bg-incorrect'>INCORECTO</span>";
+                                            } ?>
+                                        </td>
                                     </tr>
                                     <?php
                                         ;}                    

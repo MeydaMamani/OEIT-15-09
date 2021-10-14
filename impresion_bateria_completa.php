@@ -138,13 +138,21 @@
                 if(is_null ($consulta['TMZ_ANEMIA']) ){ echo ' - '.";"; }
                 else{ echo $consulta['TMZ_ANEMIA'] -> format('d/m/y').";" ; }
 
+                if(is_null ($consulta['SIFILIS']) ){ echo ' - '.";"; }
+                else{ echo $consulta['SIFILIS'] -> format('d/m/y').";" ; }
+
                 if(is_null ($consulta['VIH']) ){ echo ' - '.";"; }
                 else{ echo $consulta['VIH']-> format('d/m/y').";" ; }
 
                 if(is_null ($consulta['BACTERIURIA']) ){ echo ' - '.";"; }
                 else{ echo $consulta['BACTERIURIA']-> format('d/m/y').";" ; }
 
-                
+                if ($consulta['CAPTADA'] == $consulta['TMZ_ANEMIA'] AND $consulta['CAPTADA'] == $consulta['SIFILIS'] AND $consulta['CAPTADA'] == $consulta['VIH'] AND $consulta['CAPTADA'] == $consulta['BACTERIURIA']) {
+                    echo 'CORRECTO'."\n";
+                } 
+                else{
+                    echo 'INCORRECTO'."\n";
+                }
             }   
         }
     }
