@@ -34,6 +34,9 @@
                         <img src="./img/icons-virus2.png" width="30" alt=""> CASOS SOSPECHOSOS F100</button>
                 </div>
             </nav>
+
+
+           
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane in active" id="sospechoso">
@@ -47,17 +50,19 @@
                                 <!-- <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Informacion</button> -->
                                 <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='sis_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
                             </div>
-                        </div>
-                        <div class="d-flex">
-                            <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
-                            <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>
+
+
+                            <div class="d-flex">
+                            <!-- <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button> -->
+                            <!-- <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button> -->
                             <form action="impresion_68_meses.php" method="POST">
                                 <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                                 <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                                 <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
                                 <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
                             </form>
-                        </div> 
+                        </div  
+                        > 
                         <div class="table-responsive">
                             <table id="demo-foo-addrow" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
                                 <thead>
