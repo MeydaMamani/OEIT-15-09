@@ -126,7 +126,7 @@
             header("Content-type: text/csv");
             header("Content-Disposition: attachment; filename=".$ficheroExcel);            
             // Vamos a mostrar en las celdas las columnas que queremos que aparezcan en la primera fila, separadas por ; 
-            echo "#;PROVINCIA;DISTRITO;DOCUMENTO;TIPO_SEGURO;FECHA_NACIMIENTO;APELLIDOS_Y_NOMBRES;MENOR_ENCONTRADO;NOMBRE_ESS;FECHA_ATENCION;LUGAR_TAMIZAJE;CUMPLE\n";                    
+            echo "#;PROVINCIA;DISTRITO;DOCUMENTO;APELLIDOS_Y_NOMBRES;FECHA_DE_NACIMIENTO;NOMBRES_ESS;MENOR_ENCONTRADO;TIPO_DE_SEGURO;LUGAR_TAMIZAJE(HIS);FECHA_DE_ATENCION;CUMPLE\n";                    
             // Recorremos la consulta SQL y lo mostramos44
             $i=1;
             while ($consulta = sqlsrv_fetch_array($consulta3)){
@@ -140,26 +140,26 @@
                 if(is_null ($consulta['num_dni']) ){ echo ' - '.";"; }
                 else{ echo utf8_encode($consulta['num_dni']).";"; }
 
-                if(is_null ($consulta['tipo_seguro']) ){ echo ' - '.";"; }
-                else{ echo $consulta['tipo_seguro'].";" ; }
+                if(is_null ($consulta['apellidos_nino']) ){ echo ' - '.";"; }
+                else{ echo $consulta['apellidos_nino'].";" ; }
 
                 if(is_null ($consulta['fecha_nacimiento_nino']) ){ echo ' - '.";"; }
                 else{ echo $consulta['fecha_nacimiento_nino'] -> format('d/m/y').";" ; }
 
-                if(is_null ($consulta['apellidos_nino']) ){ echo ' - '.";"; }
-                else{ echo $consulta['apellidos_nino'].";" ; }
+                if(is_null ($consulta['NOMBRE_EESS']) ){ echo ' - '.";"; }
+                else{ echo $consulta['NOMBRE_EESS'].";" ; }
 
                 if(is_null ($consulta['MENOR_ENCONTRADO']) ){ echo ' - '.";"; }
                 else{ echo $consulta['MENOR_ENCONTRADO'].";" ; }
 
-                if(is_null ($consulta['NOMBRE_EESS']) ){ echo ' - '.";"; }
-                else{ echo $consulta['NOMBRE_EESS'].";" ; }
-
-                if(is_null ($consulta['Fecha_Atencion']) ){ echo ' - '.";"; }
-                else{ echo $consulta['Fecha_Atencion'] -> format('d/m/y').";" ; }
+                if(is_null ($consulta['tipo_seguro']) ){ echo ' - '.";"; }
+                else{ echo $consulta['tipo_seguro'].";" ; }
 
                 if(is_null ($consulta['Lugar_TMZ']) ){ echo ' - '.";"; }
                 else{ echo $consulta['Lugar_TMZ'].";" ; }
+
+                if(is_null ($consulta['Fecha_Atencion']) ){ echo ' - '.";"; }
+                else{ echo $consulta['Fecha_Atencion'] -> format('d/m/y').";" ; }
 
                 if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
                     echo "No"."\n";

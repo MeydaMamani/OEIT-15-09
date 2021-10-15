@@ -87,7 +87,7 @@
             header("Content-type: text/csv");
             header("Content-Disposition: attachment; filename=".$ficheroExcel);            
             // Vamos a mostrar en las celdas las columnas que queremos que aparezcan en la primera fila, separadas por ; 
-            echo "#;PROVINCIA;DISTRITO;ESTABLECIMIENTO;MENOR_ENCONTRADO;FECHA_NACIDO;DOCUMENTO;APELLIDOS_Y_NOMBRES;PREMATURO;SUPLEMENTADO;TIPO_DOC_PACIENTE;TIPO_SEGURO;SE_ATIENDE\n";                    
+            echo "#;PROVINCIA;DISTRITO;ESTABLECIMIENTO;TIPO_DOCUMENTO;DOCUMENTO;APELLIDOS_Y_NOMBRES;FECHA_NACIDO;MENOR_ENCONTRADO;PREMATURO;SUPLEMENTADO;TIPO_DE_SEGURO;SE_ATIENDE\n";
             // Recorremos la consulta SQL y lo mostramos
             $i=1;
             while ($consulta = sqlsrv_fetch_array($consulta2)){
@@ -101,26 +101,26 @@
                 if(is_null ($consulta['Establecimiento']) ){ echo ' - '.";"; }
                 else{ echo utf8_encode($consulta['Establecimiento']).";"; }
 
-                if(is_null ($consulta['MENOR_ENCONTRADO']) ){ echo ' - '.";"; }
-                else{ echo $consulta['MENOR_ENCONTRADO'].";" ; }
-
-                if(is_null ($consulta['FECNACIDO']) ){ echo ' - '.";"; }
-                else{ echo $consulta['FECNACIDO'] -> format('d/m/y').";" ; }
-
+                if(is_null ($consulta['Tipo_Doc_Paciente']) ){ echo ' - '.";"; }
+                else{ echo $consulta['Tipo_Doc_Paciente'].";" ; }
+                
                 if(is_null ($consulta['Numcnv']) ){ echo ' - '.";"; }
                 else{ echo $consulta['Numcnv'].";" ; }
 
                 if(is_null ($consulta['NOMBRES_MENOR']) ){ echo ' - '.";"; }
                 else{ echo $consulta['NOMBRES_MENOR'].";" ; }
 
+                if(is_null ($consulta['FECNACIDO']) ){ echo ' - '.";"; }
+                else{ echo $consulta['FECNACIDO'] -> format('d/m/y').";" ; }
+
+                if(is_null ($consulta['MENOR_ENCONTRADO']) ){ echo ' - '.";"; }
+                else{ echo $consulta['MENOR_ENCONTRADO'].";" ; }
+
                 if(is_null ($consulta['PREMATURO']) ){ echo ' - '.";"; }
                 else{ echo $consulta['PREMATURO'].";" ; }
 
                 if(is_null ($consulta['SUPLEMENTADO']) ){ echo 'NO'.";"; }
                 else{ echo 'SI'.";" ; }
-
-                if(is_null ($consulta['Tipo_Doc_Paciente']) ){ echo ' - '.";"; }
-                else{ echo $consulta['Tipo_Doc_Paciente'].";" ; }
 
                 if(is_null ($consulta['TIPO_SEGURO']) ){ echo ' - '.";"; }
                 else{ echo $consulta['TIPO_SEGURO'].";" ; }
