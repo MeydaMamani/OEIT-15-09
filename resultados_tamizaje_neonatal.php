@@ -75,13 +75,13 @@
                             <th class="align-middle">Provincia</th>
                             <th class="align-middle">Distrito</th>
                             <th class="align-middle">Documento</th>
-                            <th class="align-middle" id="color_neonatal_head">Tipo de Seguro</th>
-                            <th class="align-middle">Fecha de Nacimiento</th>
                             <th class="align-middle">Apellidos y Nombres</th>
-                            <th class="align-middle" id="color_neonatal_head">Menor Encontrado</th>
+                            <th class="align-middle">Fecha de Nacimiento</th>
                             <th class="align-middle">Nombre ESS</th>
-                            <th class="align-middle">Fecha Atención</th>
+                            <th class="align-middle" id="color_neonatal_head">Menor Encontrado</th>
+                            <th class="align-middle" id="color_neonatal_head">Tipo de Seguro</th>
                             <th class="align-middle">Lugar de Tamizaje (HIS)</th>
+                            <th class="align-middle">Fecha Atención</th>
                             <th class="align-middle">Cumple</th>
                         </tr>
                     </thead>
@@ -153,13 +153,13 @@
                                 <td class="align-middle"><?php echo $newdate; ?></td>
                                 <td class="align-middle"><?php echo $newdate1; ?></td>
                                 <td class="align-middle"><?php echo $newdate2; ?></td>
-                                <td class="align-middle" id="color_neonatal_body"><?php echo $newdate3; ?></td>
-                                <td class="align-middle"><?php echo $newdate4; ?></td>                               
                                 <td class="align-middle"><?php echo utf8_encode($newdate6); ?></td>
-                                <td class="align-middle" id="color_neonatal_body"><?php echo $newdate7; ?></td>
+                                <td class="align-middle"><?php echo $newdate4; ?></td>                               
                                 <td class="align-middle"><?php echo utf8_encode($newdate8); ?></td>
-                                <td class="align-middle"><?php echo $newdate9; ?></td>
+                                <td class="align-middle" id="color_neonatal_body"><?php echo $newdate7; ?></td>
+                                <td class="align-middle" id="color_neonatal_body"><?php echo $newdate3; ?></td>
                                 <td class="align-middle"><?php echo $newdate10; ?></td>
+                                <td class="align-middle"><?php echo $newdate9; ?></td>
                                 <td class="align-middle">
                                   <?php
                                     if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
@@ -202,13 +202,13 @@
                             <th class="align-middle">Provincia</th>
                             <th class="align-middle">Distrito</th>
                             <th class="align-middle">Documento</th>
-                            <th class="align-middle" id="color_fed_head">Tipo de Seguro</th>
-                            <th class="align-middle">Fecha de Nacimiento</th>
                             <th class="align-middle">Apellidos y Nombres</th>
-                            <th class="align-middle" id="color_fed_head">Menor Encontrado</th>
+                            <th class="align-middle">Fecha de Nacimiento</th>
                             <th class="align-middle">Nombre ESS</th>
-                            <th class="align-middle">Fecha Atención</th>
+                            <th class="align-middle" id="color_fed_head">Menor Encontrado</th>
+                            <th class="align-middle" id="color_fed_head">Tipo de Seguro</th>
                             <th class="align-middle">Lugar de Tamizaje (HIS)</th>
+                            <th class="align-middle">Fecha Atención</th>
                             <th class="align-middle">Cumple</th>
                         </tr>
                     </thead>
@@ -290,13 +290,13 @@
                                 <td class="align-middle"><?php echo $newdate; ?></td>
                                 <td class="align-middle"><?php echo $newdate1; ?></td>
                                 <td class="align-middle"><?php echo $newdate2; ?></td>
-                                <td class="align-middle" id="color_fed_body"><?php echo $newdate3; ?></td>
-                                <td class="align-middle"><?php echo $newdate4; ?></td>                               
                                 <td class="align-middle"><?php echo $newdate6; ?></td>
-                                <td class="align-middle" id="color_fed_body"><?php echo $newdate7; ?></td>
+                                <td class="align-middle"><?php echo $newdate4; ?></td>                               
                                 <td class="align-middle"><?php echo $newdate8; ?></td>
-                                <td class="align-middle"><?php echo $newdate9; ?></td>
+                                <td class="align-middle" id="color_fed_body"><?php echo $newdate7; ?></td>
+                                <td class="align-middle" id="color_fed_body"><?php echo $newdate3; ?></td>
                                 <td class="align-middle"><?php echo $newdate10; ?></td>
+                                <td class="align-middle"><?php echo $newdate9; ?></td>
                                 <td class="align-middle">
                                   <?php
                                     if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
