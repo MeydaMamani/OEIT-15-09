@@ -57,7 +57,7 @@
                                 <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
                                 <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
                             </form>
-                        </div>    
+                        </div> 
                         <div class="table-responsive">
                             <table id="demo-foo-addrow" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
                                 <thead>
@@ -86,6 +86,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+                        
                                 <tbody>
                                     <?php  
                                         include('consulta_sis_covid.php');
@@ -210,6 +212,8 @@
                                 <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='sis_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
                             </div>
                         </div>
+
+                        
                         <div class="table-responsive">
                             <table id="demo-foo-addrow2" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
                                 <thead>
