@@ -161,7 +161,7 @@
 
                 if(is_null ($consulta['DIAS_SEG']) ){ echo ' - '.";"; }
                 else{ echo $consulta['DIAS_SEG']-> format('d/m/y').";" ; }
-
+                https://youtu.be/cp9pe-hIbgA
                 if(is_null ($consulta['CF300']) ){ echo ' - '.";"; }
                 else{ echo $consulta['CF300']-> format('d/m/y').";" ; }
 
