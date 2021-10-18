@@ -57,7 +57,7 @@
 		</div>
 		<nav>
 			<ul>
-				<li><a href="inicio.php"><span class="icon-home"></span>Inicio</a></li>
+				<li><a href="index.php"><span class="icon-home"></span>Inicio</a></li>
 				<li class="submenu">
 					<a href="#"><span class="icon-reddit"></span>Niño<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
@@ -102,9 +102,9 @@
 						<li><a href="cant_prof_EPP.php">Cantidad Profesional EPP (2020 FED)<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
-				<li class="submenu">
+				<!-- <li class="submenu">
 					<a href="acerca.php" style="color: #d8e24e;"><i class="fa fa-cog"></i> Nosotros<span class="caret icon-arrow-down6"></span></a>
-				</li>
+				</li> -->
 			</ul>
 		</nav>
 	</header>

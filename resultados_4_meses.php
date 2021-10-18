@@ -56,7 +56,6 @@
                 <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='4_meses.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
               </div>
             </div>
-
             <div class="d-flex">
                 <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
                 <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>
@@ -201,16 +200,16 @@
                                             echo "<span class='badge bg-correct'>Si</span>";
                                         }
                                     }
-                                    if(is_null ($consulta['SUPLEMENTADO'])){
+                                    if(is_null($consulta['SUPLEMENTADO'])){
                                         echo "<span class='badge bg-incorrect'>No</span>";
                                     }
-                                    if(!is_null ($consulta['SUPLEMENTADO']) && ($newdate14<110 || $newdate14>130)){
+                                    if(!is_null($consulta['SUPLEMENTADO']) && ($newdate14<110 || $newdate14>130)){
                                         echo "<span class='badge bg-observed'>Observado</span>";
                                      }
                                 }
                                 else{
                                     echo "<span class='badge bg-notmeasure'>No Mide</span>";
-                                }                                    
+                                }
                             ?></td>
                         </tr>
                         <?php

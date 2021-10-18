@@ -104,7 +104,7 @@
             header("Content-type: text/csv");
             header("Content-Disposition: attachment; filename=".$ficheroExcel);            
             // Vamos a mostrar en las celdas las columnas que queremos que aparezcan en la primera fila, separadas por ; 
-            echo "#;PROVINCIA;DISTRITO;ESTABLECIMIENTO;MENOR_VISITADO;MENOR_ENCONTRADO;FECHA_NACIMIENTO;DOCUMENTO;TIPO_SEGURO;APELLIDOS_Y_NOMBRES;PREMATURO;SUPLEMENTADO(DIAS);ULTIMA_ATE_PN;CUMPLE\n";                    
+            echo "#;PROVINCIA;DISTRITO;ESTABLECIMIENTO;MENOR_VISITADO;MENOR_ENCONTRADO;FECHA_DE_NACIMIENTO;DOCUMENTO;TIPO_DE_SEGURO;APELLIDOS_Y_NOMBRES;PREMATURO;SUPLEMENTADO(DIAS);ULTIMA_ATE_PN;CUMPLE\n";
             // Recorremos la consulta SQL y lo mostramos
             $i=1;
             while ($consulta = sqlsrv_fetch_array($consulta5)){
@@ -129,6 +129,9 @@
 
                 if(is_null ($consulta['DOCUMENTO']) ){ echo ' - '.";"; }
                 else{ echo $consulta['DOCUMENTO'].";" ; }
+                
+                if(is_null ($consulta['TIPO_SEGURO']) ){ echo ' - '.";"; }
+                else{ echo $consulta['TIPO_SEGURO'].";" ; }
 
                 if(is_null ($consulta['APELLIDOS_NOMBRES']) ){ echo ' - '.";"; }
                 else{ echo $consulta['APELLIDOS_NOMBRES'].";" ; }
@@ -141,9 +144,6 @@
 
                 if(is_null ($consulta['ULTIMA_ATE_PN']) ){ echo ' - '.";"; }
                 else{ echo $consulta['ULTIMA_ATE_PN'].";" ; }
-
-                if(is_null ($consulta['TIPO_SEGURO']) ){ echo ' - '.";"; }
-                else{ echo $consulta['TIPO_SEGURO'].";" ; }
 
                 if($consulta['PREMATURO'] != 'PREMATURO'){ 
                     foreach (range(110, 130) as $numero) {
