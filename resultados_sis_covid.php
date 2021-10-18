@@ -49,13 +49,11 @@
                             </div>
                         </div>    
                         <div class="d-flex">
-                            <!-- <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button> -->
-                            <!-- <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button> -->
                             <form action="impresion_sis_covid.php" method="POST">
                                 <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                                 <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                                 <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                                <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
+                                <button type="submit" id="export_data" name="exportarCSV_f0" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
                             </form>
                         </div>
                         <div class="table-responsive">
@@ -78,9 +76,6 @@
                                         <th class="align-middle">Cumple</th>
                                     </tr>
                                 </thead>
-                                
-
-
                                 <div class="float-end pb-4">
                                     <div class="form-group">
                                         <div id="inputbus" class="input-group input-group-sm">
@@ -88,9 +83,7 @@
                                             <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
                                         </div>
                                     </div>
-                                </div>
-
-                        
+                                </div>                       
                                 <tbody>
                                     <?php  
                                         include('consulta_sis_covid.php');
@@ -166,10 +159,10 @@
                                         <td class="align-middle"><?php echo $i++; ?></td>
                                         <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
                                         <td class="align-middle"><?php echo utf8_encode($newdate4); ?></td>
-                                        <td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
+                                        <td class="align-middle"><?php echo $newdate5; ?></td>
                                         <td class="align-middle"><?php echo $newdate6; ?></td>
                                         <td class="align-middle"><?php echo $newdate7; ?></td>
-                                        <td class="align-middle"><?php echo $newdate8; ?></td>
+                                        <td class="align-middle"><?php echo utf8_encode($newdate8); ?></td>
                                         <td class="align-middle"><?php echo $newdate9; ?></td>
                                         <td class="align-middle"><?php echo $newdate10; ?></td>
                                         <td class="align-middle"><?php echo $newdate11; ?></td>
@@ -216,18 +209,14 @@
                             </div>
                         </div>
 
-                        <div class="d-flex">----
-                            <!-- <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button> -->
-                            <!-- <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button> -->
-                            <form action="impresion_68_meses.php" method="POST">
+                        <div class="d-flex">
+                            <form action="impresion_sis_covid.php" method="POST">
                                 <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                                 <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                                 <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                                <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
+                                <button type="submit" id="export_data" name="exportarCSV_f100" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
                             </form>
                         </div>
-
-                        
                         <div class="table-responsive">
                             <table id="demo-foo-addrow2" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
                                 <thead>
