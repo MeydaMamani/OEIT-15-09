@@ -142,7 +142,7 @@
                         </div>
                         <div class="col-md p-2">
                             <p class="font-13 text-start"><b>Dni Usuario: </b></p>
-                            <input type="text" class="form-control" id="dni_user" name="dni_user">
+                            <input type="number"  class="form-control" id="dni_user" name="dni_user" maxlength="8" >
                         </div>
                     </div>
                     <div class="d-flex">
@@ -165,7 +165,7 @@
                     <div class="d-flex">
                             <div class="col-md p-2">
                                 <p class="font-13 text-start"><b>Dni Paciente: </b></p>
-                                <input type="text" class="form-control" id="dni_paciente" name="dni_paciente">
+                                <input type="number"   class="form-control" id="dni_paciente" name="dni_paciente" maxlength="8" >
                             </div>
                             <div class="col-md p-2">
                                 <p class="font-13 text-start"><b>Fecha Atención: </b></p>
