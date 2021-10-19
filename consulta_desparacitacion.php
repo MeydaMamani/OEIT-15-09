@@ -52,7 +52,7 @@
           $resultado2 = "SELECT A.Provincia_Establecimiento, A.Distrito_Establecimiento, A.CANTIDAD_PROV
                           FROM (SELECT Provincia_Establecimiento, Distrito_Establecimiento,
                           SUM(CASE WHEN (Provincia_Establecimiento='$red') THEN 1 ELSE 0 END) AS CANTIDAD_PROV
-                              FROM dbo.DESPARACITACION 
+                              FROM dbo.DESPARACITACION WHERE Provincia_Establecimiento='$red'
                           GROUP BY Provincia_Establecimiento, Distrito_Establecimiento) A 
                           DROP TABLE dbo.DESPARACITACION";
         }
@@ -69,7 +69,7 @@
                           FROM (SELECT Provincia_Establecimiento, Distrito_Establecimiento,
                           SUM(CASE WHEN (Provincia_Establecimiento='$red') THEN 1 ELSE 0 END) AS CANTIDAD_PROV,
                           SUM(CASE WHEN (Distrito_Establecimiento='$dist') THEN 1 ELSE 0 END) AS CANTIDAD_DIST
-                              FROM dbo.DESPARACITACION WHERE Distrito_Establecimiento='$dist'
+                              FROM dbo.DESPARACITACION WHERE Provincia_Establecimiento='$red' AND Distrito_Establecimiento='$dist'
                           GROUP BY Provincia_Establecimiento, Distrito_Establecimiento) A
                           DROP TABLE dbo.DESPARACITACION";
         }
