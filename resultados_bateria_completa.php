@@ -3,34 +3,34 @@
   if (isset($_POST['Buscar'])) {
     global $conex;
     include('./base.php');
-     $row_cnt=0; $correctos=0; $incorrectos=0;
-        include('consulta_bateria_completa.php');
-        while ($consulta = sqlsrv_fetch_array($consulta2)){  
-          $row_cnt++;
-          if ($consulta['CAPTADA'] == $consulta['TMZ_ANEMIA'] AND $consulta['CAPTADA'] == $consulta['SIFILIS'] AND $consulta['CAPTADA'] == $consulta['VIH'] AND $consulta['CAPTADA'] == $consulta['BACTERIURIA']) {
-            $correctos++;
-          } 
-          else{
-            $incorrectos++;
-          }
-        }  
-      ?>
+    include('consulta_bateria_completa.php');
+    $row_cont=0; $correctos=0; $incorrectos=0;
+    while ($consulta = sqlsrv_fetch_array($consulta2)){  
+      $row_cont++;
+      if ($consulta['CAPTADA'] == $consulta['TMZ_ANEMIA'] AND $consulta['CAPTADA'] == $consulta['SIFILIS'] AND $consulta['CAPTADA'] == $consulta['VIH'] AND $consulta['CAPTADA'] == $consulta['BACTERIURIA']) {
+        $correctos++;
+      } 
+      else{
+        $incorrectos++;
+      }
+    }  
+  ?>
         <div class="container">
             <div class="text-center p-3">
               <h3>Gestantes de Bateria Completa (Indicador 1 - CG01) - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="row mb-3 mt-3">
-                <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cnt; ?></b></div>
+                <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
                 <div class="col-8 d-flex justify-content-end">
                   <ul class="list-group list-group-horizontal-sm">
                     <li class="list-group-item font-14">Correctos <span class="badge bg-success rounded-pill correcto"><?php echo $correctos; ?></span></li>
                     <li class="list-group-item font-14">Incorrectos <span class="badge bg-danger rounded-pill incorrecto"><?php echo $incorrectos; ?></span></li>
                     <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill avance">
                       <?php 
-                        if($correctos == 0 and $row_cnt == 0){
+                        if($correctos == 0 and $row_cont == 0){
                           echo '0 %';
                         }else{
-                          echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%';
+                          echo number_format((float)(($correctos/$row_cont)*100), 2, '.', ''), '%';
                         }
                         ?>
                         </span>
@@ -44,8 +44,6 @@
                 <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Informacion</button>
                 <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='bateria_completa.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
               </div>
-
-
               <div class="d-flex">
                 <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
                 <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>
@@ -165,7 +163,6 @@
                 </tfoot>
               </table>
             </div>
-
             <!-- tabla fed -->
             <div class="col-12 table-responsive table_fed" style="display: none;">
               <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="10">
@@ -378,11 +375,11 @@
       $(".table_no_fed").hide();
     });
     $(".btn_all").click(function(){
-      $(".total").text(<?php echo $row_cnt; ?>);
+      $(".total").text(<?php echo $row_cont; ?>);
       $(".correcto").text(<?php echo $correctos; ?>);
       $(".incorrecto").text(<?php echo $incorrectos; ?>);
       $(".avance").text(<?php if($correctos == 0 and $row_cont == 0){ echo "'0 %'"; }
-          else{ $porcentaje = number_format((float)(($correctos/$row_cnt)*100), 2, '.', '');
+          else{ $porcentaje = number_format((float)(($correctos/$row_cont)*100), 2, '.', '');
                   echo "'$porcentaje %'"; }?>);
       $(".table_fed").hide();
       $(".table_no_fed").show();
