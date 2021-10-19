@@ -250,22 +250,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script>
-   $(function(){
-    $(".btn_fed").click(function(){
-      console.log('me diste click fed');
-      // $(".datos").text('260');
-      $(".table_fed").show();
-      $(".table_no_fed").hide();
-    });
-    $(".btn_all").click(function(){
-      console.log('Me diste click boton todo');
-      // $(".datos").text('283');
-      $(".table_fed").hide();
-      $(".table_no_fed").show();
-    });
-  });
-
-  $('#demo-input-search').on('input', function (e) {
+   $('#demo-input-search').on('input', function (e) {
       e.preventDefault();
       addrow2.trigger('footable_filter', {filter: $(this).val()});
   });
