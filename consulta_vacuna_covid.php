@@ -82,7 +82,7 @@ include('./base.php');
                           <div class="sl-right">
                             <div>
                             <label class="information-person-text">Primera Dosis</label>
-                              <p class="font-13"><?php echo $consulta['PRIMERA']; ?></p>
+                              <p class="font-13"><?php echo $consulta['PRIMERA'] -> format('d/m/y'); ?></p>
                             </div>
                           </div>
                         </div>
@@ -92,7 +92,7 @@ include('./base.php');
                           <div class="sl-right">
                             <div>
                               <label class="information-person-text">Segunda Dosis</label>
-                              <p class="font-13"><?php echo $consulta['SEGUNDA']; ?></p>
+                              <p class="font-13"><?php echo $consulta['SEGUNDA'] -> format('d/m/y'); ?></p>
                             </div>
                           </div>
                         </div>
