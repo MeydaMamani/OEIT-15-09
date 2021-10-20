@@ -35,6 +35,9 @@
 	<!-- link chartjs -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
 	
+	<!-- select2 para buscardor -->
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 	<!-- notificaciones toastr -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
@@ -104,9 +107,15 @@
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="#"><i class="fa fa-graduation-cap"></i> Educación<span class="caret icon-arrow-down6"></span></a>
+					<a href="#" style="color: #d8e24e;"><i class="fa fa-graduation-cap"></i> Educación<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a href="reincorporacion.php">Reincorporación<span class="icon-dot"></span></a></li>
+					</ul>
+				</li>
+				<li class="submenu">
+					<a href="#" style="color: #79cff6;"><i class="fa fa-file"></i> Archivos Planos<span class="caret icon-arrow-down6"></span></a>
+					<ul class="children">
+						<li><a href="arch_plane.php">Planos<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 			</ul>
