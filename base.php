@@ -103,9 +103,12 @@
 						<li><a href="desparacitacion.php">Desparacitación<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
-				<!-- <li class="submenu">
-					<a href="acerca.php" style="color: #d8e24e;"><i class="fa fa-cog"></i> Nosotros<span class="caret icon-arrow-down6"></span></a>
-				</li> -->
+				<li class="submenu">
+					<a href="#"><i class="fa fa-graduation-cap"></i> Educación<span class="caret icon-arrow-down6"></span></a>
+					<ul class="children">
+						<li><a href="reincorporacion.php">Reincorporación<span class="icon-dot"></span></a></li>
+					</ul>
+				</li>
 			</ul>
 		</nav>
 	</header>
