@@ -1,6 +1,6 @@
 <?php
     include('./base.php');
-    include('consulta_reincorporacion.php');
+    include('consulta_reincor.php');
     $row_cont=0; $correctos=0; $incorrectos=0;
     while ($consulta = sqlsrv_fetch_array($consulta2)){  
         $row_cont++;

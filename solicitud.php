@@ -142,7 +142,7 @@
                         </div>
                         <div class="col-md p-2">
                             <p class="font-13 text-start"><b>Dni Usuario: </b></p>
-                            <input type="number"  class="form-control" id="dni_user" name="dni_user" maxlength="8" >
+                            <input type="number"  class="form-control" id="dni_user" name="dni_user"  placeholder="DNI" maxlength="8" >
                         </div>
                     </div>
                     <div class="d-flex">
