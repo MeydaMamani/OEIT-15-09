@@ -256,7 +256,7 @@
             <div class="modal-content">
               <div class="modal-body">
                 <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <img src="./img/Screenshot_94.png" width="465" alt="">
+                <img src="./img/I_T.png" style="width: 100%;">
               </div>
             </div>
           </div>

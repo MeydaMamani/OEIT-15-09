@@ -40,7 +40,7 @@
             </div>
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
-                <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-bar-chart"></i> Cuadro Resumen</button>
+                <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-line-chart"></i> Cuadro Resumen</button>
                 <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Informacion</button>
                 <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='bateria_completa.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
               </div>
