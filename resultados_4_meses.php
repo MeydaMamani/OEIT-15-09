@@ -288,75 +288,79 @@
                                 if(($tipo2 === 0 || $tipo2 > 0) && (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))
                                     || (($tipo == '') || ($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
 
-                                    if(is_null ($consulta['NOMBRE_PROV']) ){
-                                        $newdate3 = '  -'; }
-                                        else{
-                                    $newdate3 = $consulta['NOMBRE_PROV'] ;}
+                                    if($consulta['PREMATURO'] != 'PREMATURO'){
+                                        echo $consulta['PREMATURO'];
+                                        if(is_null ($consulta['NOMBRE_PROV']) ){
+                                            $newdate3 = '  -'; }
+                                            else{
+                                        $newdate3 = $consulta['NOMBRE_PROV'] ;}
+                            
+                                        if(is_null ($consulta['NOMBRE_DIST']) ){
+                                            $newdate4 = '  -'; }
+                                            else{
+                                        $newdate4 = $consulta['NOMBRE_DIST'];}
+                            
+                                        if(is_null ($consulta['EESS_ATENCION']) ){
+                                            $newdate5 = '  -'; }
+                                            else{
+                                        $newdate5 = $consulta['EESS_ATENCION'];}
+                            
+                                        if(is_null ($consulta['MENOR_VISITADO']) ){
+                                            $newdate6 = '  -'; }
+                                            else{
+                                        $newdate6 = $consulta['MENOR_VISITADO'];}
+                            
+                                        if(is_null ($consulta['MENOR_ENCONTRADO']) ){
+                                            $newdate7 = '  -'; }
+                                            else{
+                                        $newdate7 = $consulta['MENOR_ENCONTRADO'];}
+                            
+                                        if(is_null ($consulta['NUM_DNI']) ){
+                                            $newdate8 = '  -'; }
+                                            else{
+                                        $newdate8 = $consulta['NUM_DNI'];}
                         
-                                    if(is_null ($consulta['NOMBRE_DIST']) ){
-                                        $newdate4 = '  -'; }
+                                        if(is_null ($consulta['NUM_CNV']) ){
+                                            $newdate9 = '  -'; }
+                                            else{
+                                        $newdate9 = $consulta['NUM_CNV'];}
+                            
+                                        if(is_null ($consulta['FECHA_NACIMIENTO_NINO']) ){
+                                            $newdate10 = '  -'; }
+                                            else{
+                                        $newdate10 = $consulta['FECHA_NACIMIENTO_NINO'] -> format('d/m/y');}                      
+                            
+                                        if(is_null ($consulta['DOCUMENTO']) ){
+                                            $newdate11 = '  -'; }
+                                            else{ 
+                                            $newdate11 = $consulta['DOCUMENTO'];}
+                                                    
+                                        if(is_null ($consulta['APELLIDOS_NOMBRES']) ){
+                                            $newdate12 = '  -'; }
                                         else{
-                                    $newdate4 = $consulta['NOMBRE_DIST'];}
-                        
-                                    if(is_null ($consulta['EESS_ATENCION']) ){
-                                        $newdate5 = '  -'; }
-                                        else{
-                                    $newdate5 = $consulta['EESS_ATENCION'];}
-                        
-                                    if(is_null ($consulta['MENOR_VISITADO']) ){
-                                        $newdate6 = '  -'; }
-                                        else{
-                                    $newdate6 = $consulta['MENOR_VISITADO'];}
-                        
-                                    if(is_null ($consulta['MENOR_ENCONTRADO']) ){
-                                        $newdate7 = '  -'; }
-                                        else{
-                                    $newdate7 = $consulta['MENOR_ENCONTRADO'];}
-                        
-                                    if(is_null ($consulta['NUM_DNI']) ){
-                                        $newdate8 = '  -'; }
-                                        else{
-                                    $newdate8 = $consulta['NUM_DNI'];}
-                    
-                                    if(is_null ($consulta['NUM_CNV']) ){
-                                        $newdate9 = '  -'; }
-                                        else{
-                                    $newdate9 = $consulta['NUM_CNV'];}
-                        
-                                    if(is_null ($consulta['FECHA_NACIMIENTO_NINO']) ){
-                                        $newdate10 = '  -'; }
-                                        else{
-                                    $newdate10 = $consulta['FECHA_NACIMIENTO_NINO'] -> format('d/m/y');}                      
-                        
-                                    if(is_null ($consulta['DOCUMENTO']) ){
-                                        $newdate11 = '  -'; }
-                                        else{ 
-                                        $newdate11 = $consulta['DOCUMENTO'];}
-                                                
-                                    if(is_null ($consulta['APELLIDOS_NOMBRES']) ){
-                                        $newdate12 = '  -'; }
-                                    else{
-                                        $newdate12 = $consulta['APELLIDOS_NOMBRES'];}
-                        
-                                    if(is_null ($consulta['PREMATURO']) ){
-                                        $newdate13 = '  -'; }
-                                        else{
-                                        $newdate13 = $consulta['PREMATURO'];}
-                        
-                                    if(is_null ($consulta['SUPLEMENTADO']) ){
-                                        $newdate14 = '  -'; }
-                                        else{
-                                        $newdate14 = $consulta['SUPLEMENTADO'];}
-                        
-                                    if(is_null ($consulta['ULTIMA_ATE_PN']) ){
-                                        $newdate15 = '  -'; }
-                                        else{
-                                        $newdate15 = $consulta['ULTIMA_ATE_PN'];}
-                        
-                                    if(is_null ($consulta['TIPO_SEGURO']) ){
-                                        $newdate16 = '  -'; }
-                                        else{
-                                        $newdate16 = $consulta['TIPO_SEGURO'];}            
+                                            $newdate12 = $consulta['APELLIDOS_NOMBRES'];}
+                            
+                                        if(is_null ($consulta['PREMATURO']) ){
+                                            $newdate13 = '  -'; }
+                                            else{
+                                            $newdate13 = $consulta['PREMATURO'];}
+                            
+                                        if(is_null ($consulta['SUPLEMENTADO']) ){
+                                            $newdate14 = '  -'; }
+                                            else{
+                                            $newdate14 = $consulta['SUPLEMENTADO'];}
+                            
+                                        if(is_null ($consulta['ULTIMA_ATE_PN']) ){
+                                            $newdate15 = '  -'; }
+                                            else{
+                                            $newdate15 = $consulta['ULTIMA_ATE_PN'];}
+                            
+                                        if(is_null ($consulta['TIPO_SEGURO']) ){
+                                            $newdate16 = '  -'; }
+                                            else{
+                                            $newdate16 = $consulta['TIPO_SEGURO'];}            
+                                    
+
                         ?>
                         <tr class="text-center font-12">
                             <td class="align-middle"><?php echo $i_fed++; ?></td>
@@ -401,6 +405,7 @@
                             ?></td>
                         </tr>
                         <?php
+                                    }
                                 }
                             ;}                    
                             include("cerrar.php");

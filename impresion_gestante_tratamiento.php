@@ -100,7 +100,7 @@
             header("Content-type: text/csv");
             header("Content-Disposition: attachment; filename=".$ficheroExcel);            
             // Vamos a mostrar en las celdas las columnas que queremos que aparezcan en la primera fila, separadas por ; 
-            echo "#;PROVINCIA;DISTRITO;DOCUMENTO_PACIENTE;GESTANTE_ATENDIDA;NUM_CONTROL;TAMIZAJE_VIOLENCIA;PROBLEMAS_RELACIONADOS_VIOLENCIA;DIAGNOSTICO_INICIO_TRTAMIENTO;DIA_ATENCION;ATENDIDO;CUMPLE\n";                    
+            echo "#;PROVINCIA;DISTRITO;DOCUMENTO_PACIENTE;GESTANTE_ATENDIDA;NUM_CONTROL;TAMIZAJE_VIOLENCIA;PROBLEMAS_RELACIONADOS_VIOLENCIA;DIAGNOSTICO_INICIO_TRATAMIENTO;DIA_ATENCION;ATENDIDO;CUMPLE\n";                    
             // Recorremos la consulta SQL y lo mostramos
             $i=1;
             while ($consulta = sqlsrv_fetch_array($consulta1)){

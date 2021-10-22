@@ -77,17 +77,17 @@
                           GES_CAPT_OPO CAPTADA,TMZ_ANEMIA, SIFILIS, VIH,BACTERIURIA,TMZ_VIF, PLANDEPARTO,PERFILOBSTETRICO,REGISTRADO_EL                          
                           FROM ( SELECT A.Provincia_Establecimiento,  A.Distrito_Establecimiento,  A.Nombre_Establecimiento,  A.Abrev_Tipo_Doc_Paciente,
                                 A.Numero_Documento_Paciente, A.Fecha_Nacimiento_Paciente,       
-                          Min(CASE WHEN ((a.Codigo_Item IN('Z3491','Z3591') AND Tipo_Diagnostico='D' AND Valor_Lab='1') )THEN A.EDAD_REG ELSE NULL END)'EDAD_CAPTADA',
-                          Min(CASE WHEN ((a.Codigo_Item IN('Z3491','Z3591') AND Tipo_Diagnostico='D' AND Valor_Lab='1') )THEN A.Fecha_Atencion ELSE NULL END)'GES_CAPT_OPO',
-                          Min(CASE WHEN (a.Codigo_Item ='85018' AND a.Tipo_Diagnostico='D')THEN A.Fecha_Atencion ELSE NULL END)'TMZ_ANEMIA',
-                          Min(CASE WHEN (a.Codigo_Item in ('86780','86593','86592') AND a.Tipo_Diagnostico='D')THEN A.Fecha_Atencion ELSE NULL END)'SIFILIS',
-                          Min(CASE WHEN (a.Codigo_Item in('86703','87389') AND a.Tipo_Diagnostico='D')THEN A.Fecha_Atencion ELSE NULL END)'VIH',
-                          Min(CASE WHEN (a.Codigo_Item in('81007','81002','81000.02') AND a.Tipo_Diagnostico='D')THEN A.Fecha_Atencion ELSE NULL END)'BACTERIURIA',
-                          Min(CASE WHEN (a.Codigo_Item IN ('96150','96150.01') AND a.Tipo_Diagnostico='D' AND VALOR_LAB IN ('VIF','G','(G)'))THEN A.Fecha_Atencion ELSE NULL END)'TMZ_VIF',
-                          Min(CASE WHEN (a.Codigo_Item ='R456' AND a.Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'VIF_CONFIRMADO',
-                          Min(CASE WHEN (a.Codigo_Item ='80055.01' AND a.Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'PERFILOBSTETRICO',
-                          Min(CASE WHEN (a.Codigo_Item ='U1692' AND a.Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'PLANDEPARTO',
-                          Min(CASE WHEN ((a.Codigo_Item IN('Z3491','Z3591') AND Tipo_Diagnostico='D' AND Valor_Lab='1') )THEN A.Fecha_Registro ELSE NULL END)'REGISTRADO_EL'
+                          Min(CASE WHEN ((a.Codigo_Item IN('Z3491','Z3591') AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND Tipo_Diagnostico='D' AND Valor_Lab='1') )THEN A.EDAD_REG ELSE NULL END)'EDAD_CAPTADA',
+                          Min(CASE WHEN ((a.Codigo_Item IN('Z3491','Z3591') AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND Tipo_Diagnostico='D' AND Valor_Lab='1') )THEN A.Fecha_Atencion ELSE NULL END)'GES_CAPT_OPO',
+                          Min(CASE WHEN (a.Codigo_Item ='85018' AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND a.Tipo_Diagnostico='D')THEN A.Fecha_Atencion ELSE NULL END)'TMZ_ANEMIA',
+                          Min(CASE WHEN (a.Codigo_Item in ('86780','86593','86592') AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND a.Tipo_Diagnostico='D')THEN A.Fecha_Atencion ELSE NULL END)'SIFILIS',
+                          Min(CASE WHEN (a.Codigo_Item in('86703','87389') AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND a.Tipo_Diagnostico='D')THEN A.Fecha_Atencion ELSE NULL END)'VIH',
+                          Min(CASE WHEN (a.Codigo_Item in('81007','81002','81000.02') AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND a.Tipo_Diagnostico='D')THEN A.Fecha_Atencion ELSE NULL END)'BACTERIURIA',
+                          Min(CASE WHEN (a.Codigo_Item IN ('96150','96150.01') AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND a.Tipo_Diagnostico='D' AND VALOR_LAB IN ('VIF','G','(G)'))THEN A.Fecha_Atencion ELSE NULL END)'TMZ_VIF',
+                          Min(CASE WHEN (a.Codigo_Item ='R456' AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND a.Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'VIF_CONFIRMADO',
+                          Min(CASE WHEN (a.Codigo_Item ='80055.01' AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND a.Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'PERFILOBSTETRICO',
+                          Min(CASE WHEN (a.Codigo_Item ='U1692' AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND a.Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'PLANDEPARTO',
+                          Min(CASE WHEN ((a.Codigo_Item IN('Z3491','Z3591') AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') AND Tipo_Diagnostico='D' AND Valor_Lab='1') )THEN A.Fecha_Registro ELSE NULL END)'REGISTRADO_EL'
                         FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A
                         WHERE (anio in ('2021') and Genero='f' and mes ='$mes' and Provincia_Establecimiento='$red' AND Distrito_Establecimiento='$dist')
                         GROUP BY Provincia_Establecimiento, Distrito_Establecimiento, Nombre_Establecimiento, Abrev_Tipo_Doc_Paciente,
