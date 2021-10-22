@@ -11,7 +11,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
-        // $id_establecimiento = $_POST['id_establecimiento'];
+        $establecimiento = $_POST['establecimiento'];
 
         if($mes == 1){ $nombre_mes = 'ENERO'; }
         else if($mes == 2){ $nombre_mes = 'FEBRERO'; }
@@ -32,20 +32,10 @@
         if ($red_1 == 1) { $red = 'DANIEL ALCIDES CARRION'; }
         elseif ($red_1 == 2) { $red = 'OXAPAMPA'; }
         elseif ($red_1 == 3) { $red = 'PASCO';  }
-        elseif ($red_1 == 4) { $redt = 'PASCO'; }
+        elseif ($red_1 == 4) { $red = 'TODOS'; }
                 
-        if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
-            $resultado = "SELECT Id_Cita, Lote,MES,DIA,Fecha_Atencion, LOTE, NUM_PAG,Num_Reg,Descripcion_Ups,Descripcion_Sector,Descripcion_Red,Provincia_Establecimiento,
-                            Descripcion_MicroRed,Distrito_Establecimiento,Codigo_Unico,Nombre_Establecimiento,Abrev_Tipo_Doc_Paciente, Numero_Documento_Paciente,Fecha_Nacimiento_Paciente,Id_Etnia,
-                            Descripcion_Etnia,Descripcion_Financiador,Descripcion_Pais,Numero_Documento_Personal, Nombres_Personal,Descripcion_Profesion,
-                            Numero_Documento_Registrador, Nombres_Registrador,Id_Condicion_Establecimiento,Id_Condicion_Servicio,Edad_Reg,Tipo_Edad,Grupo_Edad, Id_Turno,
-                            Codigo_Item,Tipo_Diagnostico, Descripcion_Item,Valor_Lab,Id_Correlativo_Item,Id_Correlativo_Lab,peso,Talla,Hemoglobina,pac,pc,Id_Otra_Condicion,
-                            Descripcion_Otra_Condicion,Descripcion_Centro_Poblado,Fecha_Ultima_Regla,Fecha_Solicitud_Hb,Fecha_Resultado_Hb,Fecha_Registro,Fecha_Modificacion
-                            from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            where anio='2021' and mes='$mes' and Provincia_Establecimiento='$red'";
-        }
-        else if ($red_1 == 4 and $dist_1 == 'TODOS') {
-            $dist = '';
+        if($red_1 == 4 and $dist_1 == 'TODOS' and $establecimiento == 'TODOS'){
+            echo 'AQUI TOY';
             $resultado = "SELECT Id_Cita, Lote,MES,DIA,Fecha_Atencion, LOTE, NUM_PAG,Num_Reg,Descripcion_Ups,Descripcion_Sector,Descripcion_Red,Provincia_Establecimiento,
                             Descripcion_MicroRed,Distrito_Establecimiento,Codigo_Unico,Nombre_Establecimiento,Abrev_Tipo_Doc_Paciente, Numero_Documento_Paciente,Fecha_Nacimiento_Paciente,Id_Etnia,
                             Descripcion_Etnia,Descripcion_Financiador,Descripcion_Pais,Numero_Documento_Personal, Nombres_Personal,Descripcion_Profesion,
@@ -55,7 +45,30 @@
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
                             where anio='2021' and mes='$mes'";
         }
-        else if($dist_1 != 'TODOS'){
+        else if ($red_1 != 4 and $dist_1 == 'TODOS' and $establecimiento == 'TODOS') {
+            $dist = '';
+            $resultado = "SELECT Id_Cita, Lote,MES,DIA,Fecha_Atencion, LOTE, NUM_PAG,Num_Reg,Descripcion_Ups,Descripcion_Sector,Descripcion_Red,Provincia_Establecimiento,
+                            Descripcion_MicroRed,Distrito_Establecimiento,Codigo_Unico,Nombre_Establecimiento,Abrev_Tipo_Doc_Paciente, Numero_Documento_Paciente,Fecha_Nacimiento_Paciente,Id_Etnia,
+                            Descripcion_Etnia,Descripcion_Financiador,Descripcion_Pais,Numero_Documento_Personal, Nombres_Personal,Descripcion_Profesion,
+                            Numero_Documento_Registrador, Nombres_Registrador,Id_Condicion_Establecimiento,Id_Condicion_Servicio,Edad_Reg,Tipo_Edad,Grupo_Edad, Id_Turno,
+                            Codigo_Item,Tipo_Diagnostico, Descripcion_Item,Valor_Lab,Id_Correlativo_Item,Id_Correlativo_Lab,peso,Talla,Hemoglobina,pac,pc,Id_Otra_Condicion,
+                            Descripcion_Otra_Condicion,Descripcion_Centro_Poblado,Fecha_Ultima_Regla,Fecha_Solicitud_Hb,Fecha_Resultado_Hb,Fecha_Registro,Fecha_Modificacion
+                            from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                            where anio='2021' and mes='$mes' and Provincia_Establecimiento='$red'";
+        }
+        else if($dist_1 != 'TODOS' and $establecimiento != 'TODOS'){
+            $dist=$dist_1;
+            $resultado = "SELECT Id_Cita, Lote,MES,DIA,Fecha_Atencion, LOTE, NUM_PAG,Num_Reg,Descripcion_Ups,Descripcion_Sector,Descripcion_Red,Provincia_Establecimiento,
+                            Descripcion_MicroRed,Distrito_Establecimiento,Codigo_Unico,Nombre_Establecimiento,Abrev_Tipo_Doc_Paciente, Numero_Documento_Paciente,Fecha_Nacimiento_Paciente,Id_Etnia,
+                            Descripcion_Etnia,Descripcion_Financiador,Descripcion_Pais,Numero_Documento_Personal, Nombres_Personal,Descripcion_Profesion,
+                            Numero_Documento_Registrador, Nombres_Registrador,Id_Condicion_Establecimiento,Id_Condicion_Servicio,Edad_Reg,Tipo_Edad,Grupo_Edad, Id_Turno,
+                            Codigo_Item,Tipo_Diagnostico, Descripcion_Item,Valor_Lab,Id_Correlativo_Item,Id_Correlativo_Lab,peso,Talla,Hemoglobina,pac,pc,Id_Otra_Condicion,
+                            Descripcion_Otra_Condicion,Descripcion_Centro_Poblado,Fecha_Ultima_Regla,Fecha_Solicitud_Hb,Fecha_Resultado_Hb,Fecha_Registro,Fecha_Modificacion
+                            from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                            where anio='2021' and mes='$mes' and Provincia_Establecimiento='$red' AND Distrito_Establecimiento='$dist'
+                            AND Nombre_Establecimiento='$establecimiento'";
+
+        }else if($dist_1 != 'TODOS' and $establecimiento == 'TODOS'){
             $dist=$dist_1;
             $resultado = "SELECT Id_Cita, Lote,MES,DIA,Fecha_Atencion, LOTE, NUM_PAG,Num_Reg,Descripcion_Ups,Descripcion_Sector,Descripcion_Red,Provincia_Establecimiento,
                             Descripcion_MicroRed,Distrito_Establecimiento,Codigo_Unico,Nombre_Establecimiento,Abrev_Tipo_Doc_Paciente, Numero_Documento_Paciente,Fecha_Nacimiento_Paciente,Id_Etnia,

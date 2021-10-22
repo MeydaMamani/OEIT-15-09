@@ -55,7 +55,7 @@
                                 </div>
                             </div><br>
                             <div class="col-12 text-center">
-                                <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2"><i class="fa fa-print"></i> Imprimir CSV</button>
+                                <button type="button" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2"><i class="fa fa-print"></i> Imprimir CSV</button>
                             </div>
                         </form>
                     </div>
@@ -67,13 +67,13 @@
 </div>
 
 <script>
-    $("#btn_buscar").click(function(){
+    $("#export_data").click(function(){
         var red = $("#red").val();
         var distrito = $("#distrito").val();
         var mes =$("#mes").val();
         var establecimiento =$("#establecimiento").val();
         if (red != 0 && distrito!='-' && mes!=''){
-            document.getElementById("btn_buscar").type = "submit";
+            document.getElementById("export_data").type = "submit";
         }else if(red == 0){
             toastr.error('Seleccione una Red', null, {"closeButton": true, "progressBar": true});
         }else if(distrito == '-'){
@@ -82,6 +82,14 @@
             toastr.error('Seleccione un Establecimiento', null, {"closeButton": true, "progressBar": true});
         }
     });
+</script>
+<script>
+    $(document).ready(function(){
+        $('#red').select2();
+		$('#distrito').select2();
+        $('#establecimiento').select2();
+        $('#mes').select2();
+	});
 </script>
 <script language="javascript">  
   var distritos_1=new Array("-","CHACAYAN","GOYLLARISQUIZGA","PAUCAR","SAN PEDRO DE PILLAO","SANTA ANA DE TUSI","TAPUC","VILCABAMBA","YANAHUANCA","TODOS");
@@ -97,7 +105,9 @@
     distritos_4,
   ];
 
-  function cambia_distrito(){ 
+  function cambia_distrito(){
+    $("#distrito").empty(); 
+    $("#establecimiento").empty();
     //tomo el valor del select del pais elegido 
     var red 
     red = document.f1.red[document.f1.red.selectedIndex].value 
@@ -115,6 +125,14 @@
           document.f1.distrito.options[i].value=mis_distritos[i] 
           document.f1.distrito.options[i].text=mis_distritos[i] 
         } 
+
+        var distrito = $("#distrito").val();
+        if(distrito == 'TODOS'){
+            $("#establecimiento").empty();
+            document.f1.establecimiento.length = 1 
+            document.f1.establecimiento.options[0].value = "TODOS" 
+            document.f1.establecimiento.options[0].text = "TODOS" 
+        }
     }else{ 
         //si no había provincia seleccionada, elimino las provincias del select 
         document.f1.distrito.length = 1 
@@ -128,10 +146,9 @@
 </script>
 <script>
     function cambia_establecimiento(){
+        $("#establecimiento").empty();
         var red = $("#red").val();
         var distrito = $("#distrito").val();
-        console.log(red);
-        console.log(distrito);
         $.ajax({
             url: 'establecimiento.php?red='+red+'&dist='+distrito,
             method: 'GET',
@@ -152,12 +169,5 @@
         })
     }
 </script> 
-<script>
-    $(document).ready(function(){
-		$('#distrito').select2();
-        $('#establecimiento').select2();
-        $('#mes').select2();
-	});
-</script>   
 </body>
 </html>
