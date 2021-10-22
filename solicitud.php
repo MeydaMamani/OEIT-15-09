@@ -15,13 +15,6 @@
                         <th class="align-middle">Provincia</th>
                         <th class="align-middle">Distrito</th>
                         <th class="align-middle">Establecimiento</th>
-                        <th class="align-middle">DNI Usuario</th>
-                        <th class="align-middle">Aplicación</th>
-                        <th class="align-middle">DNI Paciente</th>
-                        <th class="align-middle">Fecha Atención</th>
-                        <th class="align-middle">Soporte</th>
-                        <th class="align-middle">Tipo Soporte</th>
-                        <th class="align-middle">Descripción</th>
                         <th class="align-middle">Acción</th>
                     </tr>
                 </thead>
@@ -52,42 +45,12 @@
                                 if(is_null ($consulta['establecimiento']) ){ $newdate3 = ' - '; }
                                 else{ $newdate3 = $consulta['establecimiento'];}
 
-                                if(is_null ($consulta['dni_usuario']) ){ $newdate4 = ' - '; }
-                                else{ $newdate4 = $consulta['dni_usuario'];}
-
-                                if(is_null ($consulta['aplicativo']) ){ $newdate5 = ' - '; }
-                                else{ $newdate5 = $consulta['aplicativo'];}
-
-                                if(is_null ($consulta['dni_paciente']) ){ $newdate6 = ' - '; }
-                                else{ $newdate6 = $consulta['dni_paciente'];}
-
-                                if(is_null ($consulta['fecha_atencion']) ){ $newdate7 = ' - '; }
-                                else{ $newdate7 = $consulta['fecha_atencion'];}
-
-                                if(is_null ($consulta['soporte']) ){ $newdate8 = ' - '; }
-                                else{ $newdate8 = $consulta['soporte'];}
-
-                                if(is_null ($consulta['tipo_soporte']) ){ $newdate9 = ' - '; }
-                                else{ $newdate9 = $consulta['tipo_soporte'];}
-
-                                if(is_null ($consulta['description']) ){ $newdate10 = ' - '; }
-                                else{ $newdate10 = $consulta['description'];}
                 ?>
                     <tr class="text-center font-12">
                         <td class="align-middle"><?php echo $i++; ?></td>
                         <td class="align-middle"><?php echo $newdate; ?></td>
                         <td class="align-middle"><?php echo $newdate2; ?></td>
                         <td class="align-middle"><?php echo $newdate3; ?></td>
-                        <td class="align-middle"><?php echo $newdate4; ?></td>
-                        <td class="align-middle"><?php echo $newdate5; ?></td>
-                        <td class="align-middle"><?php echo $newdate6; ?></td>
-                        <td class="align-middle"><?php echo $newdate7; ?></td>
-                        <td class="align-middle"><?php echo $newdate8; ?></td>
-                        <td class="align-middle"><?php echo $newdate9; ?></td>
-                        <td class="align-middle"><?php echo $newdate10; ?></td>
-                        <td class="align-middle">
-                            <a class="btn btn-sm btn-outline-danger m-2 border-rounded" href="consulta_solicitud.php?eliminar=<?php echo $id;?>"><i class="fa fa-trash"></i></a>
-                        </td>
                     </tr>
                 <?php
                     ;}              
@@ -130,15 +93,17 @@
                         </div>
                         <div class="col-md m-1 text-mobile">
                             <p style="font-size: 13px;" class="text-start"><b>Ingrese Distrito: </b></p>
-                            <select class="select_gestante form-select" name="distrito" id="distrito" aria-label="Default select example">
+                            <select class="select_gestante form-select" name="distrito" id="distrito" onchange="cambia_establecimiento()" aria-label="Default select example">
                                 <option value="-">-</option>
                             </select>
                         </div>
                     </div>
                     <div class="d-flex">
                         <div class="col-md p-2">
-                            <p class="font-13 text-start"><b>Establecimiento: </b></p>
-                            <input type="text" class="form-control" id="establecimiento" name="establecimiento">
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione Establecimiento: </b></p>
+                            <select class="select_gestante form-select js-example-basic-single" name="establecimiento" id="establecimiento" aria-label="Default select example">
+                                <option value="-">Seleccione Establecimiento</option>
+                            </select>
                         </div>
                         <div class="col-md p-2">
                             <p class="font-13 text-start"><b>Dni Usuario: </b></p>
@@ -238,6 +203,13 @@
 
     });
 </script>
+<script>
+    $(document).ready(function(){
+        // $('#red').select2();
+		// $('#distrito').select2();
+        // $('#establecimiento').select2();
+	});
+</script>
 <script language="javascript">  
   var distritos_1=new Array("-","CHACAYAN","GOYLLARISQUIZGA","PAUCAR","SAN PEDRO DE PILLAO","SANTA ANA DE TUSI","TAPUC","VILCABAMBA","YANAHUANCA","TODOS");
   var distritos_2=new Array("-","CHONTABAMBA","CONSTITUCIÓN","HUANCABAMBA","OXAPAMPA","PALCAZU","POZUZO","PUERTO BERMUDEZ","VILLA RICA","TODOS");
@@ -253,6 +225,8 @@
   ];
 
   function cambia_distrito(){ 
+    $("#distrito").empty(); 
+    $("#establecimiento").empty();
     //tomo el valor del select del pais elegido 
     var red 
     red = document.f1.red[document.f1.red.selectedIndex].value 
@@ -281,5 +255,30 @@
     document.f1.distrito.options[0].selected = true 
   }
 </script>
+<script>
+    function cambia_establecimiento(){
+        $("#establecimiento").empty();
+        var red = $("#red").val();
+        var distrito = $("#distrito").val();
+        $.ajax({
+            url: 'establecimiento.php?red='+red+'&dist='+distrito,
+            method: 'GET',
+            success: function(data) {
+                console.log(data);
+                var establecimiento = data;
+                var expresionRegular = /\s*,\s*/;
+                var listaEstablecimiento = establecimiento.split(expresionRegular);
+                var indice = listaEstablecimiento.length-1;
+                listaEstablecimiento[indice] = 'TODOS';
+                num_distritos = listaEstablecimiento.length 
+                document.f1.establecimiento.length = num_distritos
+                for(i=0;i<num_distritos;i++){ 
+                    document.f1.establecimiento.options[i].value=listaEstablecimiento[i] 
+                    document.f1.establecimiento.options[i].text=listaEstablecimiento[i] 
+                } 
+            }
+        })
+    }
+</script> 
 </body>
 </html>
