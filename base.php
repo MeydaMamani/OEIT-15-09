@@ -36,8 +36,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
 	
 	<!-- select2 para buscardor -->
-	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/select2.css">
+	<script src="./js/select2.js"></script>
 
 	<!-- notificaciones toastr -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
@@ -122,7 +122,7 @@
 				<li class="submenu">
 					<a href="#"><i class="fa fa-align-left"></i> Tableros<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
-						<li><a href="https://app.powerbi.com/view?r=eyJrIjoiYjlhNDlmNzItYTdlYS00ZjEwLWFhNjktOGZjOTUxMDA4MmZkIiwidCI6IjE2ZWJhMGRlLTYwNDktNDczNS1iMGE3LWIwOGE3YWE4YjdhNSJ9">Vacunacion Covid - Enlace<span class="icon-dot"></span></a></li>
+						<li><a href="https://app.powerbi.com/view?r=eyJrIjoiYjlhNDlmNzItYTdlYS00ZjEwLWFhNjktOGZjOTUxMDA4MmZkIiwidCI6IjE2ZWJhMGRlLTYwNDktNDczNS1iMGE3LWIwOGE3YWE4YjdhNSJ9">Vacunación Covid - Enlace<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 			</ul>

@@ -5,7 +5,7 @@
     <div class="bd-example">
         <div class="row">
             <div class="col-lg-3 col-sm-2"></div>
-            <div class="col-lg-6 col-sm-8 p-4"><br><br>
+            <div class="col-lg-6 col-sm-8 p-4"><br>
                 <div class="card" style="border-color: #198754;">
                     <h5 class="card-header text-white" style="background: #198754;">Archivo Plano</h5>
                     <div class="card-body">
@@ -31,28 +31,10 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <p style="font-size: 13px;" class="text-start"><b>Seleccione Establecimiento: </b></p>
-                                    <p>Proximamente se estará habilitando esta opción</p>
-                                    <!-- <select class="select_gestante form-select js-example-basic-single" name="id_establecimiento" id="id_establecimiento" aria-label="Default select example">
+                                    <!-- <p>Proximamente se estará habilitando esta opción</p> -->
+                                    <select class="select_gestante form-select js-example-basic-single" name="establecimiento" id="establecimiento" aria-label="Default select example">
                                         <option value="-">Seleccione Establecimiento</option>
-                                        <?php
-                                            require('abrir.php');
-                                            $get_red = "<div class='mired'></div>";
-                                            echo 'SOY RED ', $get_red;
-
-                                            $consulta_establ = "SELECT Id_Establecimiento, Nombre_Establecimiento  FROM MAESTRO_HIS_ESTABLECIMIENTO 
-                                                                WHERE Descripcion_Sector='GOBIERNO REGIONAL' AND Provincia='PASCO' AND Distrito='YANACANCHA'";
-
-                                            $resul_establ = sqlsrv_query($conn, $consulta_establ);
-                                            echo $resul_establ;
-                                            while ($consulta = sqlsrv_fetch_array($resul_establ)){
-                                                $id = $consulta['Id_Establecimiento'];
-                                                $nombre_establecimiento = $consulta['Nombre_Establecimiento'];
-                                        ?>                                    
-                                        <option value="<?php echo $id ?>"><?php echo $id, ' - ', $nombre_establecimiento?></option>
-                                        <?php
-                                            }
-                                        ?>
-                                    </select> -->
+                                    </select>
                                 </div>
                                 <div class="col-md-6">
                                     <p style="font-size: 13px;" class="text-start"><b>Seleccione mes a evaluar: </b></p>
@@ -89,14 +71,14 @@
         var red = $("#red").val();
         var distrito = $("#distrito").val();
         var mes =$("#mes").val();
-        var id_establecimiento =$("#id_establecimiento").val();
+        var establecimiento =$("#establecimiento").val();
         if (red != 0 && distrito!='-' && mes!=''){
             document.getElementById("btn_buscar").type = "submit";
         }else if(red == 0){
             toastr.error('Seleccione una Red', null, {"closeButton": true, "progressBar": true});
         }else if(distrito == '-'){
             toastr.error('Seleccione un Distrito', null, {"closeButton": true, "progressBar": true});
-        }else if(id_establecimiento == '-'){
+        }else if(establecimiento == '-'){
             toastr.error('Seleccione un Establecimiento', null, {"closeButton": true, "progressBar": true});
         }
     });
@@ -148,20 +130,34 @@
     function cambia_establecimiento(){
         var red = $("#red").val();
         var distrito = $("#distrito").val();
-        if(red == 1){
-            var red_1 = 'DANIEL ALCIDES CARRION';
-        }else if(red == 2){
-            var red_1 = 'OXAPAMPA';
-        }else if(red == 3){
-            var red_1 = 'PASCO';
-        }else{
-            var red_1 = 'TODOS';
-        }
-        
-        $(".mired").text();
-        console.log(red_1);
+        console.log(red);
         console.log(distrito);
+        $.ajax({
+            url: 'establecimiento.php?red='+red+'&dist='+distrito,
+            method: 'GET',
+            success: function(data) {
+                console.log(data);
+                var establecimiento = data;
+                var expresionRegular = /\s*,\s*/;
+                var listaEstablecimiento = establecimiento.split(expresionRegular);
+                var indice = listaEstablecimiento.length-1;
+                listaEstablecimiento[indice] = 'TODOS';
+                num_distritos = listaEstablecimiento.length 
+                document.f1.establecimiento.length = num_distritos
+                for(i=0;i<num_distritos;i++){ 
+                    document.f1.establecimiento.options[i].value=listaEstablecimiento[i] 
+                    document.f1.establecimiento.options[i].text=listaEstablecimiento[i] 
+                } 
+            }
+        })
     }
-</script>    
+</script> 
+<script>
+    $(document).ready(function(){
+		$('#distrito').select2();
+        $('#establecimiento').select2();
+        $('#mes').select2();
+	});
+</script>   
 </body>
 </html>
