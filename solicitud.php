@@ -14,36 +14,29 @@
                         <th class="align-middle">#</th>
                         <th class="align-middle">Provincia</th>
                         <th class="align-middle">Distrito</th>
-                        <th class="align-middle">Establecimiento</th>
-                        <th class="align-middle">Acción</th>
+                        <th class="align-middle">TOTAL</th>
                     </tr>
                 </thead>
                 <div>
-                            <div class="float-end pb-3 table_no_fed">
-                                <div class="form-group">
-                                <div id="inputbus" class="input-group input-group-sm">
-                                    <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                    <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
-                                </div>
-                                </div>
-                            </div>
+                    <div class="float-end pb-3 table_no_fed">
+                        <div class="form-group">
+                        <div id="inputbus" class="input-group input-group-sm">
+                            <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                            <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <tbody>
                 <?php 
-                            $resultado2 = "SELECT * FROM USER_REQUEST";
-                            $consulta2 = sqlsrv_query($conn, $resultado2);
-                            $i=1;
-                            while ($consulta = sqlsrv_fetch_array($consulta2)){ 
-                                $id = $consulta['id'];
-
-                                if(is_null ($consulta['provincia']) ){ $newdate = ' - '; }
-                                else{ $newdate = $consulta['provincia'];}
-
-                                if(is_null ($consulta['distrito']) ){ $newdate2 = ' - '; }
-                                else{ $newdate2 = $consulta['distrito'];}
-
-                                if(is_null ($consulta['establecimiento']) ){ $newdate3 = ' - '; }
-                                else{ $newdate3 = $consulta['establecimiento'];}
+                    $resultado2 = "SELECT Provincia, distrito, COUNT(distrito) as total FROM USER_REQUEST
+                    GROUP BY Provincia, distrito";
+                    $consulta2 = sqlsrv_query($conn, $resultado2);
+                    $i=1;
+                    while ($consulta = sqlsrv_fetch_array($consulta2)){ 
+                        $newdate = $consulta['Provincia'];
+                        $newdate2 = $consulta['distrito'];
+                        $newdate3 = $consulta['total'];
 
                 ?>
                     <tr class="text-center font-12">
@@ -58,13 +51,13 @@
                 ?>
                 </tbody>
                 <tfoot>
-                            <tr>
-                                <td colspan="15">
-                                <div class="">
-                                    <ul class="pagination"></ul>
-                                </div>
-                                </td>
-                            </tr>
+                    <tr>
+                        <td colspan="15">
+                            <div class="">
+                                <ul class="pagination"></ul>
+                            </div>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
@@ -75,7 +68,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Solicitud de registro de Migración EQhali</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Solicitud de Registro de Migración EQhali</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -107,7 +100,7 @@
                         </div>
                         <div class="col-md p-2">
                             <p class="font-13 text-start"><b>Dni Usuario: </b></p>
-                            <input type="number"  class="form-control" id="dni_user" name="dni_user"  placeholder="DNI" maxlength="8" >
+                            <input type="text" class="form-control validanumericos" id="dni_user" name="dni_user" maxlength="8" placeholder="Ingrese su DNI">
                         </div>
                     </div>
                     <div class="d-flex">
@@ -130,7 +123,7 @@
                     <div class="d-flex">
                             <div class="col-md p-2">
                                 <p class="font-13 text-start"><b>Dni Paciente: </b></p>
-                                <input type="number"   class="form-control" id="dni_paciente" name="dni_paciente" maxlength="8" >
+                                <input type="text" class="form-control validanumericos2" id="dni_paciente" name="dni_paciente" maxlength="8">
                             </div>
                             <div class="col-md p-2">
                                 <p class="font-13 text-start"><b>Fecha Atención: </b></p>
@@ -280,5 +273,26 @@
         })
     }
 </script> 
+<script language="javascript">  
+  onload = function(){ 
+    var ele = document.querySelectorAll('.validanumericos')[0];
+    ele.onkeypress = function(e) {
+      if(isNaN(this.value+String.fromCharCode(e.charCode)))
+        return false;
+    }
+    ele.onpaste = function(e){
+      e.preventDefault();
+    }
+
+    var ele2 = document.querySelectorAll('.validanumericos2')[0];
+    ele2.onkeypress = function(e) {
+      if(isNaN(this.value+String.fromCharCode(e.charCode)))
+        return false;
+    }
+    ele2.onpaste = function(e){
+      e.preventDefault();
+    }
+  }
+</script>
 </body>
 </html>
