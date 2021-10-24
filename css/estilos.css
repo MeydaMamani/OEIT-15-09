@@ -307,19 +307,6 @@ li a, a{
 	background: #a7a7a73d;
 }
 
-
-
-/* .select2-container .select2-selection--single{
-	height: 38px !important;
+.select2-container, .select2 .select2-container .select2-container--default {
+	width: 280px !important;
 }
-
-.select2-container--default .select2-selection--single .select2-selection__arrow b{
-	margin-top: 3px !important;
-	margin-left: -11px !important;
-}
-
-.select2-container--default .select2-selection--single .select2-selection__rendered{
-	line-height: 36px !important;
-	text-align: start !important;
-	padding-left: 13px;
-} */

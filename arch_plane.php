@@ -29,14 +29,14 @@
                                 </div>
                             </div><br>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md">
                                     <p style="font-size: 13px;" class="text-start"><b>Seleccione Establecimiento: </b></p>
                                     <!-- <p>Proximamente se estará habilitando esta opción</p> -->
                                     <select class="select_gestante form-select js-example-basic-single" name="establecimiento" id="establecimiento" aria-label="Default select example">
                                         <option value="-">Seleccione Establecimiento</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md text-mobile">
                                     <p style="font-size: 13px;" class="text-start"><b>Seleccione mes a evaluar: </b></p>
                                     <select class="select_gestante form-select" name="mes" id="mes" aria-label="Default select example">
                                         <option value="1">ENERO</option>
