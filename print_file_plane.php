@@ -35,7 +35,6 @@
         elseif ($red_1 == 4) { $red = 'TODOS'; }
                 
         if($red_1 == 4 and $dist_1 == 'TODOS' and $establecimiento == 'TODOS'){
-            echo 'AQUI TOY';
             $resultado = "SELECT Id_Cita, Lote,MES,DIA,Fecha_Atencion, LOTE, NUM_PAG,Num_Reg,Descripcion_Ups,Descripcion_Sector,Descripcion_Red,Provincia_Establecimiento,
                             Descripcion_MicroRed,Distrito_Establecimiento,Codigo_Unico,Nombre_Establecimiento,Abrev_Tipo_Doc_Paciente, Numero_Documento_Paciente,Fecha_Nacimiento_Paciente,Id_Etnia,
                             Descripcion_Etnia,Descripcion_Financiador,Descripcion_Pais,Numero_Documento_Personal, Nombres_Personal,Descripcion_Profesion,

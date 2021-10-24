@@ -6,7 +6,7 @@
 <div class="container text-center mb-4">
     <div class="bd-example">
         <br>
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ModalSolicitud"><i class="fa fa-plus"></i> Agregar Solicitud</button>
+        <button type="button" class="btn btn-outline-primary mb-4" data-bs-toggle="modal" data-bs-target="#ModalSolicitud"><i class="fa fa-plus"></i> Agregar Solicitud</button>
         <div class="table-responsive">
             <table id="demo-foo-addrow2" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
                 <thead>
@@ -169,11 +169,6 @@
     </div>
 </div>
 
-<?php
-    if(isset($_GET['eliminar'])){
-        include('consulta_solicitud.php');
-    }
-?>
 <script src="./plugin/footable/js/footable-init.js"></script>
 <script src="./plugin/footable/js/footable.all.min.js"></script>
 <script>
@@ -192,8 +187,6 @@
         }else if(distrito == '-'){
             toastr.error('Seleccione un Distrito', null, {"closeButton": true, "progressBar": true});
         }
-
-
     });
 </script>
 <script>
@@ -257,7 +250,6 @@
             url: 'establecimiento.php?red='+red+'&dist='+distrito,
             method: 'GET',
             success: function(data) {
-                console.log(data);
                 var establecimiento = data;
                 var expresionRegular = /\s*,\s*/;
                 var listaEstablecimiento = establecimiento.split(expresionRegular);
