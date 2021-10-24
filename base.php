@@ -122,7 +122,7 @@
 				<li class="submenu">
 					<a href="#"><i class="fa fa-align-left"></i> Tableros<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
-						<li><a href="https://app.powerbi.com/view?r=eyJrIjoiYjlhNDlmNzItYTdlYS00ZjEwLWFhNjktOGZjOTUxMDA4MmZkIiwidCI6IjE2ZWJhMGRlLTYwNDktNDczNS1iMGE3LWIwOGE3YWE4YjdhNSJ9">Vacunación Covid - Enlace<span class="icon-dot"></span></a></li>
+						<li><a href="https://app.powerbi.com/view?r=eyJrIjoiYjlhNDlmNzItYTdlYS00ZjEwLWFhNjktOGZjOTUxMDA4MmZkIiwidCI6IjE2ZWJhMGRlLTYwNDktNDczNS1iMGE3LWIwOGE3YWE4YjdhNSJ9" target="_blank">Vacunación Covid - Enlace<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 			</ul>

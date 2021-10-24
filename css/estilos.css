@@ -121,7 +121,7 @@ header nav ul li .caret {
 	header nav {
 		width: 100%;
 		height: calc(100% - 80px);
-		position: fixed;
+		position: absolute;
 		right:100%;
 		margin: 0;
 		overflow: scroll;
