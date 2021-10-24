@@ -250,10 +250,8 @@ li a, a{
 	}
 }
 
-@media (max-width: 1500px) {
-	.select2-container{
-		width: 100% !important;
-	}	
+.select2-container{
+	width: 100% !important;
 }
 
 /* estilos para tablas  */

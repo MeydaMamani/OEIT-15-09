@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <form name="f1" action="print_file_plane.php" method="POST" class="">
                             <div class="row">
-                                <div class="col-md">
+                                <div class="col-md-6">
                                     <p style="font-size: 13px;" class="text-start"><b>Ingrese Red: </b></p>
                                     <select class="select_gestante form-select" name="red" id="red" onchange="cambia_distrito()" aria-label="Default select example">
                                         <option value="0" selected>Seleccione Red</option>
@@ -21,7 +21,7 @@
                                         <option value="4">TODOS</option>
                                     </select>
                                 </div>
-                                <div class="col-md text-mobile">
+                                <div class="col-md-6 text-mobile">
                                     <p style="font-size: 13px;" class="text-start"><b>Ingrese Distrito: </b></p>
                                     <select class="select_gestante form-select" name="distrito" id="distrito" onchange="cambia_establecimiento()" aria-label="Default select example">
                                         <option value="-">-</option>
@@ -29,14 +29,14 @@
                                 </div>
                             </div><br>
                             <div class="row">
-                                <div class="col-md">
+                                <div class="col-md-6">
                                     <p style="font-size: 13px;" class="text-start"><b>Seleccione Establecimiento: </b></p>
                                     <!-- <p>Proximamente se estará habilitando esta opción</p> -->
                                     <select class="select_gestante form-select js-example-basic-single" name="establecimiento" id="establecimiento" aria-label="Default select example">
                                         <option value="-">Seleccione Establecimiento</option>
                                     </select>
                                 </div>
-                                <div class="col-md text-mobile">
+                                <div class="col-md-6 text-mobile">
                                     <p style="font-size: 13px;" class="text-start"><b>Seleccione mes a evaluar: </b></p>
                                     <select class="select_gestante form-select" name="mes" id="mes" aria-label="Default select example">
                                         <option value="1">ENERO</option>
@@ -94,7 +94,7 @@
 <script language="javascript">  
   var distritos_1=new Array("-","CHACAYAN","GOYLLARISQUIZGA","PAUCAR","SAN PEDRO DE PILLAO","SANTA ANA DE TUSI","TAPUC","VILCABAMBA","YANAHUANCA","TODOS");
   var distritos_2=new Array("-","CHONTABAMBA","CONSTITUCIÓN","HUANCABAMBA","OXAPAMPA","PALCAZU","POZUZO","PUERTO BERMUDEZ","VILLA RICA","TODOS");
-  var distritos_3=new Array("-","CHAUPIMARCA","HUACHON","HUARIACA","HUAYLLAY","NINACACA","PALLANCHACRA","PAUCARTAMBO","SAN FCO DE ASIS DE YARUSYACAN","SIMON BOLIVAR","TICLACAYAN","TINYAHUARCO","VICCO","YANACANCHA","TODOS");
+  var distritos_3=new Array("-","CHAUPIMARCA","HUACHON","HUARIACA","HUAYLLAY","NINACACA","PALLANCHACRA","PAUCARTAMBO","SAN FRANCISCO DE ASIS DE YARUSYACAN","SIMON BOLIVAR","TICLACAYAN","TINYAHUARCO","VICCO","YANACANCHA","TODOS");
   var distritos_4=new Array("TODOS");
 
   var todasDistritos = [

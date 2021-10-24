@@ -92,13 +92,13 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md solicitud">
+                        <div class="col-md-6 solicitud">
                             <p style="font-size: 13px;" class="text-start"><b>Seleccione Establecimiento: </b></p>
                             <select class="select_gestante form-select js-example-basic-single" name="establecimiento" id="establecimiento" aria-label="Default select example">
                                 <option value="-">Seleccione Establecimiento</option>
                             </select>
                         </div>
-                        <div class="col-md text-mobile">
+                        <div class="col-md-6 text-mobile">
                             <p class="font-13 text-start"><b>Dni Usuario: </b></p>
                             <input type="text" class="form-control validanumericos" id="dni_user" name="dni_user" maxlength="8" placeholder="Ingrese su DNI" required>
                         </div>
@@ -177,15 +177,20 @@
         var red = $("#red").val();
         var distrito = $("#distrito").val();
         var establecimiento = $("#establecimiento").val();
+        var app = $("#app").val();
         var dni_user = $("#dni_user").val();
+        var dni_paciente = $("#dni_paciente").val();
 
-        var mes =$("#mes").val();
-        if (red != 0 && distrito!='-' && mes!=''){
+        if (red != 0 && distrito!='-' && app!='-' && dni_user.length == 8 && dni_paciente.length == 8){
             document.getElementById("btn_buscar").type = "submit";
         }else if(red == 0){
             toastr.error('Seleccione una Red', null, {"closeButton": true, "progressBar": true});
         }else if(distrito == '-'){
             toastr.error('Seleccione un Distrito', null, {"closeButton": true, "progressBar": true});
+        }else if(app == '-'){
+            toastr.error('Seleccione una aplicación', null, {"closeButton": true, "progressBar": true});
+        }else if(dni_user.length != 8 || dni_paciente.length != 8){
+            toastr.error('Ingrese DNI correcto', null, {"closeButton": true, "progressBar": true});
         }
     });
 
@@ -204,7 +209,7 @@
 <script language="javascript">  
   var distritos_1=new Array("-","CHACAYAN","GOYLLARISQUIZGA","PAUCAR","SAN PEDRO DE PILLAO","SANTA ANA DE TUSI","TAPUC","VILCABAMBA","YANAHUANCA","TODOS");
   var distritos_2=new Array("-","CHONTABAMBA","CONSTITUCIÓN","HUANCABAMBA","OXAPAMPA","PALCAZU","POZUZO","PUERTO BERMUDEZ","VILLA RICA","TODOS");
-  var distritos_3=new Array("-","CHAUPIMARCA","HUACHON","HUARIACA","HUAYLLAY","NINACACA","PALLANCHACRA","PAUCARTAMBO","SAN FCO DE ASIS DE YARUSYACAN","SIMON BOLIVAR","TICLACAYAN","TINYAHUARCO","VICCO","YANACANCHA","TODOS");
+  var distritos_3=new Array("-","CHAUPIMARCA","HUACHON","HUARIACA","HUAYLLAY","NINACACA","PALLANCHACRA","PAUCARTAMBO","SAN FRANCISCO DE ASIS DE YARUSYACAN","SIMON BOLIVAR","TICLACAYAN","TINYAHUARCO","VICCO","YANACANCHA","TODOS");
   var distritos_4=new Array("TODOS");
 
   var todasDistritos = [
@@ -235,6 +240,14 @@
           document.f1.distrito.options[i].value=mis_distritos[i] 
           document.f1.distrito.options[i].text=mis_distritos[i] 
         } 
+
+        var distrito = $("#distrito").val();
+        if(distrito == 'TODOS'){
+            $("#establecimiento").empty();
+            document.f1.establecimiento.length = 1 
+            document.f1.establecimiento.options[0].value = "TODOS" 
+            document.f1.establecimiento.options[0].text = "TODOS" 
+        }
     }else{ 
         //si no había provincia seleccionada, elimino las provincias del select 
         document.f1.distrito.length = 1 
