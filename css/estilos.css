@@ -248,7 +248,13 @@ li a, a{
 		width: 180px;
 		margin-right: -25px;
 	}
-}	
+}
+
+@media (max-width: 1500px) {
+	.select2-container{
+		width: 100% !important;
+	}	
+}
 
 /* estilos para tablas  */
 #fields_bateria_head {
@@ -305,8 +311,4 @@ li a, a{
 
 #color_fed_body {
 	background: #a7a7a73d;
-}
-
-.select2-container, .select2 .select2-container .select2-container--default {
-	width: 280px !important;
 }

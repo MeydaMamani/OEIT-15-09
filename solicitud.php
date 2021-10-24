@@ -64,7 +64,7 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="ModalSolicitud" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalSolicitud" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -73,8 +73,8 @@
             </div>
             <div class="modal-body">
                 <form action="consulta_solicitud.php" method="POST" name="f1" id="form_solicitud">
-                    <div class="d-flex">
-                        <div class="col-md m-1">
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-sm-12 solicitud">
                             <p style="font-size: 13px;" class="text-start"><b>Ingrese Red: </b></p>
                             <select class="select_gestante form-select" name="red" id="red" onchange="cambia_distrito()" aria-label="Default select example">
                                 <option value="0" selected>Seleccione Red</option>
@@ -84,80 +84,80 @@
                                 <option value="4">TODOS</option>
                             </select>
                         </div>
-                        <div class="col-md m-1 text-mobile">
+                        <div class="col-md-6 col-sm-12 solicitud text-mobile">
                             <p style="font-size: 13px;" class="text-start"><b>Ingrese Distrito: </b></p>
                             <select class="select_gestante form-select" name="distrito" id="distrito" onchange="cambia_establecimiento()" aria-label="Default select example">
                                 <option value="-">-</option>
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex">
-                        <div class="col-md p-2">
+                    <div class="row mb-3">
+                        <div class="col-md solicitud">
                             <p style="font-size: 13px;" class="text-start"><b>Seleccione Establecimiento: </b></p>
                             <select class="select_gestante form-select js-example-basic-single" name="establecimiento" id="establecimiento" aria-label="Default select example">
                                 <option value="-">Seleccione Establecimiento</option>
                             </select>
                         </div>
-                        <div class="col-md p-2">
+                        <div class="col-md text-mobile">
                             <p class="font-13 text-start"><b>Dni Usuario: </b></p>
-                            <input type="text" class="form-control validanumericos" id="dni_user" name="dni_user" maxlength="8" placeholder="Ingrese su DNI">
+                            <input type="text" class="form-control validanumericos" id="dni_user" name="dni_user" maxlength="8" placeholder="Ingrese su DNI" required>
                         </div>
                     </div>
-                    <div class="d-flex">
-                            <div class="col-md p-2">
-                                <p class="font-13 text-start"><b>Password: </b></p>
-                                <input type="password" class="form-control" id="password" name="password">
-                            </div>
-                            <div class="col-md p-2">
-                                <p class="font-13 text-start" ><b>Ingrese Aplicativo:  </b></p>
-                                <select class="select_gestante form-select" name="app" id="app">
-                                    <option value="-"  selected>Seleccione Aplicativo</option>
-                                    <option value="CRED">CRED</option> 
-                                    <option value="INMUNIZACIONES">INMUNIZACIONES</option>
-                                    <option value="WAWARED">WAWARED</option>
-                                    <option value="C-EXT">C-EXT</option>
-                                    <option value="REFCON">REFCON</option>
-                                </select>
-                            </div>
+                    <div class="row mb-3">
+                        <div class="col-md">
+                            <p class="font-13 text-start"><b>Password: </b></p>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <div class="col-md text-mobile">
+                            <p class="font-13 text-start" ><b>Ingrese Aplicativo:  </b></p>
+                            <select class="select_gestante form-select" name="app" id="app" required>
+                                <option value="-"  selected>Seleccione Aplicativo</option>
+                                <option value="CRED">CRED</option> 
+                                <option value="INMUNIZACIONES">INMUNIZACIONES</option>
+                                <option value="WAWARED">WAWARED</option>
+                                <option value="C-EXT">C-EXT</option>
+                                <option value="REFCON">REFCON</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="d-flex">
-                            <div class="col-md p-2">
-                                <p class="font-13 text-start"><b>Dni Paciente: </b></p>
-                                <input type="text" class="form-control validanumericos2" id="dni_paciente" name="dni_paciente" maxlength="8">
-                            </div>
-                            <div class="col-md p-2">
-                                <p class="font-13 text-start"><b>Fecha Atención: </b></p>
-                                <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion">
-                            </div>
+                    <div class="row mb-3">
+                        <div class="col-md">
+                            <p class="font-13 text-start"><b>Dni Paciente: </b></p>
+                            <input type="text" class="form-control validanumericos2" id="dni_paciente" name="dni_paciente" maxlength="8" required>
+                        </div>
+                        <div class="col-md text-mobile">
+                            <p class="font-13 text-start"><b>Fecha Atención: </b></p>
+                            <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion">
+                        </div>
                     </div>
-                    <div class="d-flex p-2">
-                            <p class="font-13 text-start"><b>¿Qué soporte desea?: </b></p>
-                            <div class="d-flex">
-                                <div class="col-md-2 col-sm-1"></div>
-                                <div class="form-check col-md-8 col-sm-6">
-                                    <input class="form-check-input" type="radio" value="migrar" name="mig_eli" id="mig_eli">
-                                    <label class="form-check-label" for="flexRadioDefault1">Migrar</label>
-                                </div>
-                                <div class="form-check col-md-8 col-sm-6">
-                                    <input class="form-check-input" type="radio" value="eliminar" name="mig_eli" id="mig_eli">
-                                    <label class="form-check-label" for="flexRadioDefault2">Eliminar</label>
-                                </div>
+                    <div class="row mb-3">
+                        <p class="font-13 text-start"><b>¿Qué soporte desea?: </b></p>
+                        <div class="row m-1">
+                            <div class="col-md-2 col-sm-1"></div>
+                            <div class="form-check col-md-3 col-sm-6">
+                                <input class="form-check-input" type="radio" value="migrar" name="mig_eli" id="mig_eli">
+                                <label class="form-check-label" for="flexRadioDefault1">Migrar</label>
                             </div>
+                            <div class="form-check col-md-3 col-sm-6">
+                                <input class="form-check-input" type="radio" value="eliminar" name="mig_eli" id="mig_eli">
+                                <label class="form-check-label" for="flexRadioDefault2">Eliminar</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex p-2">
-                            <!-- <p class="font-13 text-start col-3"><b>¿Qué soporte desea?: </b></p> -->
-                            <div class="form-check col-2 text-start">
-                                <input class="form-check-input" type="radio" value="todos" id="select_type" name="select_type">
-                                <label class="form-check-label" for="defaultCheck1"> Todos</label>
-                            </div>
-                            <div class="form-check col-2 text-start">
-                                <input class="form-check-input" type="radio" value="parcial" id="select_type" name="select_type">
-                                <label class="form-check-label" for="defaultCheck2">Parcial</label>
-                            </div>
+                    <div class="row mb-3 m-1">
+                        <div class="col-md-2 col-sm-1"></div>
+                        <div class="form-check col-md-3 col-sm-6">
+                            <input class="form-check-input" type="radio" value="todos" id="select_type" name="select_type">
+                            <label class="form-check-label" for="defaultCheck1"> Todos</label>
+                        </div>
+                        <div class="form-check col-md-3 col-sm-6">
+                            <input class="form-check-input" type="radio" value="parcial" id="select_type" name="select_type">
+                            <label class="form-check-label" for="defaultCheck2">Parcial</label>
+                        </div>
                     </div>
                     <div class="col-12">
                         <p class="font-13 text-start"><b>Ingrese detalle: </b></p>
-                        <textarea class="form-control" placeholder="Ingrese detalles de su solicitud" id="description" name="description"></textarea>
+                        <textarea class="form-control" placeholder="Ingrese detalles de su solicitud" id="description" name="description" required></textarea>
                     </div><br>
                     <div class="modal-footer">
                         <button name="Buscar" class="btn text-white" type="button" id="btn_buscar" placeholder="Buscar" style="background: #337ab7;"> Registrar</button>
@@ -188,12 +188,17 @@
             toastr.error('Seleccione un Distrito', null, {"closeButton": true, "progressBar": true});
         }
     });
-</script>
-<script>
+
     $(document).ready(function(){
-        // $('#red').select2();
-		// $('#distrito').select2();
-        // $('#establecimiento').select2();
+        $('#red').select2({
+            dropdownParent: $('#ModalSolicitud')
+        });
+		$('#distrito').select2({
+            dropdownParent: $('#ModalSolicitud')
+        });
+        $('#establecimiento').select2({
+            dropdownParent: $('#ModalSolicitud')
+        });
 	});
 </script>
 <script language="javascript">  
