@@ -12,7 +12,7 @@
             <div class="sub-content">
                 <h2>BIENVENIDOS!</h2>
                 <p>Al sistema temporal de la Dirección de Estadística e Informática DEIT - DIRESA - PASCO, la presente plataforma es un 
-                   extracto de nuestro aplicativo, el cual se implementara muy pronto...</p>
+                   extracto de nuestro aplicativo, el cual se implementará muy pronto...</p>
                 <h5>El equipo DEIT </h5>   
             </div>
             <div class="line"></div>
