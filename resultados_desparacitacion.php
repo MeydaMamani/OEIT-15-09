@@ -19,22 +19,6 @@
             </div>
             <div class="row mb-3 mt-3">
                 <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
-                <!-- <div class="col-8 d-flex justify-content-end">
-                  <ul class="list-group list-group-horizontal-sm">
-                    <li class="list-group-item font-14">Cumplen <span class="badge bg-success rounded-pill cumple"><?php echo $cumple; ?></span></li>
-                    <li class="list-group-item font-14">No Cumplen <span class="badge bg-danger rounded-pill no_cumple"><?php echo $no_cumple; ?></span></li>
-                    <li class="list-group-item font-14">Observados <span class="badge bg-warning rounded-pill observado"><?php echo $observado; ?> </span></li>
-                    <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill avance">
-                      <?php 
-                        if($cumple == 0 and $row_cont == 0){
-                            echo '0 %';
-                          }else{
-                            echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%';
-                          }
-                      ?> </span>
-                    </li>
-                  </ul>
-                </div> -->
             </div>
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
@@ -42,7 +26,7 @@
               </div>
             </div>
             <div class="d-flex">
-                <form action="impresion_4_meses.php" method="POST">
+                <form action="print_deworming.php" method="POST">
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                     <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                     <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
