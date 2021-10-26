@@ -6,7 +6,7 @@
         $row_cont++;
     }  
 ?>
- <div class="container">
+        <div class="container">
             <div class="text-center p-3">
                 <h3>Reincorporación</h3>
             </div>
