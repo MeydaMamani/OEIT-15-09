@@ -53,22 +53,30 @@
                             THEN 'OCTUBRE'
                             WHEN CAST(FECHA_NACIMIENTO_NINO AS DATE)>='2021-10-02' AND CAST(FECHA_NACIMIENTO_NINO AS DATE)<='2021-10-31'
                             THEN 'NOVIEMBRE'
-                            ELSE '0' END
+                            ELSE '0'
+                            END
                         into sellomunicipal
                         from NOMINAL_PADRON_NOMINAL
-                        WHERE MES='202110' AND YEAR(FECHA_NACIMIENTO_NINO)>='2021'
+                        WHERE MES='2021$mes2' AND YEAR(FECHA_NACIMIENTO_NINO)>='2021'
                         GROUP BY NOMBRE_PROV,NOMBRE_DIST, MENOR_VISITADO, MENOR_ENCONTRADO,FECHA_VISITA,NUM_CNV,COD_CUI,NUM_DNI,FECHA_NACIMIENTO_NINO,APELLIDO_PATERNO_NINO,
                         APELLIDO_MATERNO_NINO,NOMBRE_NINO,AREA_CENTRO_POBLA,EJE_VIAL,DESCRIPCION,REFERENCIA_DIREC,TIPO_SEGURO
                         ORDER BY FECHA_NACIMIENTO_NINO";
 
+        $resultado2 = "UPDATE sellomunicipal
+                        SET NUM_DNI = '0'
+                        WHERE NUM_DNI is null
+                        UPDATE sellomunicipal
+                        SET EJE_VIAL='0'
+                        WHERE EJE_VIAL =''";
+
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
-            $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
-                            COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
-                            count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
-                            count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
-                            count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
-                            count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
-                            count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+            $resultado3 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
+                            COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS 'TOTAL',
+                            sum(CASE WHEN NUM_DNI <> 0 THEN 1 ELSE 0 END) AS 'CUMPLE_DNI',
+                            sum(CASE WHEN ((EJE_VIAL<>'0' AND AREA_CENTRO_POBLA='URBANA')OR (EJE_VIAL='0' AND AREA_CENTRO_POBLA='RURAL')) THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                            sum(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                            sum(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                            sum(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
                             from sellomunicipal
                             where MES_A_MEDIR='$nombre_mes' AND NOMBRE_PROV='$red'
                             group by NOMBRE_PROV,NOMBRE_DIST
@@ -76,28 +84,28 @@
                             DROP TABLE sellomunicipal";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
-            $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
-                            COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
-                            count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
-                            count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
-                            count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
-                            count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
-                            count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+            $resultado3 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
+                            COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS 'TOTAL',
+                            sum(CASE WHEN NUM_DNI <> 0 THEN 1 ELSE 0 END) AS 'CUMPLE_DNI',
+                            sum(CASE WHEN ((EJE_VIAL<>'0' AND AREA_CENTRO_POBLA='URBANA')OR (EJE_VIAL='0' AND AREA_CENTRO_POBLA='RURAL')) THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                            sum(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                            sum(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                            sum(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
                             from sellomunicipal
-                            where MES_A_MEDIR='$nombre_mes' 
+                            where MES_A_MEDIR='$nombre_mes'
                             group by NOMBRE_PROV,NOMBRE_DIST
                             ORDER BY NOMBRE_PROV, NOMBRE_DIST
                             DROP TABLE sellomunicipal";
         }
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
-            $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
-                            COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
-                            count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
-                            count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
-                            count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
-                            count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
-                            count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+            $resultado3 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
+                            COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS 'TOTAL',
+                            sum(CASE WHEN NUM_DNI <> 0 THEN 1 ELSE 0 END) AS 'CUMPLE_DNI',
+                            sum(CASE WHEN ((EJE_VIAL<>'0' AND AREA_CENTRO_POBLA='URBANA')OR (EJE_VIAL='0' AND AREA_CENTRO_POBLA='RURAL')) THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                            sum(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                            sum(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                            sum(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
                             from sellomunicipal
                             where MES_A_MEDIR='$nombre_mes' AND NOMBRE_PROV='$red' AND NOMBRE_DIST='$dist'
                             group by NOMBRE_PROV,NOMBRE_DIST
@@ -107,5 +115,6 @@
         
         $consulta = sqlsrv_query($conn2, $resultado);
         $consulta1 = sqlsrv_query($conn2, $resultado2);
+        $consulta2 = sqlsrv_query($conn2, $resultado3);
     }
 ?>
