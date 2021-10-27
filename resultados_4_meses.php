@@ -289,7 +289,6 @@
                                     || (($tipo == '') || ($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
 
                                     if($consulta['PREMATURO'] != 'PREMATURO'){
-                                        echo $consulta['PREMATURO'];
                                         if(is_null ($consulta['NOMBRE_PROV']) ){
                                             $newdate3 = '  -'; }
                                             else{

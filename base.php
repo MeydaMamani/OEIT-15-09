@@ -105,6 +105,7 @@
 						<li><a href="seguimiento_neonatal.php">Seguimiento Tamizaje Neonatal<span class="icon-dot"></span></a></li>
 						<li><a href="cant_prof_EPP.php">Cantidad Profesional EPP (2020 FED)<span class="icon-dot"></span></a></li>
 						<li><a href="desparacitacion.php">Desparacitación<span class="icon-dot"></span></a></li>
+						<li><a href="homologation.php">Homologación<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 				<li class="submenu">

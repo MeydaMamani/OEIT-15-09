@@ -116,7 +116,7 @@
                 else{ echo $consulta['DISTRITO'].";" ; }
 
                 if(is_null ($consulta['IPRESS']) ){ echo ' - '.";"; }
-                else{ echo utf8_encode($consulta['IPRESS']).";"; }
+                else{ echo $consulta['IPRESS'].";"; }
 
                 if(is_null ($consulta['TIPO_DOC']) ){ echo ' - '.";"; }
                 else{ echo $consulta['TIPO_DOC'].";" ; }

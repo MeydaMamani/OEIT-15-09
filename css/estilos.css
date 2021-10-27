@@ -310,3 +310,14 @@ li a, a{
 #color_fed_body {
 	background: #a7a7a73d;
 }
+
+
+@media (min-width: 1200px){
+	.container .homologation, .container-lg,  .container-md, .container-sm, .container-xl {
+		max-width: 1300px;
+	}
+}
+
+canvas.myChartProvince, canvas.myChartDistrict{
+	width: 400px !important; height: 300px !important; display: initial !important;
+}
