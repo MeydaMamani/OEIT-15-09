@@ -8,18 +8,18 @@
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
 
-        if($mes == 1){ $nombre_mes = 'Enero'; }
-        else if($mes == 2){ $nombre_mes = 'Febrero'; }
-        else if($mes == 3){ $nombre_mes = 'Marzo'; }
-        else if($mes == 4){ $nombre_mes = 'Abril'; }
-        else if($mes == 5){ $nombre_mes = 'Mayo'; }
-        else if($mes == 6){ $nombre_mes = 'Junio'; }
-        else if($mes == 7){ $nombre_mes = 'Julio'; }
-        else if($mes == 8){ $nombre_mes = 'Agosto'; }
-        else if($mes == 9){ $nombre_mes = 'Setiembre'; }
-        else if($mes == 10){ $nombre_mes = 'Octubre'; }
-        else if($mes == 11){ $nombre_mes = 'Noviembre'; }
-        else if($mes == 12){ $nombre_mes = 'Diciembre'; }
+        if($mes == 1){ $nombre_mes = 'ENERO'; }
+        else if($mes == 2){ $nombre_mes = 'FEBRERO'; }
+        else if($mes == 3){ $nombre_mes = 'MARZO'; }
+        else if($mes == 4){ $nombre_mes = 'ABRIL'; }
+        else if($mes == 5){ $nombre_mes = 'MAYO'; }
+        else if($mes == 6){ $nombre_mes = 'JUNIO'; }
+        else if($mes == 7){ $nombre_mes = 'JULIO'; }
+        else if($mes == 8){ $nombre_mes = 'AGOSTO'; }
+        else if($mes == 9){ $nombre_mes = 'SETIEMBRE'; }
+        else if($mes == 10){ $nombre_mes = 'OCTUBRE'; }
+        else if($mes == 11){ $nombre_mes = 'NOVIEMBRE'; }
+        else if($mes == 12){ $nombre_mes = 'DICIEMBRE'; }
         
         if (strlen($mes) == 1){
             $mes2 = '0'.$mes;
@@ -40,48 +40,72 @@
             $redt = 'PASCO';
         }
         
+        $resultado = "SELECT NOMBRE_PROV,NOMBRE_DIST, MENOR_VISITADO, MENOR_ENCONTRADO,FECHA_VISITA,NUM_CNV,COD_CUI,NUM_DNI,FECHA_NACIMIENTO_NINO,APELLIDO_PATERNO_NINO,
+                        APELLIDO_MATERNO_NINO,NOMBRE_NINO,AREA_CENTRO_POBLA,EJE_VIAL,DESCRIPCION,REFERENCIA_DIREC,TIPO_SEGURO,
+                        'MES_A_MEDIR' = CASE 
+                            WHEN CAST(FECHA_NACIMIENTO_NINO AS DATE)>='2021-06-02' AND CAST(FECHA_NACIMIENTO_NINO AS DATE)<='2021-07-02'
+                            THEN 'JULIO'
+                            WHEN CAST(FECHA_NACIMIENTO_NINO AS DATE)>='2021-07-03' AND CAST(FECHA_NACIMIENTO_NINO AS DATE)<='2021-08-01'
+                            THEN 'AGOSTO'
+                            WHEN CAST(FECHA_NACIMIENTO_NINO AS DATE)>='2021-08-02' AND CAST(FECHA_NACIMIENTO_NINO AS DATE)<='2021-09-01'
+                            THEN 'SETIEMBRE'
+                            WHEN CAST(FECHA_NACIMIENTO_NINO AS DATE)>='2021-09-02' AND CAST(FECHA_NACIMIENTO_NINO AS DATE)<='2021-10-01'
+                            THEN 'OCTUBRE'
+                            WHEN CAST(FECHA_NACIMIENTO_NINO AS DATE)>='2021-10-02' AND CAST(FECHA_NACIMIENTO_NINO AS DATE)<='2021-10-31'
+                            THEN 'NOVIEMBRE'
+                            ELSE '0' END
+                        into sellomunicipal
+                        from NOMINAL_PADRON_NOMINAL
+                        WHERE MES='202110' AND YEAR(FECHA_NACIMIENTO_NINO)>='2021'
+                        GROUP BY NOMBRE_PROV,NOMBRE_DIST, MENOR_VISITADO, MENOR_ENCONTRADO,FECHA_VISITA,NUM_CNV,COD_CUI,NUM_DNI,FECHA_NACIMIENTO_NINO,APELLIDO_PATERNO_NINO,
+                        APELLIDO_MATERNO_NINO,NOMBRE_NINO,AREA_CENTRO_POBLA,EJE_VIAL,DESCRIPCION,REFERENCIA_DIREC,TIPO_SEGURO
+                        ORDER BY FECHA_NACIMIENTO_NINO";
+
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
                             COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
-                            MIN(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS Nulosdni,
-                            MIN(CASE WHEN EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA'  THEN 1 ELSE 0 END) AS NulosEJEVIAL1,
-                            MIN(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS NuloDESCRIPCION,
-                            MIN(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS NULOREFERENCIADESCRIPCION,
-                            MIN(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS Nino_visitdo
-                            from NOMINAL_PADRON_NOMINAL
-                            where mes='2021$mes2' and YEAR(FECHA_NACIMIENTO_NINO)='2021' and month (FECHA_NACIMIENTO_NINO)='$mes' AND NOMBRE_PROV='$red'
+                            count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
+                            count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                            count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                            count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                            count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+                            from sellomunicipal
+                            where MES_A_MEDIR='$nombre_mes' AND NOMBRE_PROV='$red'
                             group by NOMBRE_PROV,NOMBRE_DIST
-                            ORDER BY NOMBRE_PROV, NOMBRE_DIST";
+                            ORDER BY NOMBRE_PROV, NOMBRE_DIST
+                            DROP TABLE sellomunicipal";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
                             COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
-                            MIN(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS Nulosdni,
-                            MIN(CASE WHEN EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA'  THEN 1 ELSE 0 END) AS NulosEJEVIAL1,
-                            MIN(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS NuloDESCRIPCION,
-                            MIN(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS NULOREFERENCIADESCRIPCION,
-                            MIN(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS Nino_visitdo
-                            from NOMINAL_PADRON_NOMINAL
-                            where mes='2021$mes2' and YEAR(FECHA_NACIMIENTO_NINO)='2021' and month (FECHA_NACIMIENTO_NINO)='$mes'
+                            count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
+                            count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                            count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                            count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                            count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+                            from sellomunicipal
+                            where MES_A_MEDIR='$nombre_mes' 
                             group by NOMBRE_PROV,NOMBRE_DIST
-                            ORDER BY NOMBRE_PROV, NOMBRE_DIST";
+                            ORDER BY NOMBRE_PROV, NOMBRE_DIST
+                            DROP TABLE sellomunicipal";
         }
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
             $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
                             COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
-                            MIN(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS Nulosdni,
-                            MIN(CASE WHEN EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA'  THEN 1 ELSE 0 END) AS NulosEJEVIAL1,
-                            MIN(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS NuloDESCRIPCION,
-                            MIN(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS NULOREFERENCIADESCRIPCION,
-                            MIN(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS Nino_visitdo
-                            from NOMINAL_PADRON_NOMINAL
-                            where mes='2021$mes2' and YEAR(FECHA_NACIMIENTO_NINO)='2021' and month (FECHA_NACIMIENTO_NINO)='$mes'
-                            AND NOMBRE_PROV='$red' AND NOMBRE_DIST='$dist'
+                            count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
+                            count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                            count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                            count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                            count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+                            from sellomunicipal
+                            where MES_A_MEDIR='$nombre_mes' AND NOMBRE_PROV='$red' AND NOMBRE_DIST='$dist'
                             group by NOMBRE_PROV,NOMBRE_DIST
-                            ORDER BY NOMBRE_PROV, NOMBRE_DIST";
+                            ORDER BY NOMBRE_PROV, NOMBRE_DIST
+                            DROP TABLE sellomunicipal";
         }
-
+        
+        $consulta = sqlsrv_query($conn2, $resultado);
         $consulta1 = sqlsrv_query($conn2, $resultado2);
     }
 ?>

@@ -7,7 +7,7 @@
     // echo 'SDOY RED ', $dist;
     if(isset($_GET['red'])){
         $dist = $_GET['red'];
-        // echo 'SDOY RED ', $dist;
+        echo 'SDOY RED ', $dist;
         $myDist = "SELECT NOMBRE_PROV,NOMBRE_DIST,
                     COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
                     MIN(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS Nulosdni,

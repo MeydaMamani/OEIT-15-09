@@ -1,8 +1,5 @@
 <?php
-
-use function PHPSTORM_META\type;
-
-require('abrir.php');
+    require('abrir.php');
     require('abrir2.php');
     require('abrir3.php');
     require('abrir4.php');
@@ -81,30 +78,30 @@ require('abrir.php');
                                     else{
                                 $newdate3 = $consulta['TOTAL'];}
                 
-                                if(is_null ($consulta['Nulosdni']) ){
+                                if(is_null ($consulta['CUMPLE_DNI']) ){
                                   $newdate4 = '  -'; }
                                   else{
-                                $newdate4 = $consulta['Nulosdni'];}
+                                $newdate4 = $consulta['CUMPLE_DNI'];}
                                   
-                                if(is_null ($consulta['NulosEJEVIAL1']) ){
+                                if(is_null ($consulta['CUMPLE_EJEVIAL']) ){
                                     $newdate5 = '  -'; }
                                     else{
-                                $newdate5 = $consulta['NulosEJEVIAL1'];}
+                                $newdate5 = $consulta['CUMPLE_EJEVIAL'];}
                     
-                                if(is_null ($consulta['NuloDESCRIPCION']) ){
+                                if(is_null ($consulta['CUMPLEDESCRIPCION']) ){
                                     $newdate6 = '  -'; }
                                     else{
-                                $newdate6 = $consulta['NuloDESCRIPCION'];}
+                                $newdate6 = $consulta['CUMPLEDESCRIPCION'];}
                 
-                                if(is_null ($consulta['NULOREFERENCIADESCRIPCION']) ){
+                                if(is_null ($consulta['CUMPLE_REFERENCIA']) ){
                                     $newdate7 = '  -'; }
                                     else{
-                                $newdate7 = $consulta['NULOREFERENCIADESCRIPCION'];}
+                                $newdate7 = $consulta['CUMPLE_REFERENCIA'];}
                 
-                                if(is_null ($consulta['Nino_visitdo']) ){
+                                if(is_null ($consulta['Nino_VISITADO']) ){
                                   $newdate8 = '  -'; }
                                   else{
-                                $newdate8 = $consulta['Nino_visitdo'];}
+                                $newdate8 = $consulta['Nino_VISITADO'];}
                 
                                 ?>
                                 <tr style="font-size: 12px; text-align: center;">
@@ -134,16 +131,19 @@ require('abrir.php');
                         </tfoot>
                     </table>
                 </div>
-                <div class="col-1"></div>
+                <div class="col-1 p-0"></div>
                 <div class="col-5 mt-5 text-center">
-                    <canvas id="myChartProvince"></canvas>
-                    <br>
+                    <div class="border border-secondary">
+                        <canvas id="myChartProvince"></canvas>
+                    </div><br>
                     <div class="d-flex justify-content-center">
                         <button class="btn btn-outline-dark btn-sm m-2 btn_dac" name="province" value="DANIEL ALCIDES CARRION"> DANIEL ALCIDES CARRION</button>
                         <button class="btn btn-outline-primary btn-sm m-2 btn_oxa" name="province"> OXAPAMPA</button>
                         <button class="btn btn-outline-danger btn-sm m-2 btn_pasco" name="province"> PASCO</button>
                     </div><br>
-                    <canvas id="myChartDistrict"></canvas>
+                    <div>
+                        <canvas id="myChartDistrict"></canvas>
+                    </div>
                     <?php
                         include('query_homologation_graph_dist.php');
                         while ($consul = sqlsrv_fetch_array($con_red)){
@@ -188,7 +188,7 @@ require('abrir.php');
                 ?>
             ],
             datasets:[{
-                label:'Niños Homologados',
+                label:'Niños Homologados TOTAL',
                 data:[
                     <?php
                         include('query_homologation_graph.php');
@@ -209,7 +209,51 @@ require('abrir.php');
                 ],
                 fill: false,
                 backgroundColor: '#36a2eb',
-            }]
+            },
+            {
+                label:'Niños Homologados AVANCE',
+                data:[
+                    <?php
+                        include('query_homologation_graph.php');
+                        $resul_menor = "WITH A AS( Select NOMBRE_PROV,NOMBRE_DIST,
+                                        COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
+                                        count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
+                                        count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                                        count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                                        count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                                        count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+                                        from sellomunicipal
+                                        where MES_A_MEDIR='SETIEMBRE' 
+                                        group by NOMBRE_PROV,NOMBRE_DIST) SELECT NOMBRE_PROV,NOMBRE_DIST, TOTAL, 
+                                        CASE 
+                                            WHEN CUMPLE_DNI<CUMPLE_EJEVIAL AND CUMPLE_DNI<CUMPLEDESCRIPCION AND CUMPLE_DNI<CUMPLE_REFERENCIA AND CUMPLE_DNI<Nino_VISITADO THEN CUMPLE_DNI 
+                                            WHEN CUMPLE_EJEVIAL<CUMPLE_DNI AND CUMPLE_EJEVIAL<CUMPLEDESCRIPCION AND CUMPLE_EJEVIAL<CUMPLE_REFERENCIA AND CUMPLE_EJEVIAL<Nino_VISITADO THEN CUMPLE_DNI 
+                                            WHEN CUMPLE_EJEVIAL<CUMPLE_DNI AND CUMPLE_EJEVIAL<CUMPLEDESCRIPCION AND CUMPLE_EJEVIAL<CUMPLE_REFERENCIA AND CUMPLE_EJEVIAL<Nino_VISITADO THEN CUMPLE_DNI 
+                                            WHEN CUMPLE_REFERENCIA<CUMPLE_DNI AND CUMPLE_REFERENCIA<CUMPLE_EJEVIAL AND CUMPLE_REFERENCIA<CUMPLE_EJEVIAL AND CUMPLE_REFERENCIA<Nino_VISITADO THEN CUMPLE_DNI 
+                                            ELSE Nino_VISITADO END AS 'MENOR'
+                                        FROM A                        
+                                        DROP TABLE sellomunicipal";
+                        $list_provinces = array();
+                        $list_total = array();
+                        $consulta = sqlsrv_query($conn2, $resultado);
+                        $consulta1 = sqlsrv_query($conn2, $resul_menor);
+                        while ($con = sqlsrv_fetch_array($consulta1)){
+                            $list_provinces[] = $con['NOMBRE_PROV'];
+                            $list_total[] = $con['TOTAL'];
+                        }
+
+                        $num_prov = sizeof($list_provinces);         
+                        $num_total = sizeof($list_total);
+                        for ($i = 0; $i < $num_total; $i++) {
+                            $data = ($list_total[$i]);
+                            echo "'$data', ";
+                        }
+                    ?>
+                ],
+                fill: false,
+                backgroundColor: '#ffcd56',
+            },
+            ]
         },
         options:{
             indexAxis: 'y',
@@ -223,70 +267,277 @@ require('abrir.php');
         }
     });
 
-    $("button[name='province'").click(function(){
-        var btn_dac = $(".btn_dac").val();
-        var btn_oxa = $(".btn_oxa").val();
-        var btn_pasco = $(".btn_pasco").val();
-        $.ajax({
-            url: 'query_homologation_graph_dist.php?red='+btn_dac,
-            method: 'GET',
-            success: function(data){
-                console.log(data);
-                // grafico para distrito
-                var ctx_district= document.getElementById("myChartDistrict").getContext("2d");
-                var myChartDistrict= new Chart(ctx_district,{
-                    type: "line",
-                    data:{
-                        labels:[
-                            <?php
-                                // echo 'TOY AQUI';
-                                include('query_homologation_graph_dist.php');
-                                while ($consul = sqlsrv_fetch_array($con_red)){
-                                    echo $consul['NOMBRE_DIST'];
-                                }
-                                // $num_dist = sizeof($list_dist);
-                                // for ($i = 0; $i < $num_dist; $i++) {
-                                //     $data = $list_dist[$i];
-                                //     echo "'$data', ";
-                                // }
-                            ?>
-                        ],
-                        datasets:[{
-                            label:'Niños Homologados',
-                            data:[
-                                <?php
-                                    include('query_homologation_graph_dist.php');
-                                    $list_tot = array();
-                                    while ($consul = sqlsrv_fetch_array($con_red)){
-                                        $list_tot[] = $consul['TOTAL'];
-                                    }
-                                    $num_tot = sizeof($list_tot);    
-                                    for ($i = 0; $i < $num_tot; $i++) {
-                                        $data = ($list_tot[$i]);
-                                        echo "'$data', ";
-                                    }
-                                ?>
-                            ],
-                            fill: false,
-                            backgroundColor: '#36a2eb',
-                            // borderColor: 'red',
-                            tension: 0.1
-                        }]
-                    },
-                    options:{
-                        indexAxis: 'y',
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
+        $(".btn_dac").click(function(){
+            var mylabels = [<?php 
+                include('query_homologation.php');
+                $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
+                            COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
+                            count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
+                            count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                            count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                            count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                            count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+                            from sellomunicipal
+                            where MES_A_MEDIR='$nombre_mes' AND NOMBRE_PROV='DANIEL ALCIDES CARRION'
+                            group by NOMBRE_PROV,NOMBRE_DIST
+                            ORDER BY NOMBRE_PROV, NOMBRE_DIST
+                            DROP TABLE sellomunicipal";
+
+                $consulta = sqlsrv_query($conn2, $resultado);
+                $consulta1 = sqlsrv_query($conn2, $resultado2);    
+                $list_dists = array();
+                $list_tots = array();
+                while ($con = sqlsrv_fetch_array($consulta1)){
+                    $list_dists[] = $con['NOMBRE_DIST'];
+                    $list_tots[] = $con['TOTAL'];
+                }
+
+                $num_dists = sizeof($list_dists);         
+                $num_total = sizeof($list_tots);
+                for ($i = 0; $i < $num_dists; $i++) {
+                    $data = ($list_dists[$i]);
+                    echo "'$data', ";
+                }
+             ?>
+            ]
+            var datos1 = {
+                label:'Niños Homologados',
+                data: [<?php 
+                    include('query_homologation.php');
+                    $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
+                                COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
+                                count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
+                                count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                                count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                                count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                                count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+                                from sellomunicipal
+                                where MES_A_MEDIR='$nombre_mes' AND NOMBRE_PROV='DANIEL ALCIDES CARRION'
+                                group by NOMBRE_PROV,NOMBRE_DIST
+                                ORDER BY NOMBRE_PROV, NOMBRE_DIST
+                                DROP TABLE sellomunicipal";
+
+                    $consulta = sqlsrv_query($conn2, $resultado);
+                    $consulta1 = sqlsrv_query($conn2, $resultado2);    
+                    $list_dists = array();
+                    $list_tots = array();
+                    while ($con = sqlsrv_fetch_array($consulta1)){
+                        $list_prov[] = $con['NOMBRE_DIST'];
+                        $list_tots[] = $con['TOTAL'];
                     }
-                });
-            }
-        })
-    });
+
+                    $num_dists = sizeof($list_dists);         
+                    $num_total = sizeof($list_tots);
+                    for ($i = 0; $i < $num_total; $i++) {
+                        $data = ($list_tots[$i]);
+                        echo "'$data', ";
+                    }
+                ?>],
+                backgroundColor: '#4bc0c0',// Color de fondo
+                borderColor: '#4bc0c0',
+                fill: false,
+                tension: 0.1
+            };
+
+            var ctx_district= document.getElementById("myChartDistrict").getContext("2d");
+            var myChartDistrict= new Chart(ctx_district,{
+                type: "line",
+                data:{
+                    labels: mylabels,
+                    datasets:[datos1 ]
+                },
+                options:{
+                    indexAxis: 'y',
+                    scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                                    }
+                        }]
+                    }
+                }
+            });
+        });
+        $(".btn_oxa").click(function(){
+            var mylabels = [<?php 
+                include('query_homologation.php');
+                $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
+                            COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
+                            count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
+                            count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                            count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                            count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                            count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+                            from sellomunicipal
+                            where MES_A_MEDIR='$nombre_mes' AND NOMBRE_PROV='OXAPAMPA'
+                            group by NOMBRE_PROV,NOMBRE_DIST
+                            ORDER BY NOMBRE_PROV, NOMBRE_DIST
+                            DROP TABLE sellomunicipal";
+
+                $consulta = sqlsrv_query($conn2, $resultado);
+                $consulta1 = sqlsrv_query($conn2, $resultado2);    
+                $list_dists = array();
+                $list_tots = array();
+                while ($con = sqlsrv_fetch_array($consulta1)){
+                    $list_dists[] = $con['NOMBRE_DIST'];
+                    $list_tots[] = $con['TOTAL'];
+                }
+
+                $num_dists = sizeof($list_dists);         
+                $num_total = sizeof($list_tots);
+                for ($i = 0; $i < $num_dists; $i++) {
+                    $data = ($list_dists[$i]);
+                    echo "'$data', ";
+                }
+             ?>
+            ]
+            var datos1 = {
+                label:'Niños Homologados',
+                data: [<?php 
+                    include('query_homologation.php');
+                    $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
+                                COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
+                                count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
+                                count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                                count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                                count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                                count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+                                from sellomunicipal
+                                where MES_A_MEDIR='$nombre_mes' AND NOMBRE_PROV='OXAPAMPA'
+                                group by NOMBRE_PROV,NOMBRE_DIST
+                                ORDER BY NOMBRE_PROV, NOMBRE_DIST
+                                DROP TABLE sellomunicipal";
+
+                    $consulta = sqlsrv_query($conn2, $resultado);
+                    $consulta1 = sqlsrv_query($conn2, $resultado2);    
+                    $list_dists = array();
+                    $list_tots = array();
+                    while ($con = sqlsrv_fetch_array($consulta1)){
+                        $list_prov[] = $con['NOMBRE_DIST'];
+                        $list_tots[] = $con['TOTAL'];
+                    }
+
+                    $num_dists = sizeof($list_dists);         
+                    $num_total = sizeof($list_tots);
+                    for ($i = 0; $i < $num_total; $i++) {
+                        $data = ($list_tots[$i]);
+                        echo "'$data', ";
+                    }
+                ?>],
+                backgroundColor: '#4bc0c0',// Color de fondo
+                borderColor: '#4bc0c0',
+                fill: false,
+                tension: 0.1
+            };
+            var ctx_district= document.getElementById("myChartDistrict").getContext("2d");
+            var myChartDistrict= new Chart(ctx_district,{
+                type: "line",
+                data:{
+                    labels: mylabels,
+                    datasets:[datos1 ]
+                },
+                options:{
+                    indexAxis: 'y',
+                    scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                                    }
+                        }]
+                    }
+                }
+            });
+        });
+        $(".btn_pasco").click(function(){
+            var mylabels = [<?php 
+                include('query_homologation.php');
+                $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
+                            COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
+                            count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
+                            count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                            count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                            count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                            count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+                            from sellomunicipal
+                            where MES_A_MEDIR='$nombre_mes' AND NOMBRE_PROV='PASCO'
+                            group by NOMBRE_PROV,NOMBRE_DIST
+                            ORDER BY NOMBRE_PROV, NOMBRE_DIST
+                            DROP TABLE sellomunicipal";
+
+                $consulta = sqlsrv_query($conn2, $resultado);
+                $consulta1 = sqlsrv_query($conn2, $resultado2);    
+                $list_dists = array();
+                $list_tots = array();
+                while ($con = sqlsrv_fetch_array($consulta1)){
+                    $list_dists[] = $con['NOMBRE_DIST'];
+                    $list_tots[] = $con['TOTAL'];
+                }
+
+                $num_dists = sizeof($list_dists);         
+                $num_total = sizeof($list_tots);
+                for ($i = 0; $i < $num_dists; $i++) {
+                    $data = ($list_dists[$i]);
+                    echo "'$data', ";
+                }
+             ?>
+            ]
+            var datos1 = {
+                label:'Niños Homologados',
+                data: [<?php 
+                    include('query_homologation.php');
+                    $resultado2 = "SELECT NOMBRE_PROV,NOMBRE_DIST,
+                                COUNT(CASE WHEN NOMBRE_PROV is not null THEN 1 ELSE 0 END) AS TOTAL,
+                                count(CASE WHEN NUM_DNI is not null THEN 1 ELSE 0 END) AS CUMPLE_DNI,
+                                count(CASE WHEN (EJE_VIAL is not null AND AREA_CENTRO_POBLA='URBANA') OR (EJE_VIAL is null AND AREA_CENTRO_POBLA='RURAL') THEN 1 ELSE 0 END) AS CUMPLE_EJEVIAL,
+                                count(CASE WHEN DESCRIPCION is not null THEN 1 ELSE 0 END) AS CUMPLEDESCRIPCION,
+                                count(CASE WHEN REFERENCIA_DIREC is not null THEN 1 ELSE 0 END) AS CUMPLE_REFERENCIA,
+                                count(CASE WHEN MENOR_ENCONTRADO is not null THEN 1 ELSE 0 END) AS Nino_VISITADO
+                                from sellomunicipal
+                                where MES_A_MEDIR='$nombre_mes' AND NOMBRE_PROV='PASCO'
+                                group by NOMBRE_PROV,NOMBRE_DIST
+                                ORDER BY NOMBRE_PROV, NOMBRE_DIST
+                                DROP TABLE sellomunicipal";
+
+                    $consulta = sqlsrv_query($conn2, $resultado);
+                    $consulta1 = sqlsrv_query($conn2, $resultado2);    
+                    $list_dists = array();
+                    $list_tots = array();
+                    while ($con = sqlsrv_fetch_array($consulta1)){
+                        $list_prov[] = $con['NOMBRE_DIST'];
+                        $list_tots[] = $con['TOTAL'];
+                    }
+
+                    $num_dists = sizeof($list_dists);         
+                    $num_total = sizeof($list_tots);
+                    for ($i = 0; $i < $num_total; $i++) {
+                        $data = ($list_tots[$i]);
+                        echo "'$data', ";
+                    }
+                ?>],
+                backgroundColor: '#4bc0c0',// Color de fondo
+                borderColor: '#4bc0c0',
+                fill: false,
+                tension: 0.1
+            };
+            var ctx_district= document.getElementById("myChartDistrict").getContext("2d");
+            var myChartDistrict= new Chart(ctx_district,{
+                type: "line",
+                data:{
+                    labels: mylabels,
+                    datasets:[datos1 ]
+                },
+                options:{
+                    indexAxis: 'y',
+                    scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                                    }
+                        }]
+                    }
+                }
+            });
+        });
 
 </script>
 </body>

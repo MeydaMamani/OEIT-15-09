@@ -66,7 +66,7 @@
                                 WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
 
             $resultado3 = "SELECT p.nombre_prov, p.nombre_dist, p.documento, p.num_cnv, p.num_dni,p.tipo_seguro,p.fecha_nacimiento_nino, p.A_medir, 
-                                p.apellido_paterno_nino + ' '+ p.apellido_materno_nino + ' ' + p.apellido_materno_nino As apellidos_nino, 
+                                p.apellido_paterno_nino + ' '+ p.apellido_materno_nino + ' ' + p.NOMBRE_NINO As apellidos_nino, 
                                 p.MENOR_ENCONTRADO,NOMBRE_EESS, a.Fecha_Atencion, a.Nombre_Establecimiento Lugar_TMZ    
                                 from bdhis_minsa.dbo.padronneonatal p left join bdhis_minsa.dbo.atenciones a 
                                         on p.documento=a.Numero_Documento_Paciente
@@ -98,7 +98,7 @@
                                 WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
 
             $resultado3 = "SELECT p.nombre_prov, p.nombre_dist, p.documento, p.num_cnv, p.num_dni,p.tipo_seguro,p.fecha_nacimiento_nino, p.A_medir, 
-                                p.apellido_paterno_nino + ' '+ p.apellido_materno_nino + ' ' + p.apellido_materno_nino As apellidos_nino, 
+                                p.apellido_paterno_nino + ' '+ p.apellido_materno_nino + ' ' + p.NOMBRE_NINO As apellidos_nino, 
                                 p.MENOR_ENCONTRADO,NOMBRE_EESS, a.Fecha_Atencion, a.Nombre_Establecimiento Lugar_TMZ    
                                 from bdhis_minsa.dbo.padronneonatal p left join bdhis_minsa.dbo.atenciones a 
                                         on p.documento=a.Numero_Documento_Paciente
@@ -130,7 +130,7 @@
                                 WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
 
             $resultado3 = "SELECT p.nombre_prov, p.nombre_dist, p.documento, p.num_cnv, p.num_dni,p.tipo_seguro,p.fecha_nacimiento_nino, p.A_medir, 
-                                p.apellido_paterno_nino + ' '+ p.apellido_materno_nino + ' ' + p.apellido_materno_nino As apellidos_nino, 
+                                p.apellido_paterno_nino + ' '+ p.apellido_materno_nino + ' ' + p.NOMBRE_NINO As apellidos_nino, 
                                 p.MENOR_ENCONTRADO,NOMBRE_EESS, a.Fecha_Atencion, a.Nombre_Establecimiento Lugar_TMZ    
                                 from bdhis_minsa.dbo.padronneonatal p left join bdhis_minsa.dbo.atenciones a 
                                         on p.documento=a.Numero_Documento_Paciente
