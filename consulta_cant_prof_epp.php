@@ -24,12 +24,6 @@
         else if($mes == 11){ $nombre_mes = 'Noviembre'; }
         else if($mes == 12){ $nombre_mes = 'Diciembre'; }
 
-        if (strlen($mes) == 1){
-            $mes2 = '0'.$mes;
-        }else{
-          $mes2 = $mes;
-        }
-
         if ($red_1 == 1) {
           $red = 'DANIEL ALCIDES CARRION';
         }
@@ -44,37 +38,40 @@
         }
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
-            $resultado = "SELECT DISTINCT(Numero_Documento_Personal),Provincia_Establecimiento, Distrito_Establecimiento, Nombre_Establecimiento,  Descripcion_Profesion, mes, 
+            $resultado = "SELECT DISTINCT(Numero_Documento_Personal),Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Descripcion_Profesion, mes, 
                             concat(Nombres_Personal,' ',Apellido_Paterno_Paciente) PERSONAL
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
                             where mes='$mes'and anio='2021' AND Provincia_Establecimiento='$red'
                                 and Codigo_Item in('99208','99402.04', 'Z3491','Z3492','Z3493','Z3591','Z3592','Z3593', 'z001',
                                 '90585', '90744', '90712', '90713', '90723', '90681', '90670', '90657', '90658','90707', '90717','90701','Z298')
                             AND ID_CITA not IN (SELECT Id_Cita FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA WHERE Codigo_Item in ('99499.01','99499.08','99499.10') 
-                            AND ANIO='2021' AND MES='$mes')";
+                            AND ANIO='2021' AND MES='$mes')
+                            ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Numero_Documento_Personal";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
-            $resultado = "SELECT DISTINCT(Numero_Documento_Personal),Provincia_Establecimiento, Distrito_Establecimiento, Nombre_Establecimiento,  Descripcion_Profesion, mes, 
+            $resultado = "SELECT DISTINCT(Numero_Documento_Personal),Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Descripcion_Profesion, mes, 
                             concat(Nombres_Personal,' ',Apellido_Paterno_Paciente) PERSONAL
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
                             where mes='$mes'and anio='2021'
                                 and Codigo_Item in('99208','99402.04', 'Z3491','Z3492','Z3493','Z3591','Z3592','Z3593', 'z001',
                                 '90585', '90744', '90712', '90713', '90723', '90681', '90670', '90657', '90658','90707', '90717','90701','Z298')
                             AND ID_CITA not IN (SELECT Id_Cita FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA WHERE Codigo_Item in ('99499.01','99499.08','99499.10') 
-                            AND ANIO='2021' AND MES='$mes')";
+                            AND ANIO='2021' AND MES='$mes')
+                            ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Numero_Documento_Personal";
         }
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
-            $resultado = "SELECT DISTINCT(Numero_Documento_Personal),Provincia_Establecimiento, Distrito_Establecimiento, Nombre_Establecimiento,  Descripcion_Profesion, mes, 
+            $resultado = "SELECT DISTINCT(Numero_Documento_Personal),Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Descripcion_Profesion, mes, 
                             concat(Nombres_Personal,' ',Apellido_Paterno_Paciente) PERSONAL
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
                             where mes='$mes'and anio='2021' AND Provincia_Establecimiento='$red' AND  Distrito_Establecimiento='$dist'
                                 and Codigo_Item in('99208','99402.04', 'Z3491','Z3492','Z3493','Z3591','Z3592','Z3593', 'z001',
                                 '90585', '90744', '90712', '90713', '90723', '90681', '90670', '90657', '90658','90707', '90717','90701','Z298')
                             AND ID_CITA not IN (SELECT Id_Cita FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA WHERE Codigo_Item in ('99499.01','99499.08','99499.10') 
-                            AND ANIO='2021' AND MES='$mes')";
+                            AND ANIO='2021' AND MES='$mes')
+                            ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Numero_Documento_Personal";
         }
         
         $consulta1 = sqlsrv_query($conn, $resultado);
-    }    
+    }
 ?>

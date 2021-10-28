@@ -52,7 +52,6 @@
                     <button type="submit" id="exportarCSV" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
                 </form>
             </div>
-
             <div class="col-12 table-responsive">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
@@ -60,6 +59,7 @@
                             <th class="align-middle">#</th>
                             <th class="align-middle">Provincia</th>
                             <th class="align-middle">Distrito</th>
+                            <th class="align-middle">Código Ipress</th>
                             <th class="align-middle">Establecimiento</th>
                             <th class="align-middle">Documento</th>
                             <th class="align-middle">Personal</th>
@@ -89,25 +89,30 @@
                                     else{
                                 $newdate2 = $consulta['Distrito_Establecimiento'] ;}
 
-                                if(is_null ($consulta['Nombre_Establecimiento']) ){
+                                if(is_null ($consulta['Codigo_Unico']) ){
                                     $newdate3 = '  -'; }
                                     else{
-                                $newdate3 = $consulta['Nombre_Establecimiento'];}
+                                $newdate3 = $consulta['Codigo_Unico'] ;}
 
-                                if(is_null ($consulta['Numero_Documento_Personal']) ){
+                                if(is_null ($consulta['Nombre_Establecimiento']) ){
                                     $newdate4 = '  -'; }
                                     else{
-                                $newdate4 = $consulta['Numero_Documento_Personal'];}
+                                $newdate4 = $consulta['Nombre_Establecimiento'];}
 
-                                if(is_null ($consulta['PERSONAL']) ){
+                                if(is_null ($consulta['Numero_Documento_Personal']) ){
                                     $newdate5 = '  -'; }
                                     else{
-                                $newdate5 = $consulta['PERSONAL'];}
+                                $newdate5 = $consulta['Numero_Documento_Personal'];}
 
-                                if(is_null ($consulta['Descripcion_Profesion']) ){
+                                if(is_null ($consulta['PERSONAL']) ){
                                     $newdate6 = '  -'; }
                                     else{
-                                $newdate6 = $consulta['Descripcion_Profesion'];}
+                                $newdate6 = $consulta['PERSONAL'];}
+
+                                if(is_null ($consulta['Descripcion_Profesion']) ){
+                                    $newdate7 = '  -'; }
+                                    else{
+                                $newdate7 = $consulta['Descripcion_Profesion'];}
 
                         ?>
                         <tr class="text-center font-12">
@@ -118,6 +123,7 @@
                             <td class="align-middle"><?php echo $newdate4; ?></td>
                             <td class="align-middle"><?php echo $newdate5; ?></td>
                             <td class="align-middle"><?php echo $newdate6; ?></td>
+                            <td class="align-middle"><?php echo $newdate7; ?></td>
                         </tr>
                         <?php
                             ;}
