@@ -4,8 +4,9 @@
     require('abrir6.php');    
  
     if(isset($_POST["exportarCSV"])) {
-        ini_set("default_charset", "UTF-8");
+        include('zone_setting.php');
         global $conex;
+        ini_set("default_charset", "UTF-8");
         // header('Content-Type: text/html; charset=UTF-8');
         
         $resultado = "SELECT d.NUM_DOC,VALIDADO_RENIEC, CONCAT(d.APELLIDO_PATERNO, ' ', d.APELLIDO_MATERNO, ' ', d.NOMBRES) AS FULL_NAME, d.PROVINCIA,d.DISTRITO,d.COD_ESTUDIANTE,d.FECHA_NACIMIENTO,
@@ -17,7 +18,7 @@
         $consulta2 = sqlsrv_query($conn6, $resultado);
 
         if(!empty($consulta2)){
-            $ficheroExcel="REINCORPORACION ".date("d-m-Y").".csv";
+            $ficheroExcel="DEIT_PASCO REINCORPORACION "._date("d-m-Y", false, 'America/Lima').".csv";
             //Indicamos que vamos a tratar con un fichero CSV
             header("Content-type: text/csv");
             header("Content-Disposition: attachment; filename=".$ficheroExcel);            

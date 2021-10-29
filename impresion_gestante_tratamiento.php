@@ -4,8 +4,9 @@
     require('abrir3.php');    
  
     if(isset($_POST["exportarCSV"])) {
-        ini_set("default_charset", "UTF-8");
+        include('zone_setting.php');
         global $conex;
+        ini_set("default_charset", "UTF-8");
         header('Content-Type: text/html; charset=UTF-8');
 
         $red_1 = $_POST['red'];
@@ -95,7 +96,7 @@
         $consulta1 = sqlsrv_query($conn, $resultado, $params, $options);
   
         if(!empty($consulta1)){
-            $ficheroExcel="GESTANTE_INICIO_TRATAMIENTO".date("d-m-Y").".csv";        
+            $ficheroExcel="DEIT_PASCO CG_FT_GESTANTES_DX_POSIT_VIOLEN_CON_DIAG_E_INICIO_TRATAMIENTO "._date("d-m-Y", false, 'America/Lima').".csv";        
             //Indicamos que vamos a tratar con un fichero CSV
             header("Content-type: text/csv");
             header("Content-Disposition: attachment; filename=".$ficheroExcel);            

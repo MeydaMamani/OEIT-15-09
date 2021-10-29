@@ -4,7 +4,8 @@
     require('abrir3.php');
     require('abrir4.php');
     require('abrir5.php'); 
-    
+    include('zone_setting.php');
+
     $red_1 = $_POST['red'];
     $dist_1 = $_POST['distrito'];
     $mes = $_POST['mes'];
@@ -111,7 +112,7 @@
       header('Content-Type: text/html; charset=UTF-8');
 
       if(!empty($consulta2)){
-          $ficheroExcel="CASOS_SOSPECHOSOS_F0 ".date("d-m-Y").".csv";        
+          $ficheroExcel="DEIT_PASCO CASOS_SOSPECHOSOS_F0 "._date("d-m-Y", false, 'America/Lima').".csv";        
           //Indicamos que vamos a tratar con un fichero CSV
           header("Content-type: text/csv");
           header("Content-Disposition: attachment; filename=".$ficheroExcel);            
@@ -165,7 +166,7 @@
 
     if(isset($_POST["exportarCSV_f100"])) {
       if(!empty($consulta4)){
-        $ficheroExcel="CASOS_SOSPECHOSOS_F100 ".date("d-m-Y").".csv";        
+        $ficheroExcel="DEIT_PASCO CASOS_SOSPECHOSOS_F100 "._date("d-m-Y", false, 'America/Lima').".csv";        
         //Indicamos que vamos a tratar con un fichero CSV
         header("Content-type: text/csv");
         header("Content-Disposition: attachment; filename=".$ficheroExcel);            
