@@ -62,9 +62,13 @@
 			<ul>
 				<li><a href="index.php"><span class="icon-home"></span>Inicio</a></li>
 				<li class="submenu">
-					<a href="#"><span class="icon-reddit"></span>Niño<span class="caret icon-arrow-down6"></span></a>
+					<a href="#"><span class="icon-reddit"></span>FED<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
-						<li><a href="prematuros.php">Niños Prematuros (CG SI-03)<span class="icon-dot"></span></a></li>
+						<li><a href="prematuros.php" tabindex="-1" href="#">NIÑO<span class="icon-dot"></span></a></li>
+						<li><a tabindex="-1" href="#">Second leve</a></li>
+					
+					<ul class="children">
+					<li><a href="prematuros.php">Niños Prematuros (CG SI-03)<span class="icon-dot"></span></a></li>
 						<li><a href="tamizaje_neonatal.php">TMZ Neonatal (CG SI-02)<span class="icon-dot"></span></a></li>
 						<li><a href="4_meses.php">4 Meses (CG SI-04)<span class="icon-dot"></span></a></li>
 						<li><a href="6-8_meses.php">6 - 8 Meses (CG SI-05)<span class="icon-dot"></span></a></li>
@@ -73,7 +77,7 @@
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="#"><i class="fa fa-female"></i> Gestante<span class="caret icon-arrow-down6"></span></a>
+					<a href="#"><i class="fa fa-female"></i>SEGUIMIENTO<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a href="bateria_completa.php">Bateria Completa (CG SI-01)<span class="icon-dot"></span></a></li>
 						<li><a href="gestante_tratamiento.php">Gestante con TMZ e Inicio de Tratamiento por Violencia (CG VI-01)<span class="icon-dot"></span></a></li>
@@ -81,7 +85,7 @@
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="#"><span class="icon-svg"></span>Covid-19<span class="caret icon-arrow-down6"></span></a>
+					<a href="#"><span class="icon-svg"></span>COVID<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a href="vacuna_covid.php">Consulta tu Vacunación<span class="icon-dot"></span></a></li>
 						<li><a href="#">Consulta Padrón <span class="icon-dot"></span></a></li>
@@ -91,7 +95,7 @@
 				</li>
 				
 				<li class="submenu">
-					<a href="#"><span class="icon-user"></span>Paciente<span class="caret icon-arrow-down6"></span></a>
+					<a href="#"><span class="icon-user"></span>PADRON NOMINAL<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a href="detalle_paciente.php">Detalle Paciente<span class="icon-dot"></span></a></li>
 					</ul>
