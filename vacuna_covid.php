@@ -32,8 +32,9 @@
         if(doc.length == 8) {
           document.getElementById("btn_buscar").type = "submit";
         }
-        else{
+        else if(doc.length != 8) {
           toastr.warning('La cantidad de dígitos es incorrecto', null, { "closeButton": true, "progressBar": true });
+          document.getElementById("btn_buscar").type = "button";
         }
     });
 </script>

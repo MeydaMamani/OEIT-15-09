@@ -1,6 +1,5 @@
 <?php
-
-require('abrir.php');
+  require('abrir7.php');
 
   if (isset($_POST['Buscar'])) {
     global $conex;
@@ -10,9 +9,9 @@ require('abrir.php');
   <?php
 
   $doc = $_POST['doc'];
-  $resultado = "SELECT * FROM VACUNADOS WHERE num_doc = '$doc';";
+  $resultado = "SELECT * FROM VACUNADOS WHERE num_doc = '$doc' AND (PRIMERA_DEP = 'PASCO' or SEGUNDA_DEP = 'PASCO');";
 
-  $consulta2 = sqlsrv_query($conn, $resultado);
+  $consulta2 = sqlsrv_query($conn7, $resultado);
   $consulta = sqlsrv_fetch_array($consulta2);
 
   if (isset($consulta['NUM_DOC'])) {
@@ -84,7 +83,7 @@ require('abrir.php');
                 <div class="sl-right">
                   <div>
                     <label class="information-person-text">Primera Dosis</label>
-                    <p class="font-13"><?php echo $consulta['PRIMERA']; ?></p>
+                    <p class="font-13"><?php echo $consulta['PRIMERA'] -> format('d/m/y'); ?></p>
                   </div>
                 </div>
               </div>
@@ -94,7 +93,7 @@ require('abrir.php');
                 <div class="sl-right">
                   <div>
                     <label class="information-person-text">Segunda Dosis</label>
-                    <p class="font-13"><?php echo $consulta['SEGUNDA'] ; ?></p>
+                    <p class="font-13"><?php echo $consulta['SEGUNDA'] -> format('d/m/y'); ?></p>
                   </div>
                 </div>
               </div>
@@ -104,8 +103,11 @@ require('abrir.php');
       } else { ?>
           <br>
           <div class="container">
+            <div class="col-md-12 text-end">
+              <button type="submit" name="Limpiar" class="btn btn-outline-info btn-sm 1btn_buscar" onclick="location.href='vacuna_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+            </div><br>
             <div class="alert alert-primary" role="alert">
-              Usted no cuenta con ninguna dosis
+              Usted no cuenta con nínguna dosis o no se encuentra en el padrón regional de Pasco
             </div>
           </div>
         <?php } ?>
@@ -113,7 +115,7 @@ require('abrir.php');
       </div>
       <br>
       <?php
-      include("cerrar.php");
+        sqlsrv_close($conn7);
       ?>
     </div>
   <?php } ?>
