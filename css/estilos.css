@@ -1,156 +1,12 @@
 body {background:#FEFEFE;}
 
-thead {
-	/* display: block; */
-}
-
-tbody {
-	/* display: block;
-	max-height: 470px;
-    overflow-y: auto; */
-}
-
 .border-rounded{
 	border-radius: 50% !important;
 }
 
-.menu_bar {
-	display:none;
-}
-
-header {
-	width: 100%;
-}
-
-header nav {
-	background:#07032e;
-	z-index:1000;
-	width:100%;
-}
-
-header nav ul {
-	list-style:none;
-}
-
-header nav ul li {
-	display:inline-block;
-	position: relative;
-}
-
-header nav ul li:hover {
-	background: #0c0546;
-}
-
-header nav ul li a {
-	color:#fff;
-	display:block;
-	text-decoration:none;
-	padding: 20px;
-}
-
-header nav ul li a span {
-	margin-right:10px;
-}
-
-header nav ul li:hover .children {
-	display:block;
-}
-
-header nav ul li .children {
-	display: none;
-	background: #0b091f;
-	position: absolute;
-	width: 170%;
-	z-index:1000;
-}
-
-header nav ul li .children li {
-	display:block;
-	overflow: hidden;
-	border-bottom: 1px solid rgba(255,255,255,.5);
-}
-
-header nav ul li .children li a {
-	display: block;
-	padding: 12px 10px;
-    font-size: 15px;
-}
-
-header nav ul li .children li a span {
-	float: right;
-	position: relative;
-	top:3px;
-	margin-right:0;
-	margin-left:10px;
-}
-
-header nav ul li .caret {
-	position: relative;
-	top:3px;
-	margin-left:10px;
-	margin-right:0px;
-}
-
 @media screen and (max-width: 800px) {
-
 	body {
 		padding-top:80px;
-	}
-	.menu_bar {
-		display:block;
-		width:100%;
-		top:0;
-		background:#07032e;
-	}
-
-	.menu_bar .bt-menu {
-		display: block;
-		padding: 15px;
-		color: #fff;
-		overflow: hidden;
-		font-size: 23px;
-		font-weight: bold;
-		text-decoration: none;
-	}
-
-	.menu_bar span {
-		float: right;
-		font-size: 30px;
-	}
-
-	header nav {
-		width: 100%;
-		height: calc(100% - 80px);
-		position: absolute;
-		right:100%;
-		margin: 0;
-		overflow: scroll;
-	}
-
-	header nav ul li {
-		display: block;
-		border-bottom:1px solid rgba(255,255,255,.5);
-	}
-
-	header nav ul li a {
-		display: block;
-	}
-
-	header nav ul li:hover .children {
-		display: none;
-	}
-
-	header nav ul li .children {
-		width: 100%;
-		position: relative;
-	}
-
-	header nav ul li .children li a {
-		margin-left:20px;
-	}
-
-	header nav ul li .caret {
-		float: right;
 	}
 
 	.text-mobile{
@@ -303,6 +159,14 @@ li a, a{
 	background: #a3c8d717;
 }
 
+#color_homologado_head {
+	background: #094f86;
+}
+
+#color_homologado_body {
+	background: #094f8612;
+}
+
 #color_fed_head {
 	background: #a7a7a7;
 }
@@ -311,13 +175,20 @@ li a, a{
 	background: #a7a7a73d;
 }
 
+@media screen and (max-width: 800px){
+	.homologation {
+		margin: 15px 20px;
+	}
+}
 
-@media (min-width: 1200px){
-	.container .homologation, .container-lg,  .container-md, .container-sm, .container-xl {
-		max-width: 1300px;
+@media screen and (min-width: 1200px){
+	.homologation {
+		margin: 30px 110px;
 	}
 }
 
 canvas.myChartProvince, canvas.myChartDistrict{
-	width: 400px !important; height: 300px !important; display: initial !important;
+	width: 400px !important; 
+	height: 300px !important; 
+	display: initial !important;
 }

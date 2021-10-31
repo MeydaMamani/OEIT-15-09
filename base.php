@@ -24,6 +24,7 @@
 	
 	<!-- archivos creados -->
 	<link rel="stylesheet" href="./css/estilos.css">
+	<link rel="stylesheet" href="./css/style.css">
 	<link rel="stylesheet" href="./css/fonts.css">
 	<link rel="stylesheet" href="./css/ventana_inicio.css">
 	<script src="./js/main.js"></script>
@@ -44,7 +45,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 <body>
-	<header>
+	<!-- <header>
 		<div style="margin: 10px 30px;">
 			<div class="row">
 			<div class="col-2">
@@ -57,18 +58,14 @@
 		</div>
 		<div class="menu_bar">
 			<a href="#" class="bt-menu"><span class="icon-menu"></span>Menu</a>
-		</div>
-		<nav>
+		</div> -->
+		<!-- <nav>
 			<ul>
 				<li><a href="index.php"><span class="icon-home"></span>Inicio</a></li>
 				<li class="submenu">
-					<a href="#"><span class="icon-reddit"></span>FED<span class="caret icon-arrow-down6"></span></a>
+					<a href="#"><span class="icon-reddit"></span>Niño<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
-						<li><a href="prematuros.php" tabindex="-1" href="#">NIÑO<span class="icon-dot"></span></a></li>
-						<li><a tabindex="-1" href="#">Second leve</a></li>
-					
-					<ul class="children">
-					<li><a href="prematuros.php">Niños Prematuros (CG SI-03)<span class="icon-dot"></span></a></li>
+						<li><a href="prematuros.php">Niños Prematuros (CG SI-03)<span class="icon-dot"></span></a></li>
 						<li><a href="tamizaje_neonatal.php">TMZ Neonatal (CG SI-02)<span class="icon-dot"></span></a></li>
 						<li><a href="4_meses.php">4 Meses (CG SI-04)<span class="icon-dot"></span></a></li>
 						<li><a href="6-8_meses.php">6 - 8 Meses (CG SI-05)<span class="icon-dot"></span></a></li>
@@ -77,7 +74,7 @@
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="#"><i class="fa fa-female"></i>SEGUIMIENTO<span class="caret icon-arrow-down6"></span></a>
+					<a href="#"><i class="fa fa-female"></i> Gestante<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a href="bateria_completa.php">Bateria Completa (CG SI-01)<span class="icon-dot"></span></a></li>
 						<li><a href="gestante_tratamiento.php">Gestante con TMZ e Inicio de Tratamiento por Violencia (CG VI-01)<span class="icon-dot"></span></a></li>
@@ -85,7 +82,7 @@
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="#"><span class="icon-svg"></span>COVID<span class="caret icon-arrow-down6"></span></a>
+					<a href="#"><span class="icon-svg"></span>Covid-19<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a href="vacuna_covid.php">Consulta tu Vacunación<span class="icon-dot"></span></a></li>
 						<li><a href="#">Consulta Padrón <span class="icon-dot"></span></a></li>
@@ -95,7 +92,7 @@
 				</li>
 				
 				<li class="submenu">
-					<a href="#"><span class="icon-user"></span>PADRON NOMINAL<span class="caret icon-arrow-down6"></span></a>
+					<a href="#"><span class="icon-user"></span>Paciente<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a href="detalle_paciente.php">Detalle Paciente<span class="icon-dot"></span></a></li>
 					</ul>
@@ -131,5 +128,134 @@
 					</ul>
 				</li>
 			</ul>
-		</nav>
-	</header>
+		</nav> -->
+	<!-- </header> -->
+	<div id="main-wrapper">
+        <header class="topbar">
+			<div style="margin: 10px 30px;">
+				<div class="row">
+				<div class="col-2">
+					<img src="./img/diresa1.jpg" class="img_diresa" alt="Logotipo Diresa">
+				</div>
+				<div class="col-10 text-end">
+					<img src="./img/oeit.png" class="img_oeit" width="240" alt="Logotipo OEIT">
+				</div>
+				</div>
+			</div>
+        </header>
+        <aside class="left-sidebar">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="nav-small-cap">PERSONAL</li>
+                        <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false"><span class="icon-home m-r-2"></span><span class="hide-menu ml-6"> Inicio</span></a></li>
+                        <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu ml-6"> FED</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li>
+                                    <a class="has-arrow" href="#" aria-expanded="false">Niños</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="prematuros.php">Niños Prematuros (CG SI-03)</a></li>
+                                        <li><a href="tamizaje_neonatal.php">TMZ Neonatal (CG SI-02)</a></li>
+                                        <li><a href="4_meses.php">Suplementación 4 meses (CG SI-04)</a></li>
+										<li><a href="6-8_meses.php">Inicio Oportuno (CG SI-05)</a></li>
+										<li><a href="cred.php">CRED (CG SI-06)</a></li>
+										<li><a href="#">Paquete Completo</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="#" aria-expanded="false">Gestantes</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="bateria_completa.php">Bateria Completa (CG SI-01)</a></li>
+                                        <li><a href="gestante_tratamiento.php">Gestantes con TMZ e Inicio de Tratamiento por Violencia (CG VI-01)</a></li>
+                                        <li><a href="gestante_usuarias_nuevas.php">Gestante Usuarias Nuevas con TMZ de Violencia (CG VI-02)</a></li>
+										<li><a href="#">Paquete Completo</a></li>
+                                    </ul>
+                                </li>
+								<li>
+                                    <a class="has-arrow" href="#" aria-expanded="false">SIS-COVID</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="sis_covid.php">SIS-COVID</a></li>
+                                    </ul>
+                                </li>
+								<li>
+                                    <a class="has-arrow" href="#" aria-expanded="false">Medicamentos</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="app-email.html">Cantidad de Profesionales EPP (2020 FED)</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-address-card"></i><span class="hide-menu ml-6"> Solicitud</span></a>
+                            <ul aria-expanded="false" class="collapse">
+								<li><a href="solicitud.php">Mi Solicitud</a></li>
+                            </ul>
+                        </li>
+						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-calculator"></i><span class="hide-menu ml-6"> Seguimiento</span></a>
+                            <ul aria-expanded="false" class="collapse">
+								<li><a href="detalle_paciente.php">Detalle Paciente</a></li>
+								<li><a href="seguimiento_neonatal.php">Tamizaje Neonatal</a></li>
+								<li><a href="desparacitacion.php">Desparacitación</a></li>
+								<li><a href="homologation.php">Homologación</a></li>
+								<li><a href="arch_plane.php">Archivos Planos</a></li>
+								<li><a href="#">Puerperas</a></li>
+								<li><a href="#">Anemia en niños</a></li>
+								<li><a href="#">Promsa (Visitas-Niños)</a></li>
+								<li><a href="#">Promsa (Visitas-Gestantes)</a></li>
+                            </ul>
+                        </li>
+						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><span class="icon-svg"></span><span class="hide-menu ml-6"> Covid-19</span></a>
+                            <ul aria-expanded="false" class="collapse">
+								<li><a href="#">Consulta tu Vacunación</a></li>
+								<li><a href="#">Consulta Padrón</a></li>
+								<li><a href="https://drive.google.com/file/d/1qR2KiCh3DRyp1OyiJZ2xjBJMpZQxmaSi/view" target="_blank">Descargue su Consentimiento</a></li>
+                                <li><a href="#">Consulta Padrón Tercera Dosis</a></li>
+                            </ul>
+                        </li>
+						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-align-left"></i><span class="hide-menu ml-6"> Padrón Nominal</span></a>
+                            <ul aria-expanded="false" class="collapse">
+								<li><a href="#">Padrón Niños</a></li>
+								<li><a href="padron_gestantes.php">Padrón Gestantes</a></li>
+                            </ul>
+                        </li>
+						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false" style="color: #d8e24e;"><i class="fa fa-graduation-cap"></i><span class="hide-menu ml-6"> Educación</span></a>
+                            <ul aria-expanded="false" class="collapse">
+								<li><a href="reincorporacion.php">Reincorporación</a></li>
+                            </ul>
+                        </li>
+						<li><a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-cubes"></i><span class="hide-menu ml-6">Tableros</span></a>
+                            <ul aria-expanded="false" class="collapse">
+								<li><a href="#">Avance ESNI Regular</a></li>
+                                <li>
+                                    <a class="has-arrow" href="#" aria-expanded="false">Niño Sello</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="https://app.powerbi.com/view?r=eyJrIjoiYjlhNDlmNzItYTdlYS00ZjEwLWFhNjktOGZjOTUxMDA4MmZkIiwidCI6IjE2ZWJhMGRlLTYwNDktNDczNS1iMGE3LWIwOGE3YWE4YjdhNSJ9" target="_blank">Avance Covid</a></li>
+                                        <li><a href="#">Avance Indicadores FED</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="#" aria-expanded="false">Gestante</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+    </div>
+	<script src="./js/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="./js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="./js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="./js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="./js/sticky-kit.min.js"></script>
+    <script src="./js/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="./js/custom.min.js"></script>
+    <!-- Style switcher -->
+    <script src="./js/jQuery.style.switcher.js"></script>
