@@ -12,6 +12,7 @@
     <!-- link para iconos -->
 	<!-- <link rel="stylesheet" href="https://i.icomoon.io/public/temp/bb9dd4d651/UntitledProject/style.css"> -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@mdi/font@6.4.95/css/materialdesignicons.min.css">
 	
 	<!-- bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -142,13 +143,24 @@
 				</div>
 				</div>
 			</div>
+			<nav class="navbar top-navbar navbar-expand-md p-0" style="background: #07032e;">
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav col-12">
+                        <li class="nav-item col-12">
+							<a class="nav-link nav-toggler hidden-md-up waves-effect text-light col-12" href="javascript:void(0)" style="font-size: 23px;">
+								<b>MENU</b><span class="icon-menu float-end mt-2"></span>
+							</a>
+						</li>
+                    </ul>
+                </div>
+            </nav>
         </header>
         <aside class="left-sidebar">
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">PERSONAL</li>
-                        <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false"><span class="icon-home m-r-2"></span><span class="hide-menu ml-6"> Inicio</span></a></li>
+                        <li><a class="has-arrow waves-effect waves-dark" href="index.php" aria-expanded="false"><span class="icon-home m-r-2"></span><span class="hide-menu ml-6"> Inicio</span></a></li>
                         <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu ml-6"> FED</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li>
@@ -205,7 +217,7 @@
                         </li>
 						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><span class="icon-svg"></span><span class="hide-menu ml-6"> Covid-19</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="#">Consulta tu Vacunación</a></li>
+								<li><a href="vacuna_covid.php">Consulta tu Vacunación</a></li>
 								<li><a href="#">Consulta Padrón</a></li>
 								<li><a href="https://drive.google.com/file/d/1qR2KiCh3DRyp1OyiJZ2xjBJMpZQxmaSi/view" target="_blank">Descargue su Consentimiento</a></li>
                                 <li><a href="#">Consulta Padrón Tercera Dosis</a></li>
@@ -242,20 +254,13 @@
             </div>
         </aside>
     </div>
-	<script src="./js/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
+	<script src="./js/jquery-3.6.0.min.js"></script>    
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
     <script src="./js/jquery.slimscroll.js"></script>
-    <!--Wave Effects -->
     <script src="./js/waves.js"></script>
-    <!--Menu sidebar -->
     <script src="./js/sidebarmenu.js"></script>
-    <!--stickey kit -->
     <script src="./js/sticky-kit.min.js"></script>
     <script src="./js/jquery.sparkline.min.js"></script>
-    <!--Custom JavaScript -->
     <script src="./js/custom.min.js"></script>
-    <!-- Style switcher -->
     <script src="./js/jQuery.style.switcher.js"></script>

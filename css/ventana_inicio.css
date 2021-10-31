@@ -168,10 +168,13 @@
     .pop-up-title{
         display: none;
     }
-
+    .pop-up-wrap{
+        margin-top: 90px;
+    }
 }
 
 @media only screen and (max-width: 320px){
     .sub-content h2{
         font-size: 30px;
     }
+}    

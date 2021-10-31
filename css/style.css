@@ -1878,7 +1878,7 @@ form label {
 .topbar .top-navbar {
     max-width: 1280px;
     margin: 0 auto;
-    min-height: 50px;
+    /* min-height: 50px; */
     padding: 0px 15px 0 15px
 }
 
@@ -1907,8 +1907,8 @@ form label {
 }
 
 .topbar .top-navbar .navbar-nav>.nav-item>.nav-link {
-    padding-left: .75rem;
-    padding-right: .75rem;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
     font-size: 15px;
     line-height: 45px
 }
@@ -6196,7 +6196,7 @@ a.mytooltip {
 
 .scroll-sidebar {
     margin: 0 auto;
-    max-width: 1310px;
+    max-width: 1430px;
     padding: 0 15px
 }
 
@@ -6205,7 +6205,7 @@ a.mytooltip {
 }
 
 .sidebar-nav {
-    background: #fff;
+    background: #07032e;
     padding: 0px
 }
 
@@ -6220,29 +6220,29 @@ a.mytooltip {
 
 .sidebar-nav ul li a {
     color: white;
-    padding: 16px 23px 16px;
+    padding: 20px 23px 20px;
     display: block;
-    font-size: 15px;
+    font-size: 14px;
     border-bottom: 1px solid rgba(255,255,255,.5);
 }
 
 .sidebar-nav ul li a.active, .sidebar-nav ul li a:hover {
     color: white;
-    background: #0c0546;
+    /* background: #0c0546; */
 }
 
 .sidebar-nav ul li a.active i, .sidebar-nav ul li a:hover i {
-    color: #1976d2
+    color: #1976d2;
 }
 
 .sidebar-nav ul li a.active {
-    font-weight: 500;
-    color: #263238
+    /* font-weight: 500; */
+    color: #6fa1eb;
 }
 
 .sidebar-nav ul li ul {
     padding: 3px 5px 0 40px;
-    top: 53px;
+    top: 61px;
 }
 
 .sidebar-nav ul li ul li a {
@@ -6273,12 +6273,12 @@ a.mytooltip {
 
 .sidebar-nav>ul>li>a.active {
     font-weight: 400;
-    background: #242933;
-    color: #26c6da
+    background: #07032e;
+    color: #0c0546;
 }
 
 .sidebar-nav>ul>li.active>a {
-    color: white;
+    color: #6fa1eb;
     font-weight: 500
 }
 
@@ -6395,8 +6395,8 @@ a.mytooltip {
         position: fixed;
         display: none;
         height: 100%;
-        width: 260px;
-        padding: 60px 0 0 0px;
+        width: 100%;
+        padding: 150px 0 0 0px;
         overflow: auto
     }
     .mini-sidebar.show-sidebar .left-sidebar, .mini-sidebar.show-sidebar .sidebar-footer {
@@ -7723,7 +7723,7 @@ a.mytooltip {
         flex-direction: row;
         -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
-        -webkit-align-items: center
+        -webkit-align-items: center;
     }
     .topbar .top-navbar .navbar-collapse {
         display: -webkit-box;
@@ -7745,8 +7745,8 @@ a.mytooltip {
         margin-top: 0px
     }
     .topbar .top-navbar .navbar-nav>.nav-item>.nav-link {
-        padding-left: .50rem;
-        padding-right: .50rem
+        padding-left: 1.topbar .top-navbar.50rem;
+        padding-right: .50rem;
     }
     .topbar .top-navbar .navbar-nav .dropdown-menu {
         position: absolute
