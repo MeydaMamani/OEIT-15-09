@@ -45,8 +45,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
-<body>
-	
+<body>	
 	<div id="main-wrapper" style="margin-bottom: 40px;">
         <header class="topbar">
 			<div style="margin: 10px 30px;">
@@ -170,13 +169,3 @@
             </div>
         </aside>
     </div>
-	<script src="./js/jquery-3.6.0.min.js"></script>    
-    <script src="./js/popper.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/jquery.slimscroll.js"></script>
-    <script src="./js/waves.js"></script>
-    <script src="./js/sidebarmenu.js"></script>
-    <script src="./js/sticky-kit.min.js"></script>
-    <script src="./js/jquery.sparkline.min.js"></script>
-    <script src="./js/custom.min.js"></script>
-    <script src="./js/jQuery.style.switcher.js"></script>

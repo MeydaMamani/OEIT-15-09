@@ -100,7 +100,7 @@
 			<div class="col-lg-4 col-sm-8 p-4 border border-primary"> <!--style="background-image: linear-gradient(-109deg, #d1c89b 0%, #169d98 81%);" -->
 				<img src="./img/fondo_formulario.png" alt="" style="position: absolute; margin-top: -24px; margin-left: -24px; z-index: 0; width: 33.75%; height: 38%;">
 				<form name="f1" action="consulta_tmz_violencia.php" method="post" class="___________________form_gestante" style="position: relative;">
-					<p style="font-size: 13px;" class="text-light"><b>Ingrese Red y Distrito: </b></p>
+					<p style="font-size: 13px;" class="text-light"><b>Seleccione una Red y Distrito: </b></p>
 					<div class="row">
 						<div class="col-md">
 						<select class="select_gestante form-select" name="red" id="red" onchange="cambia_distrito()" aria-label="Default select example">

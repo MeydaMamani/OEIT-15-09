@@ -455,14 +455,6 @@
             }
         });
 
-  // function datosParaGrafico(){
-  //   $.ajax({
-  //     url: 'consulta_grafica_bateria_completa.php',
-  //     type: 'POST',
-  //   }).done(function(resp){
-  //     console.log(resp);
-  //   })
-  // }
 </script>
 </body>
 </html>

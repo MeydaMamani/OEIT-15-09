@@ -75,7 +75,7 @@
                 <form action="consulta_solicitud.php" method="POST" name="f1" id="form_solicitud">
                     <div class="row mb-3">
                         <div class="col-md-6 col-sm-12 solicitud">
-                            <p style="font-size: 13px;" class="text-start"><b>Ingrese Red: </b></p>
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione una Red: </b></p>
                             <select class="select_gestante form-select" name="red" id="red" onchange="cambia_distrito()" aria-label="Default select example">
                                 <option value="0" selected>Seleccione Red</option>
                                 <option value="1">DANIEL ALCIDES CARRION</option> 
@@ -85,7 +85,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 col-sm-12 solicitud text-mobile">
-                            <p style="font-size: 13px;" class="text-start"><b>Ingrese Distrito: </b></p>
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione un Distrito: </b></p>
                             <select class="select_gestante form-select" name="distrito" id="distrito" onchange="cambia_establecimiento()" aria-label="Default select example">
                                 <option value="-">-</option>
                             </select>

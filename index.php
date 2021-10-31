@@ -20,3 +20,6 @@
         </div>
     </div>
 </div>
+<script src="./js/records_menu.js"></script>
+</body>
+</html>
