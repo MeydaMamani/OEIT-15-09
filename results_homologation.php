@@ -35,18 +35,18 @@
             </div>
             <div class="row">
                 <div class="col-md-7 table-responsive">
-                    <table id="demo-foo-addrow2" class="table table-hover" data-page-size="15" data-limit-navigation="10">
+                    <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                         <thead>
                             <tr class="text-light font-12 text-center" style="background: #0f81db;">
                                 <th class="align-middle">#</th>
                                 <th class="align-middle">Provincia</th>
                                 <th class="align-middle">Distrito</th>
-                                <th class="align-middle">Total</th>
-                                <th class="align-middle">DNI Nulos</th>
-                                <th class="align-middle">Eje Vial 1</th>
-                                <th class="align-middle">Descripción</th>
-                                <th class="align-middle">Referencia Descripción</th>
-                                <th class="align-middle">Niño Visitado</th>
+                                <th class="align-middle">Total Niños</th>
+                                <th class="align-middle">DNI Homologado</th>
+                                <th class="align-middle" id="color_homologado_head">Eje Vial</th>
+                                <th class="align-middle" id="color_homologado_head">Descripción</th>
+                                <th class="align-middle" id="color_homologado_head">Referencia Descripción</th>
+                                <th class="align-middle" id="color_homologado_head">Niño Visitado</th>
                             </tr>
                         </thead>
                         <div class="float-end pb-4">
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <tbody>
-                        <?php  
+                            <?php  
                             include('query_homologation.php');
                             $i=1;
                             while ($consulta = sqlsrv_fetch_array($consulta2)){  
@@ -114,10 +114,10 @@
                                     <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
                                     <td class="align-middle"><?php echo $newdate3; ?></td>
                                     <td class="align-middle"><?php echo $newdate4; ?></td>
-                                    <td class="align-middle"><?php echo $newdate5; ?></td>
-                                    <td class="align-middle"><?php echo $newdate6; ?></td>
-                                    <td class="align-middle"><?php echo $newdate7; ?></td>
-                                    <td class="align-middle"><?php echo $newdate8; ?></td>
+                                    <td class="align-middle" id="color_homologado_body"><?php echo $newdate5; ?></td>
+                                    <td class="align-middle" id="color_homologado_body"><?php echo $newdate6; ?></td>
+                                    <td class="align-middle" id="color_homologado_body"><?php echo $newdate7; ?></td>
+                                    <td class="align-middle" id="color_homologado_body"><?php echo $newdate8; ?></td>
                                 </tr>
                             <?php
                                 ;}                    
@@ -138,15 +138,29 @@
                 <div class="col-1 p-0"></div>
                 <div class="col-md-4 mt-5 p-0 text-center">
                     <div class="border border-secondary">
+                        <h4 class="p-2">Avance Regional</h4>
                         <canvas id="myChartProvince"></canvas>
                     </div><br>
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-outline-dark btn-sm m-2 btn_dac" name="province" value="DANIEL ALCIDES CARRION"> DANIEL ALCIDES CARRION</button>
-                        <button class="btn btn-outline-primary btn-sm m-2 btn_oxa" name="province"> OXAPAMPA</button>
-                        <button class="btn btn-outline-danger btn-sm m-2 btn_pasco" name="province"> PASCO</button>
-                    </div><br>
-                    <div>
+                    <div class="border border-secondary">
+                        <h4 class="p-2">Avance Distrital</h4>
                         <canvas id="myChartDistrict"></canvas>
+                    </div><br>
+                    <div class="d-flex justify-content-center">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <!-- <div class="col-4">
+                            <img src="./img/CARRION2.png" alt="" style="width: 5%; position: absolute; margin-left: -4px; margin-top: 47px;">
+                        </div>
+                        <div class="col-4">
+                            <img src="./img/PASCO1.png" alt="" style="width: 11%; position: absolute; margin-left: -8.5%; margin-top: 3.5%">
+                        </div>
+                        <div class="col-4">
+                            <img src="./img/OXA1.png" alt="" style="width: 11%; position: absolute; margin-left: -11.8em; margin-top: -1px;">
+                        </div> -->
+                        <button class="btn btn-outline-dark btn-sm m-2 btn_dac" id="btn_dac" name="province" value="DANIEL ALCIDES CARRION"> DANIEL A. CARRION</button>
+                        <button class="btn btn-outline-dark btn-sm m-2 btn_oxa" name="province"> OXAPAMPA</button>
+                        <button class="btn btn-outline-dark btn-sm m-2 btn_pasco" name="province"> PASCO</button>
                     </div>
                 </div>
             </div>
@@ -159,7 +173,77 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
   <script>
+    $( document ).ready(function() {
+        $("#btn_dac").click();
+    });
     // grafico para provincia
+    var options = {
+            // maintainAspectRatio: false,
+            spanGaps: false,
+            responsive: true,
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: {
+                    fontColor: 'red',
+                    boxWidth: 14,
+                    fontFamily: 'proximanova'
+                }
+            },
+            tooltips: {
+                mode: 'label',
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var type = data.datasets[tooltipItem.datasetIndex].label;
+                        var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                        var total = 0;
+                        for (var i = 0; i < data.datasets.length; i++)
+                            total += data.datasets[i].data[tooltipItem.index];
+                        if (tooltipItem.datasetIndex !== data.datasets.length - 1) {
+                            return type + " : " + value.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '1,');
+                        } else {
+                            return [type + " : " + value.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '1,'), "Overall : " + total];
+                        }
+                    }
+                }
+            },
+            plugins: {
+                datalabels: {
+                    formatter: function(value, ctx) {
+                        let sum = 0;
+                        let dataArr = ctx.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value * 100 / sum).toFixed(0) + "%";
+                        return percentage;
+                    },
+                    font: {
+                        weight: "normal"
+                    },
+                    color: "#fff"
+                }
+            },
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        fontColor: "#fff"
+                    }
+                }],
+                yAxes: [{
+                    stacked: true,
+                    display: false,
+                    ticks: {
+                        fontColor: "#fff"
+                    }
+                }]
+            }
+
+        };
     var ctx_province= document.getElementById("myChartProvince").getContext("2d");
     var myChartProvince= new Chart(ctx_province,{
         type: "bar",
@@ -175,7 +259,7 @@
                     for ($i = 0; $i < $num_prov; $i++) {
                         $data = $list_provinces[$i];
                         if($data == 'DANIEL ALCIDES CARRION'){
-                            $data = 'DANIEL CARRION';
+                            $data = 'DANIEL A. CARRION';
                         }
                         echo "'$data', ";
                     }
@@ -262,7 +346,7 @@
             },
             ]
         },
-        options:{
+        options: {
             indexAxis: 'y',
             scales: {
                 yAxes: [{
@@ -402,11 +486,11 @@
                 options:{
                     indexAxis: 'y',
                     scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                                    }
-                        }]
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                                        }
+                            }]
                     }
                 }
             });

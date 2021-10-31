@@ -46,92 +46,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 <body>
-	<!-- <header>
-		<div style="margin: 10px 30px;">
-			<div class="row">
-			<div class="col-2">
-				<img src="./img/diresa1.jpg" class="img_diresa" alt="Logotipo Diresa">
-			</div>
-			<div class="col-10 text-end">
-				<img src="./img/oeit.png" class="img_oeit" width="240" alt="Logotipo OEIT">
-			</div>
-			</div>
-		</div>
-		<div class="menu_bar">
-			<a href="#" class="bt-menu"><span class="icon-menu"></span>Menu</a>
-		</div> -->
-		<!-- <nav>
-			<ul>
-				<li><a href="index.php"><span class="icon-home"></span>Inicio</a></li>
-				<li class="submenu">
-					<a href="#"><span class="icon-reddit"></span>Niño<span class="caret icon-arrow-down6"></span></a>
-					<ul class="children">
-						<li><a href="prematuros.php">Niños Prematuros (CG SI-03)<span class="icon-dot"></span></a></li>
-						<li><a href="tamizaje_neonatal.php">TMZ Neonatal (CG SI-02)<span class="icon-dot"></span></a></li>
-						<li><a href="4_meses.php">4 Meses (CG SI-04)<span class="icon-dot"></span></a></li>
-						<li><a href="6-8_meses.php">6 - 8 Meses (CG SI-05)<span class="icon-dot"></span></a></li>
-						<li><a href="cred.php">CRED (SI-CG06)<span class="icon-dot"></span></a></li>
-						<li><a href="paquete_nino.php">Paquete<span class="icon-dot"></span></a></li>
-					</ul>
-				</li>
-				<li class="submenu">
-					<a href="#"><i class="fa fa-female"></i> Gestante<span class="caret icon-arrow-down6"></span></a>
-					<ul class="children">
-						<li><a href="bateria_completa.php">Bateria Completa (CG SI-01)<span class="icon-dot"></span></a></li>
-						<li><a href="gestante_tratamiento.php">Gestante con TMZ e Inicio de Tratamiento por Violencia (CG VI-01)<span class="icon-dot"></span></a></li>
-						<li><a href="gestante_usuarias_nuevas.php">Gestante Usuarias Nuevas con TMZ de Violencia (CG VI-02)<span class="icon-dot"></span></a></li>
-					</ul>
-				</li>
-				<li class="submenu">
-					<a href="#"><span class="icon-svg"></span>Covid-19<span class="caret icon-arrow-down6"></span></a>
-					<ul class="children">
-						<li><a href="vacuna_covid.php">Consulta tu Vacunación<span class="icon-dot"></span></a></li>
-						<li><a href="#">Consulta Padrón <span class="icon-dot"></span></a></li>
-						<li><a href="https://drive.google.com/file/d/1qR2KiCh3DRyp1OyiJZ2xjBJMpZQxmaSi/view" target="_blank">Descargue su Consentimiento <span class="icon-dot"></span></a></li>
-						<li><a href="sis_covid.php">Sis-Covid<span class="icon-dot"></span></a></li>
-					</ul>
-				</li>
-				
-				<li class="submenu">
-					<a href="#"><span class="icon-user"></span>Paciente<span class="caret icon-arrow-down6"></span></a>
-					<ul class="children">
-						<li><a href="detalle_paciente.php">Detalle Paciente<span class="icon-dot"></span></a></li>
-					</ul>
-				</li>
-				<li class="submenu">
-					<a href="solicitud.php"><i class="fa fa-address-card"></i> Solicitud<span class="caret icon-arrow-down6"></span></a>
-				</li>
-				<li class="submenu">
-					<a href="#"><i class="fa fa-calculator"></i> Seguimiento<span class="caret icon-arrow-down6"></span></a>
-					<ul class="children">
-						<li><a href="seguimiento_neonatal.php">Seguimiento Tamizaje Neonatal<span class="icon-dot"></span></a></li>
-						<li><a href="cant_prof_EPP.php">Cantidad Profesional EPP (2020 FED)<span class="icon-dot"></span></a></li>
-						<li><a href="desparacitacion.php">Desparacitación<span class="icon-dot"></span></a></li>
-						<li><a href="homologation.php">Homologación<span class="icon-dot"></span></a></li>
-					</ul>
-				</li>
-				<li class="submenu">
-					<a href="#" style="color: #d8e24e;"><i class="fa fa-graduation-cap"></i> Educación<span class="caret icon-arrow-down6"></span></a>
-					<ul class="children">
-						<li><a href="reincorporacion.php">Reincorporación<span class="icon-dot"></span></a></li>
-					</ul>
-				</li>
-				<li class="submenu">
-					<a href="#" style="color: #79cff6;"><i class="fa fa-file"></i> Archivos Planos<span class="caret icon-arrow-down6"></span></a>
-					<ul class="children">
-						<li><a href="arch_plane.php">Planos<span class="icon-dot"></span></a></li>
-					</ul>
-				</li>
-				<li class="submenu">
-					<a href="#"><i class="fa fa-align-left"></i> Tableros<span class="caret icon-arrow-down6"></span></a>
-					<ul class="children">
-						<li><a href="https://app.powerbi.com/view?r=eyJrIjoiYjlhNDlmNzItYTdlYS00ZjEwLWFhNjktOGZjOTUxMDA4MmZkIiwidCI6IjE2ZWJhMGRlLTYwNDktNDczNS1iMGE3LWIwOGE3YWE4YjdhNSJ9" target="_blank">Vacunación Covid - Enlace<span class="icon-dot"></span></a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav> -->
-	<!-- </header> -->
-	<div id="main-wrapper">
+	
+	<div id="main-wrapper" style="margin-bottom: 40px;">
         <header class="topbar">
 			<div style="margin: 10px 30px;">
 				<div class="row">
@@ -171,7 +87,7 @@
                                         <li><a href="4_meses.php">Suplementación 4 meses (CG SI-04)</a></li>
 										<li><a href="6-8_meses.php">Inicio Oportuno (CG SI-05)</a></li>
 										<li><a href="cred.php">CRED (CG SI-06)</a></li>
-										<li><a href="#">Paquete Completo</a></li>
+										<li><a href="paquete_nino.php">Paquete Completo</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -192,7 +108,7 @@
 								<li>
                                     <a class="has-arrow" href="#" aria-expanded="false">Medicamentos</a>
                                     <ul aria-expanded="false" class="collapse">
-                                        <li><a href="app-email.html">Cantidad de Profesionales EPP (2020 FED)</a></li>
+                                        <li><a href="cant_prof_EPP.php">Cantidad de Profesionales EPP (2020 FED)</a></li>
                                     </ul>
                                 </li>
                             </ul>
