@@ -26,6 +26,8 @@
         </div>
     </div>
 </div>
+<script src="./js/records_menu.js"></script>
+<script src="./js/select2.js"></script>
 <script>
   $("#btn_buscar").click(function(){
         var doc = $("#doc").val();

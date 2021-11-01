@@ -169,11 +169,12 @@
     </div>
 </div>
 
+<script src="./js/records_menu.js"></script>
 <script src="./plugin/footable/js/footable-init.js"></script>
 <script src="./plugin/footable/js/footable.all.min.js"></script>
+
 <script>
     $("#btn_buscar").click(function(){
-        // $("#form_solicitud")[0].reset();
         var red = $("#red").val();
         var distrito = $("#distrito").val();
         var establecimiento = $("#establecimiento").val();

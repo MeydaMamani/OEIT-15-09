@@ -58,7 +58,7 @@
         </div>
     </div>
 </div>
-<script src="./js/jquery-3.6.0.min.js"></script>
+<script src="./js/records_menu.js"></script>
 <script src="./js/select2.js"></script>
 <script src="./js/district.js"></script>
 </body>

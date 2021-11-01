@@ -27,21 +27,10 @@
         </div>
     </div>
 </div>
-
+<script src="./js/records_menu.js"></script>
 <script>
-  
-  // $("#doc").keypress(function() {
-    // var doc = $("#doc").val();
-    // if(doc.length == 8) {
-    //   document.getElementById("btn_buscar").type = "submit";
-    // }
-    // else{
-    //   toastr.warning('La cantidad de dígitos es incorrecto', null, { "closeButton": true, "progressBar": true });
-    // }
-  // });
-  $(document).on('keypress',function(e) {
+   $(document).on('keypress',function(e) {
     if(e.which == 13) {
-        // alert('You pressed enter!');
         var doc = $("#doc").val();
         if(doc.length == 8) {
           document.getElementById("btn_buscar").type = "submit";
@@ -50,7 +39,7 @@
           toastr.warning('La cantidad de dígitos es incorrecto', null, { "closeButton": true, "progressBar": true });
         }
     }
-});
+  });
 
   $("#btn_buscar").click(function(){
     var doc = $("#doc").val();

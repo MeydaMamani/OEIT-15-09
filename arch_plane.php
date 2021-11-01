@@ -65,6 +65,8 @@
         </div>
     </div>
 </div>
+<script src="./js/records_menu.js"></script>
+<script src="./js/select2.js"></script>
 
 <script>
     $("#export_data").click(function(){

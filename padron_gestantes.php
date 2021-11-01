@@ -332,10 +332,8 @@
             </div>
         </div>
 
-        <script src="./js/jquery-3.6.0.min.js"></script>
+<script src="./js/records_menu.js"></script>
 <script src="./plugin/footable/js/footable-init.js"></script>
 <script src="./plugin/footable/js/footable.all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 </body>
 </html>
