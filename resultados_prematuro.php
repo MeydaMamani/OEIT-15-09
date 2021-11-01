@@ -16,18 +16,79 @@
         else{ $correctos++; }
     }
 ?>
-
+        <br>
         <div class="container">
+            <div class="row">
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <marquee width="100%" direction="right" height="15px">
+                        <p class="font-12 text-secondary"><b>Fuente: </b> BD Padrón nominal y BD CNV con Fecha: 31 de Octubre del 2021 a las 08:30 horas</p>
+                    </marquee>
+                </div>
+            </div>
             <div class="text-center p-3">
               <h3>Niños Prematuros CG03 - <?php echo $nombre_mes; ?></h3>
             </div>
-            <div class="row mb-3 mt-3">
-                <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"> <?php echo $row_cnt; ?></b></div>
-                <div class="col-8 d-flex justify-content-end">
-                  <ul class="list-group list-group-horizontal-sm">
-                    <li class="list-group-item font-14">Suplementados <span class="badge bg-success rounded-pill correcto"><?php echo $correctos; ?></span></li>
-                    <li class="list-group-item font-14">No Suplementados <span class="badge bg-danger rounded-pill incorrecto"><?php echo $incorrectos; ?></span></li>
-                    <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill avance">
+            <div class="row mb-3">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="card" style="margin-right: 40px;">
+                        <div class="card-body">
+                            <h4 class="card-title text-secondary">Cantidad Registros</h4>
+                            <div class="d-flex">
+                                <div class="align-self-center">
+                                    <h4 class="font-medium m-b-0"><i class="fa fa-plus text-info"></i><b class="total"> <?php echo $row_cnt; ?></b></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-right: 40px;">
+                        <div class="card-body">
+                            <h4 class="card-title text-secondary">Suplementados</h4>
+                            <div class="d-flex">
+                                <div class="align-self-center">
+                                    <h4 class="font-medium m-b-0 correcto"><?php echo $correctos; ?></h4>
+                                </div>
+                                <div class="ml-auto">
+                                    <div id="spark8"><i width="67" height="40" class="fa fa-user-plus text-success" style="display: inline-block; width: 67px; height: 40px; vertical-align: top;"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-right: 40px;">
+                        <div class="card-body">
+                            <h4 class="card-title text-secondary">No Suplementados</h4>
+                            <div class="d-flex">
+                                <div class="align-self-center">
+                                    <h4 class="font-medium m-b-0 incorrecto"><i class="fa fa-user-times text-danger"></i><?php echo $incorrectos; ?></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-right: 40px;">
+                        <div class="card-body">
+                            <div class="row p-t-10 p-b-10">
+                                <div class="col p-r-0">
+                                    <h1 class="font-light avance"><?php
+                                        if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
+                                            echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
+                                        ?> 
+                                    </h1>
+                                    <h6 class="text-muted">Avance</h6></div>
+                                <div class="col text-right align-self-center">
+                                    <div data-label="<?php
+                                        if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
+                                            echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
+                                        ?>" class="css-bar m-b-0 css-bar-info css-bar-<?php if($correctos == 0 and $incorrectos == 0){ echo '0'; }else{
+                                            echo number_format((float)(($correctos/$row_cnt)*100), 0, '.', ''); }
+                                        ?>"><i class="mdi mdi-receipt"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  <!-- <ul class="list-group list-group-horizontal-sm">
+                    <li class="list-group-item font-14">Suplementados <span class="badge bg-success rounded-pill correcto font-14"><?php echo $correctos; ?></span></li>
+                    <li class="list-group-item font-14">No Suplementados <span class="badge bg-danger rounded-pill incorrecto font-14"><?php echo $incorrectos; ?></span></li>
+                    <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill avance font-14">
                       <?php
                         if($correctos == 0 and $incorrectos == 0){
                             echo '0 %';
@@ -36,27 +97,25 @@
                           }
                       ?> </span>
                     </li>
-                  </ul>
+                  </ul> -->
                 </div>
             </div>
-            <div class="row mb-3">
-              <div class="col-lg-12 text-center">
-                <!-- <button type="button" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                <button type="button" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Información</button>
-                <button type="button" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='prematuros.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
-              </div>
-            </div>
             <div class="d-flex">
-                <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
-                <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>
-                <form action="impresion_prematuro.php" method="POST">
-                    <input hidden name="red" value="<?php echo $_POST['red']; ?>">
-                    <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                    <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
-                </form>
+                <div class="col-md-5 d-flex">
+                    <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
+                    <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>
+                    <form action="impresion_prematuro.php" method="POST">
+                        <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                        <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                        <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                        <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
+                    </form>
+                </div>
+                <div class="col-md-7">
+                    <button type="button" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Información</button>
+                    <button type="button" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='prematuros.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+                </div>
             </div>
-
             <div class="col-12 table-responsive table_no_fed">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
@@ -76,7 +135,7 @@
                             <th class="align-middle" id="color_prematuro_head">Se Atiende</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-3 table_no_fed">
+                    <div class="float-end pb-1 table_no_fed">
                         <div class="form-group">
                             <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
@@ -337,19 +396,13 @@
           </div>
         </div>
     <?php } ?>
-    
+    <script src="./js/records_menu.js"></script>
     <script src="./plugin/footable/js/footable-init.js"></script>
     <script src="./plugin/footable/js/footable.all.min.js"></script>
+    <script src="./plugin/chartist-js/jquery.sparkline.min.js"></script>
+
     <script>
-        // $("#export_data").click(function(e){
-        //     event.preventDefault();
-        //     var excel = $("#export_data").val();
-        //     console.log(excel);
-        //     $.post("consulta_prematuro.php", {archivo: excel}, function(resp){
-        //         console.log(resp);
-        //     });
-        // });
-        $(function(){
+         $(function(){
             $(".btn_fed").click(function(){
                 $(".total").text(<?php echo $fed-1; ?>);
                 $(".correcto").text(<?php echo $fed_supl; ?>);
@@ -376,7 +429,6 @@
             e.preventDefault();
             addrow2.trigger('footable_filter', {filter: $(this).val()});
         });
-
         var addrow2 = $('#demo-foo-addrow');
         addrow2.footable().on('click', '.delete-row-btn', function() {
             var footable = addrow.data('footable');

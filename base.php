@@ -44,6 +44,11 @@
 	<!-- notificaciones toastr -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <link rel="stylesheet" href="./plugin/chartist-js/chartist.min.css">
+    <link rel="stylesheet" href="./plugin/chartist-js/chartist-init.css">
+    <link rel="stylesheet" href="./plugin/chartist-js/chartist-plugin-tooltip.min.js">
+    <link rel="stylesheet" href="./plugin/chartist-js/css-chart.css">
 </head>
 <body>	
 	<div id="main-wrapper" style="margin-bottom: 40px;">
