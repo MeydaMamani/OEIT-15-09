@@ -36,6 +36,7 @@
 	
 	<!-- link chartjs -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    
 	
 	<!-- select2 para buscardor -->
 	<link rel="stylesheet" type="text/css" href="./css/select2.css">
@@ -51,7 +52,7 @@
     <link rel="stylesheet" href="./plugin/chartist-js/css-chart.css">
 </head>
 <body>	
-	<div id="main-wrapper" style="margin-bottom: 40px;">
+	<div id="main-wrapper">
         <header class="topbar">
 			<div style="margin: 10px 30px;">
 				<div class="row">
@@ -138,9 +139,9 @@
 						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><span class="icon-svg"></span><span class="hide-menu ml-6"> Covid-19</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="vacuna_covid.php">Consulta tu Vacunación</a></li>
-								<li><a href="#">Consulta Padrón</a></li>
+								<li><a href="vacuna_padron.php">Consulta Padrón</a></li>
 								<li><a href="https://drive.google.com/file/d/1qR2KiCh3DRyp1OyiJZ2xjBJMpZQxmaSi/view" target="_blank">Descargue su Consentimiento</a></li>
-                                <li><a href="#">Consulta Padrón Tercera Dosis</a></li>
+                                <li><a href="standart_3_dose.php">Consulta Padrón Tercera Dosis</a></li>
                             </ul>
                         </li>
 						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-align-left"></i><span class="hide-menu ml-6"> Padrón Nominal</span></a>

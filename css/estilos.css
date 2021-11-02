@@ -187,7 +187,7 @@ li a, a{
 
 @media screen and (min-width: 1200px){
 	.homologation {
-		margin: 30px 110px;
+		margin: 10px 110px;
 	}
 }
 
@@ -195,4 +195,42 @@ canvas.myChartProvince, canvas.myChartDistrict{
 	width: 400px !important; 
 	height: 300px !important; 
 	display: initial !important;
+}
+
+.img-user{
+	background: white;
+	border-radius: 50%;
+	border: 6px solid #2223255e;
+}
+.img-covid{
+	color: #55b6bc;
+	font-size: 36px;
+	padding-left: 80px;
+	margin-bottom: 40px;
+}
+.profiletimeline1 {
+	position: relative;
+	padding-left: 40px;
+	margin-right: 10px;
+	border-left: 1px solid #26dad2;
+	margin-left: 30px;
+}
+.profiletimeline1 .sl-left {
+	float: left;
+	margin-left: -65px;
+	z-index: 1;
+	margin-right: 30px;
+}
+.profiletimeline1 .sl-item {
+	margin: 20px 0;
+}
+.circle1{
+	background: white;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	padding: 10px;
+	color: #26dad2;
+	border: 3px solid #26dad2;
 }

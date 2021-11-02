@@ -26,24 +26,6 @@ b{
     left: calc(50% - 3.5px)
 }
 
-* {
-    outline: none
-}
-
-body {
-    background: #fff;
-    color: black;
-    font-family: "Poppins", sans-serif;
-    margin: 0;
-    overflow-x: hidden;
-    font-weight: 300
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-    background: #ffffff
-}
 
 a:focus, a:hover {
     text-decoration: none
@@ -1283,9 +1265,8 @@ form label {
 }
 
 .page-wrapper {
-    background: #eef5f9;
     padding-bottom: 60px;
-    padding-top: 65px
+    padding-top: 200px
 }
 
 .container-fluid {
@@ -1296,8 +1277,9 @@ form label {
 
 .topbar {
     background: white;
-    position: relative;
-    z-index: 50
+    position: fixed;
+    z-index: 50;
+    width: 100%;
 }
 
 .topbar .top-navbar {
@@ -4650,18 +4632,19 @@ a.mytooltip {
 }
 
 .left-sidebar {
-    position: absolute;
+    position: fixed;
     width: 100%;
     margin-top: 0;
     z-index: 20;
     background: #07032e;
     -webkit-box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
-    box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08)
+    box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+    padding-top: 115px;
 }
 
-.fix-sidebar .left-sidebar {
+/* .fix-sidebar .left-sidebar {
     position: fixed
-}
+} */
 
 .scroll-sidebar {
     margin: 0 auto;
@@ -5670,76 +5653,6 @@ a.mytooltip {
     font-weight: 400
 }
 
-.profiletimeline {
-    position: relative;
-    padding-left: 40px;
-    margin-right: 10px;
-    border-left: 1px solid rgba(120, 130, 140, 0.13);
-    margin-left: 30px
-}
-
-.profiletimeline .sl-left {
-    float: left;
-    margin-left: -60px;
-    z-index: 1;
-    margin-right: 15px
-}
-
-.profiletimeline .sl-left img {
-    max-width: 40px
-}
-
-.profiletimeline .sl-item {
-    margin-top: 8px;
-    margin-bottom: 30px
-}
-
-.profiletimeline .sl-date {
-    font-size: 12px;
-    color: #99abb4
-}
-
-.profiletimeline .time-item {
-    border-color: rgba(120, 130, 140, 0.13);
-    padding-bottom: 1px;
-    position: relative
-}
-
-.profiletimeline .time-item:before {
-    content: " ";
-    display: table
-}
-
-.profiletimeline .time-item:after {
-    background-color: #ffffff;
-    border-color: rgba(120, 130, 140, 0.13);
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    bottom: 0;
-    content: '';
-    height: 14px;
-    left: 0;
-    margin-left: -8px;
-    position: absolute;
-    top: 5px;
-    width: 14px
-}
-
-.profiletimeline .time-item-item:after {
-    content: " ";
-    display: table
-}
-
-.profiletimeline .item-info {
-    margin-bottom: 15px;
-    margin-left: 15px
-}
-
-.profiletimeline .item-info p {
-    margin-bottom: 10px!important
-}
-
 .blog-widget {
     margin-top: 30px
 }
@@ -6120,10 +6033,6 @@ a.mytooltip {
     display: none!important
 }
 
-.card-inverse .card-blockquote, .card-inverse .card-footer, .card-inverse .card-header, .card-inverse .card-title {
-    color: #ffffff
-}
-
 @media (min-width:1650px) {
     .widget-app-columns {
         -webkit-column-count: 3;
@@ -6214,7 +6123,7 @@ a.mytooltip {
         margin-top: 0px
     }
     .topbar .top-navbar .navbar-nav>.nav-item>.nav-link {
-        padding-left: 1.topbar .top-navbar.50rem;
+        padding-left: 1.50rem;
         padding-right: .50rem;
     }
     .topbar .top-navbar .navbar-nav .dropdown-menu {
@@ -6226,7 +6135,7 @@ a.mytooltip {
     }
     .mini-sidebar .page-wrapper {
         margin-left: 0px;
-        padding-top: 60px
+        padding-top: 15445px
     }
     .comment-text .comment-footer .action-icons {
         display: block;
@@ -6484,12 +6393,6 @@ input[type=checkbox]:not(:disabled).tabbed:focus~.lever:after, input[type=checkb
     -webkit-transform-origin: left 0px;
     -ms-transform-origin: left 0px;
     transform-origin: left 0px
-}
-
-.card {
-    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 4px
 }
 
 .well, pre {

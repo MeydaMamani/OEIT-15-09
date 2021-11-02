@@ -1,8 +1,8 @@
 <?php
     include('./base.php');
 ?>
-<br><br><br>
-<div class="col-12 text-center mb-4 mt-4">
+
+<div class="page-wrapper">
     <div class="pop-up-wrap">
         <div class="pop-up-title">
             <h2>DEIT</h2>

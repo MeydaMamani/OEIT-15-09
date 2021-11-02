@@ -16,14 +16,14 @@
 
   if (isset($consulta['NUM_DOC'])) {
   ?>
-    <br>
+    <br><br>
     <div class="container">
       <div class="row mb-4">
         <div class="col-lg-10">
           <h4 class="m-b-30"> INFORMACIÓN - <?php echo $doc; ?></h4>
         </div>
         <div class="col-lg-2 text-end">
-          <button type="submit" name="Limpiar" class="btn btn-outline-info btn-sm 1btn_buscar" onclick="location.href='vacuna_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+          <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
         </div>
       </div>
       <div class="border border-success">
@@ -104,7 +104,7 @@
           <br>
           <div class="container">
             <div class="col-md-12 text-end">
-              <button type="submit" name="Limpiar" class="btn btn-outline-info btn-sm 1btn_buscar" onclick="location.href='vacuna_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+              <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
             </div><br>
             <div class="alert alert-primary" role="alert">
               Usted no cuenta con nínguna dosis o no se encuentra en el padrón regional de Pasco
@@ -119,3 +119,7 @@
       ?>
     </div>
   <?php } ?>
+
+ <script src="./js/records_menu.js"></script>
+</body>
+</html>
