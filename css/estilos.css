@@ -234,3 +234,31 @@ canvas.myChartProvince, canvas.myChartDistrict{
 	color: #26dad2;
 	border: 3px solid #26dad2;
 }
+
+.btn_dac{
+	font-weight: 500;
+    border: 0;
+	clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
+	width: 170px;
+    height: 60px;
+}
+
+.btn_oxa{
+	font-weight: 500;
+    border: 0;
+	clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 15% 50%, 0% 0%);
+	width: 170px;
+}
+
+.btn_pasco{
+	font-weight: 500;
+    border: 0;
+	clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
+	width: 170px;
+}
+
+.btn_dac.active, .btn_oxa.active, .btn_pasco.active { 
+	color: blue; 
+	background: #d7e6f5;
+	transform: scale(1.17);
+}
