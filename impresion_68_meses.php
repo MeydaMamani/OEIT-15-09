@@ -166,7 +166,8 @@
                 if(is_null ($consulta['SUPLE']) ){ echo ' - '.";"; }
                 else{ echo $consulta['SUPLE']-> format('d/m/y').";" ; }
 
-                if(!is_null ($consulta['HEMOGLOBINA']) && !is_null ($consulta['D50X']) && !is_null ($consulta['U310_SF1']) && is_null ($consulta['SUPLE'])){
+                // SUPLEMENTACION      D50X     U3010_SF1
+              if(!is_null ($consulta['HEMOGLOBINA']) && !is_null ($consulta['D50X']) && !is_null ($consulta['U310_SF1']) && is_null ($consulta['SUPLE'])){
                   if($consulta['HEMOGLOBINA'] == $consulta['D50X'] && $consulta['HEMOGLOBINA'] == $consulta['U310_SF1']){
                       echo "Si"."\n";
                   }else{
@@ -178,28 +179,32 @@
                       $fecha_anemia_7_dias = strtotime(date("d-m-Y", strtotime($nuevo_formato_anemia."+ 7 days")));
 
                       if($fecha_anemia < $fecha_hemoglobina_7_dias && $fecha_anemia > $nuevo_formato_hemoglobina) {
-                        echo "Si"."\n";
+                          echo "Si"."\n";
                       }
                       else{
-                        echo "No"."\n";
+                          echo "No"."\n";
                       }
                   }
               }
+              // SUPLEMENTACION     Y     HEMOGLOBINA
               else if(!is_null ($consulta['HEMOGLOBINA']) && is_null ($consulta['D50X']) && is_null ($consulta['U310_SF1']) && !is_null ($consulta['SUPLE'])){
                   if($consulta['HEMOGLOBINA'] == $consulta['SUPLE']){
-                    echo "Si"."\n";
+                      echo "Si"."\n";
                   }
                   else{
                       $nuevo_formato_hemoglobina = date_format($consulta['HEMOGLOBINA'], "d-m-Y");
-                      $fecha_hemoglobina_7_dias = strtotime(date("d-m-Y", strtotime($nuevo_formato_hemoglobina."+ 8 days")));
+                      $fecha_hemoglobina_7_dias = strtotime(date("d-m-Y", strtotime($nuevo_formato_hemoglobina."+ 7 days")));
                       $fecha_suplementacion = strtotime(date_format($consulta['SUPLE'], "d-m-Y"));
                       if($fecha_suplementacion < $fecha_hemoglobina_7_dias && $fecha_suplementacion > $nuevo_formato_hemoglobina) {
-                        echo "Si"."\n";
+                          echo "Si"."\n";
+                      }
+                      else{
+                          echo "No"."\n";
                       }
                   }
               }
               else{
-                echo "No"."\n";
+                  echo "No"."\n";
               }
             }   
         }
