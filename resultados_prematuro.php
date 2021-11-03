@@ -75,7 +75,7 @@
                                             ?> 
                                         </h1>
                                         <h6 class="text-muted">Avance</h6></div>
-                                    <div class="col text-right align-self-center">
+                                    <div class="col text-right align-self-center position-sticky">
                                         <div data-label="<?php
                                             if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
                                                 echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
