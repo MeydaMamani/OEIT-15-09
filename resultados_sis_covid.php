@@ -17,6 +17,7 @@
         $row_cont_p++;
     }
 ?>
+    <div class="page-wrapper">
         <div class="container">
             <div class="text-center p-3">
               <h3>SIS COVID</h3><br>
@@ -379,9 +380,9 @@
                 </div>
             </div>    
         </div>
-
+    </div>
     <?php } ?>
-    
+    <script src="./js/records_menu.js"></script>
     <script src="./plugin/footable/js/footable-init.js"></script>
     <script src="./plugin/footable/js/footable.all.min.js"></script>
     <script>

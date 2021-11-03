@@ -14,7 +14,7 @@
         $row_cnt++;
     }
 ?>
-        <br>
+    <div class="page-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-9"></div>
@@ -148,7 +148,7 @@
                 </table>
             </div>
         </div>
-
+    </div>
     <?php } ?>
     
     <script src="./js/records_menu.js"></script>

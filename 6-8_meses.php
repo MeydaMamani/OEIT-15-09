@@ -1,13 +1,13 @@
 <?php
     include('./base.php');
 ?>
-<div class="col-12 text-center mb-4">
+<div class="page-wrapper">
     <div class="bd-example">
         <div class="row">
             <div class="col-lg-3 col-sm-2"></div>
             <div class="col-lg-6 col-sm-8 p-4"><br><br>
                 <div class="card" style="border-color: #337ab7;">
-                    <h5 class="card-header text-white" style="background: #337ab7;">Niños de 6 a 8 meses</h5>
+                    <h5 class="card-header text-white text-center" style="background: #337ab7;">Niños de 6 a 8 meses</h5>
                     <div class="card-body">
                         <form name="f1" action="resultados_6_8_meses.php" method="post" class="_form_gestante">
                             <div class="row">

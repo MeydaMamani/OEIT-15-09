@@ -6,6 +6,7 @@
         $row_cont++;
     }  
 ?>
+    <div class="page-wrapper">
         <div class="container">
             <div class="text-center p-3">
                 <h3>Padrón de Gestantes</h3>
@@ -331,6 +332,7 @@
               </table><br>
             </div>
         </div>
+    </div>
 
 <script src="./js/records_menu.js"></script>
 <script src="./plugin/footable/js/footable-init.js"></script>

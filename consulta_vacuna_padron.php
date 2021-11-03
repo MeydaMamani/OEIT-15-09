@@ -13,7 +13,7 @@
     
     if (isset($consulta['NUM_DOC'])) {
   ?>
-    <br><br>
+<div class="page-wrapper">
     <div class="container">
       <div class="row mb-4">
         <div class="col-lg-12 text-end">
@@ -62,9 +62,10 @@
             </div>
         </div>
 	</div>
+</div>
       <?php
         } else { ?>
-            <br><br>
+        <div class="page-wrapper">
             <div class="container">
               <div class="col-md-12 text-end">
                 <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_padron.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
@@ -73,6 +74,7 @@
                 USTED NO SE ENCUENTRA EN EL PADRON REGIONAL, ACERQUESE A SU ESTABLECIMIENTO DE SALUD MAS CERCANO PARA UNA REEVALUACION Y SER CONSIDERADO EN NUESTRA BASE DE DATOS REGIONAL
               </div>
             </div>
+        </div>    
           <?php } 
         
           sqlsrv_close($conn6);

@@ -27,7 +27,7 @@
       }
     }
 ?>
-
+      <div class="page-wrapper">
         <div class="container">
             <div class="text-center p-3">
               <h4>Tamizaje Neonatal (CG02) - <?php echo $nombre_mes; ?> </h4>
@@ -335,7 +335,7 @@
                 </table>
             </div>
         </div>
-
+      </div>
         <!-- MODAL CUADRO RESUMEN-->
         <div class="modal fade" id="ModalResumen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 1250px;">
@@ -418,7 +418,8 @@
 
   <?php } ?>
     
-  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/records_menu.js"></script>
+  <!-- <script src="./js/jquery-3.6.0.min.js"></script> -->
   <script src="./plugin/footable/js/footable-init.js"></script>
   <script src="./plugin/footable/js/footable.all.min.js"></script>
 

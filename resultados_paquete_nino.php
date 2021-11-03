@@ -15,7 +15,7 @@
         $row_cont++;
     }
 ?>
-
+    <div class="page-wrapper">
         <div class="container">
             <div class="text-center p-3">
               <h3>Paquete Niño - <?php echo $nombre_mes; ?></h3>
@@ -203,35 +203,13 @@
                 </table>
             </div>
         </div>
-
+    </div>
     <?php } ?>
 
+    <script src="./js/records_menu.js"></script>
     <script src="./plugin/footable/js/footable-init.js"></script>
     <script src="./plugin/footable/js/footable.all.min.js"></script>
     <script>
-        $(function(){
-            // $(".btn_fed").click(function(){
-            //     $(".total").text(<?php echo $i_fed-1; ?>);
-            //     $(".cumple").text(<?php echo $cumple_fed; ?>);
-            //     $(".no_cumple").text(<?php echo $no_cumple_fed; ?>);
-            //     $(".avance").text(<?php if($cumple_fed==0 && $i_fed-1 == 0){ echo "'0 %'"; }
-            //         else{ $porcentaje = number_format((float)(($cumple_fed/($i_fed-1))*100), 2, '.', '');
-            //                 echo "'$porcentaje %'"; }?>);
-            //     $(".table_fed").show();
-            //     $(".table_no_fed").hide();
-            // });
-            // $(".btn_all").click(function(){
-            //     $(".total").text(<?php echo $row_cont; ?>);
-            //     $(".cumple").text(<?php echo $cumple; ?>);
-            //     $(".no_cumple").text(<?php echo $no_cumple; ?>);
-            //     $(".avance").text(<?php if($cumple == 0 and $row_cont == 0){ echo "'0 %'"; }
-            //         else{ $porcentaje = number_format((float)(($cumple/$row_cont)*100), 2, '.', '');
-            //                 echo "'$porcentaje %'"; }?>);
-            //     $(".table_fed").hide();
-            //     $(".table_no_fed").show();
-            // });
-        });
-
         $('#demo-input-search').on('input', function (e) {
             e.preventDefault();
             addrow2.trigger('footable_filter', {filter: $(this).val()});

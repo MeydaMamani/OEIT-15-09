@@ -15,6 +15,7 @@
       }
     }  
   ?>
+    <div class="page-wrapper">
         <div class="container">
             <div class="text-center p-3">
               <h3>Gestantes de Bateria Completa (Indicador 1 - CG01) - <?php echo $nombre_mes; ?></h3>
@@ -282,6 +283,7 @@
               </table>
             </div>
         </div>
+    </div>
         <!-- MODAL CUADRO RESUMEN-->
         <div class="modal fade" id="ModalResumen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 1300px;">
@@ -357,7 +359,7 @@
         </div>
 <?php } ?>
 
-<script src="./js/jquery-3.6.0.min.js"></script>
+<script src="./js/records_menu.js"></script>
 <script src="./plugin/footable/js/footable-init.js"></script>
 <script src="./plugin/footable/js/footable.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>

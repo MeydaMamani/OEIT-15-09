@@ -398,6 +398,7 @@
           </div>
         </div>
     <?php } ?>
+
     <script src="./js/records_menu.js"></script>
     <script src="./plugin/footable/js/footable-init.js"></script>
     <script src="./plugin/footable/js/footable.all.min.js"></script>

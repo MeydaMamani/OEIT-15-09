@@ -2,64 +2,66 @@
     include('./base.php');
     require('abrir.php');
 ?>
-<br>
-<div class="container text-center mb-2">
-    <div class="bd-example">
-        <br>
-        <button type="button" class="btn btn-outline-primary mb-4" data-bs-toggle="modal" data-bs-target="#ModalSolicitud"><i class="fa fa-plus"></i> Agregar Solicitud</button>
-        <div class="table-responsive">
-            <table id="demo-foo-addrow2" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
-                <thead>
-                    <tr class="text-center font-12" style="background: #c9d0e2;">
-                        <th class="align-middle">#</th>
-                        <th class="align-middle">Provincia</th>
-                        <th class="align-middle">Distrito</th>
-                        <th class="align-middle">TOTAL</th>
-                    </tr>
-                </thead>
-                <div>
-                    <div class="float-end pb-1 table_no_fed">
-                        <div class="form-group">
-                        <div id="inputbus" class="input-group input-group-sm">
-                            <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                            <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
-                        </div>
+
+<div class="page-wrapper">
+    <div class="container text-center mb-2">
+        <div class="bd-example">
+            <br>
+            <button type="button" class="btn btn-outline-primary mb-4" data-bs-toggle="modal" data-bs-target="#ModalSolicitud"><i class="fa fa-plus"></i> Agregar Solicitud</button>
+            <div class="table-responsive">
+                <table id="demo-foo-addrow2" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
+                    <thead>
+                        <tr class="text-center font-12" style="background: #c9d0e2;">
+                            <th class="align-middle">#</th>
+                            <th class="align-middle">Provincia</th>
+                            <th class="align-middle">Distrito</th>
+                            <th class="align-middle">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <div>
+                        <div class="float-end pb-1 table_no_fed">
+                            <div class="form-group">
+                            <div id="inputbus" class="input-group input-group-sm">
+                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
+                            </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <tbody>
-                <?php 
-                    $resultado2 = "SELECT Provincia, distrito, COUNT(distrito) as total FROM USER_REQUEST
-                    GROUP BY Provincia, distrito";
-                    $consulta2 = sqlsrv_query($conn, $resultado2);
-                    $i=1;
-                    while ($consulta = sqlsrv_fetch_array($consulta2)){ 
-                        $newdate = $consulta['Provincia'];
-                        $newdate2 = $consulta['distrito'];
-                        $newdate3 = $consulta['total'];
-
-                ?>
-                    <tr class="text-center font-12">
-                        <td class="align-middle"><?php echo $i++; ?></td>
-                        <td class="align-middle"><?php echo $newdate; ?></td>
-                        <td class="align-middle"><?php echo $newdate2; ?></td>
-                        <td class="align-middle"><?php echo $newdate3; ?></td>
-                    </tr>
-                <?php
-                    ;}              
-                    include("cerrar.php");
-                ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="15">
-                            <div class="">
-                                <ul class="pagination"></ul>
-                            </div>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+                    <tbody>
+                    <?php 
+                        $resultado2 = "SELECT Provincia, distrito, COUNT(distrito) as total FROM USER_REQUEST
+                        GROUP BY Provincia, distrito";
+                        $consulta2 = sqlsrv_query($conn, $resultado2);
+                        $i=1;
+                        while ($consulta = sqlsrv_fetch_array($consulta2)){ 
+                            $newdate = $consulta['Provincia'];
+                            $newdate2 = $consulta['distrito'];
+                            $newdate3 = $consulta['total'];
+    
+                    ?>
+                        <tr class="text-center font-12">
+                            <td class="align-middle"><?php echo $i++; ?></td>
+                            <td class="align-middle"><?php echo $newdate; ?></td>
+                            <td class="align-middle"><?php echo $newdate2; ?></td>
+                            <td class="align-middle"><?php echo $newdate3; ?></td>
+                        </tr>
+                    <?php
+                        ;}              
+                        include("cerrar.php");
+                    ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="15">
+                                <div class="">
+                                    <ul class="pagination"></ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
 </div>

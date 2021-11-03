@@ -6,6 +6,7 @@
         $row_cont++;
     }  
 ?>
+    <div class="page-wrapper">
         <div class="container">
             <div class="text-center p-3">
                 <h3>Reincorporación</h3>
@@ -185,7 +186,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="15">
+                        <td colspan="20">
                         <div class="">
                             <ul class="pagination"></ul>
                         </div>
@@ -195,6 +196,7 @@
               </table>
             </div>
         </div>
+    </div>
 
 <script src="./js/records_menu.js"></script>
 <script src="./plugin/footable/js/footable-init.js"></script>

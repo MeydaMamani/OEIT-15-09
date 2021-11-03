@@ -50,7 +50,7 @@
         }
     }
 ?>
-
+    <div class="page-wrapper">
         <div class="container">
             <div class="text-center p-3">
               <h3>Niños de 6 a 8 Meses CG05 - <?php echo $nombre_mes; ?></h3>
@@ -435,7 +435,7 @@
                 </table>
             </div>
         </div>
-
+    </div>
         <!-- MODAL INFORMACION-->
         <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -449,6 +449,7 @@
         </div>
     <?php } ?>
 
+    <script src="./js/records_menu.js"></script>
     <script src="./plugin/footable/js/footable-init.js"></script>
     <script src="./plugin/footable/js/footable.all.min.js"></script>
     <script>

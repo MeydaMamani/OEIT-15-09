@@ -1,13 +1,13 @@
 <?php
     include('./base.php');
 ?>
-<div class="col-12 text-center mb-4">
+<div class="page-wrapper">
     <div class="bd-example">
         <div class="row">
             <div class="col-lg-2 col-sm-2"></div>
             <div class="col-lg-8 col-sm-8 p-4"><br><br>
                 <div class="card" style="border-color: #337ab7;">
-                    <h5 class="card-header text-white" style="background: #337ab7;">Seguimiento Tamizaje Neonatal</h5>
+                    <h5 class="card-header text-white text-center" style="background: #337ab7;">Seguimiento Tamizaje Neonatal</h5>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-5">
