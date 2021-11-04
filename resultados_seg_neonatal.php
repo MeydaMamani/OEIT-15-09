@@ -53,8 +53,6 @@
               </div>
             </div>
             <div class="d-flex">
-                <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="fa fa-clone"></i> FED</button>
-                <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="fa fa-circle"></i> Todo</button>
                 <form action="impresion_seg_neonatal.php" method="POST">
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                     <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">

@@ -14,6 +14,12 @@ body {background:#FEFEFE;}
 	}
 }
 
+@media screen and (max-width: 800px) {
+	.datos_avance{
+		margin: 10px;
+	}
+}
+
 .profiletimeline {
     position: relative;
     padding-left: 40px;
@@ -61,6 +67,34 @@ body {background:#FEFEFE;}
     font-size: 15px;
 }
 
+.font-18 {
+	font-size: 18px;
+}
+
+.font-30{
+	font-size: 30px;
+}
+
+.font-35{
+	font-size: 35px;
+}
+
+.font-40{
+	font-size: 40px;
+}
+
+.font-45{
+	font-size: 45px;
+}
+
+.font-50{
+	font-size: 50px;
+}
+
+.font-60{
+	font-size: 60px;
+}
+
 a:hover{
 	color: white;
 }
@@ -71,12 +105,7 @@ a:hover{
 .row{
 	margin-right: 0;
 }
-.font-13{
-	font-size: 13px;
-}
-.font-14{
-	font-size: 14px;
-}
+
 .bg-correct{
 	color: #1ad27d;
 	border: 1px solid #1ad27d;
@@ -261,4 +290,17 @@ canvas.myChartProvince, canvas.myChartDistrict{
 	color: blue; 
 	background: #d7e6f5;
 	transform: scale(1.17);
+}
+
+
+.css-bar {
+	width: 90px !important;
+	height: 90px !important;
+}
+
+.css-bar:after, .css-bar > img, .css-bar > i {
+	width: 74px !important;
+	height: 75px !important;
+	margin-left: 8px !important;
+	margin-top: 8px !important;
 }
