@@ -142,6 +142,7 @@
 								<li><a href="vacuna_padron.php">Consulta Padrón</a></li>
 								<li><a href="https://drive.google.com/file/d/1qR2KiCh3DRyp1OyiJZ2xjBJMpZQxmaSi/view" target="_blank">Descargue su Consentimiento</a></li>
                                 <li><a href="standart_3_dose.php">Consulta Padrón Tercera Dosis</a></li>
+                                <li><a href="nominal_vaccine_advance.php">Avance Vacuna Nominal</a></li>
                             </ul>
                         </li>
 						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-align-left"></i><span class="hide-menu ml-6"> Padrón Nominal</span></a>
