@@ -158,6 +158,7 @@
                         </li>
 						<li><a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-cubes"></i><span class="hide-menu ml-6">Tableros</span></a>
                             <ul aria-expanded="false" class="collapse">
+                                <li><a href="graph_advance_vaccine.php">Avance de Vacunas</a></li>
 								<li><a href="#">Avance ESNI Regular</a></li>
                                 <li>
                                     <a class="has-arrow" href="#" aria-expanded="false">Niño Sello</a>
