@@ -298,11 +298,6 @@
                                 }
                                 return percentage;
                             }
-                            if(mydata == 0){
-                                let dataArr = ctx.chart.data.datasets[0].data;
-                                let percentage = (1*100 ).toFixed(0)+"%";
-                                return percentage;
-                            }
                         },
                         color: 'black',
                         anchor: 'end',
@@ -467,11 +462,6 @@
                                 } else {
                                     percentage = percentage.toFixed(2)+"%";
                                 }
-                                return percentage;
-                            }
-                            if(mydata == 0){
-                                let dataArr = ctx.chart.data.datasets[0].data;
-                                let percentage = (1*100 ).toFixed(0)+"%";
                                 return percentage;
                             }
                         },
@@ -647,11 +637,6 @@
                                 } else {
                                     percentage = percentage.toFixed(2)+"%";
                                 }
-                                return percentage;
-                            }
-                            if(mydata == 0){
-                                let dataArr = ctx.chart.data.datasets[0].data;
-                                let percentage = (1*100 ).toFixed(0)+"%";
                                 return percentage;
                             }
                         },

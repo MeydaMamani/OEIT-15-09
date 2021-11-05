@@ -35,11 +35,11 @@
             <table>
                 <thead>
                     <tr class="text-center">
-                        <th colspan="8" style="font-size: 26px; border: 1px solid #3A3838;">DEIT PASCO</th>
+                        <th colspan="8" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
                     </tr>
                     <tr></tr>
                     <tr class="text-center">
-                        <th colspan="8" style="font-size: 30px; border: 1px solid #3A3838;">APTOS PARA TERCERA DOSIS</th>
+                        <th colspan="8" style="font-size: 28px; border: 1px solid #3A3838;">APTOS PARA TERCERA DOSIS</th>
                     </tr>
                     <tr></tr>
                 </thead>

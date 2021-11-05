@@ -8,6 +8,7 @@
         global $conex;
         include('./base.php');
 
+    include('zone_setting.php');
     include('consulta_prematuro.php');
     $row_cnt=0; $correctos=0; $incorrectos=0;
     while ($consulta = sqlsrv_fetch_array($consulta2)){
@@ -22,60 +23,79 @@
                 <div class="row">
                     <div class="col-9"></div>
                     <div class="col-3">
-                        <marquee width="100%" direction="right" height="15px">
-                            <p class="font-12 text-secondary"><b>Fuente: </b> BD Padrón nominal y BD CNV con Fecha: 31 de Octubre del 2021 a las 08:30 horas</p>
+                        <marquee width="100%" direction="left" height="15px">
+                            <p class="font-12 text-secondary"><b>Fuente: </b> BD Padrón Nominal y BD CNV con Fecha: <?php echo date("d-m-y"); ?> a las 08:30 horas</p>
                         </marquee>
                     </div>
                 </div>
                 <div class="text-center mb-3">
-                  <h3>Niños Prematuros CG03 - <?php echo $nombre_mes; ?></h3>
+                  <h3 class="mb-4">Niños Prematuros CG03 - <?php echo $nombre_mes; ?></h3>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-12 d-flex justify-content-center">
-                        <div class="card" style="margin-right: 40px;">
-                            <div class="card-body">
-                                <h4 class="card-title text-secondary">Cantidad Registros</h4>
-                                <div class="d-flex">
+                    <div class="row justify-content-center">
+                        <div class="card col-md-3 datos_avance">
+                            <div class="card-body p-1">
+                                <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
+                                <div class="justify-content-center">
                                     <div class="align-self-center">
-                                        <h4 class="font-medium m-b-0"><i class="fa fa-plus text-info"></i><b class="total"> <?php echo $row_cnt; ?></b></h4>
+                                        <h4 class="font-medium mb-3 text-center d-flex">
+                                            <div class="col-md-5 text-end">
+                                                <img src="./img/programmer3.png" width="90" alt="">
+                                            </div>
+                                            <div class="mt-2 col-md-6">
+                                                <b class="total font-60"> <?php echo $row_cnt; ?></b> <i class="fa fa-plus font-50 text-secondary"></i>
+                                            </div>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card" style="margin-right: 40px;">
-                            <div class="card-body">
-                                <h4 class="card-title text-secondary">Suplementados</h4>
-                                <div class="d-flex">
+                        <div class="card col-md-3 datos_avance">
+                            <div class="card-body p-1">
+                                <p class="card-title text-secondary text-center font-18 pt-2">Suplementados</h4>
+                                <div class="justify-content-center">
                                     <div class="align-self-center">
-                                        <h4 class="font-medium m-b-0 correcto"><?php echo $correctos; ?></h4>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <div id="spark8"><i width="67" height="40" class="fa fa-user-plus text-success" style="display: inline-block; width: 67px; height: 40px; vertical-align: top;"></i></div>
+                                        <h4 class="font-medium mb-3 text-center d-flex">
+                                            <div class="col-md-5 text-end">
+                                                <img src="./img/boy.png" width="90" alt="">
+                                            </div>
+                                            <div class="mt-2 col-md-6">
+                                                <b class="total font-60"> <?php echo $correctos; ?></b> <i class="fa fa-check font-50 text-success
+                                                 text-secondary"></i>
+                                            </div>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card" style="margin-right: 40px;">
-                            <div class="card-body">
-                                <h4 class="card-title text-secondary">No Suplementados</h4>
-                                <div class="d-flex">
+                        <div class="card col-md-3 datos_avance">
+                            <div class="card-body p-0">
+                            <p class="card-title text-secondary text-center font-18 pt-3">No Suplementados</h4>
+                                <div class="justify-content-center">
                                     <div class="align-self-center">
-                                        <h4 class="font-medium m-b-0 incorrecto"><i class="fa fa-user-times text-danger"></i><?php echo $incorrectos; ?></h4>
+                                        <h4 class="font-medium mb-3 text-center d-flex">
+                                            <div class="col-md-5 text-end">
+                                                <img src="./img/boy_x.png" width="90" alt="">
+                                            </div>
+                                            <div class="mt-2 col-md-6">
+                                                <b class="total font-60"> <?php echo $incorrectos; ?></b> <i class="fa fa-times font-50 text-danger text-secondary"></i>
+                                            </div>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card" style="margin-right: 40px;">
-                            <div class="card-body">
-                                <div class="row p-t-10 p-b-10">
-                                    <div class="col p-r-0">
-                                        <h1 class="font-light avance"><?php
+                        <div class="card col-md-3 datos_avance">
+                            <div class="card-body p-1">
+                                <div class="row pt-4">
+                                    <div class="col-md-7 p-r-0 text-center">
+                                        <h1 class="font-light avance mb-3"><?php
                                             if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
                                                 echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
                                             ?> 
                                         </h1>
-                                        <h6 class="text-muted">Avance</h6></div>
-                                    <div class="col text-right align-self-center position-sticky">
+                                        <h4 class="text-muted">Avance</h4></div>
+                                    <div class="col-md-5 text-center align-self-center position-sticky">
                                         <div data-label="<?php
                                             if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
                                                 echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }

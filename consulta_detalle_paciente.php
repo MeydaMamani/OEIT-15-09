@@ -12,7 +12,7 @@ global $conex;
         $resultado = "SELECT t.Provincia_Establecimiento,t.Distrito_Establecimiento,t.Nombre_Establecimiento, t.Tipo_Doc_Paciente,
                       t.Numero_Documento_Paciente,t.Fecha_Nacimiento_Paciente, t.Id_Cita, t.Fecha_Atencion,t.Tipo_Diagnostico, t.Codigo_Item, t.Valor_Lab, t.Descripcion_Item
                       from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t 
-                      where Numero_Documento_Paciente='$doc' and anio='2021' and Fecha_Nacimiento_Paciente>='1979-01-01'
+                      where Numero_Documento_Paciente='$doc' and anio='2021' and Fecha_Nacimiento_Paciente>='1960-01-01'
                       order by Fecha_Atencion DESC,id_cita;";
 
               $consulta2 = sqlsrv_query($conn, $resultado);
