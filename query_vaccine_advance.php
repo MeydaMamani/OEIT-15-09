@@ -24,7 +24,7 @@
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado = "SELECT TIPO_DOC,NUM_DOC, PRIMERA_PACIEN, PRIMERA_PROV, 
                             PRIMERA_DIST, PRIMERA_EESS, PRIMERA, PRIMERA_FAB, SEGUNDA_PROV,
-                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB 
+                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB, SEGUNDA_EDAD 
                             FROM VACUNADOS 
                             WHERE (PRIMERA_PROV='$red' OR SEGUNDA_PROV='$red')";
 
@@ -33,7 +33,7 @@
             $dist = '';
             $resultado = "SELECT TIPO_DOC,NUM_DOC, PRIMERA_PACIEN, PRIMERA_PROV, 
                             PRIMERA_DIST, PRIMERA_EESS, PRIMERA, PRIMERA_FAB, SEGUNDA_PROV,
-                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB 
+                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB, SEGUNDA_EDAD
                             FROM VACUNADOS";
 
         }
@@ -41,7 +41,7 @@
             $dist=$dist_1;
             $resultado = "SELECT TIPO_DOC,NUM_DOC, PRIMERA_PACIEN, PRIMERA_PROV, 
                             PRIMERA_DIST, PRIMERA_EESS, PRIMERA, PRIMERA_FAB, SEGUNDA_PROV,
-                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB 
+                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB, SEGUNDA_EDAD
                             FROM VACUNADOS 
                             WHERE (PRIMERA_PROV='$red' OR SEGUNDA_PROV='$red') 
                             AND (PRIMERA_DIST = '$dist' OR SEGUNDA_DIST='$dist')";

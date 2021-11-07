@@ -175,10 +175,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <?php include('homolgation_chart.php'); ?>
-  <script>
-    $( document ).ready(function() {
-        $("#btn_dac").click();
-    });
-</script>
+    <script>
+        $( document ).ready(function() {
+            $("#btn_dac").click();
+        });
+    </script>
 </body>
 </html>

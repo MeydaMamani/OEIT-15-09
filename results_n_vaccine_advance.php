@@ -39,7 +39,7 @@
                             <th></th>
                             <th colspan="3" class="border">Paciente</th>
                             <th colspan="5" class="border">Primera Dosis</th>
-                            <th colspan="5" class="border">Segunda Dosis</th>
+                            <th colspan="6" class="border">Segunda Dosis</th>
                         </tr>
                         <tr class="text-center font-12" style="background: #c9d0e2;">
                             <th class="align-middle border">#</th>
@@ -56,6 +56,7 @@
                             <th class="align-middle border">Establecimiento</th>
                             <th class="align-middle border">Fecha de Vacunación</th>
                             <th class="align-middle border">Vacuna</th>
+                            <th class="align-middle border">Edad</th>
                         </tr>
                     </thead>
                     <div class="float-end pb-1">
@@ -135,6 +136,11 @@
                                     $newdate13 = '   -';}
                                 else{
                                     $newdate13 = $consulta['SEGUNDA_FAB'];}
+
+                                if(is_null ($consulta['SEGUNDA_EDAD']) ){
+                                    $newdate14 = '   -';}
+                                else{
+                                    $newdate14 = $consulta['SEGUNDA_EDAD'];}    
                         ?>
                         <tr class="text-center font-12">
                             <td class="align-middle"><?php echo $i++; ?></td>
@@ -151,6 +157,7 @@
                             <td class="align-middle"><?php echo $newdate11; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate12); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate13); ?></td>
+                            <td class="align-middle"><?php echo $newdate14; ?></td>
                         </tr>
                         <?php
                             ;}                    

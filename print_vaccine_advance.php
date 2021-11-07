@@ -27,7 +27,7 @@
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado = "SELECT TIPO_DOC,NUM_DOC, PRIMERA_PACIEN, PRIMERA_PROV, 
                             PRIMERA_DIST, PRIMERA_EESS, PRIMERA, PRIMERA_FAB, SEGUNDA_PROV,
-                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB 
+                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB, SEGUNDA_EDAD
                             FROM VACUNADOS 
                             WHERE (PRIMERA_PROV='$red' OR SEGUNDA_PROV='$red')";
 
@@ -36,7 +36,7 @@
             $dist = '';
             $resultado = "SELECT TIPO_DOC,NUM_DOC, PRIMERA_PACIEN, PRIMERA_PROV, 
                             PRIMERA_DIST, PRIMERA_EESS, PRIMERA, PRIMERA_FAB, SEGUNDA_PROV,
-                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB 
+                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB, SEGUNDA_EDAD 
                             FROM VACUNADOS";
 
         }
@@ -44,7 +44,7 @@
             $dist=$dist_1;
             $resultado = "SELECT TIPO_DOC,NUM_DOC, PRIMERA_PACIEN, PRIMERA_PROV, 
                             PRIMERA_DIST, PRIMERA_EESS, PRIMERA, PRIMERA_FAB, SEGUNDA_PROV,
-                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB 
+                            SEGUNDA_DIST,SEGUNDA_EESS, SEGUNDA, SEGUNDA_FAB, SEGUNDA_EDAD 
                             FROM VACUNADOS 
                             WHERE (PRIMERA_PROV='$red' OR SEGUNDA_PROV='$red') 
                             AND (PRIMERA_DIST = '$dist' OR SEGUNDA_DIST='$dist')";
@@ -62,11 +62,11 @@
         <table>
             <thead>
                 <tr class="text-center">
-                    <th colspan="14" style="font-size: 28px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
+                    <th colspan="15" style="font-size: 28px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
                 </tr>
                 <tr></tr>
                 <tr class="text-center">
-                    <th colspan="14" style="font-size: 30px; border: 1px solid #3A3838;">AVANCE DE VACUNA NOMINAL</th>
+                    <th colspan="15" style="font-size: 30px; border: 1px solid #3A3838;">AVANCE DE VACUNA NOMINAL</th>
                 </tr>
                 <tr></tr>
             </thead>
@@ -77,7 +77,7 @@
                     <th></th>
                     <th colspan="3" class="border">Paciente</th>
                     <th colspan="5" class="border">Primera Dosis</th>
-                    <th colspan="5" class="border">Segunda Dosis</th>
+                    <th colspan="6" class="border">Segunda Dosis</th>
                 </tr>
                 <tr class="font-12 text-center" style="background: #c9d0e2;">
                     <th style="border: 1px solid #DDDDDD;">#</th>
@@ -94,6 +94,7 @@
                     <th style="border: 1px solid #DDDDDD;">Establecimiento</th>
                     <th style="border: 1px solid #DDDDDD;">Fecha Vacunado</th>
                     <th style="border: 1px solid #DDDDDD;">Vacuna</th>
+                    <th style="border: 1px solid #DDDDDD;">Edad</th>
                 </tr>
             </thead>
             <tbody>
@@ -164,6 +165,11 @@
                             $newdate13 = '   -';}
                         else{
                             $newdate13 = $consulta['SEGUNDA_FAB'];}
+
+                        if(is_null ($consulta['SEGUNDA_EDAD']) ){
+                            $newdate14 = '   -';}
+                        else{
+                            $newdate14 = $consulta['SEGUNDA_EDAD'];}   
                 ?>
                 <tr class="text-center font-12">
                     <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $i++; ?></td>
@@ -180,6 +186,7 @@
                     <td style="border: 1px solid #DDDDDD;"><?php echo $newdate11; ?></td>
                     <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo utf8_encode($newdate12); ?></td>
                     <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo utf8_encode($newdate13); ?></td>
+                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo utf8_encode($newdate14); ?></td>
                 </tr>
                 <?php
                     ;}                    

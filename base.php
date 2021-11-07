@@ -36,7 +36,6 @@
 	
 	<!-- link chartjs -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
-    
 	
 	<!-- select2 para buscardor -->
 	<link rel="stylesheet" type="text/css" href="./css/select2.css">
