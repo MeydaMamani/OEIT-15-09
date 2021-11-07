@@ -4585,7 +4585,7 @@ a.mytooltip {
 
 .sidebar-nav ul li a {
     color: white;
-    padding: 20px 23px 20px;
+    padding: 12px 20px 11px;
     display: block;
     font-size: 14px;
     border-bottom: 1px solid rgba(255,255,255,.5);
@@ -4607,7 +4607,7 @@ a.mytooltip {
 
 .sidebar-nav ul li ul {
     padding: 3px 5px 0 40px;
-    top: 61px;
+    top: 55px;
 }
 
 .sidebar-nav ul li ul li a {

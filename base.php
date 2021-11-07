@@ -11,8 +11,8 @@
 
     <!-- link para iconos -->
 	<!-- <link rel="stylesheet" href="https://i.icomoon.io/public/temp/bb9dd4d651/UntitledProject/style.css"> -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@mdi/font@6.4.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="./css/materialdesignicons.css">
+    <link rel="stylesheet" href="./css/materialdesignicons.min.css">
 	
 	<!-- bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -80,8 +80,10 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">PERSONAL</li>
-                        <li><a class="has-arrow waves-effect waves-dark" href="index.php" aria-expanded="false"><span class="icon-home m-r-2"></span><span class="hide-menu ml-6"> Inicio</span></a></li>
-                        <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu ml-6"> FED</span></a>
+                        <li><a class="has-arrow waves-effect" href="index.php" aria-expanded="false">
+                            <i class="mdi mdi-home text-white pb-1 m-r-2"></i><span class="hide-menu ml-6"> Inicio</span></a>
+                        </li>
+                        <li><a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-account text-white pb-1"></i><span class="hide-menu ml-6"> FED</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li>
                                     <a class="has-arrow" href="#" aria-expanded="false">Niños</a>
@@ -117,12 +119,12 @@
                                 </li>
                             </ul>
                         </li>
-						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-address-card"></i><span class="hide-menu ml-6"> Solicitud</span></a>
+						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-file-document text-white pb-1"></i><span class="hide-menu ml-6"> Solicitud</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="solicitud.php">Mi Solicitud</a></li>
                             </ul>
                         </li>
-						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-calculator"></i><span class="hide-menu ml-6"> Seguimiento</span></a>
+						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-calendar-check text-white pb-1"></i><span class="hide-menu ml-6"> Seguimiento</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="detalle_paciente.php">Detalle Paciente</a></li>
 								<li><a href="seguimiento_neonatal.php">Tamizaje Neonatal</a></li>
@@ -135,7 +137,7 @@
 								<li><a href="#">Promsa (Visitas-Gestantes)</a></li>
                             </ul>
                         </li>
-						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><span class="icon-svg"></span><span class="hide-menu ml-6"> Covid-19</span></a>
+						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-multiplication-box text-white pb-1"></i><span class="hide-menu ml-6"> Covid-19</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="vacuna_covid.php">Consulta tu Vacunación</a></li>
 								<li><a href="vacuna_padron.php">Consulta Padrón</a></li>
@@ -144,18 +146,18 @@
                                 <li><a href="nominal_vaccine_advance.php">Avance Vacuna Nominal</a></li>
                             </ul>
                         </li>
-						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-align-left"></i><span class="hide-menu ml-6"> Padrón Nominal</span></a>
+						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-format-list-bulleted text-white pb-1"></i><span class="hide-menu ml-6"> Padrón Nominal</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="#">Padrón Niños</a></li>
 								<li><a href="padron_gestantes.php">Padrón Gestantes</a></li>
                             </ul>
                         </li>
-						<li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false" style="color: #d8e24e;"><i class="fa fa-graduation-cap"></i><span class="hide-menu ml-6"> Educación</span></a>
+						<li> <a class="has-arrow waves-effect" aria-expanded="false" style="color: #d8e24e;"><i class="mdi mdi-school pb-1" style="color: #d8e24e;"></i><span class="hide-menu ml-6"> Educación</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="reincorporacion.php">Reincorporación</a></li>
                             </ul>
                         </li>
-						<li><a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa fa-cubes"></i><span class="hide-menu ml-6">Tableros</span></a>
+						<li><a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-chart-bar text-white pb-1"></i><span class="hide-menu ml-6">Tableros</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="graph_advance_vaccine.php">Avance de Vacunas</a></li>
 								<li><a href="#">Avance ESNI Regular</a></li>
