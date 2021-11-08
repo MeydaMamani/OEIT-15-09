@@ -22,17 +22,17 @@
                     <div class="row">
                         <div class="border border-secondary col-md-4">
                             <div class="col-12" style="display: none;">
-                                <div class="d-flex justify-content-center">
-                                    <button class="btn-sm btn_dac" id="btn_dac" name="province" value="DANIEL ALCIDES CARRION"> DANIEL A. CARRION</button>
-                                    <button class="btn-sm btn_pasco" name="province"> PASCO</button>
-                                    <button class="btn-sm btn_oxa" name="province"> OXAPAMPA</button>
-                                </div>
                             </div>
                             <div class="col-md-12">
-                                <object data="./img/Mapa_de_localización_Pasco.svg" type="image/svg+xml" class="position-absolute" style="left: 11%; margin-top: 177px;">
+                                <div class="justify-content-center position-absolute" style="margin-top: 15%;">
+                                    <button class="btn-sm btn_dac1" id="btn_dac" name="province"> DANIEL A. CARRION</button><br>
+                                    <button class="btn-sm btn_pasco1" name="province"> PASCO</button><br>
+                                    <button class="btn-sm btn_oxa1" name="province"> OXAPAMPA</button>
+                                </div>
+                                <!-- <object data="./img/Mapa_de_localización_Pasco.svg" type="image/svg+xml" class="position-absolute" style="left: 11%; margin-top: 177px;">
                                     <img src="./img/Mapa_de_localización_Pasco.svg" alt="">
-                                </object>
-                                <img src="./img/mapa_peru.png" alt="">
+                                </object> -->
+                                <img src="./img/mapa_peru.png" alt="" style="width: 105%;">
                             </div>
                         </div>                    
                         <div class="table-responsive col-md-8" id="no_graph_district">    
@@ -417,7 +417,9 @@
     <script src="./plugin/footable/js/footable.all.min.js"></script>
     <script src="./js/Chart.min.js"></script>
     <script src="./js/chartjs-plugin-datalabels.min.js"></script>
+
     <script>
+        
         var ctx = document.getElementById("myPieChart").getContext('2d');
         var myPieChart = new Chart(ctx, {
         type: 'pie',
@@ -481,204 +483,204 @@
                         ],
                         backgroundColor: '#1d3f74',
                     },
-                    // {
-                    //     label:'IPV',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $IPV_04 = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $IPV_04[] = $con['IPV_02_04_MESES_2_DOSIS'];
-                    //             }
-                    //             $num_total = sizeof($IPV_04);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $IPV_04[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
-                    // {
-                    //     label:'APO',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $APO = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $APO[] = $con['APO_06_MESES_3ra_Dosis'];
-                    //             }
-                    //             $num_total = sizeof($APO);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $APO[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
-                    // {
-                    //     label:'Pentavalente',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $penta_meses = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $penta_meses[] = $con['PENTAVALENTE_02_04_06_MESES_3ra_dosis'];
-                    //             }
-                    //             $num_total = sizeof($penta_meses);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $penta_meses[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
-                    // {
-                    //     label:'Reacción Pentavalente DPT',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $penta_dpt = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $penta_dpt[] = $con['Reacciones_Adversas_pentavalente_DTP_3ra_dosis'];
-                    //             }
-                    //             $num_total = sizeof($penta_dpt);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $penta_dpt[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
-                    // {
-                    //     label:'Reacción Pentavalente HVB',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $penta_hvb = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $penta_hvb[] = $con['Reacciones_Adversas_pentavalente_HvB_3ra_dosis'];
-                    //             }
-                    //             $num_total = sizeof($penta_hvb);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $penta_hvb[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
-                    // {
-                    //     label:'Reacción Pentavalente HIB',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $penta_hib = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $penta_hib[] = $con['Reacciones_Adversas_pentavalente_HiB_3ra_dosis'];
-                    //             }
-                    //             $num_total = sizeof($penta_hib);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $penta_hib[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
-                    // {
-                    //     label:'Rotavirus',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $rotavirus = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $rotavirus[] = $con['ROTAVIRUS_02_04_MESES_2da_DOSIS'];
-                    //             }
-                    //             $num_total = sizeof($rotavirus);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $rotavirus[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
-                    // {
-                    //     label:'Neumococo Meses',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $neumococo = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $neumococo[] = $con['NEUMOCOCO_02_04_MESES_2da_DOSIS'];
-                    //             }
-                    //             $num_total = sizeof($neumococo);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $neumococo[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
-                    // {
-                    //     label:'Influenza',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $influenza = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $influenza[] = $con['INFLUENZA_2da_DOSIS'];
-                    //             }
-                    //             $num_total = sizeof($influenza);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $influenza[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
-                    // {
-                    //     label:'Neumococo Año',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $neumo_anio = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $neumo_anio[] = $con['NEUMOCOCO_1_ANIO_3ra_DOSIS'];
-                    //             }
-                    //             $num_total = sizeof($neumo_anio);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $neumo_anio[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
-                    // {
-                    //     label:'SPR',
-                    //     data:[
-                    //         <?php
-                    //             include('query_graph_advance_vaccine.php');
-                    //             $spr = array();
-                    //             while ($con = sqlsrv_fetch_array($consulta1)){
-                    //                 $spr[] = $con['SPR_1_ANIO_1ra_DOSIS'];
-                    //             }
-                    //             $num_total = sizeof($spr);
-                    //             for ($i = 0; $i < $num_total; $i++) {
-                    //                 $data = $spr[$i];
-                    //                 echo "$data, ";
-                    //             }
-                    //         ?>
-                    //     ],
-                    //     backgroundColor: '#1d3f74',
-                    // },
+                    {
+                        label:'IPV',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $IPV_04 = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $IPV_04[] = $con['IPV_02_04_MESES_2_DOSIS'];
+                                }
+                                $num_total = sizeof($IPV_04);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $IPV_04[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                    {
+                        label:'APO',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $APO = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $APO[] = $con['APO_06_MESES_3ra_Dosis'];
+                                }
+                                $num_total = sizeof($APO);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $APO[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                    {
+                        label:'Pentavalente',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $penta_meses = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $penta_meses[] = $con['PENTAVALENTE_02_04_06_MESES_3ra_dosis'];
+                                }
+                                $num_total = sizeof($penta_meses);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $penta_meses[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                    {
+                        label:'Reacción Pentavalente DPT',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $penta_dpt = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $penta_dpt[] = $con['Reacciones_Adversas_pentavalente_DTP_3ra_dosis'];
+                                }
+                                $num_total = sizeof($penta_dpt);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $penta_dpt[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                    {
+                        label:'Reacción Pentavalente HVB',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $penta_hvb = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $penta_hvb[] = $con['Reacciones_Adversas_pentavalente_HvB_3ra_dosis'];
+                                }
+                                $num_total = sizeof($penta_hvb);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $penta_hvb[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                    {
+                        label:'Reacción Pentavalente HIB',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $penta_hib = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $penta_hib[] = $con['Reacciones_Adversas_pentavalente_HiB_3ra_dosis'];
+                                }
+                                $num_total = sizeof($penta_hib);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $penta_hib[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                    {
+                        label:'Rotavirus',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $rotavirus = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $rotavirus[] = $con['ROTAVIRUS_02_04_MESES_2da_DOSIS'];
+                                }
+                                $num_total = sizeof($rotavirus);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $rotavirus[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                    {
+                        label:'Neumococo Meses',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $neumococo = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $neumococo[] = $con['NEUMOCOCO_02_04_MESES_2da_DOSIS'];
+                                }
+                                $num_total = sizeof($neumococo);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $neumococo[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                    {
+                        label:'Influenza',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $influenza = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $influenza[] = $con['INFLUENZA_2da_DOSIS'];
+                                }
+                                $num_total = sizeof($influenza);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $influenza[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                    {
+                        label:'Neumococo Año',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $neumo_anio = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $neumo_anio[] = $con['NEUMOCOCO_1_ANIO_3ra_DOSIS'];
+                                }
+                                $num_total = sizeof($neumo_anio);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $neumo_anio[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                    {
+                        label:'SPR',
+                        data:[
+                            <?php
+                                include('query_graph_advance_vaccine.php');
+                                $spr = array();
+                                while ($con = sqlsrv_fetch_array($consulta1)){
+                                    $spr[] = $con['SPR_1_ANIO_1ra_DOSIS'];
+                                }
+                                $num_total = sizeof($spr);
+                                for ($i = 0; $i < $num_total; $i++) {
+                                    $data = $spr[$i];
+                                    echo "$data, ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
                 ]
             },
             plugins: [ChartDataLabels],
@@ -719,19 +721,19 @@
         });
 
         // grafico para DISTRITO
-        $(".btn_dac").click(function(){
+        $(".btn_dac1").click(function(){
             console.log('ME DISTE CLICK DAC')
             $(".tbdac").show();
             $(".tboxa").hide();
             $(".tbpas").hide();
         });
-        $(".btn_oxa").click(function(){
+        $(".btn_oxa1").click(function(){
             console.log('ME DISTE CLICK OXA')
             $(".tbdac").hide();
             $(".tboxa").show();
             $(".tbpas").hide();
         });
-        $(".btn_pasco").click(function(){
+        $(".btn_pasco1").click(function(){
             console.log('ME DISTE CLICK PASCO')
             $(".tbdac").hide();
             $(".tboxa").hide();

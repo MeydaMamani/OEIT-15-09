@@ -7,14 +7,10 @@
       <?php 
         include('consulta_gestante_usuarias_nuevas.php');
         $row_cont=0; $cumple=0; $no_cumple=0;
-        while ($consulta = sqlsrv_fetch_array($consulta2)){  
-          $row_cont++;
-          if($consulta['Codigo_Item'] != '' and !is_null ($consulta['Codigo_Item'])){
-            $cumple++;
-          }else{
-            $no_cumple++;
-          }
-        }  
+        // while ($consulta = sqlsrv_fetch_array($consulta2)){  
+        //   $row_cont++;
+         
+        // }  
       ?>
     <div class="page-wrapper">
         <div class="container">
@@ -23,7 +19,7 @@
             </div>
             <div class="row mb-3 mt-3">
                 <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
-                <div class="col-8 d-flex justify-content-end">
+                <!-- <div class="col-8 d-flex justify-content-end">
                   <ul class="list-group list-group-horizontal-sm">
                     <li class="list-group-item font-14">Cumple <span class="badge bg-success rounded-pill cumple"><?php echo $cumple; ?></span></li>
                     <li class="list-group-item font-14">No Cumple <span class="badge bg-danger rounded-pill no_cumple"><?php echo $no_cumple; ?></span></li>
@@ -35,7 +31,7 @@
                         ?> </span>
                     </li>
                   </ul>
-                </div>
+                </div> -->
             </div>
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
@@ -64,13 +60,9 @@
                     <th class="align-middle">Provincia</th>
                     <th class="align-middle">Distrito</th>
                     <th class="align-middle">Establecimiento</th>
-                    <th class="align-middle">Tipo Documento</th>
                     <th class="align-middle">Documento</th>
-                    <th class="align-middle">Fecha Nacimiento Paciente</th>
-                    <th class="align-middle">Edad</th>
-                    <th class="align-middle">Fecha Atención</th>
-                    <th class="align-middle">Código</th>
-                    <th class="align-middle">Cumple</th>
+                    <th class="align-middle">Ate Planificación</th>
+                    <th class="align-middle">Tmz VIF</th>
                   </tr>
                 </thead>
                 <div>
@@ -87,71 +79,47 @@
                   <?php 
                     include('consulta_gestante_usuarias_nuevas.php');
                     $i=1;
-                    while ($consulta = sqlsrv_fetch_array($consulta2)){  
-                      if(is_null ($consulta['Provincia_Establecimiento']) ){
-                          $newdate = '  -'; }
-                      else{
-                        $newdate = $consulta['Provincia_Establecimiento'];}
+                    while ($consulta = sqlsrv_fetch_array($consulta3)){ 
+                      echo $consulta['Nombre_Establecimiento'];
+                      // if(is_null ($consulta['Provincia']) ){
+                      //     $newdate = '  -'; }
+                      // else{
+                      //   $newdate = $consulta['Provincia'];}
 
-                      if(is_null ($consulta['distrito_establecimiento']) ){
-                        $newdate2 = '  -'; }
-                      else{
-                        $newdate2 = $consulta['distrito_establecimiento'];}
+                      // if(is_null ($consulta['Distrito']) ){
+                      //   $newdate2 = '  -'; }
+                      // else{
+                      //   $newdate2 = $consulta['Distrito'];}
  
-                      if(is_null ($consulta['Abrev_Tipo_Doc_Paciente']) ){
-                          $newdate3 = '  -'; }
-                        else{
-                      $newdate3 = $consulta['Abrev_Tipo_Doc_Paciente'];}
+                      // if(is_null ($consulta['Nombre_Establecimiento']) ){
+                      //     $newdate3 = '  -'; }
+                      //   else{
+                      // $newdate3 = $consulta['Nombre_Establecimiento'];}
 
-                      if(is_null ($consulta['Nombre_Establecimiento']) ){
-                          $newdate4 = '  -'; }
-                        else{
-                      $newdate4 = $consulta['Nombre_Establecimiento'];}
+                      // if(is_null ($consulta['documento']) ){
+                      //     $newdate4 = '  -'; }
+                      //   else{
+                      // $newdate4 = $consulta['documento'];}
 
-                      if(is_null ($consulta['Numero_Documento_Paciente']) ){
-                          $newdate5 = '  -'; }
-                        else{
-                      $newdate5 = $consulta['Numero_Documento_Paciente'];}
+                      // if(is_null ($consulta['ATE_PLANIFICACION']) ){
+                      //     $newdate5 = '  -'; }
+                      //   else{
+                      // $newdate5 = $consulta['ATE_PLANIFICACION'] -> format('d/m/y');}
 
-                      if(is_null ($consulta['Fecha_Nacimiento_Paciente']) ){
-                          $newdate6 = '  -'; }
-                        else{
-                      $newdate6 = $consulta['Fecha_Nacimiento_Paciente'] -> format('d/m/y');}
-
-                      if(is_null ($consulta['Edad_Reg']) ){
-                          $newdate7 = '  -'; }
-                        else{
-                      $newdate7 = $consulta['Edad_Reg'];}
-
-                      if(is_null ($consulta['Fecha_Atencion']) ){
-                        $newdate8 = '  -'; }
-                      else{
-                        $newdate8 = $consulta['Fecha_Atencion']-> format('d/m/y');}
-
-                      if(is_null ($consulta['Codigo_Item']) ){
-                            $newdate9 = '  -'; }
-                      else{
-                        $newdate9 = $consulta['Codigo_Item'];}
+                      // if(is_null ($consulta['TMZ_VIF']) ){
+                      //     $newdate6 = '  -'; }
+                      //   else{
+                      // $newdate6 = $consulta['TMZ_VIF'];}
 
                   ?>
                     <tr class="text-center font-12" id="table_fed">
                       <td class="align-middle"><?php echo $i++; ?></td>
                       <td class="align-middle"><?php echo utf8_encode($newdate); ?></td>
-                      <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
+                      <!-- <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
                       <td class="align-middle"><?php echo utf8_encode($newdate4); ?></td>
                       <td class="align-middle"><?php echo $newdate3; ?></td>
                       <td class="align-middle"><?php echo $newdate5; ?></td>
-                      <td class="align-middle"><?php echo $newdate6; ?></td>
-                      <td class="align-middle"><?php echo $newdate7; ?></td>                      
-                      <td class="align-middle"><?php echo $newdate8; ?></td>
-                      <td class="align-middle"><?php echo $newdate9; ?></td>
-                      <td class="align-middle"><?php 
-                        if($consulta['Codigo_Item'] != '' and !is_null ($consulta['Codigo_Item'])){
-                          echo "<span class='badge bg-correct'>Si</span>";
-                        }else{
-                          echo "<span class='badge bg-incorrect'>No</span>";
-                        }
-                       ?></td>
+                      <td class="align-middle"><?php echo $newdate6; ?></td> -->
                     </tr>
                   <?php
                       ;}              
