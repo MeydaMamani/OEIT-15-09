@@ -176,7 +176,7 @@
                     SUM(CASE WHEN ( (T.Tipo_Edad='A' AND T.Edad_Reg=1) AND (T.Codigo_Item IN ('90707','Z274') AND (T.Valor_Lab IN ('1','01','D1'))) ) THEN 1 ELSE 0 END) SPR_1_ANIO_1ra_DOSIS
                     
                     FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA T
-                    here (Anio IN ('2021')) and (mes in ('1','2','3','4','5','6','7','8')) AND Provincia_Establecimiento = 'PASCO'
+                    where (Anio IN ('2021')) and (mes in ('1','2','3','4','5','6','7','8')) AND Provincia_Establecimiento = 'PASCO'
                     GROUP BY
                     T.Anio,Provincia_Establecimiento, Distrito_Establecimiento
                     order by Provincia_Establecimiento, Distrito_Establecimiento";

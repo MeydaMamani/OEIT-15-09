@@ -13,382 +13,431 @@
                 <div class="col-md-9 p-0 text-center">
                     <div class="border border-secondary">
                         <div class="x_province">
-                            <h4 class="p-2">Avance Regional</h4>
+                            <h4 class="p-2">AVANCE REGIONAL</h4>
                             <div class="dac" style="height: 300px;">
                                 <canvas id="myChartProvince"></canvas>
                             </div>
                         </div>
-                    </div><br><br>
-                    <div class="table-responsive" id="no_graph_district">
-                        <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
-                            <thead>
-                                <tr class="text-light font-12 text-center" style="background: #0f81db;">
-                                    <th class="align-middle">#</th>
-                                    <th class="align-middle">Distrito</th>
-                                    <th class="align-middle">BGC 24 Horas</th>
-                                    <th class="align-middle">HVB 12 Horas</th>
-                                    <th class="align-middle">IPV 2da Dosis</th>
-                                    <th class="align-middle">APO 3era Dosis</th>
-                                    <th class="align-middle">Penta 3era Dosis</th>
-                                    <th class="align-middle">Penta DTP 3era Dosis</th>
-                                    <th class="align-middle">Penta HVB 3era Dosis</th>
-                                    <th class="align-middle">Penta HIB 3era Dosis</th>
-                                    <th class="align-middle">Rotavirus 2da Dosis</th>
-                                    <th class="align-middle">Neumococo 2da Dosis</th>
-                                    <th class="align-middle">Influenza 2da Dosis</th>
-                                    <th class="align-middle">Neumococo 2ra Dosis</th>
-                                    <th class="align-middle">SPR 1ra Dosis</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tbdac">
-                                <?php 
-                                    include('query_graph_advance_vaccine.php');
-                                    $i=1;
-                                    while ($consulta = sqlsrv_fetch_array($consulta2)){ 
-                                        // CAMBIO AQUI                    
-                                        if(is_null ($consulta['Distrito']) ){
-                                            $newdate2 = '  -'; }
-                                            else{
-                                        $newdate2 = $consulta['Distrito'] ;}
-                            
-                                        if(is_null ($consulta['BCG_24_HORAS']) ){
-                                            $newdate3 = '  -'; }
-                                            else{
-                                        $newdate3 = $consulta['BCG_24_HORAS'];}
-                        
-                                        if(is_null ($consulta['HVB_12_HORAS']) ){
-                                        $newdate4 = '  -'; }
-                                        else{
-                                        $newdate4 = $consulta['HVB_12_HORAS'];}
-                                        
-                                        if(is_null ($consulta['IPV_02_04_MESES_2_DOSIS']) ){
-                                            $newdate5 = '  -'; }
-                                            else{
-                                        $newdate5 = $consulta['IPV_02_04_MESES_2_DOSIS'];}
-                            
-                                        if(is_null ($consulta['APO_06_MESES_3ra_Dosis']) ){
-                                            $newdate6 = '  -'; }
-                                            else{
-                                        $newdate6 = $consulta['APO_06_MESES_3ra_Dosis'];}
-                        
-                                        if(is_null ($consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis']) ){
-                                            $newdate7 = '  -'; }
-                                        else{
-                                            $newdate7 = $consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis'];}
-                        
-                                        if(is_null ($consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis']) ){
-                                            $newdate8 = '  -'; }
-                                        else{
-                                            $newdate8 = $consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis'];}
-
-                                        if(is_null ($consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis']) ){
-                                            $newdate9 = '  -'; }
-                                        else{
-                                            $newdate9 = $consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis'];}
-
-                                        if(is_null ($consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis']) ){
-                                            $newdate10 = '  -'; }
-                                        else{
-                                            $newdate10 = $consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis'];}
-                                        
-                                        if(is_null ($consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS']) ){
-                                            $newdate11 = '  -'; }
-                                        else{
-                                            $newdate11 = $consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS'];}                
-                        
-                                        if(is_null ($consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS']) ){
-                                            $newdate12 = '  -'; }
-                                        else{
-                                            $newdate12 = $consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS'];}
-
-                                        if(is_null ($consulta['INFLUENZA_2da_DOSIS']) ){
-                                            $newdate13 = '  -'; }
-                                        else{
-                                            $newdate13 = $consulta['INFLUENZA_2da_DOSIS'];}
-
-                                        if(is_null ($consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS']) ){
-                                            $newdate14 = '  -'; }
-                                        else{
-                                            $newdate14 = $consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS'];}
-
-                                        if(is_null ($consulta['SPR_1_ANIO_1ra_DOSIS']) ){
-                                            $newdate15 = '  -'; }
-                                        else{
-                                            $newdate15 = $consulta['SPR_1_ANIO_1ra_DOSIS'];}
-                                ?>
-                                <tr style="font-size: 11px; text-align: center;">
-                                    <td class="align-middle"><?php echo $i++; ?></td>
-                                    <td class="align-middle" id="my_district"><?php echo utf8_encode($newdate2); ?></td>
-                                    <td class="align-middle"><?php echo $newdate3; ?></td>
-                                    <td class="align-middle"><?php echo $newdate4; ?></td>
-                                    <td class="align-middle"><?php echo $newdate5; ?></td>
-                                    <td class="align-middle"><?php echo $newdate6; ?></td>
-                                    <td class="align-middle"><?php echo $newdate7; ?></td>
-                                    <td class="align-middle"><?php echo $newdate8; ?></td>
-                                    <td class="align-middle"><?php echo $newdate9; ?></td>
-                                    <td class="align-middle"><?php echo $newdate10; ?></td>
-                                    <td class="align-middle"><?php echo $newdate11; ?></td>
-                                    <td class="align-middle"><?php echo $newdate12; ?></td>
-                                    <td class="align-middle"><?php echo $newdate13; ?></td>
-                                    <td class="align-middle"><?php echo $newdate14; ?></td>
-                                    <td class="align-middle"><?php echo $newdate15; ?></td>
-                                </tr>
-                                <?php
-                                    ;}                    
-                                    include("cerrar.php");
-                                ?>
-                            </tbody>
-                            <tbody class="tboxa" style="display: none;">
-                                <?php 
-                                    include('query_graph_advance_vaccine.php');
-                                    $i=1;
-                                    while ($consulta = sqlsrv_fetch_array($consulta3)){ 
-                                        // CAMBIO AQUI                    
-                                        if(is_null ($consulta['Distrito']) ){
-                                            $newdate2 = '  -'; }
-                                            else{
-                                        $newdate2 = $consulta['Distrito'] ;}
-                            
-                                        if(is_null ($consulta['BCG_24_HORAS']) ){
-                                            $newdate3 = '  -'; }
-                                            else{
-                                        $newdate3 = $consulta['BCG_24_HORAS'];}
-                        
-                                        if(is_null ($consulta['HVB_12_HORAS']) ){
-                                        $newdate4 = '  -'; }
-                                        else{
-                                        $newdate4 = $consulta['HVB_12_HORAS'];}
-                                        
-                                        if(is_null ($consulta['IPV_02_04_MESES_2_DOSIS']) ){
-                                            $newdate5 = '  -'; }
-                                            else{
-                                        $newdate5 = $consulta['IPV_02_04_MESES_2_DOSIS'];}
-                            
-                                        if(is_null ($consulta['APO_06_MESES_3ra_Dosis']) ){
-                                            $newdate6 = '  -'; }
-                                            else{
-                                        $newdate6 = $consulta['APO_06_MESES_3ra_Dosis'];}
-                        
-                                        if(is_null ($consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis']) ){
-                                            $newdate7 = '  -'; }
-                                        else{
-                                            $newdate7 = $consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis'];}
-                        
-                                        if(is_null ($consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis']) ){
-                                            $newdate8 = '  -'; }
-                                        else{
-                                            $newdate8 = $consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis'];}
-
-                                        if(is_null ($consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis']) ){
-                                            $newdate9 = '  -'; }
-                                        else{
-                                            $newdate9 = $consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis'];}
-
-                                        if(is_null ($consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis']) ){
-                                            $newdate10 = '  -'; }
-                                        else{
-                                            $newdate10 = $consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis'];}
-                                        
-                                        if(is_null ($consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS']) ){
-                                            $newdate11 = '  -'; }
-                                        else{
-                                            $newdate11 = $consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS'];}                
-                        
-                                        if(is_null ($consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS']) ){
-                                            $newdate12 = '  -'; }
-                                        else{
-                                            $newdate12 = $consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS'];}
-
-                                        if(is_null ($consulta['INFLUENZA_2da_DOSIS']) ){
-                                            $newdate13 = '  -'; }
-                                        else{
-                                            $newdate13 = $consulta['INFLUENZA_2da_DOSIS'];}
-
-                                        if(is_null ($consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS']) ){
-                                            $newdate14 = '  -'; }
-                                        else{
-                                            $newdate14 = $consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS'];}
-
-                                        if(is_null ($consulta['SPR_1_ANIO_1ra_DOSIS']) ){
-                                            $newdate15 = '  -'; }
-                                        else{
-                                            $newdate15 = $consulta['SPR_1_ANIO_1ra_DOSIS'];}
-                                ?>
-                                <tr style="font-size: 11px; text-align: center;">
-                                    <td class="align-middle"><?php echo $i++; ?></td>
-                                    <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
-                                    <td class="align-middle"><?php echo $newdate3; ?></td>
-                                    <td class="align-middle"><?php echo $newdate4; ?></td>
-                                    <td class="align-middle"><?php echo $newdate5; ?></td>
-                                    <td class="align-middle"><?php echo $newdate6; ?></td>
-                                    <td class="align-middle"><?php echo $newdate7; ?></td>
-                                    <td class="align-middle"><?php echo $newdate8; ?></td>
-                                    <td class="align-middle"><?php echo $newdate9; ?></td>
-                                    <td class="align-middle"><?php echo $newdate10; ?></td>
-                                    <td class="align-middle"><?php echo $newdate11; ?></td>
-                                    <td class="align-middle"><?php echo $newdate12; ?></td>
-                                    <td class="align-middle"><?php echo $newdate13; ?></td>
-                                    <td class="align-middle"><?php echo $newdate14; ?></td>
-                                    <td class="align-middle"><?php echo $newdate15; ?></td>
-                                </tr>
-                                <?php
-                                    ;}                    
-                                    include("cerrar.php");
-                                ?>
-                            </tbody>
-                            <tbody class="tbpas" style="display: none;">
-                                <?php 
-                                    include('query_graph_advance_vaccine.php');
-                                    $i=1;
-                                    while ($consulta = sqlsrv_fetch_array($consulta4)){ 
-                                        // CAMBIO AQUI                    
-                                        if(is_null ($consulta['Distrito']) ){
-                                            $newdate2 = '  -'; }
-                                            else{
-                                        $newdate2 = $consulta['Distrito'] ;}
-                            
-                                        if(is_null ($consulta['BCG_24_HORAS']) ){
-                                            $newdate3 = '  -'; }
-                                            else{
-                                        $newdate3 = $consulta['BCG_24_HORAS'];}
-                        
-                                        if(is_null ($consulta['HVB_12_HORAS']) ){
-                                        $newdate4 = '  -'; }
-                                        else{
-                                        $newdate4 = $consulta['HVB_12_HORAS'];}
-                                        
-                                        if(is_null ($consulta['IPV_02_04_MESES_2_DOSIS']) ){
-                                            $newdate5 = '  -'; }
-                                            else{
-                                        $newdate5 = $consulta['IPV_02_04_MESES_2_DOSIS'];}
-                            
-                                        if(is_null ($consulta['APO_06_MESES_3ra_Dosis']) ){
-                                            $newdate6 = '  -'; }
-                                            else{
-                                        $newdate6 = $consulta['APO_06_MESES_3ra_Dosis'];}
-                        
-                                        if(is_null ($consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis']) ){
-                                            $newdate7 = '  -'; }
-                                        else{
-                                            $newdate7 = $consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis'];}
-                        
-                                        if(is_null ($consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis']) ){
-                                            $newdate8 = '  -'; }
-                                        else{
-                                            $newdate8 = $consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis'];}
-
-                                        if(is_null ($consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis']) ){
-                                            $newdate9 = '  -'; }
-                                        else{
-                                            $newdate9 = $consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis'];}
-
-                                        if(is_null ($consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis']) ){
-                                            $newdate10 = '  -'; }
-                                        else{
-                                            $newdate10 = $consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis'];}
-                                        
-                                        if(is_null ($consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS']) ){
-                                            $newdate11 = '  -'; }
-                                        else{
-                                            $newdate11 = $consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS'];}                
-                        
-                                        if(is_null ($consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS']) ){
-                                            $newdate12 = '  -'; }
-                                        else{
-                                            $newdate12 = $consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS'];}
-
-                                        if(is_null ($consulta['INFLUENZA_2da_DOSIS']) ){
-                                            $newdate13 = '  -'; }
-                                        else{
-                                            $newdate13 = $consulta['INFLUENZA_2da_DOSIS'];}
-
-                                        if(is_null ($consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS']) ){
-                                            $newdate14 = '  -'; }
-                                        else{
-                                            $newdate14 = $consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS'];}
-
-                                        if(is_null ($consulta['SPR_1_ANIO_1ra_DOSIS']) ){
-                                            $newdate15 = '  -'; }
-                                        else{
-                                            $newdate15 = $consulta['SPR_1_ANIO_1ra_DOSIS'];}
-                                ?>
-                                <tr style="font-size: 11px; text-align: center;">
-                                    <td class="align-middle"><?php echo $i++; ?></td>
-                                    <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
-                                    <td class="align-middle"><?php echo $newdate3; ?></td>
-                                    <td class="align-middle"><?php echo $newdate4; ?></td>
-                                    <td class="align-middle"><?php echo $newdate5; ?></td>
-                                    <td class="align-middle"><?php echo $newdate6; ?></td>
-                                    <td class="align-middle"><?php echo $newdate7; ?></td>
-                                    <td class="align-middle"><?php echo $newdate8; ?></td>
-                                    <td class="align-middle"><?php echo $newdate9; ?></td>
-                                    <td class="align-middle"><?php echo $newdate10; ?></td>
-                                    <td class="align-middle"><?php echo $newdate11; ?></td>
-                                    <td class="align-middle"><?php echo $newdate12; ?></td>
-                                    <td class="align-middle"><?php echo $newdate13; ?></td>
-                                    <td class="align-middle"><?php echo $newdate14; ?></td>
-                                    <td class="align-middle"><?php echo $newdate15; ?></td>
-                                </tr>
-                                <?php
-                                    ;}                    
-                                    include("cerrar.php");
-                                ?>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="11">
-                                        <div class="">
-                                            <ul class="pagination"></ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <div id="graph_district">
-                        <h4 class="p-2">Avance Distrital</h4>
-                        <div class="dac" style="height: 410px;">
-                            <canvas id="myChartDistrict"></canvas>
-                        </div>
-                    </div>
-                    <div class="x_district">
-                        <h4 class="p-2">Avance Distrital</h4>
-                        <div class="dac" style="height: 300px; display: none;">
-                            <canvas id="myChartDistrict"></canvas>
-                        </div>
-                        <div class="oxa" style="height: 300px; display: none;">
-                            <canvas id="myChartDistrict1"></canvas>
-                        </div>
-                        <div class="pasco" style="height: 300px; display: none;">
-                            <canvas id="myChartDistrict2"></canvas>
-                        </div>
-                    </div>
-                    <div class="border border-secondary">
-                        <div class="col-12" style="width: 110%;">
-                            <div class="d-flex justify-content-center">
-                                <button class="btn-sm btn_dac" id="btn_dac" name="province" value="DANIEL ALCIDES CARRION"> DANIEL A. CARRION</button>
-                                <button class="btn-sm btn_pasco" name="province"> PASCO</button>
-                                <button class="btn-sm btn_oxa" name="province"> OXAPAMPA</button>
-                            </div>
-                        </div><br>
                     </div><br>
+                    <div class="row">
+                        <div class="border border-secondary col-md-4">
+                            <div class="col-12" style="display: none;">
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn-sm btn_dac" id="btn_dac" name="province" value="DANIEL ALCIDES CARRION"> DANIEL A. CARRION</button>
+                                    <button class="btn-sm btn_pasco" name="province"> PASCO</button>
+                                    <button class="btn-sm btn_oxa" name="province"> OXAPAMPA</button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <object data="./img/Mapa_de_localización_Pasco.svg" type="image/svg+xml" class="position-absolute" style="left: 11%; margin-top: 177px;">
+                                    <img src="./img/Mapa_de_localización_Pasco.svg" alt="">
+                                </object>
+                                <img src="./img/mapa_peru.png" alt="">
+                            </div>
+                        </div>                    
+                        <div class="table-responsive col-md-8" id="no_graph_district">    
+                            <table id="demo-foo-addrow2" class="table table-hover table-bordered tbdac">
+                                <thead>
+                                    <tr class="text-light font-12 text-center" style="background: #0d6cb8;">
+                                        <th class="align-middle">#</th>
+                                        <th class="align-middle">Distrito</th>
+                                        <th class="align-middle">BGC 24 Horas</th>
+                                        <th class="align-middle">HVB 12 Horas</th>
+                                        <th class="align-middle">IPV 2da Dosis</th>
+                                        <th class="align-middle">APO 3era Dosis</th>
+                                        <th class="align-middle">Penta 3era Dosis</th>
+                                        <th class="align-middle">Penta DTP 3era Dosis</th>
+                                        <th class="align-middle">Penta HVB 3era Dosis</th>
+                                        <th class="align-middle">Penta HIB 3era Dosis</th>
+                                        <th class="align-middle">Rotavirus 2da Dosis</th>
+                                        <th class="align-middle">Neumococo 2da Dosis</th>
+                                        <th class="align-middle">Influenza 2da Dosis</th>
+                                        <th class="align-middle">Neumococo 2ra Dosis</th>
+                                        <th class="align-middle">SPR 1ra Dosis</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        include('query_graph_advance_vaccine.php');
+                                        $i_dac=0;
+                                        while ($consulta = sqlsrv_fetch_array($consulta2)){ 
+                                            // CAMBIO AQUI                    
+                                            if(is_null ($consulta['Distrito']) ){
+                                                $newdate2 = '  -'; }
+                                                else{
+                                            $newdate2 = $consulta['Distrito'] ;}
+                                
+                                            if(is_null ($consulta['BCG_24_HORAS']) ){
+                                                $newdate3 = '  -'; }
+                                                else{
+                                            $newdate3 = $consulta['BCG_24_HORAS'];}
+                            
+                                            if(is_null ($consulta['HVB_12_HORAS']) ){
+                                            $newdate4 = '  -'; }
+                                            else{
+                                            $newdate4 = $consulta['HVB_12_HORAS'];}
+                                            
+                                            if(is_null ($consulta['IPV_02_04_MESES_2_DOSIS']) ){
+                                                $newdate5 = '  -'; }
+                                                else{
+                                            $newdate5 = $consulta['IPV_02_04_MESES_2_DOSIS'];}
+                                
+                                            if(is_null ($consulta['APO_06_MESES_3ra_Dosis']) ){
+                                                $newdate6 = '  -'; }
+                                                else{
+                                            $newdate6 = $consulta['APO_06_MESES_3ra_Dosis'];}
+                            
+                                            if(is_null ($consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis']) ){
+                                                $newdate7 = '  -'; }
+                                            else{
+                                                $newdate7 = $consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis'];}
+                            
+                                            if(is_null ($consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis']) ){
+                                                $newdate8 = '  -'; }
+                                            else{
+                                                $newdate8 = $consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis'];}
+                        
+                                            if(is_null ($consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis']) ){
+                                                $newdate9 = '  -'; }
+                                            else{
+                                                $newdate9 = $consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis'];}
+                        
+                                            if(is_null ($consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis']) ){
+                                                $newdate10 = '  -'; }
+                                            else{
+                                                $newdate10 = $consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis'];}
+                                            
+                                            if(is_null ($consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS']) ){
+                                                $newdate11 = '  -'; }
+                                            else{
+                                                $newdate11 = $consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS'];}                
+                            
+                                            if(is_null ($consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS']) ){
+                                                $newdate12 = '  -'; }
+                                            else{
+                                                $newdate12 = $consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS'];}
+                        
+                                            if(is_null ($consulta['INFLUENZA_2da_DOSIS']) ){
+                                                $newdate13 = '  -'; }
+                                            else{
+                                                $newdate13 = $consulta['INFLUENZA_2da_DOSIS'];}
+                        
+                                            if(is_null ($consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS']) ){
+                                                $newdate14 = '  -'; }
+                                            else{
+                                                $newdate14 = $consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS'];}
+                        
+                                            if(is_null ($consulta['SPR_1_ANIO_1ra_DOSIS']) ){
+                                                $newdate15 = '  -'; }
+                                            else{
+                                                $newdate15 = $consulta['SPR_1_ANIO_1ra_DOSIS'];}
+                                    ?>
+                                    <tr style="font-size: 11px; text-align: center;">
+                                        <td class="align-middle"><?php echo ++$i_dac; ?></td>
+                                        <td class="align-middle" id="tb_district_dac<?php echo $i_dac; ?>"><?php echo utf8_encode($newdate2); ?></td>
+                                        <td class="align-middle"><?php echo $newdate3; ?></td>
+                                        <td class="align-middle"><?php echo $newdate4; ?></td>
+                                        <td class="align-middle"><?php echo $newdate5; ?></td>
+                                        <td class="align-middle"><?php echo $newdate6; ?></td>
+                                        <td class="align-middle"><?php echo $newdate7; ?></td>
+                                        <td class="align-middle"><?php echo $newdate8; ?></td>
+                                        <td class="align-middle"><?php echo $newdate9; ?></td>
+                                        <td class="align-middle"><?php echo $newdate10; ?></td>
+                                        <td class="align-middle"><?php echo $newdate11; ?></td>
+                                        <td class="align-middle"><?php echo $newdate12; ?></td>
+                                        <td class="align-middle"><?php echo $newdate13; ?></td>
+                                        <td class="align-middle"><?php echo $newdate14; ?></td>
+                                        <td class="align-middle"><?php echo $newdate15; ?></td>
+                                    </tr>
+                                    <?php
+                                        ;}                    
+                                        include("cerrar.php");
+                                    ?>
+                                </tbody>
+                            </table>
+                            <table id="demo-foo-addrow2" class="table table-hover table-bordered tboxa" style="display: none;">
+                                <thead>
+                                    <tr class="text-light font-12 text-center" style="background: #0d6cb8;">
+                                        <th class="align-middle">#</th>
+                                        <th class="align-middle">Distrito</th>
+                                        <th class="align-middle">BGC 24 Horas</th>
+                                        <th class="align-middle">HVB 12 Horas</th>
+                                        <th class="align-middle">IPV 2da Dosis</th>
+                                        <th class="align-middle">APO 3era Dosis</th>
+                                        <th class="align-middle">Penta 3era Dosis</th>
+                                        <th class="align-middle">Penta DTP 3era Dosis</th>
+                                        <th class="align-middle">Penta HVB 3era Dosis</th>
+                                        <th class="align-middle">Penta HIB 3era Dosis</th>
+                                        <th class="align-middle">Rotavirus 2da Dosis</th>
+                                        <th class="align-middle">Neumococo 2da Dosis</th>
+                                        <th class="align-middle">Influenza 2da Dosis</th>
+                                        <th class="align-middle">Neumococo 2ra Dosis</th>
+                                        <th class="align-middle">SPR 1ra Dosis</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        include('query_graph_advance_vaccine.php');
+                                        $i_oxa=0;
+                                        while ($consulta = sqlsrv_fetch_array($consulta3)){ 
+                                            // CAMBIO AQUI                    
+                                            if(is_null ($consulta['Distrito']) ){
+                                                $newdate2 = '  -'; }
+                                                else{
+                                            $newdate2 = $consulta['Distrito'] ;}
+                                
+                                            if(is_null ($consulta['BCG_24_HORAS']) ){
+                                                $newdate3 = '  -'; }
+                                                else{
+                                            $newdate3 = $consulta['BCG_24_HORAS'];}
+                            
+                                            if(is_null ($consulta['HVB_12_HORAS']) ){
+                                            $newdate4 = '  -'; }
+                                            else{
+                                            $newdate4 = $consulta['HVB_12_HORAS'];}
+                                            
+                                            if(is_null ($consulta['IPV_02_04_MESES_2_DOSIS']) ){
+                                                $newdate5 = '  -'; }
+                                                else{
+                                            $newdate5 = $consulta['IPV_02_04_MESES_2_DOSIS'];}
+                                
+                                            if(is_null ($consulta['APO_06_MESES_3ra_Dosis']) ){
+                                                $newdate6 = '  -'; }
+                                                else{
+                                            $newdate6 = $consulta['APO_06_MESES_3ra_Dosis'];}
+                            
+                                            if(is_null ($consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis']) ){
+                                                $newdate7 = '  -'; }
+                                            else{
+                                                $newdate7 = $consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis'];}
+                            
+                                            if(is_null ($consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis']) ){
+                                                $newdate8 = '  -'; }
+                                            else{
+                                                $newdate8 = $consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis'];}
+                        
+                                            if(is_null ($consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis']) ){
+                                                $newdate9 = '  -'; }
+                                            else{
+                                                $newdate9 = $consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis'];}
+                        
+                                            if(is_null ($consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis']) ){
+                                                $newdate10 = '  -'; }
+                                            else{
+                                                $newdate10 = $consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis'];}
+                                            
+                                            if(is_null ($consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS']) ){
+                                                $newdate11 = '  -'; }
+                                            else{
+                                                $newdate11 = $consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS'];}                
+                            
+                                            if(is_null ($consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS']) ){
+                                                $newdate12 = '  -'; }
+                                            else{
+                                                $newdate12 = $consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS'];}
+                        
+                                            if(is_null ($consulta['INFLUENZA_2da_DOSIS']) ){
+                                                $newdate13 = '  -'; }
+                                            else{
+                                                $newdate13 = $consulta['INFLUENZA_2da_DOSIS'];}
+                        
+                                            if(is_null ($consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS']) ){
+                                                $newdate14 = '  -'; }
+                                            else{
+                                                $newdate14 = $consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS'];}
+                        
+                                            if(is_null ($consulta['SPR_1_ANIO_1ra_DOSIS']) ){
+                                                $newdate15 = '  -'; }
+                                            else{
+                                                $newdate15 = $consulta['SPR_1_ANIO_1ra_DOSIS'];}
+                                    ?>
+                                    <tr style="font-size: 11px; text-align: center;">
+                                        <td class="align-middle"><?php echo ++$i_oxa; ?></td>
+                                        <td class="align-middle" id="tb_district_oxa<?php echo $i_oxa; ?>"><?php echo utf8_encode($newdate2); ?></td>
+                                        <td class="align-middle"><?php echo $newdate3; ?></td>
+                                        <td class="align-middle"><?php echo $newdate4; ?></td>
+                                        <td class="align-middle"><?php echo $newdate5; ?></td>
+                                        <td class="align-middle"><?php echo $newdate6; ?></td>
+                                        <td class="align-middle"><?php echo $newdate7; ?></td>
+                                        <td class="align-middle"><?php echo $newdate8; ?></td>
+                                        <td class="align-middle"><?php echo $newdate9; ?></td>
+                                        <td class="align-middle"><?php echo $newdate10; ?></td>
+                                        <td class="align-middle"><?php echo $newdate11; ?></td>
+                                        <td class="align-middle"><?php echo $newdate12; ?></td>
+                                        <td class="align-middle"><?php echo $newdate13; ?></td>
+                                        <td class="align-middle"><?php echo $newdate14; ?></td>
+                                        <td class="align-middle"><?php echo $newdate15; ?></td>
+                                    </tr>
+                                    <?php
+                                        ;}                    
+                                        include("cerrar.php");
+                                    ?>
+                                </tbody>
+                            </table> 
+                            <table id="demo-foo-addrow2" class="table table-hover table-bordered tbpas" style="display: none;">
+                                <thead>
+                                    <tr class="text-light font-12 text-center" style="background: #0d6cb8;">
+                                        <th class="align-middle">#</th>
+                                        <th class="align-middle">Distrito</th>
+                                        <th class="align-middle">BGC 24 Horas</th>
+                                        <th class="align-middle">HVB 12 Horas</th>
+                                        <th class="align-middle">IPV 2da Dosis</th>
+                                        <th class="align-middle">APO 3era Dosis</th>
+                                        <th class="align-middle">Penta 3era Dosis</th>
+                                        <th class="align-middle">Penta DTP 3era Dosis</th>
+                                        <th class="align-middle">Penta HVB 3era Dosis</th>
+                                        <th class="align-middle">Penta HIB 3era Dosis</th>
+                                        <th class="align-middle">Rotavirus 2da Dosis</th>
+                                        <th class="align-middle">Neumococo 2da Dosis</th>
+                                        <th class="align-middle">Influenza 2da Dosis</th>
+                                        <th class="align-middle">Neumococo 2ra Dosis</th>
+                                        <th class="align-middle">SPR 1ra Dosis</th>
+                                    </tr>
+                                </thead>  
+                                <tbody>
+                                    <?php 
+                                        include('query_graph_advance_vaccine.php');
+                                        $i_pas=0;
+                                        while ($consulta = sqlsrv_fetch_array($consulta4)){ 
+                                            // CAMBIO AQUI                    
+                                            if(is_null ($consulta['Distrito']) ){
+                                                $newdate2 = '  -'; }
+                                                else{
+                                            $newdate2 = $consulta['Distrito'] ;}
+                                
+                                            if(is_null ($consulta['BCG_24_HORAS']) ){
+                                                $newdate3 = '  -'; }
+                                                else{
+                                            $newdate3 = $consulta['BCG_24_HORAS'];}
+                            
+                                            if(is_null ($consulta['HVB_12_HORAS']) ){
+                                            $newdate4 = '  -'; }
+                                            else{
+                                            $newdate4 = $consulta['HVB_12_HORAS'];}
+                                            
+                                            if(is_null ($consulta['IPV_02_04_MESES_2_DOSIS']) ){
+                                                $newdate5 = '  -'; }
+                                                else{
+                                            $newdate5 = $consulta['IPV_02_04_MESES_2_DOSIS'];}
+                                
+                                            if(is_null ($consulta['APO_06_MESES_3ra_Dosis']) ){
+                                                $newdate6 = '  -'; }
+                                                else{
+                                            $newdate6 = $consulta['APO_06_MESES_3ra_Dosis'];}
+                            
+                                            if(is_null ($consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis']) ){
+                                                $newdate7 = '  -'; }
+                                            else{
+                                                $newdate7 = $consulta['PENTAVALENTE_02_04_06_MESES_3ra_dosis'];}
+                            
+                                            if(is_null ($consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis']) ){
+                                                $newdate8 = '  -'; }
+                                            else{
+                                                $newdate8 = $consulta['Reacciones_Adversas_pentavalente_DTP_3ra_dosis'];}
+                        
+                                            if(is_null ($consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis']) ){
+                                                $newdate9 = '  -'; }
+                                            else{
+                                                $newdate9 = $consulta['Reacciones_Adversas_pentavalente_HvB_3ra_dosis'];}
+                        
+                                            if(is_null ($consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis']) ){
+                                                $newdate10 = '  -'; }
+                                            else{
+                                                $newdate10 = $consulta['Reacciones_Adversas_pentavalente_HiB_3ra_dosis'];}
+                                            
+                                            if(is_null ($consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS']) ){
+                                                $newdate11 = '  -'; }
+                                            else{
+                                                $newdate11 = $consulta['ROTAVIRUS_02_04_MESES_2da_DOSIS'];}                
+                            
+                                            if(is_null ($consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS']) ){
+                                                $newdate12 = '  -'; }
+                                            else{
+                                                $newdate12 = $consulta['NEUMOCOCO_02_04_MESES_2da_DOSIS'];}
+                        
+                                            if(is_null ($consulta['INFLUENZA_2da_DOSIS']) ){
+                                                $newdate13 = '  -'; }
+                                            else{
+                                                $newdate13 = $consulta['INFLUENZA_2da_DOSIS'];}
+                        
+                                            if(is_null ($consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS']) ){
+                                                $newdate14 = '  -'; }
+                                            else{
+                                                $newdate14 = $consulta['NEUMOCOCO_1_ANIO_3ra_DOSIS'];}
+                        
+                                            if(is_null ($consulta['SPR_1_ANIO_1ra_DOSIS']) ){
+                                                $newdate15 = '  -'; }
+                                            else{
+                                                $newdate15 = $consulta['SPR_1_ANIO_1ra_DOSIS'];}
+                                    ?>
+                                    <tr style="font-size: 11px; text-align: center;">
+                                        <td class="align-middle"><?php echo ++$i_pas; ?></td>
+                                        <td class="align-middle" id="tb_district_pasco<?php echo $i_pas; ?>"><?php echo utf8_encode($newdate2); ?></td>
+                                        <td class="align-middle"><?php echo $newdate3; ?></td>
+                                        <td class="align-middle"><?php echo $newdate4; ?></td>
+                                        <td class="align-middle"><?php echo $newdate5; ?></td>
+                                        <td class="align-middle"><?php echo $newdate6; ?></td>
+                                        <td class="align-middle"><?php echo $newdate7; ?></td>
+                                        <td class="align-middle"><?php echo $newdate8; ?></td>
+                                        <td class="align-middle"><?php echo $newdate9; ?></td>
+                                        <td class="align-middle"><?php echo $newdate10; ?></td>
+                                        <td class="align-middle"><?php echo $newdate11; ?></td>
+                                        <td class="align-middle"><?php echo $newdate12; ?></td>
+                                        <td class="align-middle"><?php echo $newdate13; ?></td>
+                                        <td class="align-middle"><?php echo $newdate14; ?></td>
+                                        <td class="align-middle"><?php echo $newdate15; ?></td>
+                                    </tr>
+                                    <?php
+                                        ;}                    
+                                        include("cerrar.php");
+                                    ?>
+                                </tbody> 
+                            </table>    
+                        </div>
+                        <div class="x_district border border-secondary col-md-8" style="display: none;">
+                            <h4 class="p-2 text-capitalize">AVANCE DISTRITO DE <span class="name_dist"></span></h4>
+                            <div class="text-end m-r-30">
+                                <button class="btn btn-outline-secondary btn-sm" id="return"><i class="mdi mdi-keyboard-return"></i> Volver</button>
+                            </div>
+                            <div class="district_dac" style="height: 335px;">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <canvas id="myPieChart" width="600" height="400"></canvas>
                 </div>
             </div>
         </div>
     </div>
     
     <script src="./js/records_menu.js"></script>
-    <!-- <script src="./js/select2.js"></script> -->
-    <!-- <script src="./js/district.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.0/Chart.bundle.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script>
-        $( document ).ready(function() {
-            $("#btn_dac").click();
-        });
-    </script> -->
+    <script src="./plugin/footable/js/footable-init.js"></script>
+    <script src="./plugin/footable/js/footable.all.min.js"></script>
+    <script src="./js/Chart.min.js"></script>
+    <script src="./js/chartjs-plugin-datalabels.min.js"></script>
     <script>
+        var ctx = document.getElementById("myPieChart").getContext('2d');
+        var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["Makassar", "Sinjae", "Bulukumba", "Gowa"],
+            datasets: [{
+            label: '# of Votes',
+            data:[4000, 3000, 2000, 5000],
+            backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+            }],
+        },
+        options:{
+                tooltips:{
+                callbacks:{
+                    label: (ttItem) => (`${ttItem.label}: Rp. ${ttItem.parsed}`)
+                }
+                }
+            }
+        });
+
         // grafico para provincia
         var ctx_province= document.getElementById("myChartProvince").getContext("2d");
         var myChartProvince= new Chart(ctx_province,{
@@ -689,95 +738,228 @@
             $(".tbpas").show();
         });
 
-        $("#my_district").click(function(){
-            console.log('ME DISTE CLIK CLICK');
-            $("#no_graph_district").hide();
-            var mylabels = [
-                <?php 
-                    include('query_graph_advance_vaccine.php');
-                    while ($con1 = sqlsrv_fetch_array($consulta5)){
-                        echo utf8_encode($con1['Distrito']); 
-                    }
-                ?>
-            ]
-            var datos1 = {
-                label:'BCG',
-                data: [
-                    <?php
-                        include('query_graph_advance_vaccine.php');
-                        while ($con = sqlsrv_fetch_array($consulta5)){
-                            echo $con['BCG_24_HORAS'];
-                        }
-                    ?>
-                ],
-                backgroundColor: '#1d3f74',
-                borderColor: '#1d3f74',
-            };
-            var datos2 = {
-                label:'HVB',
-                data:[
-                    <?php
-                        include('query_graph_advance_vaccine.php');
-                        while ($con = sqlsrv_fetch_array($consulta1)){
-                            echo $con['HVB_12_HORAS'];
-                        }
-                    ?>
-                ],
-                backgroundColor: '#1d3f74',
-                borderColor: '#1d3f74',
-            };
-            
-            var ctx_district= document.getElementById("myChartDistrict").getContext("2d");
-            var myChartDistrict= new Chart(ctx_district,{
-                type: "bar",
-                data:{
-                    labels: mylabels,
-                    datasets: [ {
-                        label: 'My First Dataset',
-                        data: [ datos1, datos2 ],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)'
-                        ],
-                        borderWidth: 1
-                    } ]
-                },
-                plugins: [ChartDataLabels],
-                options:{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y',
-                    plugins: {
-                        legend: {
-                            display: true
-                        },
-                        datalabels: {
-                            formatter: (value, ctx) => {
-                                let mydata = ctx.datasetIndex;
-                                var mydata1 = ctx.dataIndex;
-                                if(mydata == 1){
-                                    var data2 = ctx.chart.data.datasets[0].data;
-                                    let percentage = (value*100 / data2[mydata1]);
-                                    if (percentage - Math.floor(percentage) == 0) {
-                                        percentage = percentage.toFixed(0)+"%";
-                                    } else {
-                                        percentage = percentage.toFixed(2)+"%";
-                                    }
-                                    return percentage;
-                                }
+        var i_dac = <?php echo $i_dac; ?>;
+        for (i = 1; i <= i_dac; i++) {
+            $("#tb_district_dac"+i).click(function(){ saludar(this); });
+            function saludar(e){
+                console.log(e.innerText);
+                var dist = e.innerText;
+                $('.district_dac').append("<canvas id='myChartDistrict'></canvas>");                
+                $("#no_graph_district").hide();
+                $(".x_district").show();
+                $(".name_dist").text(dist);
+                $.ajax({
+                    url: 'query_graph_advance_vaccine_district.php?dist='+dist,
+                    method: 'GET',
+                    success: function(data) {
+                        console.log('SOY DATA', data);
+                        var mylist = data.split(', ');
+                        console.log(mylist);
+
+                        const ctx = document.getElementById('myChartDistrict').getContext('2d');
+                        const myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['BCG 24H', 'HVB 12H', 'IPV 2° DOSIS', 'APO 3° DOSIS', 'PENTAVALENTE 3° DOSIS', 'PENTAVALENTE DTP 3° DOSIS', 'PENTAVALENTE HVB 3° DOSIS', 'PENTAVALENTE HIV 3° DOSIS', 'ROTAVIRUS 2° DOSIS', 'NEOMOCOCO 2° DOSIS', 'INFLUENZA 2° DOSIS', 'NEUMOCOCO 3° DOSIS', 'SPR 1° DOSIS'],
+                                datasets: [{
+                                    label: '# of Votes',
+                                    data: mylist,
+                                    backgroundColor: [ '#1d3f74' ],
+                                    borderWidth: 1
+                                }]
                             },
-                            color: 'black',
-                            anchor: 'end',
-                            align: 'right',
-                            offset: 10
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+                            plugins: [ChartDataLabels],
+                            options:{
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                indexAxis: 'y',
+                                plugins: {
+                                    legend: {
+                                        display: true
+                                    },
+                                    datalabels: {
+                                        formatter: (value, ctx) => {
+                                            let mydata = ctx.datasetIndex;
+                                            var mydata1 = ctx.dataIndex;
+                                            if(mydata == 1){
+                                                var data2 = ctx.chart.data.datasets[0].data;
+                                                let percentage = (value*100 / data2[mydata1]);
+                                                if (percentage - Math.floor(percentage) == 0) {
+                                                    percentage = percentage.toFixed(0)+"%";
+                                                } else {
+                                                    percentage = percentage.toFixed(2)+"%";
+                                                }
+                                                return percentage;
+                                            }
+                                        },
+                                        color: 'black',
+                                        anchor: 'end',
+                                        align: 'right',
+                                        offset: 5
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });                       
                     }
-                }
-            });
+                })
+            }
+        }
+
+        var i_oxa = <?php echo $i_oxa; ?>;
+        for (i = 1; i <= i_oxa; i++) {
+            $("#tb_district_oxa"+i).click(function(){ saludar(this); });
+            function saludar(e){
+                console.log(e.innerText);
+                var dist = e.innerText;
+                $('.district_dac').append("<canvas id='myChartDistrict1'></canvas>");                
+                $("#no_graph_district").hide();
+                $(".x_district").show();
+                $(".name_dist").text(dist);
+                $.ajax({
+                    url: 'query_graph_advance_vaccine_district.php?dist='+dist,
+                    method: 'GET',
+                    success: function(data) {
+                        console.log('SOY DATA', data);
+                        var mylist = data.split(', ');
+                        console.log(mylist);
+
+                        const ctx = document.getElementById('myChartDistrict1').getContext('2d');
+                        const myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['BCG 24H', 'HVB 12H', 'IPV 2° DOSIS', 'APO 3° DOSIS', 'PENTAVALENTE 3° DOSIS', 'PENTAVALENTE DTP 3° DOSIS', 'PENTAVALENTE HVB 3° DOSIS', 'PENTAVALENTE HIV 3° DOSIS', 'ROTAVIRUS 2° DOSIS', 'NEOMOCOCO 2° DOSIS', 'INFLUENZA 2° DOSIS', 'NEUMOCOCO 3° DOSIS', 'SPR 1° DOSIS'],
+                                datasets: [{
+                                    label: '# of Votes',
+                                    data: mylist,
+                                    backgroundColor: [ '#1d3f74' ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            plugins: [ChartDataLabels],
+                            options:{
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                indexAxis: 'y',
+                                plugins: {
+                                    legend: {
+                                        display: true
+                                    },
+                                    datalabels: {
+                                        formatter: (value, ctx) => {
+                                            let mydata = ctx.datasetIndex;
+                                            var mydata1 = ctx.dataIndex;
+                                            if(mydata == 1){
+                                                var data2 = ctx.chart.data.datasets[0].data;
+                                                let percentage = (value*100 / data2[mydata1]);
+                                                if (percentage - Math.floor(percentage) == 0) {
+                                                    percentage = percentage.toFixed(0)+"%";
+                                                } else {
+                                                    percentage = percentage.toFixed(2)+"%";
+                                                }
+                                                return percentage;
+                                            }
+                                        },
+                                        color: 'black',
+                                        anchor: 'end',
+                                        align: 'right',
+                                        offset: 5
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });                       
+                    }
+                })
+            }
+        }
+
+        var i_pas = <?php echo $i_pas; ?>;
+        for (i = 1; i <= i_pas; i++) {
+            $("#tb_district_pasco"+i).click(function(){ saludar(this); });
+            function saludar(e){
+                console.log(e.innerText);
+                var dist = e.innerText;
+                $('.district_dac').append("<canvas id='myChartDistrict2'></canvas>");                
+                $("#no_graph_district").hide();
+                $(".x_district").show();
+                $(".name_dist").text(dist);
+                $.ajax({
+                    url: 'query_graph_advance_vaccine_district.php?dist='+dist,
+                    method: 'GET',
+                    success: function(data) {
+                        console.log('SOY DATA', data);
+                        var mylist = data.split(', ');
+                        console.log(mylist);
+
+                        const ctx = document.getElementById('myChartDistrict2').getContext('2d');
+                        const myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['BCG 24H', 'HVB 12H', 'IPV 2° DOSIS', 'APO 3° DOSIS', 'PENTAVALENTE 3° DOSIS', 'PENTAVALENTE DTP 3° DOSIS', 'PENTAVALENTE HVB 3° DOSIS', 'PENTAVALENTE HIV 3° DOSIS', 'ROTAVIRUS 2° DOSIS', 'NEOMOCOCO 2° DOSIS', 'INFLUENZA 2° DOSIS', 'NEUMOCOCO 3° DOSIS', 'SPR 1° DOSIS'],
+                                datasets: [{
+                                    label: '# of Votes',
+                                    data: mylist,
+                                    backgroundColor: [ '#1d3f74' ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            plugins: [ChartDataLabels],
+                            options:{
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                indexAxis: 'y',
+                                plugins: {
+                                    legend: {
+                                        display: true
+                                    },
+                                    datalabels: {
+                                        formatter: (value, ctx) => {
+                                            let mydata = ctx.datasetIndex;
+                                            var mydata1 = ctx.dataIndex;
+                                            if(mydata == 1){
+                                                var data2 = ctx.chart.data.datasets[0].data;
+                                                let percentage = (value*100 / data2[mydata1]);
+                                                if (percentage - Math.floor(percentage) == 0) {
+                                                    percentage = percentage.toFixed(0)+"%";
+                                                } else {
+                                                    percentage = percentage.toFixed(2)+"%";
+                                                }
+                                                return percentage;
+                                            }
+                                        },
+                                        color: 'black',
+                                        anchor: 'end',
+                                        align: 'right',
+                                        offset: 5
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });                       
+                    }
+                })
+            }
+        }
+
+        $("#return").click(function(){
+            $("#no_graph_district").show();
+            $(".x_district").hide();
+            $(".district_dac").empty();
+            // $(".district_oxa").empty();
+            // $(".district_pasco").empty();
         });
     </script>
 </body>
