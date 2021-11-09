@@ -15,7 +15,7 @@
                 <div class="col-5 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
                 <div class="col-7">
                     <form action="print_3_dosis.php" method="POST">
-                        <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
+                        <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
                     </form>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                       <div id="inputbus" class="input-group">
                         <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                        <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
+                        <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                       </div>
                     </div>
                 </div>

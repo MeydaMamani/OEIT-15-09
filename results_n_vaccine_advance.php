@@ -26,9 +26,9 @@
                         <form action="print_vaccine_advance.php" method="POST">
                             <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                             <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                            <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir Excel</button>
+                            <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                         </form>
-                        <button class="btn btn-outline-secondary btn-sm m-2" onclick="location.href='nominal_vaccine_advance.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+                        <button class="btn btn-outline-secondary btn-sm m-2" onclick="location.href='nominal_vaccine_advance.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                         <div class="form-group">
                             <div id="inputbus" class="input-group">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
+                                <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
                     </div>

@@ -44,14 +44,14 @@
             </div>
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
-                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='arch_plano.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='arch_plano.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
               </div>            
               <div class="d-flex">
                 <form action="impresion_gestante_tratamiento.php" method="POST">
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                     <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                     <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
+                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
                 </form>
             </div>
             <div class="col-12 table-responsive">
@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
+                                <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
                     </div>

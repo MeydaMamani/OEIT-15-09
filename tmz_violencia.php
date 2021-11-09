@@ -133,7 +133,7 @@
 						<option>12</option>
 					</select><br>
 					<div class="col-12 text-center">
-						<button type="submit" name="Buscar" class="--btn_buscar btn btn-primary" placeholder="Buscar"><i class="fa fa-search"></i> Buscar</button>
+						<button type="submit" name="Buscar" class="--btn_buscar btn btn-primary" placeholder="Buscar"><i class="mdi mdi-magnify"></i> Buscar</button>
 					</div>
 				</form>
 			</div>

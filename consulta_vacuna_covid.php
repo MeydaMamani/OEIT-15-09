@@ -24,7 +24,7 @@
           <h4 class="m-b-30"> INFORMACIÓN - <?php echo $doc; ?></h4>
         </div>
         <div class="col-lg-2 text-end">
-          <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+          <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_covid.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
         </div>
       </div>
       <div class="border border-success">
@@ -105,7 +105,7 @@
           <div class="page-wrapper">  
             <div class="container">
               <div class="col-md-12 text-end">
-                <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+                <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_covid.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
               </div><br>
               <div class="alert alert-primary" role="alert">
                 Usted no cuenta con nínguna dosis o no se encuentra en el padrón regional de Pasco

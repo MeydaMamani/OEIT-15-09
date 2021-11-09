@@ -17,7 +17,7 @@
                           </div>
                         </div><br>
                         <div class="col-12 text-center">
-                          <button type="button" name="Buscar" class="btn text-white" id="btn_buscar" style="background: #337ab7;" placeholder="Buscar"><i class="fa fa-search"></i> Buscar</button>
+                          <button type="button" name="Buscar" class="btn text-white" id="btn_buscar" style="background: #337ab7;" placeholder="Buscar"><i class="mdi mdi-magnify"></i> Buscar</button>
                         </div>
                       </form>
                     </div>

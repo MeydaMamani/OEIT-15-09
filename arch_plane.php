@@ -55,7 +55,7 @@
                                 </div>
                             </div><br>
                             <div class="col-12 text-center">
-                                <button type="button" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2"><i class="fa fa-print"></i> Imprimir CSV</button>
+                                <button type="button" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2"><i class="mdi mdi-printer"></i> Imprimir CSV</button>
                             </div>
                         </form>
                     </div>

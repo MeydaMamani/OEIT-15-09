@@ -39,9 +39,9 @@
                         <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                         <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                         <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                        <button type="submit" id="exportarCSV" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
+                        <button type="submit" id="exportarCSV" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
                     </form>
-                    <button class="btn btn-outline-secondary btn-sm m-2" onclick="location.href='cant_prof_epp.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+                    <button class="btn btn-outline-secondary btn-sm m-2" onclick="location.href='cant_prof_epp.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                 </div>
             </div>
             <div class="col-12 table-responsive">
@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
+                                <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
                     </div>
