@@ -4,13 +4,14 @@
     global $conex;
     include('./base.php');
 ?>
+
     <div class="page-wrapper">
         <div class="homologation">
             <div class="text-center p-1">
-              <h4>AVANCE DE VACUNACIÓN</h4>
+              <h2 style="color: #0d6cb8;">AVANCE DE VACUNACIÓN</h2>
             </div><br>
             <div class="row">
-                <div class="col-md-9 p-0 text-center">
+                <div class="col-md-8 p-0 text-center">
                     <div class="border border-secondary">
                         <div class="x_province">
                             <h4 class="p-2">AVANCE REGIONAL</h4>
@@ -18,20 +19,17 @@
                                 <canvas id="myChartProvince"></canvas>
                             </div>
                         </div>
-                    </div><br>
+                    </div><br><br>
                     <div class="row">
                         <div class="border border-secondary col-md-4">
                             <div class="col-12" style="display: none;">
                             </div>
                             <div class="col-md-12">
-                                <div class="justify-content-center position-absolute" style="margin-top: 15%;">
-                                    <button class="btn-sm btn_dac1" id="btn_dac" name="province"> DANIEL A. CARRION</button><br>
-                                    <button class="btn-sm btn_pasco1" name="province"> PASCO</button><br>
-                                    <button class="btn-sm btn_oxa1" name="province"> OXAPAMPA</button>
+                                <div class="justify-content-center position-absolute" style="margin-top: 8%; margin-left: 65px; display: grid;">
+                                    <button class="btn-sm btn_dac1" id="btn_dac" name="province" style="font-size: 11px;"> DANIEL A. CARRION</button><br>
+                                    <button class="btn-sm btn_pasco1" name="province" style="font-size: 11px;"> PASCO</button><br>
+                                    <button class="btn-sm btn_oxa1" name="province" style="font-size: 11px;"> OXAPAMPA</button>
                                 </div>
-                                <!-- <object data="./img/Mapa_de_localización_Pasco.svg" type="image/svg+xml" class="position-absolute" style="left: 11%; margin-top: 177px;">
-                                    <img src="./img/Mapa_de_localización_Pasco.svg" alt="">
-                                </object> -->
                                 <img src="./img/mapa_peru.png" alt="" style="width: 105%;">
                             </div>
                         </div>                    
@@ -134,7 +132,7 @@
                                     ?>
                                     <tr style="font-size: 11px; text-align: center;">
                                         <td class="align-middle"><?php echo ++$i_dac; ?></td>
-                                        <td class="align-middle" id="tb_district_dac<?php echo $i_dac; ?>"><?php echo utf8_encode($newdate2); ?></td>
+                                        <td class="align-middle" style="cursor: pointer;" id="tb_district_dac<?php echo $i_dac; ?>"><?php echo utf8_encode($newdate2); ?></td>
                                         <td class="align-middle"><?php echo $newdate3; ?></td>
                                         <td class="align-middle"><?php echo $newdate4; ?></td>
                                         <td class="align-middle"><?php echo $newdate5; ?></td>
@@ -253,7 +251,7 @@
                                     ?>
                                     <tr style="font-size: 11px; text-align: center;">
                                         <td class="align-middle"><?php echo ++$i_oxa; ?></td>
-                                        <td class="align-middle" id="tb_district_oxa<?php echo $i_oxa; ?>"><?php echo utf8_encode($newdate2); ?></td>
+                                        <td class="align-middle" style="cursor: pointer;" id="tb_district_oxa<?php echo $i_oxa; ?>"><?php echo utf8_encode($newdate2); ?></td>
                                         <td class="align-middle"><?php echo $newdate3; ?></td>
                                         <td class="align-middle"><?php echo $newdate4; ?></td>
                                         <td class="align-middle"><?php echo $newdate5; ?></td>
@@ -372,7 +370,7 @@
                                     ?>
                                     <tr style="font-size: 11px; text-align: center;">
                                         <td class="align-middle"><?php echo ++$i_pas; ?></td>
-                                        <td class="align-middle" id="tb_district_pasco<?php echo $i_pas; ?>"><?php echo utf8_encode($newdate2); ?></td>
+                                        <td class="align-middle" style="cursor: pointer;" id="tb_district_pasco<?php echo $i_pas; ?>"><?php echo utf8_encode($newdate2); ?></td>
                                         <td class="align-middle"><?php echo $newdate3; ?></td>
                                         <td class="align-middle"><?php echo $newdate4; ?></td>
                                         <td class="align-middle"><?php echo $newdate5; ?></td>
@@ -399,13 +397,16 @@
                             <div class="text-end m-r-30">
                                 <button class="btn btn-outline-secondary btn-sm" id="return"><i class="mdi mdi-keyboard-return"></i> Volver</button>
                             </div>
-                            <div class="district_dac" style="height: 335px;">
+                            <div class="district_dac" style="height: 410px;">
                                 
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-1"></div>
                 <div class="col-md-3 text-center">
+                    <div id="chart_div" style="width: 400px; height: 120px;"></div>
+                    <br>
                     <canvas id="myPieChart" width="600" height="400"></canvas>
                 </div>
             </div>
@@ -417,18 +418,46 @@
     <script src="./plugin/footable/js/footable.all.min.js"></script>
     <script src="./js/Chart.min.js"></script>
     <script src="./js/chartjs-plugin-datalabels.min.js"></script>
+     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Memory', 80],
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+          redFrom: 90, redTo: 100,
+          yellowFrom:75, yellowTo: 90,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        setInterval(function() {
+          data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+          chart.draw(data, options);
+        }, 13000);
+      }
+</script>
 
     <script>
-        
         var ctx = document.getElementById("myPieChart").getContext('2d');
         var myPieChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["Makassar", "Sinjae", "Bulukumba", "Gowa"],
+            labels: ["Makassar", "Bulukumba", "Gowa"],
             datasets: [{
-            label: '# of Votes',
+            label: 'Avance de Vacunación',
             data:[4000, 3000, 2000, 5000],
-            backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+            backgroundColor: ['#007bff', '#ffc107', '#28a745'],
             }],
         },
         options:{
@@ -695,16 +724,6 @@
                         formatter: (value, ctx) => {
                             let mydata = ctx.datasetIndex;
                             var mydata1 = ctx.dataIndex;
-                            if(mydata == 1){
-                                var data2 = ctx.chart.data.datasets[0].data;
-                                let percentage = (value*100 / data2[mydata1]).toFixed(2)+"%";
-                                return percentage;
-                            }
-                            if(mydata == 0){
-                                let dataArr = ctx.chart.data.datasets[0].data;
-                                let percentage = (1*100 ).toFixed(0)+"%";
-                                return percentage;
-                            }
                         },
                         color: 'black',
                         anchor: 'end',
@@ -764,7 +783,7 @@
                             data: {
                                 labels: ['BCG 24H', 'HVB 12H', 'IPV 2° DOSIS', 'APO 3° DOSIS', 'PENTAVALENTE 3° DOSIS', 'PENTAVALENTE DTP 3° DOSIS', 'PENTAVALENTE HVB 3° DOSIS', 'PENTAVALENTE HIV 3° DOSIS', 'ROTAVIRUS 2° DOSIS', 'NEOMOCOCO 2° DOSIS', 'INFLUENZA 2° DOSIS', 'NEUMOCOCO 3° DOSIS', 'SPR 1° DOSIS'],
                                 datasets: [{
-                                    label: '# of Votes',
+                                    label: 'Avance de Vacunación',
                                     data: mylist,
                                     backgroundColor: [ '#1d3f74' ],
                                     borderWidth: 1
@@ -836,7 +855,7 @@
                             data: {
                                 labels: ['BCG 24H', 'HVB 12H', 'IPV 2° DOSIS', 'APO 3° DOSIS', 'PENTAVALENTE 3° DOSIS', 'PENTAVALENTE DTP 3° DOSIS', 'PENTAVALENTE HVB 3° DOSIS', 'PENTAVALENTE HIV 3° DOSIS', 'ROTAVIRUS 2° DOSIS', 'NEOMOCOCO 2° DOSIS', 'INFLUENZA 2° DOSIS', 'NEUMOCOCO 3° DOSIS', 'SPR 1° DOSIS'],
                                 datasets: [{
-                                    label: '# of Votes',
+                                    label: 'Avance de Vacunación',
                                     data: mylist,
                                     backgroundColor: [ '#1d3f74' ],
                                     borderWidth: 1
@@ -908,7 +927,7 @@
                             data: {
                                 labels: ['BCG 24H', 'HVB 12H', 'IPV 2° DOSIS', 'APO 3° DOSIS', 'PENTAVALENTE 3° DOSIS', 'PENTAVALENTE DTP 3° DOSIS', 'PENTAVALENTE HVB 3° DOSIS', 'PENTAVALENTE HIV 3° DOSIS', 'ROTAVIRUS 2° DOSIS', 'NEOMOCOCO 2° DOSIS', 'INFLUENZA 2° DOSIS', 'NEUMOCOCO 3° DOSIS', 'SPR 1° DOSIS'],
                                 datasets: [{
-                                    label: '# of Votes',
+                                    label: 'Avance de Vacunación',
                                     data: mylist,
                                     backgroundColor: [ '#1d3f74' ],
                                     borderWidth: 1
@@ -960,8 +979,6 @@
             $("#no_graph_district").show();
             $(".x_district").hide();
             $(".district_dac").empty();
-            // $(".district_oxa").empty();
-            // $(".district_pasco").empty();
         });
     </script>
 </body>

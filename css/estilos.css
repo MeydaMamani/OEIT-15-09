@@ -216,7 +216,7 @@ li a, a{
 
 @media screen and (min-width: 1200px){
 	.homologation {
-		margin: 10px 110px;
+		margin: 5px 110px;
 	}
 }
 
@@ -309,22 +309,22 @@ canvas.myChartProvince, canvas.myChartDistrict{
 	font-weight: 500;
     border: 0;
 	clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
-	width: 130px;
-    height: 60px;
+	width: 100px;
+    height: 45px;
 }
 
 .btn_oxa1{
 	font-weight: 500;
     border: 0;
 	clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 15% 50%, 0% 0%);
-	width: 130px;
-	height: 60px;
+	width: 100px;
+	height: 45px;
 }
 
 .btn_pasco1{
 	font-weight: 500;
     border: 0;
 	clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
-	width: 130px;
-	height: 60px;
+	width: 100px;
+	height: 45px;
 }
