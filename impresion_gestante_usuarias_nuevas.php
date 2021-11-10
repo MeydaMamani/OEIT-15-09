@@ -13,119 +13,281 @@
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
 
-        if (strlen($mes) == 1){ $mes2 = '0'.$mes;  }else{ $mes2 = $mes;
+        if($mes == 1){ $nombre_mes = 'Enero'; }
+        else if($mes == 2){ $nombre_mes = 'Febrero'; }
+        else if($mes == 3){ $nombre_mes = 'Marzo'; }
+        else if($mes == 4){ $nombre_mes = 'Abril'; }
+        else if($mes == 5){ $nombre_mes = 'Mayo'; }
+        else if($mes == 6){ $nombre_mes = 'Junio'; }
+        else if($mes == 7){ $nombre_mes = 'Julio'; }
+        else if($mes == 8){ $nombre_mes = 'Agosto'; }
+        else if($mes == 9){ $nombre_mes = 'Setiembre'; }
+        else if($mes == 10){ $nombre_mes = 'Octubre'; }
+        else if($mes == 11){ $nombre_mes = 'Noviembre'; }
+        else if($mes == 12){ $nombre_mes = 'Diciembre'; }
+        
+        if (strlen($mes) == 1){
+          $mes2 = '0'.$mes;
+        }else{
+            $mes2 = $mes;
         }
 
-        if ($red_1 == 1) { $red = 'DANIEL ALCIDES CARRION'; }
-        elseif ($red_1 == 2) { $red = 'OXAPAMPA'; }
-        elseif ($red_1 == 3) { $red = 'PASCO';  }
-        elseif ($red_1 == 4) { $redt = 'PASCO'; }
-        
+        if ($red_1 == 1) {
+          $red = 'DANIEL ALCIDES CARRION';
+        }
+        elseif ($red_1 == 2) {
+          $red = 'OXAPAMPA';
+        }
+        elseif ($red_1 == 3) {
+          $red = 'PASCO';
+        }
+        elseif ($red_1 == 4) {
+          $red = 'TODOS';
+        }
+
+        $resultado1 = "SELECT Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Codigo_Item, Tipo_Diagnostico, Fecha_Atencion, Numero_Documento_Paciente, Tipo_Doc_Paciente, Valor_Lab 
+                      into bdhis_minsa.dbo.TRAMAHIS 
+                      from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                      where ltrim(rtrim(Codigo_Item)) in ('99208','96150','96150.01')
+                      and isnumeric(Numero_Documento_Paciente)=1
+                      and ltrim(rtrim(Genero))='F'
+                      ANd Tipo_Edad='A' AND edad_reg>=18
+                      AND [Id_Condicion_Servicio] in ('N','R')";
+
+        $resultado2 = "SELECT Codigo_Unico, Categoria_Establecimiento 
+                      into bdhis_minsa.dbo.RENAES 
+                      from MAESTRO_HIS_ESTABLECIMIENTO";
+
+        $resultado3 = "CREATE TABLE DEN (
+                          renaes int, 
+                          fecha_cita date, 
+                          id VARCHAR(30), 
+                          den int,
+                      )";
+
+        $resultado4 = "CREATE TABLE NUM (
+                          renaes int, 
+                          fecha_cita date, 
+                          id VARCHAR(30), 
+                          num int,
+                      )";
+
+        $resultado5 = "CREATE TABLE TRAMAHIS_FED2021_VI02_NOMINAL (
+                          anio int,
+                          mes int,
+                          renaes int,
+                          id VARCHAR(20),
+                          den INT,
+                          num INT,
+                      )";
+
+        $resultado6 = "DECLARE @year int, @mes_eval int , @mes_final int 
+                        set @year=2021
+                        set @mes_eval=1
+                        set @mes_final=12
+                      
+                      while @mes_eval <= @mes_final
+                      begin
+                              PRINT 'The counter value is = ' + CONVERT(VARCHAR,@mes_eval)
+                              -- Denominador. 
+                            INSERT into DEN 
+                          select distinct convert(int,r.Codigo_Unico) renaes, try_convert(date,Fecha_Atencion) fecha_cita, convert(varchar,Tipo_Doc_Paciente)+convert(varchar,Numero_Documento_Paciente) id, den=1
+                          from bdhis_minsa.dbo.TRAMAHIS h
+                          left join bdhis_minsa.dbo.RENAES r ON TRY_CONVERT(INT,h.Codigo_Unico) = TRY_CONVERT(INT,R.Codigo_Unico)
+                          where ltrim(rtrim(Codigo_Item)) in ('99208') and ltrim(rtrim(Tipo_Diagnostico)) in ('D')
+                          and month(try_convert(date,Fecha_Atencion))=@mes_eval and year(try_convert(date,Fecha_Atencion))=@year
+                          and Numero_Documento_Paciente is not null
+                          AND Categoria_Establecimiento IN ('I-1','I-2','I-3','I-4')
+                      
+                              -- Numerador. 
+                          INSERT INTO NUM
+                          select distinct try_convert(int,Codigo_Unico) renaes, try_convert(date,Fecha_Atencion) fecha_cita, convert(varchar,Tipo_Doc_Paciente)+convert(varchar,Numero_Documento_Paciente) id, num=1
+                          from bdhis_minsa.dbo.TRAMAHIS
+                          where (
+                            (	ltrim(rtrim(Codigo_Item)) = '96150' and ltrim(rtrim(Tipo_Diagnostico)) ='D' and ltrim(rtrim(valor_lab)) ='VIF'	)
+                            or 
+                            ( 	ltrim(rtrim(Codigo_Item)) = '96150.01' and ltrim(rtrim(Tipo_Diagnostico)) = 'D' )
+                          ) and month(try_convert(date,Fecha_Atencion))=@mes_eval and year(try_convert(date,Fecha_Atencion))=@year
+                      
+                              
+                              --CONVERT(datetime, '2017-08-25')
+                              select a.*, month(a.fecha_cita) mes, year(a.fecha_cita) anio,isnull(b.num,0) num 
+                          into bdhis_minsa.dbo.REPORTS
+                          from bdhis_minsa.dbo.DEN a
+                          left join bdhis_minsa.dbo.NUM b on a.fecha_cita=b.fecha_cita and a.renaes=b.renaes and a.id=b.id
+                      
+                              select anio, mes, renaes, id, max(den) den, max(num) num
+                          into bdhis_minsa.dbo.REPORTS_FINAL
+                          from REPORTS
+                          group by anio, mes, renaes, id
+                      
+                          insert into TRAMAHIS_FED2021_VI02_NOMINAL
+                          select anio, mes, renaes, convert(varchar(20),id) id, den, num 
+                          from bdhis_minsa.dbo.REPORTS_FINAL
+                      
+                              DROP TABLE bdhis_minsa.dbo.REPORTS
+                              DROP TABLE bdhis_minsa.dbo.REPORTS_FINAL
+                          
+                          set @mes_eval = @mes_eval + 1
+                      end";
+
+        $resultado7 = "SELECT anio, mes, renaes, sum(den) den, sum(num) num
+                      into TRAMAHIS_FED2021_VI02_consolidado
+                      from TRAMAHIS_FED2021_VI02_NOMINAL
+                      group by anio, mes, renaes ";
+
+
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
-            $resultado = "SELECT a.Provincia_Establecimiento, a.distrito_establecimiento, a.Abrev_Tipo_Doc_Paciente, a.Nombre_Establecimiento,a.Numero_Documento_Paciente, A.Fecha_Nacimiento_Paciente,t.Edad_Reg,
-                            a.Fecha_Atencion, t.Codigo_Item
-                            from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA a  left join
-                            (select t.Provincia_Establecimiento,t.Distrito_Establecimiento, t.Nombre_Establecimiento,t.Descripcion_Ups, t.Numero_Documento_Paciente,
-                                t.Tipo_Diagnostico,t.Codigo_Item, t.Valor_Lab, t.Edad_Reg,t.Fecha_Atencion
-                            from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
-                            where  t.anio='2021' and t.mes='$mes' AND  ((t.Codigo_Item='96150' and t.Valor_Lab='VIF' AND t.Tipo_Diagnostico='D') OR
-                                (t.Codigo_Item='96150.01' AND t.Tipo_Diagnostico='D')) AND t.Edad_Reg>17 AND t.Tipo_Edad='A' AND
-                                t.Id_Cita IN
-                                  (select t.Id_Cita from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
-                                  where  t.anio='2021' AND t.MES='$mes' and t.Codigo_Item='99208' and t.Tipo_Diagnostico='D' and t.Id_Ups='301612' and 
-                                  t.Id_Condicion_Establecimiento in ('N','R') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))
-                                  AND t.Edad_Reg>17 AND t.Tipo_Edad='A')   ) t
-                            on a.Numero_Documento_Paciente=t.Numero_Documento_Paciente
-                            where  a.anio='2021' AND a.MES='$mes' AND a.Provincia_Establecimiento='$red' and a.Codigo_Item='99208' and a.Tipo_Diagnostico='D' and a.Id_Ups='301612' and a.Id_Condicion_Establecimiento in ('N','R')
-                            AND (a.Edad_Reg>17 AND a.Tipo_Edad='A') and (a.Codigo_Unico NOT IN ('000000979','000000980','000000981'))";
-  
+            $resultado8 = "SELECT  m.Provincia,m.Distrito,m.Nombre_Establecimiento,SUBSTRING(d.id,2,10)documento,d.fecha_cita ATE_PLANIFICACION,n.fecha_cita TMZ_VIF
+                          from den d left join num n 
+                          on d.id=n.id
+                          left join MAESTRO_HIS_ESTABLECIMIENTO m
+                          on d.renaes=cast(m.Codigo_Unico as int)
+                          WHERE MONTH(d.fecha_cita)=$mes2 AND Provincia='$red'
+                          DROP TABLE bdhis_minsa.dbo.TRAMAHIS
+                          DROP TABLE bdhis_minsa.dbo.RENAES
+                          DROP TABLE DEN
+                          DROP TABLE NUM
+                          DROP TABLE TRAMAHIS_FED2021_VI02_NOMINAL
+                          DROP TABLE bdhis_minsa.dbo.NUM 
+                          DROP TABLE bdhis_minsa.dbo.DEN
+                          DROP TABLE bdhis_minsa.dbo.REPORTS
+                          DROP TABLE bdhis_minsa.dbo.REPORTS_FINAL
+                          DROP TABLE TRAMAHIS_FED2021_VI02_consolidado";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
-            $dist = '';
-            $resultado = "SELECT a.Provincia_Establecimiento, a.distrito_establecimiento, a.Abrev_Tipo_Doc_Paciente, a.Nombre_Establecimiento,a.Numero_Documento_Paciente, A.Fecha_Nacimiento_Paciente,t.Edad_Reg,
-                              a.Fecha_Atencion, t.Codigo_Item from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA a  left join
-                              (select t.Provincia_Establecimiento,t.Distrito_Establecimiento,t.Nombre_Establecimiento,t.Descripcion_Ups, t.Numero_Documento_Paciente,
-                                      t.Tipo_Diagnostico,t.Codigo_Item, t.Valor_Lab, t.Edad_Reg,t.Fecha_Atencion
-                              from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
-                              where  t.anio='2021' and t.mes='$mes' and ((t.Codigo_Item='96150' and t.Valor_Lab='VIF' AND t.Tipo_Diagnostico='D') OR
-                                      (t.Codigo_Item='96150.01' AND t.Tipo_Diagnostico='D')) AND t.Edad_Reg>17 AND t.Tipo_Edad='A' AND
-                                      t.Id_Cita IN
-                                (select t.Id_Cita from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
-                                where  t.anio='2021' AND t.MES='$mes' and t.Codigo_Item='99208' and t.Tipo_Diagnostico='D' and t.Id_Ups='301612' and 
-                                t.Id_Condicion_Establecimiento in ('N','R') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))
-                                AND t.Edad_Reg>17 AND t.Tipo_Edad='A')   ) t
-                              on a.Numero_Documento_Paciente=t.Numero_Documento_Paciente
-                              where  a.anio='2021' AND a.MES='$mes' and a.Codigo_Item='99208' and a.Tipo_Diagnostico='D' and a.Id_Ups='301612' and a.Id_Condicion_Establecimiento in ('N','R')
-                              AND (a.Edad_Reg>17 AND a.Tipo_Edad='A') and (a.Codigo_Unico NOT IN ('000000979','000000980','000000981')) ";
+            $resultado8 = "SELECT  m.Provincia,m.Distrito,m.Nombre_Establecimiento,SUBSTRING(d.id,2,10)documento,d.fecha_cita ATE_PLANIFICACION,n.fecha_cita TMZ_VIF
+                          from den d left join num n 
+                          on d.id=n.id
+                          left join MAESTRO_HIS_ESTABLECIMIENTO m
+                          on d.renaes=cast(m.Codigo_Unico as int)
+                          WHERE MONTH(d.fecha_cita)=$mes2
+                          DROP TABLE bdhis_minsa.dbo.TRAMAHIS
+                          DROP TABLE bdhis_minsa.dbo.RENAES
+                          DROP TABLE DEN
+                          DROP TABLE NUM
+                          DROP TABLE TRAMAHIS_FED2021_VI02_NOMINAL
+                          DROP TABLE bdhis_minsa.dbo.NUM 
+                          DROP TABLE bdhis_minsa.dbo.DEN
+                          DROP TABLE bdhis_minsa.dbo.REPORTS
+                          DROP TABLE bdhis_minsa.dbo.REPORTS_FINAL
+                          DROP TABLE TRAMAHIS_FED2021_VI02_consolidado";
+          
         }
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
-            $resultado = "SELECT a.Provincia_Establecimiento, a.distrito_establecimiento, a.Abrev_Tipo_Doc_Paciente, a.Nombre_Establecimiento,a.Numero_Documento_Paciente, A.Fecha_Nacimiento_Paciente,t.Edad_Reg,
-                            a.Fecha_Atencion, t.Codigo_Item
-                            from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA a  left join
-                            (select t.Provincia_Establecimiento,t.Distrito_Establecimiento, t.Nombre_Establecimiento,t.Descripcion_Ups, t.Numero_Documento_Paciente,
-                                t.Tipo_Diagnostico,t.Codigo_Item, t.Valor_Lab, t.Edad_Reg,t.Fecha_Atencion
-                            from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
-                            where  t.anio='2021' and t.mes='$mes' AND  ((t.Codigo_Item='96150' and t.Valor_Lab='VIF' AND t.Tipo_Diagnostico='D') OR
-                                (t.Codigo_Item='96150.01' AND t.Tipo_Diagnostico='D')) AND t.Edad_Reg>17 AND t.Tipo_Edad='A' AND
-                                t.Id_Cita IN
-                                  (select t.Id_Cita from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
-                                  where  t.anio='2021' AND t.MES='$mes' and t.Codigo_Item='99208' and t.Tipo_Diagnostico='D' and t.Id_Ups='301612' and 
-                                  t.Id_Condicion_Establecimiento in ('N','R') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))
-                                  AND t.Edad_Reg>17 AND t.Tipo_Edad='A')   ) t
-                            on a.Numero_Documento_Paciente=t.Numero_Documento_Paciente
-                            where  a.anio='2021' AND a.MES='$mes' AND a.Provincia_Establecimiento='$red' AND a.distrito_establecimiento='$dist' and a.Codigo_Item='99208' and a.Tipo_Diagnostico='D' and a.Id_Ups='301612' and a.Id_Condicion_Establecimiento in ('N','R')
-                            AND (a.Edad_Reg>17 AND a.Tipo_Edad='A') and (a.Codigo_Unico NOT IN ('000000979','000000980','000000981'))";
+            $resultado8 = "SELECT  m.Provincia,m.Distrito,m.Nombre_Establecimiento,SUBSTRING(d.id,2,10)documento,d.fecha_cita ATE_PLANIFICACION,n.fecha_cita TMZ_VIF
+                          from den d left join num n 
+                          on d.id=n.id
+                          left join MAESTRO_HIS_ESTABLECIMIENTO m
+                          on d.renaes=cast(m.Codigo_Unico as int)
+                          WHERE MONTH(d.fecha_cita)=$mes2 AND Provincia='$red' AND Distrito='$dist'
+                          DROP TABLE bdhis_minsa.dbo.TRAMAHIS
+                          DROP TABLE bdhis_minsa.dbo.RENAES
+                          DROP TABLE DEN
+                          DROP TABLE NUM
+                          DROP TABLE TRAMAHIS_FED2021_VI02_NOMINAL
+                          DROP TABLE bdhis_minsa.dbo.NUM 
+                          DROP TABLE bdhis_minsa.dbo.DEN
+                          DROP TABLE bdhis_minsa.dbo.REPORTS
+                          DROP TABLE bdhis_minsa.dbo.REPORTS_FINAL
+                          DROP TABLE TRAMAHIS_FED2021_VI02_consolidado";
         }
-  
-        $params = array(); 
-        $options = array("Scrollable" => SQLSRV_CURSOR_KEYSET);
-        $consulta2 = sqlsrv_query($conn, $resultado, $params, $options);
 
-        if(!empty($consulta2)){
-            $ficheroExcel="DEIT_PASCO CG_FT_GESTANTES_USUAR_NUEVAS_SERV_PLANIF_FAM - PPFF_CON_DX_VIOLENC (TMZ) "._date("d-m-Y", false, 'America/Lima').".csv";        
-            //Indicamos que vamos a tratar con un fichero CSV
-            header("Content-type: text/csv");
-            header("Content-Disposition: attachment; filename=".$ficheroExcel);            
-            // Vamos a mostrar en las celdas las columnas que queremos que aparezcan en la primera fila, separadas por ; 
-            echo "#;PROVINCIA;DISTRITO;ESTABLECIMIENTO;TIPO_DOCUMENTO;DOCUMENTO;FECHA_NAC_PACIENTE;EDAD;FECHA_ATENCION;CODIGO;CUMPLE\n";                    
-            // Recorremos la consulta SQL y lo mostramos
-            $i=1;
-            while ($consulta = sqlsrv_fetch_array($consulta2)){
-                echo $i++.";";
-                if(is_null ($consulta['Provincia_Establecimiento']) ){ echo ' - '.";"; }
-                else{ echo $consulta['Provincia_Establecimiento'].";"; }
+        $consulta1 = sqlsrv_query($conn, $resultado1);
+        $consulta2 = sqlsrv_query($conn, $resultado2);
+        $consulta3 = sqlsrv_query($conn, $resultado3);
+        $consulta4 = sqlsrv_query($conn, $resultado4);
+        $consulta5 = sqlsrv_query($conn, $resultado5);
+        $consulta6 = sqlsrv_query($conn, $resultado6);
+        $consulta7 = sqlsrv_query($conn, $resultado7);
+        $consulta8 = sqlsrv_query($conn, $resultado8);
 
-                if(is_null ($consulta['distrito_establecimiento']) ){ echo ' - '.";"; }
-                else{ echo $consulta['distrito_establecimiento'].";" ; }
+        if(!empty($consulta8)){
+            $ficheroExcel="DEIT_PASCO CG_FT_USUAR_NUEVAS_SERV_PLANIF_FAM - PPFF_CON_DX_VIOLENC (TMZ) "._date("d-m-Y", false, 'America/Lima').".xls";        
+            header('Content-Type: application/vnd.ms-excel');
+            header("Content-Type: application/octet-stream");
+            header("Content-Disposition: attachment;filename=".$ficheroExcel);
+            header("Cache-Control: max-age=0");
+    ?>
 
-                if(is_null ($consulta['Nombre_Establecimiento']) ){ echo ' - '.";"; }
-                else{ echo utf8_encode($consulta['Nombre_Establecimiento']).";"; }
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <table>
+            <thead>
+                <tr class="text-center">
+                    <th colspan="7" style="font-size: 30px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
+                </tr>
+                <tr></tr>
+                <tr class="text-center">
+                    <th colspan="7" style="font-size: 30px; border: 1px solid #3A3838;">Usuarias Nuevas en el Servicio de Planificación Familiar con DX Violencia - <?php echo $nombre_mes; ?></th>
+                </tr>
+                <tr></tr>
+            </thead>
+        </table>
+        <table>
+            <thead>
+                <tr class="text-center font-12" style="background: #c9d0e2;">
+                    <th style="border: 1px solid #DDDDDD;">#</th>
+                    <th style="border: 1px solid #DDDDDD;">Provincia</th>
+                    <th style="border: 1px solid #DDDDDD;">Distrito</th>
+                    <th style="border: 1px solid #DDDDDD;">Establecimiento</th>
+                    <th style="border: 1px solid #DDDDDD;">Documento</th>
+                    <th style="border: 1px solid #DDDDDD;">Ate Planificación</th>
+                    <th style="border: 1px solid #DDDDDD;">Tmz VIF</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                    $i=1;
+                    while ($consulta = sqlsrv_fetch_array($consulta8)){ 
+                        if(is_null ($consulta['Provincia']) ){
+                            $newdate = '  -'; }
+                        else{
+                            $newdate = $consulta['Provincia'];}
+    
+                        if(is_null ($consulta['Distrito']) ){
+                            $newdate2 = '  -'; }
+                        else{
+                            $newdate2 = $consulta['Distrito'];}
+    
+                        if(is_null ($consulta['Nombre_Establecimiento']) ){
+                            $newdate3 = '  -'; }
+                            else{
+                        $newdate3 = $consulta['Nombre_Establecimiento'];}
+    
+                        if(is_null ($consulta['documento']) ){
+                            $newdate4 = '  -'; }
+                            else{
+                        $newdate4 = $consulta['documento'];}
+    
+                        if(is_null ($consulta['ATE_PLANIFICACION']) ){
+                            $newdate5 = '  -'; }
+                            else{
+                        $newdate5 = $consulta['ATE_PLANIFICACION'] -> format('d/m/y');}
+    
+                        if(is_null ($consulta['TMZ_VIF']) ){
+                            $newdate6 = '  -'; }
+                            else{
+                        $newdate6 = $consulta['TMZ_VIF'] -> format('d/m/y');}
+    
+                ?>
+                <tr class="text-center font-12">
+                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $i++; ?></td>
+                    <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate); ?></td>
+                    <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate2); ?></td>
+                    <td style="border: 1px solid #DDDDDD;"><?php echo $newdate3; ?></td>
+                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo str_pad($newdate4, 8, "o", STR_PAD_LEFT); ?></td>
+                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate5; ?></td>
+                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate6; ?></td>                      
+                </tr>
+                <?php
+                    ;}              
+                    include("cerrar.php");
+                ?>
+            </tbody>
+        </table>
 
-                if(is_null ($consulta['Abrev_Tipo_Doc_Paciente']) ){ echo ' - '.";"; }
-                else{ echo $consulta['Abrev_Tipo_Doc_Paciente'].";" ; }
-
-                if(is_null ($consulta['Numero_Documento_Paciente']) ){ echo ' - '.";"; }
-                else{ echo $consulta['Numero_Documento_Paciente'].";" ; }
-
-                if(is_null ($consulta['Fecha_Nacimiento_Paciente']) ){ echo ' - '.";"; }
-                else{ echo $consulta['Fecha_Nacimiento_Paciente'] -> format('d/m/y').";" ; }
-
-                if(is_null ($consulta['Edad_Reg']) ){ echo ' - '.";"; }
-                else{ echo $consulta['Edad_Reg'].";" ; }
-
-                if(is_null ($consulta['Fecha_Atencion']) ){ echo ' - '.";"; }
-                else{ echo $consulta['Fecha_Atencion'] -> format('d/m/y').";" ; }
-
-                if(is_null ($consulta['Codigo_Item']) ){ echo ' - '.";"; }
-                else{ echo $consulta['Codigo_Item'].";" ; }
-
-                if($consulta['Codigo_Item'] != '' and !is_null ($consulta['Codigo_Item'])){
-                    echo "Si"."\n";
-                }else{
-                    echo "No"."\n";
-                }
-            }   
+<?php
         }
     }
 ?>
