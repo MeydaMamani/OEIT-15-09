@@ -40,12 +40,12 @@
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
                 <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Informacion</button> -->
-                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='paquete_nino.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button> -->
+                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='paquete_nino.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
               </div>
             </div>
-            <!-- <button class="btn btn-outline-dark btn-sm btn_fed"><i class="fa fa-clone"></i> FED</button>
-            <button class="btn btn-outline-success btn-sm btn_all"><i class="fa fa-circle"></i> Todo</button> -->
+            <!-- <button class="btn btn-outline-dark btn-sm btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
+            <button class="btn btn-outline-success btn-sm btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button> -->
             <div class="col-12 table-responsive table_no_fed">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
@@ -80,7 +80,7 @@
                         <div class="form-group">
                             <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
+                                <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
                     </div>

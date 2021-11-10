@@ -17,7 +17,7 @@
     <div class="container">
       <div class="row mb-4">
         <div class="col-lg-12 text-end">
-          <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_padron.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+          <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_padron.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
         </div>
       </div>
       <div class="row m-3">
@@ -68,7 +68,7 @@
         <div class="page-wrapper">
             <div class="container">
               <div class="col-md-12 text-end">
-                <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_padron.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+                <button type="submit" name="Limpiar" class="btn btn-outline-info" onclick="location.href='vacuna_padron.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
               </div><br>
               <div class="alert alert-danger" role="alert">
                 USTED NO SE ENCUENTRA EN EL PADRON REGIONAL, ACERQUESE A SU ESTABLECIMIENTO DE SALUD MAS CERCANO PARA UNA REEVALUACION Y SER CONSIDERADO EN NUESTRA BASE DE DATOS REGIONAL

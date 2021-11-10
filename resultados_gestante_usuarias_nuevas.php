@@ -19,40 +19,46 @@
             <div class="row mb-3 mt-1">
                 <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
             </div>
-            <div class="row mb-1">
-                <div class="col-lg-12 text-center">
-                    <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-view-headline"></i> Información</button>
-                    <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='gestante_usuarias_nuevas.php';"><i class="mdi mdi-keyboard-backspace"></i> Regresar</button>
-                </div>
-                <div class="d-flex">
-                    <form action="impresion_gestante_usuarias_nuevas.php" method="POST">
-                        <input hidden name="red" value="<?php echo $_POST['red']; ?>">
-                        <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                        <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                        <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
-                    </form>
-                </div>    
+
+            <div class="row mb-3">
+              <div class="col-lg-12 text-center">
+                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-bar-chart"></i> Cuadro Resumen</button> -->
+                <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
+                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='gestante_usuarias_nuevas.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
+              </div>
+
+
+              <div class="d-flex">
+                <!--<button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
+                <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button>-->
+                <form action="impresion_gestante_usuarias_nuevas.php" method="POST">
+                    <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                    <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                    <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
+                </form>
             </div>
-            <div class="col-12 table-responsive">
-                <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
-                    <thead>
-                        <tr class="text-center font-12" style="background: #c9d0e2;">
-                            <th class="align-middle">#</th>
-                            <th class="align-middle">Provincia</th>
-                            <th class="align-middle">Distrito</th>
-                            <th class="align-middle">Establecimiento</th>
-                            <th class="align-middle">Documento</th>
-                            <th class="align-middle">Ate Planificación</th>
-                            <th class="align-middle">Tmz VIF</th>
-                        </tr>
-                    </thead>
-                    <div class="float-end pb-1">
-                        <div class="form-group">
-                            <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
-                            </div>
-                        </div>
+           
+            <div class="col-12 table-responsive table_no_fed">
+              <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="20">
+                <thead>
+                  <tr class="text-center font-12" style="background: #c9d0e2;">
+                    <th class="align-middle">#</th>
+                    <th class="align-middle">Provincia</th>
+                    <th class="align-middle">Distrito</th>
+                    <th class="align-middle">Establecimiento</th>
+                    <th class="align-middle">Documento</th>
+                    <th class="align-middle">Ate Planificación</th>
+                    <th class="align-middle">Tmz VIF</th>
+                  </tr>
+                </thead>
+                <div>
+                  <div class="float-end pb-3 table_no_fed">
+                    <div class="form-group">
+                      <div id="inputbus" class="input-group input-group-sm">
+                        <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                        <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
+                      </div>
                     </div>
                     <tbody>
                         <?php 

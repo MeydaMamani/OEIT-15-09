@@ -25,7 +25,7 @@ global $conex;
                   <h4 class="m-b-30"> INFORMACIÓN - <?php echo $doc; ?></h4>
                 </div>
                 <div class="col-lg-2 text-end">
-                  <button type="submit" name="Limpiar" class="btn btn-outline-info btn-sm 1btn_buscar" onclick="location.href='detalle_paciente.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+                  <button type="submit" name="Limpiar" class="btn btn-outline-info btn-sm 1btn_buscar" onclick="location.href='detalle_paciente.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                 </div>
               </div>
               <?php  while ($consulta = sqlsrv_fetch_array($consulta2)){  

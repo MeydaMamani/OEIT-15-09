@@ -45,8 +45,8 @@
                         <div class="row mb-3">
                             <div class="col-lg-12 text-center">
                                 <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Informacion</button> -->
-                                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='sis_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+                                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button> -->
+                                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='sis_covid.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                             </div>
                         </div>    
                         <div class="d-flex">
@@ -54,7 +54,7 @@
                                 <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                                 <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                                 <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                                <button type="submit" id="export_data" name="exportarCSV_f0" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
+                                <button type="submit" id="export_data" name="exportarCSV_f0" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
                             </form>
                         </div>
                         <div class="table-responsive">
@@ -81,7 +81,7 @@
                                     <div class="form-group">
                                         <div id="inputbus" class="input-group input-group-sm">
                                             <input id="demo-input-search" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                            <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
+                                            <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                                         </div>
                                     </div>
                                 </div>                       
@@ -205,8 +205,8 @@
                         <div class="row mb-3">
                             <div class="col-lg-12 text-center">
                                 <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="fa fa-list"></i> Informacion</button> -->
-                                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='sis_covid.php';"><i class="fa fa-arrow-left"></i> Regresar</button>
+                                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button> -->
+                                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='sis_covid.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                             </div>
                         </div>
 
@@ -215,7 +215,7 @@
                                 <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                                 <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                                 <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                                <button type="submit" id="export_data" name="exportarCSV_f100" class="btn btn-outline-success btn-sm m-2 "><i class="fa fa-print"></i> Imprimir CSV</button>
+                                <button type="submit" id="export_data" name="exportarCSV_f100" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
                             </form>
                         </div>
                         <div class="table-responsive">
@@ -245,7 +245,7 @@
                                     <div class="form-group">
                                         <div id="inputbus" class="input-group input-group-sm">
                                             <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                            <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
+                                            <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                                         </div>
                                     </div>
                                 </div>

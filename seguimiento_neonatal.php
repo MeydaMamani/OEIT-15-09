@@ -61,7 +61,7 @@
                                 </div>
                             </div><br>
                             <div class="col-12 text-center">
-                                <button type="button" name="Buscar" class="btn text-white" id="btn_buscar" placeholder="Buscar" style="background: #337ab7;"><i class="fa fa-search"></i> Buscar</button>
+                                <button type="button" name="Buscar" class="btn text-white" id="btn_buscar" placeholder="Buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
                             </div>
                         </form>
                         <form name="f2" action="resultados_seg_neonatal_sector.php" method="post" class="form_establishment mt-4" style="display: none;">
@@ -102,7 +102,7 @@
                                 </div>
                             </div><br>
                             <div class="col-12 text-center">
-                                <button type="button" name="Buscar" class="btn text-white" id="btn_buscar1" placeholder="Buscar" style="background: #337ab7;"><i class="fa fa-search"></i> Buscar</button>
+                                <button type="button" name="Buscar" class="btn text-white" id="btn_buscar1" placeholder="Buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
                             </div>
                         </form>
                     </div>

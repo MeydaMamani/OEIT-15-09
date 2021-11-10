@@ -286,7 +286,7 @@
                             <div class="form-group">
                                 <div id="inputbus" class="input-group input-group-sm">
                                     <input id="demo-input-search" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                    <span class="input-group-text bg-light" id="basic-addon1"><i class="fa fa-search" style="font-size:15px"></i></span>
+                                    <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                                 </div>
                             </div>
                         </div>
