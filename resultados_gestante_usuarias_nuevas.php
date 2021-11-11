@@ -1,18 +1,26 @@
 <?php 
   require ('abrir.php');    
   if (isset($_POST['Buscar'])) {
-    global $conex;
-  include('./base.php');
-?>
-      <?php 
+        global $conex;
+        include('./base.php');
+        include('zone_setting.php');
         include('consulta_gestante_usuarias_nuevas.php');
         $row_cont=0; $cumple=0; $no_cumple=0;
-        while ($consulta = sqlsrv_fetch_array($consulta8)){  
-          $row_cont++;
+        while ($consulta = sqlsrv_fetch_array($consulta5)){  
+            $row_cont++;
         }  
-      ?>
+?>
+
     <div class="page-wrapper">
         <div class="container">
+            <div class="row">
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <marquee width="100%" direction="left" height="15px">
+                        <p class="font-12 text-secondary"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo date("d-m-y"); ?> a las 08:30 horas</p>
+                    </marquee>
+                </div>
+            </div>
             <div class="text-center p-3">
               <h3>Usuarias Nuevas en el Servicio de Planificación Familiar con DX Violencia - <?php echo $nombre_mes; ?></h3>
             </div>
@@ -35,12 +43,12 @@
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                     <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                     <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
+                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                 </form>
             </div>
            
             <div class="col-12 table-responsive table_no_fed">
-              <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="20">
+              <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                 <thead>
                   <tr class="text-center font-12" style="background: #c9d0e2;">
                     <th class="align-middle">#</th>
@@ -53,7 +61,7 @@
                   </tr>
                 </thead>
                 <div>
-                  <div class="float-end pb-3 table_no_fed">
+                  <div class="float-end pb-1 table_no_fed">
                     <div class="form-group">
                       <div id="inputbus" class="input-group input-group-sm">
                         <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
@@ -64,7 +72,7 @@
                         <?php 
                             include('consulta_gestante_usuarias_nuevas.php');
                             $i=1;
-                            while ($consulta = sqlsrv_fetch_array($consulta8)){ 
+                            while ($consulta = sqlsrv_fetch_array($consulta5)){ 
                                 if(is_null ($consulta['Provincia']) ){
                                     $newdate = '  -'; }
                                 else{
