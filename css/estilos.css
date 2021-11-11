@@ -302,15 +302,17 @@ canvas.myChartProvince, canvas.myChartDistrict{
 
 
 .css-bar {
-	width: 90px !important;
-	height: 90px !important;
+	/* width: 90px !important;
+	height: 90px !important; */
 }
 
 .css-bar:after, .css-bar > img, .css-bar > i {
-	width: 74px !important;
+	/* width: 74px !important;
 	height: 75px !important;
 	margin-left: 8px !important;
-	margin-top: 8px !important;
+	margin-top: 8px !important; */
+	background-color: transparent !important;
+	color: transparent !important;
 }
 
 .btn_dac1{
