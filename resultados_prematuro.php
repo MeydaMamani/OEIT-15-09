@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="text-center mb-3">
-                  <h3 class="mb-4">Niños Prematuros CG03 - <?php echo $nombre_mes; ?></h3>
+                  <h3 class="mb-4">Niños de 4 Meses CG04 - <?php echo $nombre_mes; ?></h3>
                 </div>
                 <div class="row mb-3">
                     <div class="row justify-content-center">

@@ -5,10 +5,9 @@
         include('./base.php');
         include('zone_setting.php');
         include('consulta_gestante_usuarias_nuevas.php');
-        $row_cont=0; $numerador=0;
-        while ($consulta = sqlsrv_fetch_array($consulta6)){  
+        $row_cont=0; $cumple=0; $no_cumple=0;
+        while ($consulta = sqlsrv_fetch_array($consulta5)){  
             $row_cont++;
-            if(!is_null ($consulta['TMZ_VIF']) ){ $numerador++; }
         }  
 ?>
 
@@ -25,87 +24,55 @@
             <div class="text-center p-3">
               <h3>Usuarias Nuevas en el Servicio de Planificación Familiar con DX Violencia - <?php echo $nombre_mes; ?></h3>
             </div>
-            <div class="row">
-                <div class="row justify-content-center">
-                    <div class="card col-md-3 datos_avance">
-                        <div class="card-body p-1">
-                            <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
-                            <div class="justify-content-center">
-                                <div class="align-self-center">
-                                    <h4 class="font-medium mb-3 text-center d-flex justify-content-center">
-                                        <div class="col-md-5 text-end">
-                                            <img src="./img/user_cant.png" width="90" alt="">
-                                        </div>
-                                        <div class="mt-2 col-md-6">
-                                            <b class="total font-60"> <?php echo $row_cont; ?></b> <i class="fa fa-plus font-50 text-secondary"></i>
-                                        </div>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="card col-md-3 datos_avance">
-                        <div class="card-body p-1">
-                            <div class="row pt-4">
-                                <div class="col-md-7 p-r-0 text-center">
-                                    <h2 class="font-light avance mb-3"><?php
-                                        if($row_cont == 0 and $numerador == 0){ echo '0 %'; }else{
-                                            echo number_format((float)(($numerador/$row_cont)*100), 2, '.', ''), '%'; }
-                                        ?> 
-                                    </h2>
-                                    <h4 class="text-muted">Avance</h4></div>
-                                <div class="col-md-5 text-center align-self-center position-sticky">
-                                    <div data-label="<?php
-                                        if($numerador == 0 and $row_cont == 0){ echo '0 %'; }else{
-                                            echo number_format((float)(($numerador/$row_cont)*100), 2, '.', ''), '%'; }
-                                        ?>" class="css-bar m-b-0 css-bar-info css-bar-<?php if($numerador == 0 and $row_cont == 0){ echo '0'; }else{
-                                            echo number_format((float)(($numerador/$row_cont)*100), 0, '.', ''); }
-                                        ?>"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row mb-3 mt-1">
+                <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
             </div>
-            <div class="col-12">
-                <div class="d-flex justify-content-center">
-                    <form action="impresion_gestante_usuarias_nuevas.php" method="POST">
-                        <input hidden name="red" value="<?php echo $_POST['red']; ?>">
-                        <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                        <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                        <button type="submit" id="exportarCSV" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
-                    </form>
-                    <button class="btn btn-outline-danger btn-sm m-2 btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Información</button>
-                    <button class="btn btn-outline-secondary btn-sm m-2" onclick="location.href='gestante_usuarias_nuevas.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
-                </div>
+
+            <div class="row mb-3">
+              <div class="col-lg-12 text-center">
+                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-bar-chart"></i> Cuadro Resumen</button> -->
+                <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
+                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='gestante_usuarias_nuevas.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
+              </div>
+
+
+              <div class="d-flex">
+                <!--<button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
+                <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button>-->
+                <form action="impresion_gestante_usuarias_nuevas.php" method="POST">
+                    <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                    <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                    <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
+                </form>
             </div>
+           
             <div class="col-12 table-responsive table_no_fed">
-                <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
-                    <thead>
-                        <tr class="text-center font-12" style="background: #c9d0e2;">
-                            <th class="align-middle">#</th>
-                            <th class="align-middle">Provincia</th>
-                            <th class="align-middle">Distrito</th>
-                            <th class="align-middle">Establecimiento</th>
-                            <th class="align-middle">Documento</th>
-                            <th class="align-middle">Ate Planificación</th>
-                            <th class="align-middle">Tmz VIF</th>
-                        </tr>
-                    </thead>
-                    <div class="float-end pb-1 table_no_fed">
-                        <div class="form-group">
-                            <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
-                            </div>
-                        </div>
-                    </div>    
+              <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
+                <thead>
+                  <tr class="text-center font-12" style="background: #c9d0e2;">
+                    <th class="align-middle">#</th>
+                    <th class="align-middle">Provincia</th>
+                    <th class="align-middle">Distrito</th>
+                    <th class="align-middle">Establecimiento</th>
+                    <th class="align-middle">Documento</th>
+                    <th class="align-middle">Ate Planificación</th>
+                    <th class="align-middle">Tmz VIF</th>
+                  </tr>
+                </thead>
+                <div>
+                  <div class="float-end pb-1 table_no_fed">
+                    <div class="form-group">
+                      <div id="inputbus" class="input-group input-group-sm">
+                        <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                        <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
+                      </div>
+                    </div>
                     <tbody>
                         <?php 
                             include('consulta_gestante_usuarias_nuevas.php');
                             $i=1;
-                            while ($consulta = sqlsrv_fetch_array($consulta6)){ 
+                            while ($consulta = sqlsrv_fetch_array($consulta5)){ 
                                 if(is_null ($consulta['Provincia']) ){
                                     $newdate = '  -'; }
                                 else{

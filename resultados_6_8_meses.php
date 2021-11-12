@@ -9,13 +9,14 @@
     ini_set("default_charset", "UTF-8");
     mb_internal_encoding("UTF-8");
     include('./base.php');
+    include('zone_setting.php');
     include('consulta_6_8_meses.php');
-    $row_cont=0; $cumple=0; $no_cumple=0;
+    $row_cnt=0; $correctos=0; $incorrectos=0;
     while ($consulta = sqlsrv_fetch_array($consulta4)){
-        $row_cont++;
+        $row_cnt++;
         if(!is_null ($consulta['HEMOGLOBINA']) && !is_null ($consulta['D50X']) && !is_null ($consulta['U310_SF1']) && is_null ($consulta['SUPLE'])){
             if($consulta['HEMOGLOBINA'] == $consulta['D50X'] && $consulta['HEMOGLOBINA'] == $consulta['U310_SF1']){
-                $cumple++;
+                $correctos++;
             }else{
                 $nuevo_formato_hemoglobina = date_format($consulta['HEMOGLOBINA'], "d-m-Y");
                 $nuevo_formato_anemia = date_format($consulta['D50X'], "d-m-Y");
@@ -25,60 +26,141 @@
                 $fecha_anemia_7_dias = strtotime(date("d-m-Y", strtotime($nuevo_formato_anemia."+ 7 days")));
 
                 if($fecha_anemia < $fecha_hemoglobina_7_dias && $fecha_anemia > $nuevo_formato_hemoglobina) {
-                    $cumple++;
+                    $correctos++;
                 }
                 else{
-                    $no_cumple++;
+                    $incorrectos++;
                 }
             }
         }
         else if(!is_null ($consulta['HEMOGLOBINA']) && is_null ($consulta['D50X']) && is_null ($consulta['U310_SF1']) && !is_null ($consulta['SUPLE'])){
             if($consulta['HEMOGLOBINA'] == $consulta['SUPLE']){
-                $cumple++;
+                $correctos++;
             }
             else{
                 $nuevo_formato_hemoglobina = date_format($consulta['HEMOGLOBINA'], "d-m-Y");
                 $fecha_hemoglobina_7_dias = strtotime(date("d-m-Y", strtotime($nuevo_formato_hemoglobina."+ 7 days")));
                 $fecha_suplementacion = strtotime(date_format($consulta['SUPLE'], "d-m-Y"));
                 if($fecha_suplementacion < $fecha_hemoglobina_7_dias && $fecha_suplementacion > $nuevo_formato_hemoglobina) {
-                    $cumple++;
+                    $correctos++;
                 }
             }
         }
         else{
-            $no_cumple++;
+            $incorrectos++;
         }
     }
 ?>
     <div class="page-wrapper">
         <div class="container">
-            <div class="text-center p-3">
-              <h3>Niños de 6 a 8 Meses CG05 - <?php echo $nombre_mes; ?></h3>
-            </div>
-            <div class="row mb-3 mt-3">
-                <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
-                <div class="col-8 d-flex justify-content-end">
-                  <ul class="list-group list-group-horizontal-sm">
-                    <li class="list-group-item font-14">Cumple <span class="badge bg-success rounded-pill cumple"><?php echo $cumple; ?></span></li>
-                    <li class="list-group-item font-14">No Cumple <span class="badge bg-danger rounded-pill no_cumple"><?php echo $no_cumple; ?></span></li>
-                    <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill avance">
-                        <?php 
-                            if($cumple == 0 and $row_cont == 0){ echo '0 %'; }
-                            else{  echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%';
-                            }
-                        ?>
-                        </span>
-                    </li>
-                  </ul>
+            <div class="row">
+                <div class="col-9"></div>
+                    <div class="col-3">
+                        <marquee width="100%" direction="left" height="15px">
+                            <p class="font-12 text-secondary"><b>Fuente: </b> BD Padrón Nominal y BD CNV con Fecha: <?php echo date("d-m-y"); ?> a las 08:30 horas</p>
+                        </marquee>
+                    </div>
                 </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-lg-12 text-center">
-                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
-                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='6-8_meses.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
-              </div>
-            </div>
+                <div class="text-center p-3">
+                    <h3>Niños de 6 a 8 Meses CG05 - <?php echo $nombre_mes; ?></h3>
+                </div>
+                <div class="row mb-3">
+                    <div class="row justify-content-center">
+                        <div class="card col-md-3 datos_avance">
+                            <div class="card-body p-1">
+                                <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
+                                <div class="justify-content-center">
+                                    <div class="align-self-center">
+                                        <h4 class="font-medium mb-3 text-center d-flex">
+                                            <div class="col-md-5 text-end">
+                                                <img src="./img/programmer3.png" width="90" alt="">
+                                            </div>
+                                            <div class="mt-2 col-md-6">
+                                                <b class="total font-60"> <?php echo $row_cnt; ?></b> <i class="fa fa-plus font-50 text-secondary"></i>
+                                            </div>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-md-3 datos_avance">
+                            <div class="card-body p-1">
+                                <p class="card-title text-secondary text-center font-18 pt-2">Suplementados</h4>
+                                <div class="justify-content-center">
+                                    <div class="align-self-center">
+                                        <h4 class="font-medium mb-3 text-center d-flex">
+                                            <div class="col-md-5 text-end">
+                                                <img src="./img/boy.png" width="90" alt="">
+                                            </div>
+                                            <div class="mt-2 col-md-6">
+                                                <b class="total font-60"> <?php echo $correctos; ?></b> <i class="fa fa-check font-50 text-success
+                                                 text-secondary"></i>
+                                            </div>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-md-3 datos_avance">
+                            <div class="card-body p-0">
+                            <p class="card-title text-secondary text-center font-18 pt-3">No Suplementados</h4>
+                                <div class="justify-content-center">
+                                    <div class="align-self-center">
+                                        <h4 class="font-medium mb-3 text-center d-flex">
+                                            <div class="col-md-5 text-end">
+                                                <img src="./img/boy_x.png" width="90" alt="">
+                                            </div>
+                                            <div class="mt-2 col-md-6">
+                                                <b class="total font-60"> <?php echo $incorrectos; ?></b> <i class="fa fa-times font-50 text-danger text-secondary"></i>
+                                            </div>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-md-3 datos_avance">
+                            <div class="card-body p-1">
+                                <div class="row pt-4">
+                                    <div class="col-md-7 p-r-0 text-center">
+                                        <h1 class="font-light avance mb-3"><?php
+                                            if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
+                                                echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
+                                            ?> 
+                                        </h1>
+                                        <h4 class="text-muted">Avance</h4></div>
+                                    <div class="col-md-5 text-center align-self-center position-sticky">
+                                        <div data-label="<?php
+                                            if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
+                                                echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
+                                            ?>" class="css-bar m-b-0 css-bar-info css-bar-<?php if($correctos == 0 and $incorrectos == 0){ echo '0'; }else{
+                                                echo number_format((float)(($correctos/$row_cnt)*100), 0, '.', ''); }
+                                            ?>"><i class="mdi mdi-receipt"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      <!-- <ul class="list-group list-group-horizontal-sm">
+                        <li class="list-group-item font-14">Suplementados <span class="badge bg-success rounded-pill correcto font-14"><?php echo $correctos; ?></span></li>
+                        <li class="list-group-item font-14">No Suplementados <span class="badge bg-danger rounded-pill incorrecto font-14"><?php echo $incorrectos; ?></span></li>
+                        <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill avance font-14">
+                          <?php
+                            if($correctos == 0 and $incorrectos == 0){
+                                echo '0 %';
+                              }else{
+                                echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%';
+                              }
+                          ?> </span>
+                        </li>
+                      </ul> -->
+                    </div>
+                </div>
+                <div class="row mb-3">
+                <div class="col-lg-12 text-center">
+                    <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
+                    <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
+                    <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='6-8_meses.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
+                </div>
+                </div>
             <div class="d-flex">
                 <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
                 <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button>
@@ -292,7 +374,7 @@
                     <tbody>
                     <?php  
                         include('consulta_6_8_meses.php');
-                        $i_fed=1; $cumple_fed=0; $no_cumple_fed=0; $observado_fed=0;
+                        $i_fed=1; $correctos_fed=0; $incorrectos_fed=0; $observado_fed=0;
                         while ($consulta = sqlsrv_fetch_array($consulta4)){
                             $tipo = strval($consulta['TIPO_SEGURO']);
                             $tipo2 = strpos($tipo, '2');
@@ -377,7 +459,7 @@
                                         if(!is_null ($consulta['HEMOGLOBINA']) && !is_null ($consulta['D50X']) && !is_null ($consulta['U310_SF1']) && is_null ($consulta['SUPLE'])){
                                             if($consulta['HEMOGLOBINA'] == $consulta['D50X'] && $consulta['HEMOGLOBINA'] == $consulta['U310_SF1']){
                                                 echo "<span class='badge bg-correct'>Si</span>";
-                                                $cumple_fed++;
+                                                $correctos_fed++;
                                             }else{
                                                 $nuevo_formato_hemoglobina = date_format($consulta['HEMOGLOBINA'], "d-m-Y");
                                                 $nuevo_formato_anemia = date_format($consulta['D50X'], "d-m-Y");
@@ -387,18 +469,18 @@
                                                 $fecha_anemia_7_dias = strtotime(date("d-m-Y", strtotime($nuevo_formato_anemia."+ 7 days")));
                                                 if($fecha_anemia < $fecha_hemoglobina_7_dias && $fecha_anemia > $nuevo_formato_hemoglobina) {
                                                     echo "<span class='badge bg-correct'>Si</span>";
-                                                    $cumple_fed++;
+                                                    $correctos_fed++;
                                                 }
                                                 else{
                                                     echo "<span class='badge bg-incorrect'>No</span>";
-                                                    $no_cumple_fed++;
+                                                    $incorrectos_fed++;
                                                 }
                                             }
                                         }
                                         else if(!is_null ($consulta['HEMOGLOBINA']) && is_null ($consulta['D50X']) && is_null ($consulta['U310_SF1']) && !is_null ($consulta['SUPLE'])){
                                             if($consulta['HEMOGLOBINA'] == $consulta['SUPLE']){
                                                 echo "<span class='badge bg-correct'>Si</span>";
-                                                $cumple_fed++;
+                                                $correctos_fed++;
                                             }
                                             else{
                                                 $nuevo_formato_hemoglobina = date_format($consulta['HEMOGLOBINA'], "d-m-Y");
@@ -406,13 +488,13 @@
                                                 $fecha_suplementacion = strtotime(date_format($consulta['SUPLE'], "d-m-Y"));
                                                 if($fecha_suplementacion < $fecha_hemoglobina_7_dias && $fecha_suplementacion > $nuevo_formato_hemoglobina) {
                                                     echo "<span class='badge bg-correct'>Si</span>";
-                                                    $cumple_fed++;
+                                                    $correctos_fed++;
                                                 }
                                             }
                                         }
                                         else{
                                             echo "<span class='badge bg-incorrect'>No</span>";
-                                            $no_cumple_fed++;
+                                            $incorrectos_fed++;
                                         }
                                     ?>
                                 </td>
@@ -456,20 +538,20 @@
         $(function(){
             $(".btn_fed").click(function(){
                 $(".total").text(<?php echo $i_fed-1; ?>);
-                $(".cumple").text(<?php echo $cumple_fed; ?>);
-                $(".no_cumple").text(<?php echo $no_cumple_fed; ?>);
-                $(".avance").text(<?php if($cumple_fed==0 && $i_fed-1 == 0){ echo "'0 %'"; }
-                    else{ $porcentaje = number_format((float)(($cumple_fed/($i_fed-1))*100), 2, '.', '');
+                $(".correctos").text(<?php echo $correctos_fed; ?>);
+                $(".incorrectos").text(<?php echo $incorrectos_fed; ?>);
+                $(".avance").text(<?php if($correctos_fed==0 && $i_fed-1 == 0){ echo "'0 %'"; }
+                    else{ $porcentaje = number_format((float)(($correctos_fed/($i_fed-1))*100), 2, '.', '');
                             echo "'$porcentaje %'"; }?>);
                 $(".table_fed").show();
                 $(".table_no_fed").hide();
             });
             $(".btn_all").click(function(){
-                $(".total").text(<?php echo $row_cont; ?>);
-                $(".cumple").text(<?php echo $cumple; ?>);
-                $(".no_cumple").text(<?php echo $no_cumple; ?>);
-                $(".avance").text(<?php if($cumple == 0 and $row_cont == 0){ echo "'0 %'"; }
-                    else{ $porcentaje = number_format((float)(($cumple/$row_cont)*100), 2, '.', '');
+                $(".total").text(<?php echo $row_cnt; ?>);
+                $(".correctos").text(<?php echo $correctos; ?>);
+                $(".incorrectos").text(<?php echo $incorrectos; ?>);
+                $(".avance").text(<?php if($correctos == 0 and $row_cnt == 0){ echo "'0 %'"; }
+                    else{ $porcentaje = number_format((float)(($correctos/$row_cnt)*100), 2, '.', '');
                             echo "'$porcentaje %'"; }?>);
                 $(".table_fed").hide();
                 $(".table_no_fed").show();
