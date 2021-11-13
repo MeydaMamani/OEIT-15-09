@@ -142,18 +142,23 @@
                     <th colspan="7" style="font-size: 26px; border: 1px solid #3A3838;">Usuarias Nuevas en el Servicio de Planificación Familiar con DX Violencia - <?php echo $nombre_mes; ?></th>
                 </tr>
                 <tr></tr>
+                <tr>
+                    <th colspan="7" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD HisMinsa, con Fecha: <?php echo date("d-m-y"); ?> a las 08:30 horas</th>
+                </tr>
+                <tr></tr>
+            </tfoot>
             </thead>
         </table>
         <table>
             <thead>
-                <tr class="text-center font-13" style="background: #c9d0e2;">
+                <tr class="text-center font-14" style="background: #c9d0e2;">
                     <th style="border: 1px solid #DDDDDD;">#</th>
-                    <th style="border: 1px solid #DDDDDD;">Provincia</th>
-                    <th style="border: 1px solid #DDDDDD;">Distrito</th>
-                    <th style="border: 1px solid #DDDDDD;">Establecimiento</th>
-                    <th style="border: 1px solid #DDDDDD;">Documento</th>
-                    <th style="border: 1px solid #DDDDDD;">Ate Planificación</th>
-                    <th style="border: 1px solid #DDDDDD;">Tmz VIF</th>
+                    <th style="border: 1px solid #DDDDDD;">PROVINCIA</th>
+                    <th style="border: 1px solid #DDDDDD;">DISTRITO</th>
+                    <th style="border: 1px solid #DDDDDD;">ESTABLECIMIENTO</th>
+                    <th style="border: 1px solid #DDDDDD;">DOCUMENTO</th>
+                    <th style="border: 1px solid #DDDDDD;">ATE PLANIFICACIÓN</th>
+                    <th style="border: 1px solid #DDDDDD;">TMZ VIF</th>
                 </tr>
             </thead>
             <tbody>
@@ -191,7 +196,7 @@
                         $newdate6 = $consulta['TMZ_VIF'] -> format('d/m/y');}
     
                 ?>
-                <tr class="text-center font-12">
+                <tr class="text-center font-14">
                     <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $i++; ?></td>
                     <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate); ?></td>
                     <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate2); ?></td>
