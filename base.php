@@ -148,7 +148,7 @@
                         </li>
 						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-format-list-bulleted text-white pb-1"></i><span class="hide-menu ml-6"> Padrón Nominal</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="#">Padrón Niños</a></li>
+								<li><a href="padron_children.php">Padrón Niños 6 Meses</a></li>
 								<li><a href="padron_gestantes.php">Padrón Gestantes</a></li>
                             </ul>
                         </li>
@@ -159,7 +159,7 @@
                         </li>
 						<li><a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-chart-bar text-white pb-1"></i><span class="hide-menu ml-6">Tableros</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="graph_advance_vaccine.php">Avance de Vacunas</a></li>
+                                <!-- <li><a href="graph_advance_vaccine.php">Avance de Vacunas</a></li> -->
 								<li><a href="#">Avance ESNI Regular</a></li>
                                 <li>
                                     <a class="has-arrow" href="#" aria-expanded="false">Niño Sello</a>

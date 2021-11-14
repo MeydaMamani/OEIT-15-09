@@ -95,130 +95,143 @@
         $consulta1 = sqlsrv_query($conn2, $resultado);
         $consulta2 = sqlsrv_query($conn3, $resultado2);
 
+        $my_date_modify = "SELECT MAX(FECHA_MODIFICACION_REGISTRO) as DATE_MODIFY FROM NOMINAL_PADRON_NOMINAL";
+        $consult = sqlsrv_query($conn2, $my_date_modify);
+        while ($cons = sqlsrv_fetch_array($consult)){
+            $date_modify = $cons['DATE_MODIFY'] -> format('d/m/y');
+        }
+
         if(!empty($consulta2)){
             $ficheroExcel="DEIT_PASCO CG_FT_PREMATUROS "._date("d-m-Y", false, 'America/Lima').".xls";        
             header('Content-Type: application/vnd.ms-excel');
             header("Content-Type: application/octet-stream");
             header("Content-Disposition: attachment;filename=".$ficheroExcel);
             header("Cache-Control: max-age=0");
+            $monday = date( 'd/m/Y', strtotime( 'monday this week' ) );
     ?>
-        <table>
-            <thead>
-                <tr class="text-center">
-                    <th colspan="13" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
-                </tr>
-                <tr></tr>
-                <tr class="text-center">
-                    <th colspan="13" style="font-size: 28px; border: 1px solid #3A3838;">NIÑOS PREMATUROS CG03 - <?php echo $nombre_mes; ?></th>
-                </tr>
-                <tr></tr>
-            </thead>
-        </table> 
-        <table>
-            <thead>
-                <tr class="font-12 text-center" style="background: #e0eff5;">
-                    <th style="border: 1px solid #DDDDDD;">#</th>
-                    <th style="border: 1px solid #DDDDDD;">Provincia</th>
-                    <th style="border: 1px solid #DDDDDD;">Distrito</th>
-                    <th style="border: 1px solid #DDDDDD;">Establecimiento</th>
-                    <th style="border: 1px solid #DDDDDD;">Tipo Documento</th>
-                    <th style="border: 1px solid #DDDDDD;">Documento</th>
-                    <th style="border: 1px solid #DDDDDD;">Apellidos y Nombres</th>
-                    <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Fecha Nacido</th>
-                    <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Menor Encontrado</th>
-                    <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Prematuro</th>
-                    <th style="border: 1px solid #DDDDDD;">Suplementado</th>
-                    <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Tipo Seguro</th>
-                    <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Se Atiende</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-                $i=1;
-                while ($consulta = sqlsrv_fetch_array($consulta2)){
-                    if(is_null ($consulta['Provnacido']) ){
-                        $newdate2 = '  -'; }
-                        else{
-                    $newdate2 = $consulta['Provnacido'];}
-                
-                    if(is_null ($consulta['Distnacido']) ){
-                        $newdate3 = '  -'; }
-                        else{
-                    $newdate3 = $consulta['Distnacido'] ;}
-                
-                    if(is_null ($consulta['Establecimiento']) ){
-                        $newdate4 = '  -'; }
-                        else{
-                    $newdate4 = $consulta['Establecimiento'];}
-                
-                    if(is_null ($consulta['MENOR_ENCONTRADO']) ){
-                        $newdate5 = '  -'; }
-                        else{
-                    $newdate5 = $consulta['MENOR_ENCONTRADO'];}
-                
-                    if(is_null ($consulta['FECNACIDO']) ){
-                        $newdate6 = '  -'; }
-                        else{
-                    $newdate6 = $consulta['FECNACIDO'] -> format('d/m/y');}
-                
-                    if(is_null ($consulta['Numcnv']) ){
-                        $newdate7 = '  -'; }
-                        else{
-                    $newdate7 = $consulta['Numcnv'];}
-                
-                    if(is_null ($consulta['NOMBRES_MENOR']) ){
-                        $newdate8 = '  -'; }
-                        else{
-                    $newdate8 = $consulta['NOMBRES_MENOR'];}
-                
-                    if(is_null ($consulta['PREMATURO']) ){
-                        $newdate10 = '  -'; }
-                        else{
-                    $newdate10 = $consulta['PREMATURO'];}
-                
-                    if(is_null ($consulta['SUPLEMENTADO']) ){
-                        $newdate11 = 'No'; }
-                        else{
-                    $newdate11 = 'Si';}
-                
-                    if(is_null ($consulta['Tipo_Doc_Paciente']) ){
-                        $newdate12 = '  -'; }
-                        else{
-                    $newdate12 = $consulta['Tipo_Doc_Paciente'];}
-                
-                    if(is_null ($consulta['TIPO_SEGURO']) ){
-                        $newdate13 = '  -'; }
-                        else{
-                    $newdate13 = $consulta['TIPO_SEGURO'];}
-                
-                    if(is_null ($consulta['SE_ATIENDE']) ){
-                        $newdate14 = '  -'; }
-                        else{
-                    $newdate14 = $consulta['SE_ATIENDE'];}
-                
-            ?>
-            <tr class="text-center font-12">
-                <td style="border: 1px solid #DDDDDD;"><?php echo $i++; ?></td>
-                <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate2); ?></td>
-                <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate3); ?></td>
-                <td style="border: 1px solid #DDDDDD;"><?php echo ($newdate4); ?></td>
-                <td style="border: 1px solid #DDDDDD;"><?php echo $newdate12; ?></td>
-                <td style="border: 1px solid #DDDDDD;"><?php echo $newdate7; ?></td>
-                <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate8); ?></td>
-                <td style="border: 1px solid #DDDDDD;" id="color_prematuro_body"><?php echo $newdate6; ?></td>
-                <td style="border: 1px solid #DDDDDD;" id="color_prematuro_body"><?php echo $newdate5; ?></td>
-                <td style="border: 1px solid #DDDDDD;" id="color_prematuro_body"><?php echo $newdate10; ?></td>
-                <td style="border: 1px solid #DDDDDD;"><?php if($newdate11 == 'Si'){ echo "<span class='badge bg-correct'>$newdate11</span>"; }
-                else{ echo "<span class='badge bg-incorrect'>$newdate11</span>"; } ?></td>
-                <td style="border: 1px solid #DDDDDD;" id="color_prematuro_body"><?php echo $newdate13; ?></td>
-                <td style="border: 1px solid #DDDDDD;" id="color_prematuro_body"><?php echo utf8_encode($newdate14); ?></td>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <table>
+        <thead>
+            <tr class="text-center">
+                <th colspan="13" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
             </tr>
-            <?php
-                ;}
-                include("cerrar.php");
-            ?>
-            </tbody>
-        </table>
+            <tr></tr>
+            <tr class="text-center">
+                <th colspan="13" style="font-size: 28px; border: 1px solid #3A3838;">Niños Prematuros CG03 - <?php echo $nombre_mes; ?></th>
+            </tr>
+            <tr></tr>
+            <tr>
+                <th colspan="13" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD Padrón Nominal con Fecha <?php echo $date_modify; ?> y BD CNV con Fecha: <?php echo $monday; ?> a las 08:30 horas</th>
+            </tr>
+            <tr></tr>
+        </thead>
+    </table> 
+    <table>
+        <thead>
+            <tr class="font-12 text-center" style="background: #e0eff5;">
+                <th style="border: 1px solid #DDDDDD;">#</th>
+                <th style="border: 1px solid #DDDDDD;">Provincia</th>
+                <th style="border: 1px solid #DDDDDD;">Distrito</th>
+                <th style="border: 1px solid #DDDDDD;">Establecimiento</th>
+                <th style="border: 1px solid #DDDDDD;">Tipo Documento</th>
+                <th style="border: 1px solid #DDDDDD;">Documento</th>
+                <th style="border: 1px solid #DDDDDD;">Apellidos y Nombres</th>
+                <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Fecha Nacido</th>
+                <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Menor Encontrado</th>
+                <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Prematuro</th>
+                <th style="border: 1px solid #DDDDDD;">Suplementado</th>
+                <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Tipo Seguro</th>
+                <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Se Atiende</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            $i=1;
+            while ($consulta = sqlsrv_fetch_array($consulta2)){
+                if(is_null ($consulta['Provnacido']) ){
+                    $newdate2 = '  -'; }
+                    else{
+                $newdate2 = $consulta['Provnacido'];}
+            
+                if(is_null ($consulta['Distnacido']) ){
+                    $newdate3 = '  -'; }
+                    else{
+                $newdate3 = $consulta['Distnacido'] ;}
+            
+                if(is_null ($consulta['Establecimiento']) ){
+                    $newdate4 = '  -'; }
+                    else{
+                $newdate4 = $consulta['Establecimiento'];}
+            
+                if(is_null ($consulta['MENOR_ENCONTRADO']) ){
+                    $newdate5 = '  -'; }
+                    else{
+                $newdate5 = $consulta['MENOR_ENCONTRADO'];}
+            
+                if(is_null ($consulta['FECNACIDO']) ){
+                    $newdate6 = '  -'; }
+                    else{
+                $newdate6 = $consulta['FECNACIDO'] -> format('d/m/y');}
+            
+                if(is_null ($consulta['Numcnv']) ){
+                    $newdate7 = '  -'; }
+                    else{
+                $newdate7 = $consulta['Numcnv'];}
+            
+                if(is_null ($consulta['NOMBRES_MENOR']) ){
+                    $newdate8 = '  -'; }
+                    else{
+                $newdate8 = $consulta['NOMBRES_MENOR'];}
+            
+                if(is_null ($consulta['PREMATURO']) ){
+                    $newdate10 = '  -'; }
+                    else{
+                $newdate10 = $consulta['PREMATURO'];}
+            
+                if(is_null ($consulta['SUPLEMENTADO']) ){
+                    $newdate11 = 'No'; }
+                    else{
+                $newdate11 = 'Si';}
+            
+                if(is_null ($consulta['Tipo_Doc_Paciente']) ){
+                    $newdate12 = '  -'; }
+                    else{
+                $newdate12 = $consulta['Tipo_Doc_Paciente'];}
+            
+                if(is_null ($consulta['TIPO_SEGURO']) ){
+                    $newdate13 = '  -'; }
+                    else{
+                $newdate13 = $consulta['TIPO_SEGURO'];}
+            
+                if(is_null ($consulta['SE_ATIENDE']) ){
+                    $newdate14 = '  -'; }
+                    else{
+                $newdate14 = $consulta['SE_ATIENDE'];}
+            
+        ?>
+        <tr class="text-center font-12">
+            <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $i++; ?></td>
+            <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate2); ?></td>
+            <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate3); ?></td>
+            <td style="border: 1px solid #DDDDDD;"><?php echo ($newdate4); ?></td>
+            <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate12; ?></td>
+            <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate7; ?></td>
+            <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate8); ?></td>
+            <td style="border: 1px solid #DDDDDD; text-align: center;" id="color_prematuro_body"><?php echo $newdate6; ?></td>
+            <td style="border: 1px solid #DDDDDD; text-align: center;" id="color_prematuro_body"><?php echo $newdate5; ?></td>
+            <td style="border: 1px solid #DDDDDD; text-align: center;" id="color_prematuro_body"><?php echo $newdate10; ?></td>
+            <td style="border: 1px solid #DDDDDD; text-align: center;"><?php if($newdate11 == 'Si'){ echo "<span class='badge bg-correct'>$newdate11</span>"; }
+            else{ echo "<span class='badge bg-incorrect'>$newdate11</span>"; } ?></td>
+            <td style="border: 1px solid #DDDDDD; text-align: center;" id="color_prematuro_body"><?php echo $newdate13; ?></td>
+            <td style="border: 1px solid #DDDDDD;" id="color_prematuro_body"><?php echo utf8_encode($newdate14); ?></td>
+        </tr>
+        <?php
+            ;}
+            include("cerrar.php");
+        ?>
+        </tbody>
+    </table>
 <?php
         }
     }
