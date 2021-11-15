@@ -392,3 +392,14 @@ canvas.myChartProvince, canvas.myChartDistrict{
 #tmz_neonatal thead tr th#color_neonatal_head {
 	background: #65a0c8 !important;
 }
+
+#cuatro_meses thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #c9d0e2 !important;
+}
+
+#cuatro_meses thead tr th#fields_4_meses_head {
+	background: #638bb3 !important;
+}

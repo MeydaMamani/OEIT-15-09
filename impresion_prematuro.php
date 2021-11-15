@@ -111,9 +111,9 @@
     ?>
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="./css/estilos.css">
     <table>
         <thead>
+            <tr></tr>
             <tr class="text-center">
                 <th colspan="13" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
             </tr>
@@ -131,19 +131,19 @@
     <table>
         <thead>
             <tr class="font-12 text-center" style="background: #e0eff5;">
-                <th style="border: 1px solid #DDDDDD;">#</th>
-                <th style="border: 1px solid #DDDDDD;">Provincia</th>
-                <th style="border: 1px solid #DDDDDD;">Distrito</th>
-                <th style="border: 1px solid #DDDDDD;">Establecimiento</th>
-                <th style="border: 1px solid #DDDDDD;">Tipo Documento</th>
-                <th style="border: 1px solid #DDDDDD;">Documento</th>
-                <th style="border: 1px solid #DDDDDD;">Apellidos y Nombres</th>
-                <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Fecha Nacido</th>
-                <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Menor Encontrado</th>
-                <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Prematuro</th>
-                <th style="border: 1px solid #DDDDDD;">Suplementado</th>
-                <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Tipo Seguro</th>
-                <th style="border: 1px solid #DDDDDD; background: #a3c8d7">Se Atiende</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">#</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Provincia</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Distrito</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Establecimiento</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Tipo Documento</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Documento</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Apellidos y Nombres</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #a3c8d7">Fecha Nacido</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #a3c8d7">Menor Encontrado</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #a3c8d7">Prematuro</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Suplementado</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #a3c8d7">Tipo Seguro</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #a3c8d7">Se Atiende</th>
             </tr>
         </thead>
         <tbody>
@@ -212,20 +212,20 @@
             
         ?>
         <tr class="text-center font-12">
-            <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $i++; ?></td>
-            <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate2); ?></td>
-            <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate3); ?></td>
-            <td style="border: 1px solid #DDDDDD;"><?php echo ($newdate4); ?></td>
-            <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate12; ?></td>
-            <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate7; ?></td>
-            <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate8); ?></td>
-            <td style="border: 1px solid #DDDDDD; text-align: center;" id="color_prematuro_body"><?php echo $newdate6; ?></td>
-            <td style="border: 1px solid #DDDDDD; text-align: center;" id="color_prematuro_body"><?php echo $newdate5; ?></td>
-            <td style="border: 1px solid #DDDDDD; text-align: center;" id="color_prematuro_body"><?php echo $newdate10; ?></td>
-            <td style="border: 1px solid #DDDDDD; text-align: center;"><?php if($newdate11 == 'Si'){ echo "<span class='badge bg-correct'>$newdate11</span>"; }
+            <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $i++; ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate2); ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate3); ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo ($newdate4); ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate12; ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate7; ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate8); ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="color_prematuro_body"><?php echo $newdate6; ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="color_prematuro_body"><?php echo $newdate5; ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="color_prematuro_body"><?php echo $newdate10; ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php if($newdate11 == 'Si'){ echo "<span class='badge bg-correct'>$newdate11</span>"; }
             else{ echo "<span class='badge bg-incorrect'>$newdate11</span>"; } ?></td>
-            <td style="border: 1px solid #DDDDDD; text-align: center;" id="color_prematuro_body"><?php echo $newdate13; ?></td>
-            <td style="border: 1px solid #DDDDDD;" id="color_prematuro_body"><?php echo utf8_encode($newdate14); ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="color_prematuro_body"><?php echo $newdate13; ?></td>
+            <td style="border: 1px solid #DDDDDD; font-size: 15px;" id="color_prematuro_body"><?php echo utf8_encode($newdate14); ?></td>
         </tr>
         <?php
             ;}

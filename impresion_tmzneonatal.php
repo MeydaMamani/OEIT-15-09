@@ -109,6 +109,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <table>
             <thead>
+                <tr></tr>
                 <tr class="text-center">
                     <th colspan="12" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
                 </tr>
@@ -126,18 +127,18 @@
         <table class="table table-hover">
             <thead>
                 <tr class="text-center font-12" style="background: #AED6F1;">
-                    <th style="border: 1px solid #DDDDDD;">#</th>
-                    <th style="border: 1px solid #DDDDDD;">Provincia</th>
-                    <th style="border: 1px solid #DDDDDD;">Distrito</th>
-                    <th style="border: 1px solid #DDDDDD;">Documento</th>
-                    <th style="border: 1px solid #DDDDDD;">Apellidos y Nombres</th>
-                    <th style="border: 1px solid #DDDDDD;">Fecha de Nacimiento</th>
-                    <th style="border: 1px solid #DDDDDD;">Nombre ESS</th>
-                    <th style="border: 1px solid #DDDDDD; background: #65a0c8;">Menor Encontrado</th>
-                    <th style="border: 1px solid #DDDDDD; background: #65a0c8;">Tipo de Seguro</th>
-                    <th style="border: 1px solid #DDDDDD;">Lugar de Tamizaje (HIS)</th>
-                    <th style="border: 1px solid #DDDDDD;">Fecha Atención</th>
-                    <th style="border: 1px solid #DDDDDD;">Cumple</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">#</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">Provincia</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">Distrito</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">Documento</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">Apellidos y Nombres</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">Fecha de Nacimiento</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">Nombre ESS</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #65a0c8;">Menor Encontrado</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #65a0c8;">Tipo de Seguro</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">Lugar de Tamizaje (HIS)</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">Fecha Atención</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">Cumple</th>
                 </tr>
             </thead>
             <tbody>
@@ -195,18 +196,18 @@
 
                 ?>
                 <tr class="font-12 text-center">
-                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $i++; ?></td>
-                    <td style="border: 1px solid #DDDDDD;"><?php echo $newdate; ?></td>
-                    <td style="border: 1px solid #DDDDDD;"><?php echo $newdate1; ?></td>
-                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate2; ?></td>
-                    <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate6); ?></td>
-                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate4; ?></td>                               
-                    <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate8); ?></td>
-                    <td style="border: 1px solid #DDDDDD; text-align: center; background: #65a0c83d;"><?php echo $newdate7; ?></td>
-                    <td style="border: 1px solid #DDDDDD; text-align: center; background: #65a0c83d;"><?php echo $newdate3; ?></td>
-                    <td style="border: 1px solid #DDDDDD;"><?php echo $newdate10; ?></td>
-                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate9; ?></td>
-                    <td style="border: 1px solid #DDDDDD; text-align: center;">
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $i++; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate1; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate2; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate6); ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate4; ?></td>                               
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate8); ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center; background: #65a0c83d;"><?php echo $newdate7; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center; background: #65a0c83d;"><?php echo $newdate3; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate10; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate9; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;">
                     <?php
                         if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
                         echo "<span class='badge bg-incorrect'>No</span>";
