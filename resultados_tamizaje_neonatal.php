@@ -72,7 +72,7 @@
 											<img src="./img/boy.png" width="80" alt="">
 										</div>
 										<div class="mt-3 ms-2 col-md-7 text-center">
-											<b class="total font-37 cumple text-success"> <?php echo $cumple; ?></b> <i class="mdi mdi-check font-37 text-success"></i>
+											<b class="total font-34 cumple text-success"> <?php echo $cumple; ?></b> <i class="mdi mdi-check font-34 text-success"></i>
 										</div>
 									</h4>
 								</div>
@@ -89,7 +89,7 @@
 											<img src="./img/boy_x.png" width="80" alt="">
 										</div>
 										<div class="mt-3 ms-2 col-md-7 text-center">
-											<b class="total font-37 no_cumple text-danger"> <?php echo $no_cumple; ?></b><i class="mdi mdi-close font-37 text-danger"></i>
+											<b class="total font-34 no_cumple text-danger"> <?php echo $no_cumple; ?></b><i class="mdi mdi-close font-34 text-danger"></i>
 										</div>
 									</h4>
 								</div>
@@ -106,7 +106,7 @@
 											<img src="./img/boy_observeds.png" width="80" alt="">
 										</div>
 										<div class="mt-3 ms-2 col-md-7 text-center">
-											<b class="total font-37 observado text-warning"> <?php echo $observado; ?></b> <i class="mdi mdi-alert-circle font-37 text-warning"></i>
+											<b class="total font-34 observado text-warning"> <?php echo $observado; ?></b> <i class="mdi mdi-alert-circle font-34 text-warning"></i>
 										</div>
 									</h4>
 								</div>
@@ -116,7 +116,7 @@
 					<div class="card col-md-3 datos_avance">
 						<div class="card-body p-1">
 							<div class="row pt-4">
-								<div class="col-md-7 p-r-0 text-center">
+								<div class="col-md-7 p-0 text-center">
 									<h1 class="font-light avance mb-3 text-primary"><?php 
 											if($cumple == 0 and $row_cont == 0){ echo '0 %'; }
 											else{  echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%'; }
@@ -138,14 +138,14 @@
 				<div class="col-md-5 d-flex">
 					<button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
 					<button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button>
-					<form action="impresion_tmzneonatal.php" method="POST">
-						<input hidden name="red" value="<?php echo $_POST['red']; ?>">
-						<input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-						<input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-						<button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
-					</form>
 				</div>
 				<div class="col-md-7 d-flex">
+                    <form action="impresion_tmzneonatal.php" method="POST">
+                        <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                        <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                        <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                        <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
+                    </form>
 					<button type="button" class="btn btn-outline-danger m-2 btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Información</button>
 					<button type="button" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='tamizaje_neonatal.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
 				</div>
@@ -168,13 +168,10 @@
                             <th class="align-middle">Cumple</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-1 col-md-3 mt-3">
+                    <div class="float-end pb-1 col-md-3">
                         <div class="mb-3">
-                            <div class="text-center mb-2">
-                                <label class="font-14 text-secondary">Buscar por Nombres o DNI:</label>
-                            </div>
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
@@ -298,13 +295,10 @@
                             <th class="align-middle">Cumple</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-1 col-md-3 mt-3">
+                    <div class="float-end pb-1 col-md-3">
                         <div class="mb-3">
-                            <div class="text-center mb-2">
-                                <label class="font-14 text-secondary">Buscar por Nombres o DNI:</label>
-                            </div>
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
