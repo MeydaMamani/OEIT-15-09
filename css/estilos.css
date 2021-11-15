@@ -83,12 +83,20 @@ body {background:#FEFEFE;}
 	font-size: 35px;
 }
 
+.font-37{
+	font-size: 37px;
+}
+
 .font-40{
 	font-size: 40px;
 }
 
 .font-45{
 	font-size: 45px;
+}
+
+.font-49{
+	font-size: 49px;
 }
 
 .font-50{
@@ -101,6 +109,10 @@ body {background:#FEFEFE;}
 
 .font-60{
 	font-size: 60px;
+}
+
+.font-70{
+	font-size: 70px;
 }
 
 a:hover{
@@ -337,4 +349,42 @@ canvas.myChartProvince, canvas.myChartDistrict{
 	clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
 	width: 100px;
 	height: 45px;
+}
+
+#prematuro thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #e0eff5 !important;
+}
+
+#prematuro thead tr th#color_prematuro_head {
+	background: #a3c8d7 !important;
+}
+
+.table-responsive { 
+	height: 450px;
+	overflow:scroll;
+}
+
+.table_fed thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #d9d9d9 !important;
+}
+
+.table_fed thead tr th#color_fed_head {
+	background: #a7a7a7 !important;
+}
+
+#tmz_neonatal thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #AED6F1 !important;
+}
+
+#tmz_neonatal thead tr th#color_neonatal_head {
+	background: #65a0c8 !important;
 }

@@ -7,18 +7,19 @@
     if (isset($_POST['Buscar'])) {
     header('Content-Type: text/html; charset=UTF-8');
     include('./base.php'); 
+    include('zone_setting.php');
     include('consulta_4_meses.php');
-    $row_cnt=0; $correctos=0; $incorrectos=0; $observado=0;
+    $row_cont=0; $cumple=0; $no_cumple=0; $observado=0;
     while ($consulta = sqlsrv_fetch_array($consulta5)){
-        $row_cnt++;
+        $row_cont++;
         if($consulta['PREMATURO'] != 'PREMATURO'){ 
             foreach (range(110, 130) as $numero) {
                 if($numero == $consulta['SUPLEMENTADO']){
-                    $correctos++;
+                    $cumple++;
                 }
             }
             if(is_null ($consulta['SUPLEMENTADO'])){
-                $incorrectos++;
+                $no_cumple++;
             }
             if(!is_null ($consulta['SUPLEMENTADO']) && ($consulta['SUPLEMENTADO']<110 || $consulta['SUPLEMENTADO']>130)){
                 $observado++;
@@ -30,113 +31,112 @@
         <div class="container">
             <div class="row">
                 <div class="col-9"></div>
-                    <div class="col-3">
-                        <marquee width="100%" direction="left" height="15px">
-                            <p class="font-12 text-secondary"><b>Fuente: </b> BD Padrón Nominal y BD CNV con Fecha: <?php echo date("d-m-y"); ?> a las 08:30 horas</p>
-                        </marquee>
-                    </div>
+                <div class="col-3">
+                    <marquee width="100%" direction="left" height="18px">
+                        <p class="font-14 text-primary"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> y BD Padrón Nominal con Fecha <?php echo $date_modify; ?> a las 08:30 horas</p>
+                    </marquee>
                 </div>
-                <div class="text-center mb-3">
-                <h3 class="mb-4">Niños Prematuros CG03 - <?php echo $nombre_mes; ?></h3>
-                </div>
-                <div class="row mb-3">
-                    <div class="row justify-content-center">
-                        <div class="card col-md-3 datos_avance">
-                            <div class="card-body p-1">
-                                <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
-                                <div class="justify-content-center">
-                                    <div class="align-self-center">
-                                        <h4 class="font-medium mb-3 text-center d-flex">
-                                            <div class="col-md-5 text-end">
-                                                <img src="./img/programmer3.png" width="90" alt="">
-                                            </div>
-                                            <div class="mt-2 col-md-6">
-                                                <b class="total font-60"> <?php echo $row_cnt; ?></b> <i class="fa fa-plus font-50 text-secondary"></i>
-                                            </div>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card col-md-3 datos_avance">
-                            <div class="card-body p-1">
-                                <p class="card-title text-secondary text-center font-18 pt-2">Suplementados</h4>
-                                <div class="justify-content-center">
-                                    <div class="align-self-center">
-                                        <h4 class="font-medium mb-3 text-center d-flex">
-                                            <div class="col-md-5 text-end">
-                                                <img src="./img/boy.png" width="90" alt="">
-                                            </div>
-                                            <div class="mt-2 col-md-6">
-                                                <b class="total font-60"> <?php echo $correctos; ?></b> <i class="fa fa-check font-50 text-success
-                                                 text-secondary"></i>
-                                            </div>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card col-md-3 datos_avance">
-                            <div class="card-body p-0">
-                            <p class="card-title text-secondary text-center font-18 pt-3">No Suplementados</h4>
-                                <div class="justify-content-center">
-                                    <div class="align-self-center">
-                                        <h4 class="font-medium mb-3 text-center d-flex">
-                                            <div class="col-md-5 text-end">
-                                                <img src="./img/boy_x.png" width="90" alt="">
-                                            </div>
-                                            <div class="mt-2 col-md-6">
-                                                <b class="total font-60"> <?php echo $incorrectos; ?></b> <i class="fa fa-times font-50 text-danger text-secondary"></i>
-                                            </div>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card col-md-3 datos_avance">
-                            <div class="card-body p-1">
-                                <div class="row pt-4">
-                                    <div class="col-md-7 p-r-0 text-center">
-                                        <h1 class="font-light avance mb-3"><?php
-                                            if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
-                                                echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
-                                            ?> 
-                                        </h1>
-                                        <h4 class="text-muted">Avance</h4></div>
-                                    <div class="col-md-5 text-center align-self-center position-sticky">
-                                        <div data-label="<?php
-                                            if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
-                                                echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
-                                            ?>" class="css-bar m-b-0 css-bar-info css-bar-<?php if($correctos == 0 and $incorrectos == 0){ echo '0'; }else{
-                                                echo number_format((float)(($correctos/$row_cnt)*100), 0, '.', ''); }
-                                            ?>"><i class="mdi mdi-receipt"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                      <!-- <ul class="list-group list-group-horizontal-sm">
-                        <li class="list-group-item font-14">Suplementados <span class="badge bg-success rounded-pill correcto font-14"><?php echo $correctos; ?></span></li>
-                        <li class="list-group-item font-14">No Suplementados <span class="badge bg-danger rounded-pill incorrecto font-14"><?php echo $incorrectos; ?></span></li>
-                        <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill avance font-14">
-                          <?php
-                            if($correctos == 0 and $incorrectos == 0){
-                                echo '0 %';
-                              }else{
-                                echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%';
-                              }
-                          ?> </span>
-                        </li>
-                      </ul> -->
-                    </div>
-                </div>
-
-
+            </div>
+            <div class="text-center mb-3">
+                <h3 class="mb-4">Niños de 4 Meses CG04 - <?php echo $nombre_mes; ?></h3>
+            </div>
+            <div class="mb-3">
+				<div class="row m-2">
+					<div class="card col-md-3 datos_avance">
+						<div class="card-body p-1">
+							<p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
+							<div class="justify-content-center">
+								<div class="align-self-center">
+									<h4 class="font-medium mb-3 justify-content-center d-flex">
+										<div class="col-md-5 text-end">
+											<img src="./img/user_cant.png" width="90" alt="">
+										</div>
+										<div class="mt-3 col-md-7 text-center">
+											<b class="total font-49 total text-secondary"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
+										</div>
+									</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card col-md-2 datos_avance">
+						<div class="card-body p-0">
+							<p class="card-title text-secondary text-center font-18 pt-3">Cumplen</h4>
+							<div class="justify-content-center">
+								<div class="align-self-center">
+									<h4 class="font-medium mb-3 justify-content-center d-flex">
+										<div class="col-md-5 text-end">
+											<img src="./img/boy.png" width="80" alt="">
+										</div>
+										<div class="mt-3 ms-2 col-md-7 text-center">
+											<b class="total font-37 cumple text-success"> <?php echo $cumple; ?></b> <i class="mdi mdi-check font-37 text-success"></i>
+										</div>
+									</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card col-md-2 datos_avance">
+						<div class="card-body p-0">
+						<p class="card-title text-secondary text-center font-18 pt-3">No Cumplen</h4>
+							<div class="justify-content-center">
+								<div class="align-self-center">
+									<h4 class="font-medium mb-3 justify-content-center d-flex">
+										<div class="col-md-5 text-end">
+											<img src="./img/boy_x.png" width="80" alt="">
+										</div>
+										<div class="mt-3 ms-2 col-md-7 text-center">
+											<b class="total font-37 no_cumple text-danger"> <?php echo $no_cumple; ?></b><i class="mdi mdi-close font-37 text-danger"></i>
+										</div>
+									</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card col-md-2 datos_avance">
+						<div class="card-body p-0">
+						<p class="card-title text-secondary text-center font-18 pt-3">Observados</h4>
+							<div class="justify-content-center">
+								<div class="align-self-center">
+									<h4 class="font-medium mb-3 justify-content-center d-flex">
+										<div class="col-md-5 text-end">
+											<img src="./img/boy_observeds.png" width="80" alt="">
+										</div>
+										<div class="mt-3 ms-2 col-md-7 text-center">
+											<b class="total font-37 observado text-warning"> <?php echo $observado; ?></b> <i class="mdi mdi-alert-circle font-37 text-warning"></i>
+										</div>
+									</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card col-md-3 datos_avance">
+						<div class="card-body p-1">
+							<div class="row pt-4">
+								<div class="col-md-7 p-r-0 text-center">
+									<h1 class="font-light avance mb-3 text-primary"><?php 
+											if($cumple == 0 and $row_cont == 0){ echo '0 %'; }
+											else{  echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%'; }
+										?>
+									</h1>
+									<h4 class="text-muted">Avance</h4></div>
+								<div class="col-md-5 text-center align-self-center position-sticky">
+									<div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php 
+										if($cumple == 0 and $row_cont == 0){ echo '0'; }
+										else{  echo number_format((float)(($cumple/$row_cont)*100), 0, '.', ''); }
+									?>"><i class="mdi mdi-receipt"></i></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
             <div class="row mb-3">
-              <div class="col-lg-12 text-center">
-                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
-                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='4_meses.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
-              </div>
+                <div class="col-lg-12 text-center">
+                    <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
+                    <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
+                    <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='4_meses.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
+                </div>
             </div>
             <div class="d-flex">
                 <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
@@ -148,8 +148,6 @@
                     <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
                 </form>
             </div>
-            <!-- <button class="btn btn-outline-success btn-sm btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> ESSALUD</button>
-            <button class="btn btn-outline-success btn-sm btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Minsa</button> -->
             <div class="col-12 table-responsive table_no_fed">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
