@@ -37,7 +37,7 @@
                                             <img src="./img/user_cant.png" width="90" alt="">
                                         </div>
                                         <div class="mt-2 col-md-6">
-                                            <b class="total font-60"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-50 text-secondary"></i>
+                                            <b class="total font-60"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-45 text-secondary"></i>
                                         </div>
                                     </h4>
                                 </div>
