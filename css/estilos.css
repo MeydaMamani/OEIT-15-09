@@ -403,3 +403,14 @@ canvas.myChartProvince, canvas.myChartDistrict{
 #cuatro_meses thead tr th#fields_4_meses_head {
 	background: #638bb3 !important;
 }
+
+#seis_ocho_meses thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #e0eff5 !important;
+}
+
+#seis_ocho_meses thead tr th#fields_68_meses_head {
+	background: #94cbe1 !important;
+}

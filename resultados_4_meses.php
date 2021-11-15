@@ -169,7 +169,7 @@
                             <th class="align-middle">Cumple</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-1 col-md-3">
+                    <div class="float-end pb-1 col-md-3 table_no_fed">
                         <div class="mb-3">
                             <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
