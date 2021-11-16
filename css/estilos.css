@@ -75,6 +75,10 @@ body {background:#FEFEFE;}
 	font-size: 23px;
 }
 
+.font-25 {
+	font-size: 25px;
+}
+
 .font-30{
 	font-size: 30px;
 }
@@ -412,5 +416,16 @@ canvas.myChartProvince, canvas.myChartDistrict{
 }
 
 #seis_ocho_meses thead tr th#fields_68_meses_head {
+	background: #94cbe1 !important;
+}
+
+#cred thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #cfd9c7 !important;
+}
+
+#cred thead tr th#fields_68_meses_head {
 	background: #94cbe1 !important;
 }
