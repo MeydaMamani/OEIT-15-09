@@ -131,10 +131,10 @@
 								<li><a href="desparacitacion.php">Desparacitación</a></li>
 								<li><a href="homologation.php">Homologación</a></li>
 								<li><a href="arch_plane.php">Archivos Planos</a></li>
-								<li><a href="#">Puerperas</a></li>
+								<li><a href="promsa.php">Promsa</a></li>
 								<li><a href="#">Anemia en niños</a></li>
-								<li><a href="#">Promsa (Visitas-Niños)</a></li>
-								<li><a href="#">Promsa (Visitas-Gestantes)</a></li>
+								<!-- <li><a href="#">Promsa (Visitas-Niños)</a></li>
+								<li><a href="#">Promsa (Visitas-Gestantes)</a></li> -->
                             </ul>
                         </li>
 						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-multiplication-box text-white pb-1"></i><span class="hide-menu ml-6"> Covid-19</span></a>

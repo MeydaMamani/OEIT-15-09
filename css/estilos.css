@@ -75,6 +75,10 @@ body {background:#FEFEFE;}
 	font-size: 23px;
 }
 
+.font-25 {
+	font-size: 25px;
+}
+
 .font-30{
 	font-size: 30px;
 }
@@ -391,4 +395,37 @@ canvas.myChartProvince, canvas.myChartDistrict{
 
 #tmz_neonatal thead tr th#color_neonatal_head {
 	background: #65a0c8 !important;
+}
+
+#cuatro_meses thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #c9d0e2 !important;
+}
+
+#cuatro_meses thead tr th#fields_4_meses_head {
+	background: #638bb3 !important;
+}
+
+#seis_ocho_meses thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #e0eff5 !important;
+}
+
+#seis_ocho_meses thead tr th#fields_68_meses_head {
+	background: #94cbe1 !important;
+}
+
+#cred thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #cfd9c7 !important;
+}
+
+#cred thead tr th#fields_68_meses_head {
+	background: #94cbe1 !important;
 }

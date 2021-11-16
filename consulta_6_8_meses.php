@@ -121,5 +121,11 @@
         $consulta2 = sqlsrv_query($conn2, $resultado);
         $consulta3 = sqlsrv_query($conn, $resultado2);
         $consulta4 = sqlsrv_query($conn, $resultado3);
+
+        $my_date_modify = "SELECT MAX(FECHA_MODIFICACION_REGISTRO) as DATE_MODIFY FROM NOMINAL_PADRON_NOMINAL";
+        $consult = sqlsrv_query($conn2, $my_date_modify);
+        while ($cons = sqlsrv_fetch_array($consult)){
+            $date_modify = $cons['DATE_MODIFY'] -> format('d/m/y');
+        }
     }
 ?>

@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="text-center mb-3">
-            <h3 class="mb-4">Niños Prematuros CG03 - <?php echo $nombre_mes; ?></h3>
+                <h3 class="mb-4">Niños Prematuros CG03 - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="mb-3">
                 <div class="row m-2">
@@ -45,7 +45,7 @@
                                             <img src="./img/user_cant.png" width="90" alt="">
                                         </div>
                                         <div class="mt-3 col-md-7 text-center">
-                                            <b class="total font-49 total"> <?php echo $row_cnt; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
+                                            <b class="font-49 total"> <?php echo $row_cnt; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
                                         </div>
                                     </h4>
                                 </div>
@@ -62,7 +62,7 @@
                                             <img src="./img/boy.png" width="90" alt="">
                                         </div>
                                         <div class="mt-3 col-md-7 text-center">
-                                            <b class="total font-49 correcto"> <?php echo $correctos; ?></b> <i class="mdi mdi-check font-49 text-success"></i>
+                                            <b class="font-49 correcto"> <?php echo $correctos; ?></b> <i class="mdi mdi-check font-49 text-success"></i>
                                         </div>
                                     </h4>
                                 </div>
@@ -79,7 +79,7 @@
                                             <img src="./img/boy_x.png" width="90" alt="">
                                         </div>
                                         <div class="mt-3 col-md-7 text-center">
-                                            <b class="total font-49 incorrecto"> <?php echo $incorrectos; ?></b> <i class="mdi mdi-close font-49 text-danger"></i>
+                                            <b class="font-49 incorrecto"> <?php echo $incorrectos; ?></b> <i class="mdi mdi-close font-49 text-danger"></i>
                                         </div>
                                     </h4>
                                 </div>
@@ -89,14 +89,14 @@
                     <div class="card col-md-3 datos_avance">
                         <div class="card-body p-1">
                             <div class="row pt-4">
-                                <div class="col-md-7 p-r-0 text-center">
+                                <div class="col-md-8 p-r-0 text-center">
                                     <h1 class="font-light avance mb-3"><?php
                                         if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
                                             echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
                                         ?> 
                                     </h1>
                                     <h4 class="text-muted">Avance</h4></div>
-                                <div class="col-md-5 text-center align-self-center position-sticky">
+                                <div class="col-md-4 p-0 text-center align-self-center position-sticky">
                                     <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php if($correctos == 0 and $incorrectos == 0){ echo '0'; }else{
                                             echo number_format((float)(($correctos/$row_cnt)*100), 0, '.', ''); }
                                         ?>"><i class="mdi mdi-receipt"></i></div>

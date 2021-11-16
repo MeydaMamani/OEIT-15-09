@@ -5,27 +5,27 @@
     require('abrir4.php');
 
     if (isset($_POST['Buscar'])) {
-    header('Content-Type: text/html; charset=UTF-8');
-    include('./base.php'); 
-    include('zone_setting.php');
-    include('consulta_4_meses.php');
-    $row_cont=0; $cumple=0; $no_cumple=0; $observado=0;
-    while ($consulta = sqlsrv_fetch_array($consulta5)){
-        $row_cont++;
-        if($consulta['PREMATURO'] != 'PREMATURO'){ 
-            foreach (range(110, 130) as $numero) {
-                if($numero == $consulta['SUPLEMENTADO']){
-                    $cumple++;
+        header('Content-Type: text/html; charset=UTF-8');
+        include('./base.php'); 
+        include('zone_setting.php');
+        include('consulta_4_meses.php');
+        $row_cont=0; $cumple=0; $no_cumple=0; $observado=0;
+        while ($consulta = sqlsrv_fetch_array($consulta5)){
+            $row_cont++;
+            if($consulta['PREMATURO'] != 'PREMATURO'){ 
+                foreach (range(110, 130) as $numero) {
+                    if($numero == $consulta['SUPLEMENTADO']){
+                        $cumple++;
+                    }
+                }
+                if(is_null ($consulta['SUPLEMENTADO'])){
+                    $no_cumple++;
+                }
+                if(!is_null ($consulta['SUPLEMENTADO']) && ($consulta['SUPLEMENTADO']<110 || $consulta['SUPLEMENTADO']>130)){
+                    $observado++;
                 }
             }
-            if(is_null ($consulta['SUPLEMENTADO'])){
-                $no_cumple++;
-            }
-            if(!is_null ($consulta['SUPLEMENTADO']) && ($consulta['SUPLEMENTADO']<110 || $consulta['SUPLEMENTADO']>130)){
-                $observado++;
-             }
         }
-    }
 ?>
     <div class="page-wrapper">
         <div class="container">
@@ -52,7 +52,7 @@
 											<img src="./img/user_cant.png" width="90" alt="">
 										</div>
 										<div class="mt-3 col-md-7 text-center">
-											<b class="total font-49 total text-secondary"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
+											<b class="total font-49 text-secondary"><?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
 										</div>
 									</h4>
 								</div>
@@ -69,7 +69,7 @@
 											<img src="./img/boy.png" width="80" alt="">
 										</div>
 										<div class="mt-3 ms-2 col-md-7 text-center">
-											<b class="total font-37 cumple text-success"> <?php echo $cumple; ?></b> <i class="mdi mdi-check font-37 text-success"></i>
+											<b class="font-34 text-success cumple"><?php echo $cumple; ?></b> <i class="mdi mdi-check font-34 text-success" style="margin-left: -6px;"></i>
 										</div>
 									</h4>
 								</div>
@@ -86,7 +86,7 @@
 											<img src="./img/boy_x.png" width="80" alt="">
 										</div>
 										<div class="mt-3 ms-2 col-md-7 text-center">
-											<b class="total font-37 no_cumple text-danger"> <?php echo $no_cumple; ?></b><i class="mdi mdi-close font-37 text-danger"></i>
+											<b class="font-34 text-danger no_cumple"><?php echo $no_cumple; ?></b><i class="mdi mdi-close font-34 text-danger" style="margin-left: -6px;"></i>
 										</div>
 									</h4>
 								</div>
@@ -103,7 +103,7 @@
 											<img src="./img/boy_observeds.png" width="80" alt="">
 										</div>
 										<div class="mt-3 ms-2 col-md-7 text-center">
-											<b class="total font-37 observado text-warning"> <?php echo $observado; ?></b> <i class="mdi mdi-alert-circle font-37 text-warning"></i>
+											<b class="font-34 text-warning observado"><?php echo $observado; ?></b> <i class="mdi mdi-alert-circle font-34 text-warning" style="margin-left: -6px;"></i>
 										</div>
 									</h4>
 								</div>
@@ -113,10 +113,10 @@
 					<div class="card col-md-3 datos_avance">
 						<div class="card-body p-1">
 							<div class="row pt-4">
-								<div class="col-md-7 p-r-0 text-center">
+								<div class="col-md-7 p-0 text-center">
 									<h1 class="font-light avance mb-3 text-primary"><?php 
 											if($cumple == 0 and $row_cont == 0){ echo '0 %'; }
-											else{  echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%'; }
+											else{ echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%'; }
 										?>
 									</h1>
 									<h4 class="text-muted">Avance</h4></div>
@@ -131,24 +131,23 @@
 					</div>
 				</div>
 			</div>
-            <div class="row mb-3">
-                <div class="col-lg-12 text-center">
-                    <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                    <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
-                    <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='4_meses.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
-                </div>
-            </div>
             <div class="d-flex">
-                <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
-                <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button>
-                <form action="impresion_4_meses.php" method="POST">
-                    <input hidden name="red" value="<?php echo $_POST['red']; ?>">
-                    <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                    <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
-                </form>
-            </div>
-            <div class="col-12 table-responsive table_no_fed">
+                <div class="col-md-5 d-flex">
+                    <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
+                    <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button>
+                </div>
+                <div class="col-md-7 d-flex">
+                    <form action="impresion_4_meses.php" method="POST">
+                        <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                        <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                        <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                        <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
+                    </form>
+                    <button type="submit" name="Limpiar" class="btn btn-outline-danger m-2 btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
+                    <button type="submit" name="Limpiar" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='4_meses.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
+                </div>
+            </div><br>
+            <div class="col-12 table-responsive table_no_fed" id="cuatro_meses">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="text-center font-12" style="background: #c9d0e2;">
@@ -170,10 +169,10 @@
                             <th class="align-middle">Cumple</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-4 table_no_fed">
-                        <div class="form-group">
+                    <div class="float-end pb-1 col-md-3 table_no_fed">
+                        <div class="mb-3">
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
@@ -331,10 +330,10 @@
                             <th class="align-middle">Cumple</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-4 table_fed" style="display: none;">
-                        <div class="form-group">
+                    <div class="float-end pb-1 col-md-3 table_fed" style="display: none;">
+                        <div class="mb-3">
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
@@ -342,7 +341,7 @@
                     <tbody>
                         <?php  
                             include('consulta_4_meses.php');
-                            $i_fed=1; $correctos_fed=0; $incorrectos_fed=0; $observado_fed=0;
+                            $i_fed=1; $cumple_fed=0; $no_cumple_fed=0; $observado_fed=0;
                             while ($consulta = sqlsrv_fetch_array($consulta5)){  
                                 // $tipo = strval('2,');4
                                 $tipo = strval($consulta['TIPO_SEGURO']);
@@ -465,12 +464,12 @@
                                 if($newdate13 != 'PREMATURO'){ 
                                     foreach (range(110, 130) as $numero) {
                                         if($numero == $newdate14){
-                                            $correctos_fed++;
+                                            $cumple_fed++;
                                             echo "<span class='badge bg-correct'>Si</span>";
                                         }
                                     }
                                     if(is_null ($consulta['SUPLEMENTADO'])){
-                                        $incorrectos_fed++;
+                                        $no_cumple_fed++;
                                         echo "<span class='badge bg-incorrect'>No</span>";
                                     }
                                     if(!is_null ($consulta['SUPLEMENTADO']) && ($newdate14<110 || $newdate14>130)){
@@ -503,17 +502,18 @@
             </div>
         </div>
     </div>
-        <!-- MODAL INFORMACION-->
-        <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-xl">
+    
+    <!-- MODAL INFORMACION-->
+    <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
-              <div class="modal-body">
-                <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <img src="./img/inf_4meses.png" style="width: 100%;">
-              </div>
+                <div class="modal-body">
+                    <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <img src="./img/inf_4meses.png" style="width: 100%;">
+                </div>
             </div>
-          </div>
         </div>
+    </div>
     <?php } ?>
     
     <script src="./js/records_menu.js"></script>
@@ -523,23 +523,34 @@
         $(function(){
             $(".btn_fed").click(function(){
                 $(".total").text(<?php echo $i_fed-1; ?>);
-                $(".correctos").text(<?php echo $correctos_fed; ?>);
-                $(".incorrectos").text(<?php echo $incorrectos_fed; ?>);
+                $(".cumple").text(<?php echo $cumple_fed; ?>);
+                $(".no_cumple").text(<?php echo $no_cumple_fed; ?>);
                 $(".observado").text(<?php echo $observado_fed; ?>);
-                $(".avance").text(<?php if($correctos_fed==0 && $i_fed-1 == 0){ echo "'0 %'"; }
-                    else{ $porcentaje = number_format((float)(($correctos/($i_fed-1))*100), 2, '.', '');
+                $(".avance").text(<?php if($cumple_fed==0 && $i_fed-1 == 0){ echo "'0 %'"; }
+                    else{ $porcentaje = number_format((float)(($cumple/($i_fed-1))*100), 2, '.', '');
                             echo "'$porcentaje %'"; }?>);
+                $("#chart").removeClass("css-bar-<?php if($cumple == 0 and $no_cumple == 0){ echo '0'; }else{
+                                                echo number_format((float)(($cumple/$row_cont)*100), 0, '.', ''); }
+                                            ?>");
+                $("#chart").addClass("css-bar-<?php if($cumple_fed==0 && $no_cumple_fed == 0){ echo "0"; }
+                    else{ $porcentaje = number_format((float)(($cumple_fed/($i_fed-1))*100), 0, '.', '');
+                            echo "$porcentaje"; }?>");
                 $(".table_fed").show();
                 $(".table_no_fed").hide();
             });
             $(".btn_all").click(function(){
-                $(".total").text(<?php echo $row_cnt; ?>);
-                $(".correctos").text(<?php echo $correctos; ?>);
-                $(".incorrectos").text(<?php echo $incorrectos; ?>);
+                $(".total").text(<?php echo $row_cont; ?>);
+                $(".cumple").text(<?php echo $cumple; ?>);
+                $(".no_cumple").text(<?php echo $no_cumple; ?>);
                 $(".observado").text(<?php echo $observado; ?>);
-                $(".avance").text(<?php if($correctos == 0 and $row_cnt == 0){ echo "'0 %'"; }
-                    else{ $porcentaje = number_format((float)(($correctos/$row_cnt)*100), 2, '.', '');
+                $(".avance").text(<?php if($cumple == 0 and $row_cont == 0){ echo "'0 %'"; }
+                    else{ $porcentaje = number_format((float)(($cumple/$row_cont)*100), 2, '.', '');
                             echo "'$porcentaje %'"; }?>);
+                $("#chart").removeClass("css-bar-<?php if($cumple_fed==0 && $no_cumple_fed == 0){ echo "0"; }
+                    else{ $porcentaje = number_format((float)(($cumple_fed/($i_fed-1))*100), 0, '.', '');
+                            echo "$porcentaje"; }?>");
+                $("#chart").addClass("css-bar-<?php if($cumple == 0 and $no_cumple == 0){ echo '0'; }else{
+                                                echo number_format((float)(($cumple/$row_cont)*100), 0, '.', ''); } ?>");
                 $(".table_fed").hide();
                 $(".table_no_fed").show();
             });
@@ -551,7 +562,7 @@
         });
                 
         var addrow2 = $('#demo-foo-addrow');
-        addrow2.footable().on('click', '.delete-row-btn', function() {
+            addrow2.footable().on('click', '.delete-row-btn', function() {
             var footable = addrow.data('footable');
             var row = $(this).parents('tr:first');
             footable.removeRow(row);
