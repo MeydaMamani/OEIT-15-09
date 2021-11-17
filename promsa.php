@@ -6,18 +6,33 @@
         <h3 class="mb-3 text-center mt-3">Promoción de la Salud</h3>
         <div class="d-flex">
             <div class="col-md-4 text-center">
-                <img src="./img/bb.png" class="img-user mt-2 mb-4" alt="Imagen Usuario" width="190">
-                <h4 class="text-secondary">4 MESES</h4>
+                <button class="btn btn-outline" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters">
+                    <img src="./img/baby_boy.png" class="img-user mt-2 mb-4" alt="Imagen Usuario" width="250">
+                <h4 class="text-secondary"> 7 DIAS </h4></button>
             </div>
-            <!-- <div class="m-4">
-                <button class="btn btn-outline-danger d-grid" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters"><img src="./img/baby_girl4.png" alt=""><span class="font-25">7 DÍAS</span></button>
+            <div class="col-md-4 text-center">
+                <button class="btn btn-outline" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters">
+                    <img src="./img/bb.png" class="img-user mt-2 mb-4" alt="Imagen Usuario" width="165">
+                <h4 class="text-secondary">4 MESES</h4></button>
             </div>
-            <div class="m-4">
+            <div class="col-md-4 text-center">
+                <button class="btn btn-outline" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters">
+                    <img src="./img/bebe2.png" class="img-user mt-2 mb-4" alt="Imagen Usuario" width="190">
+                <h4 class="text-secondary" > 6 MESES </h4></button>
+            </div>
+            
+
+
+<!--
+           <div class="m-4  text-center">
+                <button class="btn btn-outline-danger d-grid" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters"><img src="./img/bb_1.png" class="img-user mt-2 mb-4"alt=""><span class="font-25">7 DÍAS</span></button>
+            </div>
+             <div class="m-4">
                 <button class="btn btn-outline-danger d-grid" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters"><img src="./img/baby_girl4.png" alt=""><span class="font-25">4 MESES</span></button>
             </div>
             <div class="m-4">
                 <button class="btn btn-outline-primary d-grid"><img src="./img/baby.png" alt=""><span class="font-25">6 MESES</span></button>
-            </div> -->
+            </div>-->
         </div>
     </div>
 </div>
