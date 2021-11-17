@@ -359,6 +359,14 @@ canvas.myChartProvince, canvas.myChartDistrict{
 	height: 45px;
 }
 
+.nav-tabs#promsa .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+	border-top: 4px solid #a8aebf;
+}
+
+.nav-justified .nav-item, .nav-justified>#promsa.nav-link{
+	/* background: #f1f2f5; */
+}
+
 #prematuro thead tr th { 
 	position: sticky;
 	top: 0;
@@ -428,4 +436,20 @@ canvas.myChartProvince, canvas.myChartDistrict{
 
 #cred thead tr th#fields_68_meses_head {
 	background: #94cbe1 !important;
+}
+
+#visitas_cuatro_meses thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #324b6a !important;
+	color: white;
+}
+
+#advance_cuatro_meses thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #4b5868 !important;
+	color: white;
 }

@@ -9,7 +9,7 @@
                 <img src="./img/bb.png" class="img-user mt-2 mb-4" alt="Imagen Usuario" width="190">
                 <h4 class="text-secondary">4 MESES</h4>
             </div>
-            <!-- <div class="m-4">
+            <div class="m-4">
                 <button class="btn btn-outline-danger d-grid" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters"><img src="./img/baby_girl4.png" alt=""><span class="font-25">7 DÍAS</span></button>
             </div>
             <div class="m-4">
@@ -17,7 +17,7 @@
             </div>
             <div class="m-4">
                 <button class="btn btn-outline-primary d-grid"><img src="./img/baby.png" alt=""><span class="font-25">6 MESES</span></button>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
@@ -26,11 +26,11 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ingrese Datos</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Promsa - Niños de 4 Meses</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="results_promsa.php" method="POST" name="f1">
+                <form action="results_promsa_fourmonth.php" method="POST" name="f1">
                     <div class="row mb-3">
                         <div class="col-md-6 col-sm-12">
                             <p style="font-size: 13px;" class="text-start"><b>Seleccione una Red: </b></p>
@@ -74,7 +74,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <hr>
+                    <div class="text-center">
                         <button name="Buscar" class="btn text-white" type="button" id="btn_buscar" placeholder="Buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">cancelar</button>
                     </div>
@@ -117,6 +118,5 @@
         });
 	});
 </script>
-
 </body>
 </html>
