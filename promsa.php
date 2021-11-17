@@ -3,10 +3,10 @@
 ?>
 <div class="page-wrapper">
     <div class="container border">
-        <h3 class="mb-3 text-center mt-3">Promoción de la Salud</h3>
+        <h3 class="mb-3 text-center mt-4">Promoción de la Salud</h3>
         <div class="d-flex">
             <div class="col-md-4 text-center">
-                <button class="btn btn-outline" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters">
+                <button class="btn btn-outline" type="button" >
                     <img src="./img/baby_boy.png" class="img-user mt-2 mb-4" alt="Imagen Usuario" width="250">
                 <h4 class="text-secondary"> 7 DIAS </h4></button>
             </div>
@@ -16,7 +16,7 @@
                 <h4 class="text-secondary">4 MESES</h4></button>
             </div>
             <div class="col-md-4 text-center">
-                <button class="btn btn-outline" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters">
+                <button class="btn btn-outline" type="button">
                     <img src="./img/bebe2.png" class="img-user mt-2 mb-4" alt="Imagen Usuario" width="190">
                 <h4 class="text-secondary" > 6 MESES </h4></button>
             </div>
@@ -41,11 +41,11 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ingrese Datos</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Niños de 4 Meses</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="results_promsa.php" method="POST" name="f1">
+                <form action="results_promsa_fourmonth.php" method="POST" name="f1">
                     <div class="row mb-3">
                         <div class="col-md-6 col-sm-12">
                             <p style="font-size: 13px;" class="text-start"><b>Seleccione una Red: </b></p>
