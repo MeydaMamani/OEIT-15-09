@@ -966,7 +966,7 @@ form label {
 }
 
 .boxed #main-wrapper .footer {
-    display: none
+    display: non00e
 }
 
 .page-wrapper {
@@ -978,6 +978,10 @@ form label {
     padding: 0 30px 25px 30px;
     max-width: 1280px;
     margin: 0 auto
+}
+container border{
+    overflow: hidden;
+    top: 2500px;
 }
 
 .topbar {
