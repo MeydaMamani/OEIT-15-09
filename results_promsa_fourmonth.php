@@ -315,11 +315,9 @@
                                     <th class="align-middle">Provincia</th>
                                     <th class="align-middle">Distrito</th>
                                     <th class="align-middle">Establecimiento</th>
-                                    <th class="align-middle">Fecha de Nacimiento</th>
-                                    <th class="align-middle">Documento</th>
-                                    <th class="align-middle">Código</th>
-                                    <th class="align-middle">Descripción</th> 
-                                    <th class="align-middle">Actividad</th>
+                                    <th class="align-middle">Denominador</th>
+                                    <th class="align-middle">Numerador</th>
+                                    <th class="align-middle">Total</th>
                                 </tr>
                             </thead>
                             <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -334,47 +332,33 @@
                                 <?php  
                                     include('query_promsa.php');
                                     $i=1;
-                                    while ($consulta = sqlsrv_fetch_array($consulta1)){  
-                                        if(is_null ($consulta['Provincia_Establecimiento']) ){
+                                    while ($consulta = sqlsrv_fetch_array($consulta6)){  
+                                        if(is_null ($consulta['NOMBRE_PROV']) ){
                                             $newdate3 = '  -'; }
                                             else{
-                                        $newdate3 = $consulta['Provincia_Establecimiento'] ;}
+                                        $newdate3 = $consulta['NOMBRE_PROV'] ;}
                                 
-                                        if(is_null ($consulta['Distrito_Establecimiento']) ){
+                                        if(is_null ($consulta['NOMBRE_DIST']) ){
                                             $newdate4 = '  -'; }
                                             else{
-                                        $newdate4 = $consulta['Distrito_Establecimiento'];}
+                                        $newdate4 = $consulta['NOMBRE_DIST'];}
                                 
-                                        if(is_null ($consulta['Nombre_Establecimiento']) ){
+                                        if(is_null ($consulta['NOMBRE_EESS']) ){
                                             $newdate5 = '  -'; }
                                             else{
-                                        $newdate5 = $consulta['Nombre_Establecimiento'];}
+                                        $newdate5 = $consulta['NOMBRE_EESS'];}
                                 
-                                        if(is_null ($consulta['Fecha_Nacimiento_Paciente']) ){
+                                        if(is_null ($consulta['DENOMINADOR']) ){
                                             $newdate6 = '  -'; }
                                             else{
-                                        $newdate6 = $consulta['Fecha_Nacimiento_Paciente'] -> format('d/m/y');}
+                                        $newdate6 = $consulta['DENOMINADOR'];}
                                 
-                                        if(is_null ($consulta['Numero_Documento_Paciente']) ){
+                                        if(is_null ($consulta['NUMERADOR']) ){
                                             $newdate7 = '  -'; }
                                             else{
-                                        $newdate7 = $consulta['Numero_Documento_Paciente'];}
+                                        $newdate7 = $consulta['NUMERADOR'];}
                                 
-                                        if(is_null ($consulta['Codigo_Item']) ){
-                                            $newdate8 = '  -'; }
-                                            else{
-                                        $newdate8 = $consulta['Codigo_Item'];}
-                            
-                                        if(is_null ($consulta['Descripcion_Item']) ){
-                                            $newdate9 = '  -'; }
-                                            else{
-                                        $newdate9 = $consulta['Descripcion_Item'];}
-                                
-                                        if(is_null ($consulta['ACTIVIDAD']) ){
-                                            $newdate10 = '  -'; }
-                                            else{
-                                        $newdate10 = $consulta['ACTIVIDAD'];}
-                                
+                               
                                 ?>
                                 <tr class="text-center font-12">
                                     <td class="align-middle"><?php echo $i++; ?></td>
@@ -383,9 +367,8 @@
                                     <td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
                                     <td class="align-middle"><?php echo $newdate6; ?></td>
                                     <td class="align-middle"><?php echo $newdate7; ?></td>
-                                    <td class="align-middle"><?php echo $newdate8; ?></td>
-                                    <td class="align-middle"><?php echo utf8_encode($newdate9); ?></td>
-                                    <td class="align-middle"><?php echo $newdate10; ?></td>
+                                    <td class="align-middle"><?php if($newdate6 == 0 and $newdate7 == 0){ echo '0'; }
+										else{  echo number_format((float)(($newdate7/$newdate6)*100), 2, '.', ''); } ?></td>
                                 </tr>
                                 <?php
                                     }                    

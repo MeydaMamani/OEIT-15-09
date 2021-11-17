@@ -81,20 +81,22 @@
                             ON P.NUM_DNI=V.Numero_Documento_Paciente
                             WHERE P.MES='2021$mes2' AND MONTH(DATEADD(DAY,120,P.FECHA_NACIMIENTO_NINO))='$mes' AND  YEAR(DATEADD(DAY,120,P.FECHA_NACIMIENTO_NINO))='2021'
                             DROP TABLE bd_padron_nominal.dbo.VISITADOS";
-            $resultado4 = "SELECT NOMBRE_PROV,NOMBRE_DIST,MES,COUNT(*) AS DENOMINADOR
+            $resultado4 = "SELECT NOMBRE_PROV,NOMBRE_DIST, NOMBRE_EESS, COUNT(*) AS DENOMINADOR
                             INTO DENOMINADOR_4_MESES
                             FROM [BD_PADRON_NOMINAL].[dbo].[NOMINAL_PADRON_NOMINAL] P
-                            WHERE P.MES='202110' AND MONTH(DATEADD(DAY,120,P.FECHA_NACIMIENTO_NINO))='10' AND  YEAR(DATEADD(DAY,120,P.FECHA_NACIMIENTO_NINO))='2021'
+                            WHERE P.MES='2021$mes2' AND MONTH(DATEADD(DAY,120,P.FECHA_NACIMIENTO_NINO))='$mes' AND  YEAR(DATEADD(DAY,120,P.FECHA_NACIMIENTO_NINO))='2021'
                             GROUP BY NOMBRE_PROV,NOMBRE_DIST,MES";
 
-            $resultado5 = "SELECT NOMBRE_PROV,NOMBRE_DIST,P.MES,COUNT(*) AS NUMERADOR 
+            $resultado5 = "SELECT NOMBRE_PROV,NOMBRE_DIST, NOMBRE_EESS, COUNT(*)  AS NUMERADOR 
                             INTO NUMERADOR_4_MESES
                             FROM [BD_PADRON_NOMINAL].[dbo].[NOMINAL_PADRON_NOMINAL] P
                             left join bd_padron_nominal.dbo.VISITADOS V ON P.NUM_DNI=V.Numero_Documento_Paciente
-                            WHERE P.MES='202110' AND MONTH(DATEADD(DAY,120,P.FECHA_NACIMIENTO_NINO))='10' AND  YEAR(DATEADD(DAY,120,P.FECHA_NACIMIENTO_NINO))='2021' AND ACTIVIDAD IS NOT NULL
+                            WHERE P.MES='2021$mes2' AND MONTH(DATEADD(DAY,120,P.FECHA_NACIMIENTO_NINO))='$mes' AND  YEAR(DATEADD(DAY,120,P.FECHA_NACIMIENTO_NINO))='2021' AND ACTIVIDAD IS NOT NULL
                             GROUP BY NOMBRE_PROV,NOMBRE_DIST,P.MES";
-            $resultado6 = "SELECT A.NOMBRE_PROV,A.NOMBRE_DIST,A.DENOMINADOR,B.NUMERADOR,(B.NUMERADOR/A.DENOMINADOR) FROM DENOMINADOR_4_MESES A
-                            LEFT JOIN NUMERADOR_4_MESES B ON A.MES=B.MES";
+
+            $resultado6 = "SELECT A.NOMBRE_PROV,A.NOMBRE_DIST, A.NOMBRE_EESS, A.DENOMINADOR,B.NUMERADOR FROM DENOMINADOR_4_MESES A
+                            INNER JOIN NUMERADOR_4_MESES  B ON A.NOMBRE_EESS=B.NOMBRE_EESS
+                            ORDER BY A.NOMBRE_PROV,A.NOMBRE_DIST, A.NOMBRE_EESS";
 
         }
         else if ($red_1 != 4 and $dist_1 == 'TODOS' and $establecimiento == 'TODOS') {
@@ -239,6 +241,9 @@
         $consulta1 = sqlsrv_query($conn, $resultado1);
         $consulta2 = sqlsrv_query($conn, $resultado2);
         $consulta3 = sqlsrv_query($conn2, $resultado3);
+        $consulta4 = sqlsrv_query($conn2, $resultado4);
+        $consulta5 = sqlsrv_query($conn2, $resultado5);
+        $consulta6 = sqlsrv_query($conn2, $resultado6);
 
         $my_date_modify = "SELECT MAX(FECHA_MODIFICACION_REGISTRO) as DATE_MODIFY FROM NOMINAL_PADRON_NOMINAL";
         $consult = sqlsrv_query($conn2, $my_date_modify);
