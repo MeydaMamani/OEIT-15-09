@@ -6,7 +6,7 @@
         header('Content-Type: text/html; charset=UTF-8');
         include('./base.php'); 
         include('zone_setting.php');
-        include('query_promsa_fourth_month.php');
+        include('query_promsa_seven_days.php');
         $total_visits=0; $face_to_face=0; $telemonitoring=0;
         while ($consulta = sqlsrv_fetch_array($consulta1)){
             $total_visits++;
@@ -17,37 +17,37 @@
             }
         }
 
-        $total_nominal=0;
-        while ($consulta = sqlsrv_fetch_array($consulta3)){
-            $total_nominal++;
-        }
+        // $total_nominal=0;
+        // while ($consulta = sqlsrv_fetch_array($consulta3)){
+        //     $total_nominal++;
+        // }
 
-        $total_resum=0; $num_dac=0; $den_dac=0; $num_pasco=0; $den_pasco=0; 
-        $num_oxa=0; $den_oxa=0; $prov_dac = false; $prov_pasco = false; $prov_oxa = false;
-        while ($consulta = sqlsrv_fetch_array($consulta6)){
-            $total_resum++;
-            if($consulta['NOMBRE_PROV'] ==  'DANIEL ALCIDES CARRION'){
-                $num_dac = $num_dac + $consulta['NUMERADOR'];
-                $den_dac = $den_dac + $consulta['DENOMINADOR'];
-                $prov_dac = true;
-            }
-            if($consulta['NOMBRE_PROV'] ==  'PASCO'){
-                $num_pasco = $num_pasco + $consulta['NUMERADOR'];
-                $den_pasco = $den_pasco + $consulta['DENOMINADOR'];
-                $prov_pasco = true;
-            }
-            if($consulta['NOMBRE_PROV'] ==  'OXAPAMPA'){
-                $num_oxa = $num_oxa + $consulta['NUMERADOR'];
-                $den_oxa = $den_oxa + $consulta['DENOMINADOR'];
-                $prov_oxa = true;
-            }
-        }
+        // $total_resum=0; $num_dac=0; $den_dac=0; $num_pasco=0; $den_pasco=0; 
+        // $num_oxa=0; $den_oxa=0; $prov_dac = false; $prov_pasco = false; $prov_oxa = false;
+        // while ($consulta = sqlsrv_fetch_array($consulta6)){
+        //     $total_resum++;
+        //     if($consulta['NOMBRE_PROV'] ==  'DANIEL ALCIDES CARRION'){
+        //         $num_dac = $num_dac + $consulta['NUMERADOR'];
+        //         $den_dac = $den_dac + $consulta['DENOMINADOR'];
+        //         $prov_dac = true;
+        //     }
+        //     if($consulta['NOMBRE_PROV'] ==  'PASCO'){
+        //         $num_pasco = $num_pasco + $consulta['NUMERADOR'];
+        //         $den_pasco = $den_pasco + $consulta['DENOMINADOR'];
+        //         $prov_pasco = true;
+        //     }
+        //     if($consulta['NOMBRE_PROV'] ==  'OXAPAMPA'){
+        //         $num_oxa = $num_oxa + $consulta['NUMERADOR'];
+        //         $den_oxa = $den_oxa + $consulta['DENOMINADOR'];
+        //         $prov_oxa = true;
+        //     }
+        // }
 ?>
 
 <div class="page-wrapper">
     <div class="container">
         <div class="text-center mt-3">
-            <h3 class="mb-4">Visita Domiciliaria 4 Meses - <?php echo $nombre_mes; ?></h3>
+            <h3 class="mb-4">Visita Domiciliaria 7 Días - <?php echo $nombre_mes; ?></h3>
         </div>
         <div class="col-md-12 text-end mb-2">
             <button type="submit" name="Limpiar" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='promsa.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
@@ -131,7 +131,6 @@
                                     <th class="align-middle">Provincia</th>
                                     <th class="align-middle">Distrito</th>
                                     <th class="align-middle">Establecimiento</th>
-                                    <th class="align-middle">Fecha de Nacimiento</th>
                                     <th class="align-middle">Documento</th>
                                     <th class="align-middle">Código</th>
                                     <th class="align-middle">Descripción</th> 
@@ -148,7 +147,7 @@
                             </div>
                             <tbody>
                                 <?php  
-                                    include('query_promsa_fourth_month.php');
+                                    include('query_promsa_seven_days.php');
                                     $i=1;
                                     while ($consulta = sqlsrv_fetch_array($consulta1)){  
                                         if(is_null ($consulta['Provincia_Establecimiento']) ){
@@ -166,10 +165,6 @@
                                             else{
                                         $newdate5 = $consulta['Nombre_Establecimiento'];}
                                 
-                                        if(is_null ($consulta['Fecha_Nacimiento_Paciente']) ){
-                                            $newdate6 = '  -'; }
-                                            else{
-                                        $newdate6 = $consulta['Fecha_Nacimiento_Paciente'] -> format('d/m/y');}
                                 
                                         if(is_null ($consulta['Numero_Documento_Paciente']) ){
                                             $newdate7 = '  -'; }
@@ -197,7 +192,6 @@
                                     <td class="align-middle"><?php echo $newdate3; ?></td>
                                     <td class="align-middle"><?php echo utf8_encode($newdate4); ?></td>
                                     <td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
-                                    <td class="align-middle"><?php echo $newdate6; ?></td>
                                     <td class="align-middle"><?php echo $newdate7; ?></td>
                                     <td class="align-middle"><?php echo $newdate8; ?></td>
                                     <td class="align-middle"><?php echo utf8_encode($newdate9); ?></td>
@@ -247,6 +241,7 @@
                                     <th class="align-middle">Fecha Modificación</th>
                                     <th class="align-middle" id="fields_4_meses_nominal">Fecha Atención</th>
                                     <th class="align-middle" id="fields_4_meses_nominal">Actividad</th>
+                                    <th class="align-middle" id="fields_4_meses_nominal">Visitado</th>
                                 </tr>
                             </thead>
                             <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -259,7 +254,7 @@
                             </div>
                             <tbody>
                                 <?php  
-                                    include('query_promsa_fourth_month.php');
+                                    include('query_promsa_seven_days.php');
                                     $i=1;
                                     while ($consult = sqlsrv_fetch_array($consulta3)){  
                                         if(is_null ($consult['NOMBRE_PROV']) ){
@@ -372,6 +367,7 @@
                                     <td class="align-middle"><?php echo $newdate_17; ?></td>
                                     <td class="align-middle"><?php echo $newdate_18; ?></td>
                                     <td class="align-middle"><?php echo $newdate_19; ?></td>
+                                    <td class="align-middle"><?php echo $newdate_20; ?></td>
                                 </tr>
                                 <?php
                                     ;}                    
@@ -502,7 +498,7 @@
                             </div>
                             <tbody>
                                 <?php  
-                                    include('query_promsa_fourth_month.php');
+                                    include('query_promsa_seven_days.php');
                                     $i=1;
                                     while ($consulta = sqlsrv_fetch_array($consulta6)){  
                                         if(is_null ($consulta['NOMBRE_PROV']) ){
