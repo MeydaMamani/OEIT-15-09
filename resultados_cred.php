@@ -6,6 +6,7 @@
         global $conex;
         include('./base.php');
 
+    include('zone_setting.php');
     include('consulta_cred.php');
     $row_cont=0;
     while ($consulta = sqlsrv_fetch_array($consulta15)){
@@ -14,39 +15,56 @@
 ?>
     <div class="page-wrapper">
         <div class="container">
-            <div class="text-center p-3">
-              <h3>CRED CG06 - <?php echo $nombre_mes; ?></h3>
-            </div>
-            <div class="row mb-3 mt-3">
-                <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
-                <div class="col-8 d-flex justify-content-end">
-                  <!-- <ul class="list-group list-group-horizontal-sm">
-                    <li class="list-group-item font-14">Correctos <span class="badge bg-success rounded-pill"><?php echo $correctos; ?></span></li>
-                    <li class="list-group-item font-14">Incorrectos <span class="badge bg-danger rounded-pill"><?php echo $incorrectos; ?></span></li>
-                    <li class="list-group-item font-14">Avance <span class="badge bg-primary rounded-pill">
-                      </span>
-                    </li>
-                  </ul> -->
+            <div class="row">
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <marquee width="100%" direction="left" height="18px">
+                        <p class="font-14 text-primary"><b>Fuente: </b> BD Padrón Nominal con Fecha <?php echo $date_modify; ?> y BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</p>
+                    </marquee>
                 </div>
             </div>
-            <div class="row mb-3">
-              <div class="col-lg-12 text-center">
-                <!-- <button type="button" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                <button type="button" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
-                <button type="button" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='cred.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
-              </div>
+            <div class="text-center mb-3">
+                <h3 class="mb-4">CRED CG06 - <?php echo $nombre_mes; ?></h3>
             </div>
+            <div class="mb-3">
+				<!-- <div class="row m-2">
+					<div class="card col-md-3 datos_avance">
+						<div class="card-body p-1">
+							<p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
+							<div class="justify-content-center">
+								<div class="align-self-center">
+									<h4 class="font-medium mb-3 justify-content-center d-flex">
+										<div class="col-md-5 text-end">
+											<img src="./img/user_cant.png" width="90" alt="">
+										</div>
+										<div class="mt-3 col-md-7 text-center">
+											<b class="total font-49 total"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
+										</div>
+									</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+                <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
+			</div>
             <div class="d-flex">
-                <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
-                <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button>
-                <form action="impresion_cred.php" method="POST">
-                    <input hidden name="red" value="<?php echo $_POST['red']; ?>">
-                    <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                    <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
-                </form>
-            </div>
-            <div class="col-12 table-responsive table_no_fed">
+                <div class="col-md-5 d-flex">
+                    <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
+                    <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button>
+                </div>
+                <div class="col-md-7 d-flex">
+                    <form action="impresion_cred.php" method="POST">
+                        <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                        <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                        <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                        <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
+                    </form>
+                    <button type="button" name="Limpiar" class="btn btn-outline-danger m-2 btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
+                    <button type="button" name="Limpiar" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='cred.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
+                </div>
+            </div><br>
+            <div class="col-12 table-responsive table_no_fed" id="cred">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="font-12 text-center" style="background: #e0ebd8;">
@@ -76,10 +94,10 @@
                             <th class="align-middle">Onceavo Control Mes</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-3 table_no_fed">
-                        <div class="form-group">
+                    <div class="float-end pb-1 col-md-3 table_no_fed">
+                        <div class="mb-3">
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
@@ -246,7 +264,7 @@
                     </tfoot>
                 </table>
             </div>
-            <!-- TBALA FEDDD -->
+            <!-- TABLA FEDDD -->
             <div class="col-12 table-responsive table_fed" style="display: none;">
                 <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
@@ -277,10 +295,10 @@
                             <th class="align-middle">Onceavo Control Mes</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-3 table_fed" style="display: none;">
-                        <div class="form-group">
+                    <div class="float-end pb-1 col-md-3 table_fed" style="display: none;">
+                        <div class="mb-3">
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>

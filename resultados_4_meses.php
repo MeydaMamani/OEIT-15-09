@@ -527,7 +527,7 @@
                 $(".no_cumple").text(<?php echo $no_cumple_fed; ?>);
                 $(".observado").text(<?php echo $observado_fed; ?>);
                 $(".avance").text(<?php if($cumple_fed==0 && $i_fed-1 == 0){ echo "'0 %'"; }
-                    else{ $porcentaje = number_format((float)(($cumple/($i_fed-1))*100), 2, '.', '');
+                    else{ $porcentaje = number_format((float)(($cumple_fed/($i_fed-1))*100), 2, '.', '');
                             echo "'$porcentaje %'"; }?>);
                 $("#chart").removeClass("css-bar-<?php if($cumple == 0 and $no_cumple == 0){ echo '0'; }else{
                                                 echo number_format((float)(($cumple/$row_cont)*100), 0, '.', ''); }

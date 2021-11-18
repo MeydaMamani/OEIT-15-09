@@ -110,14 +110,14 @@
                 <div class="col-md-5 d-flex">
                     <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
                     <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button>
+                </div>
+                <div class="col-md-7 d-flex">
                     <form action="impresion_prematuro.php" method="POST">
                         <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                         <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                         <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
                         <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                     </form>
-                </div>
-                <div class="col-md-7 d-flex">
                     <button type="button" class="btn btn-outline-danger m-2 btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Información</button>
                     <button type="button" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='prematuros.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                 </div>
@@ -142,13 +142,10 @@
                             <th class="align-middle" id="color_prematuro_head">Se Atiende</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-1 col-md-3 mt-3">
+                    <div class="float-end pb-1 col-md-3 table_no_fed">
                         <div class="mb-3">
-                            <div class="text-center mb-2">
-                                <label class="font-14 text-secondary">Buscar por Nombres o DNI:</label>
-                            </div>
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
@@ -271,13 +268,10 @@
                             <th class="align-middle" id="color_fed_head">Se Atiende</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-1 col-md-3 mt-3">
+                    <div class="float-end pb-1 col-md-3 table_fed" style="display: none;">
                         <div class="mb-3">
-                            <div class="text-center mb-2">
-                                <label class="font-14 text-secondary">Buscar por Nombres o DNI:</label>
-                            </div>
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>

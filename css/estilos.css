@@ -460,3 +460,7 @@ img:hover{
 	background: #4b5868 !important;
 	color: white;
 }
+
+#advance_cuatro_meses thead tr th#fields_4_meses_nominal {
+	background: black !important;
+}
