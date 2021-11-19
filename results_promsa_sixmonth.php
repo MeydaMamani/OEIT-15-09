@@ -29,56 +29,56 @@
         }
 
         $total_nominal=0;
-        // while ($consulta = sqlsrv_fetch_array($consulta4)){
-        //     $total_nominal++;
-        // }
+        while ($consulta = sqlsrv_fetch_array($consulta4)){
+            $total_nominal++;
+        }
 
         $total_nominal_x=0;
-        // while ($consulta = sqlsrv_fetch_array($consulta9)){
-        //     $total_nominal_x++;
-        // }
+        while ($consulta = sqlsrv_fetch_array($consulta9)){
+            $total_nominal_x++;
+        }
 
         $total_resum=0; $num_dac=0; $den_dac=0; $num_pasco=0; $den_pasco=0; 
         $num_oxa=0; $den_oxa=0; $prov_dac = false; $prov_pasco = false; $prov_oxa = false;
-        // while ($consulta = sqlsrv_fetch_array($consulta7)){
-        //     $total_resum++;
-        //     if($consulta['NOMBRE_PROV'] ==  'DANIEL ALCIDES CARRION'){
-        //         $num_dac = $num_dac + $consulta['NUMERADOR'];
-        //         $den_dac = $den_dac + $consulta['DENOMINADOR'];
-        //         $prov_dac = true;
-        //     }
-        //     if($consulta['NOMBRE_PROV'] ==  'PASCO'){
-        //         $num_pasco = $num_pasco + $consulta['NUMERADOR'];
-        //         $den_pasco = $den_pasco + $consulta['DENOMINADOR'];
-        //         $prov_pasco = true;
-        //     }
-        //     if($consulta['NOMBRE_PROV'] ==  'OXAPAMPA'){
-        //         $num_oxa = $num_oxa + $consulta['NUMERADOR'];
-        //         $den_oxa = $den_oxa + $consulta['DENOMINADOR'];
-        //         $prov_oxa = true;
-        //     }
-        // }
+        while ($consulta = sqlsrv_fetch_array($consulta7)){
+            $total_resum++;
+            if($consulta['NOMBRE_PROV'] ==  'DANIEL ALCIDES CARRION'){
+                $num_dac = $num_dac + $consulta['NUMERADOR'];
+                $den_dac = $den_dac + $consulta['DENOMINADOR'];
+                $prov_dac = true;
+            }
+            if($consulta['NOMBRE_PROV'] ==  'PASCO'){
+                $num_pasco = $num_pasco + $consulta['NUMERADOR'];
+                $den_pasco = $den_pasco + $consulta['DENOMINADOR'];
+                $prov_pasco = true;
+            }
+            if($consulta['NOMBRE_PROV'] ==  'OXAPAMPA'){
+                $num_oxa = $num_oxa + $consulta['NUMERADOR'];
+                $den_oxa = $den_oxa + $consulta['DENOMINADOR'];
+                $prov_oxa = true;
+            }
+        }
 
         $total_resum_x=0; $num_dac_x=0; $den_dac_x=0; $num_pasco_x=0; $den_pasco_x=0; 
         $num_oxa_x=0; $den_oxa_x=0; $prov_dac_x = false; $prov_pasco_x = false; $prov_oxa_x = false;
-        // while ($consulta = sqlsrv_fetch_array($consulta12)){
-        //     $total_resum_x++;
-        //     if($consulta['NOMBRE_PROV'] ==  'DANIEL ALCIDES CARRION'){
-        //         $num_dac_x = $num_dac_x + $consulta['NUMERADOR'];
-        //         $den_dac_x = $den_dac_x + $consulta['DENOMINADOR'];
-        //         $prov_dac_x = true;
-        //     }
-        //     if($consulta['NOMBRE_PROV'] ==  'PASCO'){
-        //         $num_pasco_x = $num_pasco_x + $consulta['NUMERADOR'];
-        //         $den_pasco_x = $den_pasco_x + $consulta['DENOMINADOR'];
-        //         $prov_pasco_x = true;
-        //     }
-        //     if($consulta['NOMBRE_PROV'] ==  'OXAPAMPA'){
-        //         $num_oxa_x = $num_oxa_x + $consulta['NUMERADOR'];
-        //         $den_oxa_x = $den_oxa_x + $consulta['DENOMINADOR'];
-        //         $prov_oxa_x = true;
-        //     }
-        // }
+        while ($consulta = sqlsrv_fetch_array($consulta12)){
+            $total_resum_x++;
+            if($consulta['NOMBRE_PROV'] ==  'DANIEL ALCIDES CARRION'){
+                $num_dac_x = $num_dac_x + $consulta['NUMERADOR'];
+                $den_dac_x = $den_dac_x + $consulta['DENOMINADOR'];
+                $prov_dac_x = true;
+            }
+            if($consulta['NOMBRE_PROV'] ==  'PASCO'){
+                $num_pasco_x = $num_pasco_x + $consulta['NUMERADOR'];
+                $den_pasco_x = $den_pasco_x + $consulta['DENOMINADOR'];
+                $prov_pasco_x = true;
+            }
+            if($consulta['NOMBRE_PROV'] ==  'OXAPAMPA'){
+                $num_oxa_x = $num_oxa_x + $consulta['NUMERADOR'];
+                $den_oxa_x = $den_oxa_x + $consulta['DENOMINADOR'];
+                $prov_oxa_x = true;
+            }
+        }
 ?>
 
 <div class="page-wrapper">
@@ -168,7 +168,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 table-responsive" id="visitas_cuatro_meses">
+                        <div class="col-md-12 table-responsive" id="visits_six_month_sin_dx">
                             <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                                 <thead>
                                     <tr class="text-center font-12" style="background: #c9d0e2;">
@@ -268,7 +268,7 @@
                     <div id="visits_con_dx" style="display: none;">
                         <div class="row">
                             <div class="col-md-11">
-                                <h4 class="text-center mb-4 mt-2" style="color: #735E00;">Niños de 6 a 11 Meses Con Anemia</h4>
+                                <h4 class="text-center mb-4 mt-2" style="color: #3e4b5a;">Niños de 6 a 11 Meses Con Anemia</h4>
                             </div>
                             <div class="col-md-1 text-end">
                                 <a id="btn_visits_sin_dx"><i class="mdi mdi-layers font-30"></i></a>
@@ -329,7 +329,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 table-responsive" id="visitas_cuatro_meses">
+                        <div class="col-md-12 table-responsive" id="visits_six_month_con_dx">
                             <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                                 <thead>
                                     <tr class="text-center font-12" style="background: #c9d0e2;">
@@ -428,13 +428,18 @@
                     </div>
                 </div>
                 <!-- AVANCE NOMINAL -->
-                <div class="tab-pane fade" id="nominal_advance" role="tabpanel" aria-labelledby="profile-tab">
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6 table-responsive table_no_fed" id="advance_cuatro_meses">
-                            <h4 class="text-center mb-4 text-primary">Niños de 6 Meses Sin Anemia</h4>
-                            <br>
-                            <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $total_nominal; ?></b></div>
+                <div class="tab-pane fade p-3" id="nominal_advance" role="tabpanel" aria-labelledby="profile-tab">
+                    <div id="nominal_sin_dx">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h4 class="text-center mb-4 mt-2" style="color: #000073;">Niños de 6 a 11 Meses Sin Anemia</h4>
+                            </div>
+                            <div class="col-md-1 text-end">
+                                <a id="btn_nominal_con_dx"><i class="mdi mdi-layers-off font-30"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $total_nominal; ?></b></div>
+                        <div class="col-md-12 table-responsive" id="visits_six_month_sin_dx">
                             <table id="demo-foo-addrow3" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                                 <thead>
                                     <tr class="text-center font-12" style="background: #c9d0e2;">
@@ -454,8 +459,8 @@
                                         <th class="align-middle">Tipo Seguro</th>
                                         <th class="align-middle">Tipo Programa Social</th>
                                         <th class="align-middle">Fecha Modificación</th>
-                                        <th class="align-middle" id="fields_4_meses_nominal">Fecha Atención</th>
-                                        <th class="align-middle" id="fields_4_meses_nominal">Actividad</th>
+                                        <th class="align-middle" id="field_nominal">Fecha Atención</th>
+                                        <th class="align-middle" id="field_nominal">Actividad</th>
                                     </tr>
                                 </thead>
                                 <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -598,9 +603,17 @@
                                 </tfoot>
                             </table>
                         </div>
-                        <div class="col-md-6 table-responsive table_no_fed" id="advance_cuatro_meses">
-                            <h4 class="text-center mb-4 text-danger">Niños de 6 Meses Con Anemia</h4>
-                            <br>
+                    </div>
+                    <div id="nominal_con_dx" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h4 class="text-center mb-4 mt-2" style="color: #3e4b5a;">Niños de 6 a 11 Meses Con Anemia</h4>
+                            </div>
+                            <div class="col-md-1 text-end">
+                                <a id="btn_nominal_sin_dx"><i class="mdi mdi-layers-off font-30"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 table-responsive" id="visits_six_month_con_dx">
                             <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $total_nominal_x; ?></b></div>
                             <table id="demo-foo-addrow4" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                                 <thead>
@@ -621,8 +634,8 @@
                                         <th class="align-middle">Tipo Seguro</th>
                                         <th class="align-middle">Tipo Programa Social</th>
                                         <th class="align-middle">Fecha Modificación</th>
-                                        <th class="align-middle" id="fields_4_meses_nominal">Fecha Atención</th>
-                                        <th class="align-middle" id="fields_4_meses_nominal">Actividad</th>
+                                        <th class="align-middle" id="field_nominal">Fecha Atención</th>
+                                        <th class="align-middle" id="field_nominal">Actividad</th>
                                     </tr>
                                 </thead>
                                 <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -768,81 +781,104 @@
                     </div>
                 </div>
                 <!-- RESUMEN -->
-                <div class="tab-pane fade" id="revision" role="tabpanel" aria-labelledby="profile-tab">
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6 table-responsive table_no_fed" id="cuatro_meses">
-                            <h4 class="text-center mb-4 text-primary">Niños de 6 Meses Sin Anemia</h4>
-                            <br>
-                            <div class="mb-3">
-                                <div class="row m-2">
-                                    <div class="card col-md-3 datos_avance">
-                                        <div class="card-body p-1">
-                                            <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
-                                            <div class="justify-content-center">
-                                                <div class="align-self-center">
-                                                    <h4 class="font-medium mb-3 justify-content-center d-flex">
-                                                        <div class="col-md-5 text-end">
-                                                            <img src="./img/user_cant.png" width="60" alt="">
-                                                        </div>
-                                                        <div class="mt-3 col-md-7 text-center">
-                                                            <b class="font-25 total"> <?php echo $total_resum; ?></b> <i class="mdi mdi-plus font-25 text-secondary"></i>
-                                                        </div>
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php if($prov_dac == true){?>
-                                    <div class="card col-md-3 datos_avance">
-                                        <div class="card-body p-1">
-                                            <p class="card-title text-secondary text-center font-18 pt-2">D.A.C</p>
-                                            <div class="row pt-2">
-                                                <div class="col-md-12 p-0 text-center ">
-                                                    <h1 class="font-light avance mb-1 text-info"><?php 
-                                                            if($num_dac == 0 and $den_dac == 0){ echo '0 %'; }
-                                                            else{ echo number_format((float)(($num_dac/$den_dac)*100), 2, '.', ''), '%'; }
-                                                        ?>
-                                                    </h1>
-                                                    <h4 class="text-muted">Avance</h4></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php } ?>
-                                    <?php if($prov_pasco == true){?>
-                                    <div class="card col-md-3 datos_avance">
-                                        <div class="card-body p-1">
-                                            <p class="card-title text-secondary text-center font-18 pt-2">PASCO</p>
-                                            <div class="row pt-2">
-                                                <div class="col-md-12 p-0 text-center ">
-                                                    <h1 class="font-light avance mb-1 text-info"><?php 
-                                                            if($num_pasco == 0 and $den_pasco == 0){ echo '0 %'; }
-                                                            else{ echo number_format((float)(($num_pasco/$den_pasco)*100), 2, '.', ''), '%'; }
-                                                        ?>
-                                                    </h1>
-                                                    <h4 class="text-muted">Avance</h4></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php } ?>
-                                    <?php if($prov_oxa == true){?>
-                                    <div class="card col-md-3 datos_avance">
-                                        <div class="card-body p-1">
-                                            <p class="card-title text-secondary text-center font-18 pt-2">OXAPAMPA</p>
-                                            <div class="row pt-2">
-                                                <div class="col-md-12 p-0 text-center ">
-                                                    <h1 class="font-light avance mb-1 text-info"><?php 
-                                                            if($num_oxa == 0 and $den_oxa == 0){ echo '0 %'; }
-                                                            else{ echo number_format((float)(($num_oxa/$den_oxa)*100), 2, '.', ''), '%'; }
-                                                        ?>
-                                                    </h1>
-                                                    <h4 class="text-muted">Avance</h4></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php } ?>
-                                </div>
+                <div class="tab-pane fade p-3" id="revision" role="tabpanel" aria-labelledby="profile-tab">
+                    <div id="resume_sin_dx">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h4 class="text-center mb-4 mt-2" style="color: #000073;">Niños de 6 a 11 Meses Sin Anemia</h4>
                             </div>
+                            <div class="col-md-1 text-end">
+                                <a id="btn_resume_con_dx"><i class="mdi mdi-layers-off font-30"></i></a>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="row m-2">
+                                <div class="card col-md-3 datos_avance">
+                                    <div class="card-body p-1">
+                                        <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
+                                        <div class="justify-content-center">
+                                            <div class="align-self-center">
+                                                <h4 class="font-medium mb-3 justify-content-center d-flex">
+                                                    <div class="col-md-5 text-end">
+                                                        <img src="./img/user_cant.png" width="90" alt="">
+                                                    </div>
+                                                    <div class="mt-3 col-md-7 text-center">
+                                                        <b class="font-55 total"> <?php echo $total_resum; ?></b> <i class="mdi mdi-plus font-55 text-secondary"></i>
+                                                    </div>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php if($prov_dac == true){?>
+                                <div class="card col-md-3 datos_avance">
+                                    <div class="card-body p-1">
+                                        <p class="card-title text-secondary text-center font-18 pt-2">DANIEL A. CARRIÓN</p>
+                                        <div class="row pt-4">
+                                            <div class="col-md-7 p-0 text-center">
+                                                <h1 class="font-light avance mb-1 text-primary"><?php 
+                                                        if($num_dac == 0 and $den_dac == 0){ echo '0 %'; }
+                                                        else{ echo number_format((float)(($num_dac/$den_dac)*100), 2, '.', ''), '%'; }
+                                                    ?>
+                                                </h1>
+                                                <h4 class="text-muted">Avance</h4></div>
+                                            <div class="col-md-5 text-center align-self-center position-sticky">
+                                                <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php 
+                                                    if($num_dac == 0 and $den_dac == 0){ echo '0'; }
+                                                    else{  echo number_format((float)(($num_dac/$den_dac)*100), 0, '.', ''); }
+                                                ?>"><i class="mdi mdi-receipt"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                                <?php if($prov_pasco == true){?>
+                                <div class="card col-md-3 datos_avance">
+                                    <div class="card-body p-1">
+                                        <p class="card-title text-secondary text-center font-18 pt-2">PASCO</p>
+                                        <div class="row pt-4">
+                                            <div class="col-md-7 p-0 text-center">
+                                                <h1 class="font-light avance mb-1 text-primary"><?php 
+                                                        if($num_pasco == 0 and $den_pasco == 0){ echo '0 %'; }
+                                                        else{ echo number_format((float)(($num_pasco/$den_pasco)*100), 2, '.', ''), '%'; }
+                                                    ?>
+                                                </h1>
+                                                <h4 class="text-muted">Avance</h4></div>
+                                            <div class="col-md-5 text-center align-self-center position-sticky">
+                                                <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php 
+                                                    if($num_pasco == 0 and $den_pasco == 0){ echo '0'; }
+                                                    else{  echo number_format((float)(($num_pasco/$den_pasco)*100), 0, '.', ''); }
+                                                ?>"><i class="mdi mdi-receipt"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                                <?php if($prov_oxa == true){?>
+                                <div class="card col-md-3 datos_avance">
+                                    <div class="card-body p-1">
+                                        <p class="card-title text-secondary text-center font-18 pt-2">OXAPAMPA</p>
+                                        <div class="row pt-4">
+                                            <div class="col-md-7 p-0 text-center">
+                                                <h1 class="font-light avance mb-1 text-primary"><?php 
+                                                        if($num_oxa == 0 and $den_oxa == 0){ echo '0 %'; }
+                                                        else{ echo number_format((float)(($num_oxa/$den_oxa)*100), 2, '.', ''), '%'; }
+                                                    ?>
+                                                </h1>
+                                                <h4 class="text-muted">Avance</h4></div>
+                                            <div class="col-md-5 text-center align-self-center position-sticky">
+                                                <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php 
+                                                    if($num_oxa == 0 and $den_oxa == 0){ echo '0'; }
+                                                    else{  echo number_format((float)(($num_oxa/$den_oxa)*100), 0, '.', ''); }
+                                                ?>"><i class="mdi mdi-receipt"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="col-md-12 table-responsive" id="visits_six_month_sin_dx">
                             <table id="demo-foo-addrow5" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                                 <thead>
                                     <tr class="text-center font-12" style="background: #c9d0e2;">
@@ -913,78 +949,86 @@
                                 </tfoot>
                             </table>
                         </div>
-                        <div class="col-md-6 table-responsive table_no_fed" id="cuatro_meses">
-                            <h4 class="text-center mb-4 text-danger">Niños de 6 Meses Con Anemia</h4>
-                            <br>
-                            <div class="mb-3">
-                                <div class="row m-2">
-                                    <div class="card col-md-3 datos_avance">
-                                        <div class="card-body p-1">
-                                            <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
-                                            <div class="justify-content-center">
-                                                <div class="align-self-center">
-                                                    <h4 class="font-medium mb-3 justify-content-center d-flex">
-                                                        <div class="col-md-5 text-end">
-                                                            <img src="./img/user_cant.png" width="60" alt="">
-                                                        </div>
-                                                        <div class="mt-3 col-md-7 text-center">
-                                                            <b class="font-25 total"> <?php echo $total_resum; ?></b> <i class="mdi mdi-plus font-25 text-secondary"></i>
-                                                        </div>
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php if($prov_dac_x == true){?>
-                                    <div class="card col-md-3 datos_avance">
-                                        <div class="card-body p-1">
-                                            <p class="card-title text-secondary text-center font-18 pt-2">D.A.C</p>
-                                            <div class="row pt-2">
-                                                <div class="col-md-12 p-0 text-center ">
-                                                    <h1 class="font-light avance mb-1 text-info"><?php 
-                                                            if($num_dac_x == 0 and $den_dac_x == 0){ echo '0 %'; }
-                                                            else{ echo number_format((float)(($num_dac_x/$den_dac_x)*100), 2, '.', ''), '%'; }
-                                                        ?>
-                                                    </h1>
-                                                    <h4 class="text-muted">Avance</h4></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php } ?>
-                                    <?php if($prov_pasco_x == true){?>
-                                    <div class="card col-md-3 datos_avance">
-                                        <div class="card-body p-1">
-                                            <p class="card-title text-secondary text-center font-18 pt-2">PASCO</p>
-                                            <div class="row pt-2">
-                                                <div class="col-md-12 p-0 text-center ">
-                                                    <h1 class="font-light avance mb-1 text-info"><?php 
-                                                            if($num_pasco_x == 0 and $den_pasco_x == 0){ echo '0 %'; }
-                                                            else{ echo number_format((float)(($num_pasco_x/$den_pasco_x)*100), 2, '.', ''), '%'; }
-                                                        ?>
-                                                    </h1>
-                                                    <h4 class="text-muted">Avance</h4></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php } ?>
-                                    <?php if($prov_oxa_x == true){?>
-                                    <div class="card col-md-3 datos_avance">
-                                        <div class="card-body p-1">
-                                            <p class="card-title text-secondary text-center font-18 pt-2">OXAPAMPA</p>
-                                            <div class="row pt-2">
-                                                <div class="col-md-12 p-0 text-center ">
-                                                    <h1 class="font-light avance mb-1 text-info"><?php 
-                                                            if($num_oxa_x == 0 and $den_oxa_x == 0){ echo '0 %'; }
-                                                            else{ echo number_format((float)(($num_oxa_x/$den_oxa_x)*100), 2, '.', ''), '%'; }
-                                                        ?>
-                                                    </h1>
-                                                    <h4 class="text-muted">Avance</h4></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php } ?>
-                                </div>
+                    </div>
+                    <div id="resume_con_dx" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h4 class="text-center mb-4 mt-2" style="color: #3e4b5a;">Niños de 6 a 11 Meses Con Anemia</h4>
                             </div>
+                            <div class="col-md-1 text-end">
+                                <a id="btn_resume_sin_dx"><i class="mdi mdi-layers-off font-30"></i></a>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="row m-2">
+                                <div class="card col-md-3 datos_avance">
+                                    <div class="card-body p-1">
+                                        <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
+                                        <div class="justify-content-center">
+                                            <div class="align-self-center">
+                                                <h4 class="font-medium mb-3 justify-content-center d-flex">
+                                                    <div class="col-md-5 text-end">
+                                                        <img src="./img/user_cant.png" width="60" alt="">
+                                                    </div>
+                                                    <div class="mt-3 col-md-7 text-center">
+                                                        <b class="font-25 total"> <?php echo $total_resum_x; ?></b> <i class="mdi mdi-plus font-25 text-secondary"></i>
+                                                    </div>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php if($prov_dac == true){?>
+                                <div class="card col-md-3 datos_avance">
+                                    <div class="card-body p-1">
+                                        <p class="card-title text-secondary text-center font-18 pt-2">D.A.C</p>
+                                        <div class="row pt-2">
+                                            <div class="col-md-12 p-0 text-center ">
+                                                <h1 class="font-light avance mb-1 text-info"><?php 
+                                                        if($num_dac_x == 0 and $den_dac_x == 0){ echo '0 %'; }
+                                                        else{ echo number_format((float)(($num_dac_x/$den_dac_x)*100), 2, '.', ''), '%'; }
+                                                    ?>
+                                                </h1>
+                                                <h4 class="text-muted">Avance</h4></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                                <?php if($prov_pasco == true){?>
+                                <div class="card col-md-3 datos_avance">
+                                    <div class="card-body p-1">
+                                        <p class="card-title text-secondary text-center font-18 pt-2">PASCO</p>
+                                        <div class="row pt-2">
+                                            <div class="col-md-12 p-0 text-center ">
+                                                <h1 class="font-light avance mb-1 text-info"><?php 
+                                                        if($num_pasco_x == 0 and $den_pasco_x == 0){ echo '0 %'; }
+                                                        else{ echo number_format((float)(($num_pasco_x/$den_pasco_x)*100), 2, '.', ''), '%'; }
+                                                    ?>
+                                                </h1>
+                                                <h4 class="text-muted">Avance</h4></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                                <?php if($prov_oxa == true){?>
+                                <div class="card col-md-3 datos_avance">
+                                    <div class="card-body p-1">
+                                        <p class="card-title text-secondary text-center font-18 pt-2">OXAPAMPA</p>
+                                        <div class="row pt-2">
+                                            <div class="col-md-12 p-0 text-center ">
+                                                <h1 class="font-light avance mb-1 text-info"><?php 
+                                                        if($num_oxa_x == 0 and $den_oxa_x == 0){ echo '0 %'; }
+                                                        else{ echo number_format((float)(($num_oxa_x/$den_oxa_x)*100), 2, '.', ''), '%'; }
+                                                    ?>
+                                                </h1>
+                                                <h4 class="text-muted">Avance</h4></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="col-md-12 table-responsive" id="visits_six_month_con_dx">
                             <table id="demo-foo-addrow6" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                                 <thead>
                                     <tr class="text-center font-12" style="background: #c9d0e2;">
@@ -1069,14 +1113,30 @@
     <script src="./plugin/footable/js/footable.all.min.js"></script>
     <script>
         $("#btn_visits_con_dx").click(function(){
-            console.log("Me diste click");
             $("#visits_sin_dx").hide();
             $("#visits_con_dx").show();
         });
         $("#btn_visits_sin_dx").click(function(){
-            console.log("Me diste click");
             $("#visits_sin_dx").show();
             $("#visits_con_dx").hide();
+        });
+
+        $("#btn_nominal_con_dx").click(function(){
+            $("#nominal_sin_dx").hide();
+            $("#nominal_con_dx").show();
+        });
+        $("#btn_nominal_sin_dx").click(function(){
+            $("#nominal_sin_dx").show();
+            $("#nominal_con_dx").hide();
+        });
+
+        $("#btn_resume_con_dx").click(function(){
+            $("#resume_sin_dx").hide();
+            $("#resume_con_dx").show();
+        });
+        $("#btn_resume_sin_dx").click(function(){
+            $("#resume_sin_dx").show();
+            $("#resume_con_dx").hide();
         });
     </script>
     <script>

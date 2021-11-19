@@ -461,10 +461,6 @@ img:hover{
 	color: white;
 }
 
-#advance_cuatro_meses thead tr th#fields_4_meses_nominal {
-	background: black !important;
-}
-
 #bateria_completa thead tr th { 
 	position: sticky;
 	top: 0;
@@ -474,4 +470,25 @@ img:hover{
 
 #bateria_completa thead tr th#fields_bateria_head {
 	background: #6f91e7 !important;
+}
+
+
+#visits_six_month_sin_dx thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #324b6a !important;
+	color: white;
+}
+
+#visits_six_month_con_dx thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #4b5868 !important;
+	color: white;
+}
+
+#visits_six_month_con_dx thead tr th#field_nominal, #visits_six_month_sin_dx thead tr th#field_nominal {
+	background: black !important;
 }
