@@ -68,7 +68,7 @@
                     <ul class="navbar-nav col-12">
                         <li class="nav-item col-12">
 							<a class="nav-link nav-toggler hidden-md-up waves-effect text-light col-12" href="javascript:void(0)" style="font-size: 23px;">
-								<b>MENU</b><span class="icon-menu float-end mt-2"></span>
+								<b>MENU</b><i class="mdi mdi-menu float-end"></i>
 							</a>
 						</li>
                     </ul>

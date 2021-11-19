@@ -27,9 +27,14 @@
                     <h4 class="text-secondary" > GESTANTE </h4></button>
                 </div>
                 <div class="col-md-4 text-center">
-                    <button class="btn btn-outline" type="button">
-                    <img src="./img/manos1.png" class="img-user mt-2 mb-4" alt="Imagen Usuario" width="220">
-                    <h4 class="text-secondary" > HABITOS DE LIMPIEZA </h4></button>
+                    <button class="btn btn-outline" type="button" data-bs-toggle="modal" data-bs-target="#ModalFiltersHabitosLimpieza">
+                    <img src="./img/M.jpg" class="img-user mt-2 mb-4" alt="Imagen Usuario" width="280">
+                    <h4 class="text-secondary"> ESTILOS DE VIDA </h4></button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <button class="btn btn-outline" type="button" data-bs-toggle="modal" data-bs-target="#ModalFiltersHigeneManos">
+                    <img src="./img/manos1.png" class="img-user mt-2 mb-4" alt="Imagen Usuario" width="280">
+                    <h4 class="text-secondary"> HIGENE DE MANOS </h4></button>
                 </div>
                 <div class="col-md-4 text-center">
                     <button class="btn btn-outline" type="button">
@@ -37,20 +42,6 @@
                     <h4 class="text-secondary" > PUERPUERAS </h4></button>
                 </div>
             </div>
-        </div>
-            
-
-
-<!--
-           <div class="m-4  text-center">
-                <button class="btn btn-outline-danger d-grid" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters"><img src="./img/bb_1.png" class="img-user mt-2 mb-4"alt=""><span class="font-25">7 DÍAS</span></button>
-            </div>
-             <div class="m-4">
-                <button class="btn btn-outline-danger d-grid" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilters"><img src="./img/baby_girl4.png" alt=""><span class="font-25">4 MESES</span></button>
-            </div>
-            <div class="m-4">
-                <button class="btn btn-outline-primary d-grid"><img src="./img/baby.png" alt=""><span class="font-25">6 MESES</span></button>
-            </div>-->
         </div>
     </div>
 </div>
@@ -108,7 +99,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <hr>
+                    <div class="text-center">
                         <button name="Buscar" class="btn text-white" type="button" id="btn_buscar" placeholder="Buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">cancelar</button>
                     </div>
@@ -170,9 +162,135 @@
                                 <option value="12">DICIEMBRE</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="modal-footer">
+                    </div><hr>
+                    <div class="text-center">
                         <button name="Buscar" class="btn text-white" type="button" id="btn_buscar1" placeholder="Buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL FILTROSS ESTILOS DE VIDA -->
+<div class="modal fade" id="ModalFiltersHabitosLimpieza" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Estilos de vida en otras temáticas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="results_promsa_cleaning_habits.php" method="POST" name="f3">
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-sm-12">
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione una Red: </b></p>
+                            <select class="select_gestante form-select" name="red2" id="red2" onchange="cambia_distrito2()" aria-label="Default select example">
+                                <option value="0" selected>Seleccione Red</option>
+                                <option value="1">DANIEL ALCIDES CARRION</option> 
+                                <option value="2">OXAPAMPA</option>
+                                <option value="3">PASCO</option>
+                                <option value="4">TODOS</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 col-sm-12 text-mobile">
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione un Distrito: </b></p>
+                            <select class="select_gestante form-select" name="distrito2" id="distrito2" onchange="cambia_establecimiento2()" aria-label="Default select example">
+                                <option value="-">-</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione Establecimiento: </b></p>
+                            <select class="select_gestante form-select js-example-basic-single" name="establecimiento2" id="establecimiento2" aria-label="Default select example">
+                                <option value="-">Seleccione Establecimiento</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 text-mobile">
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione mes a evaluar: </b></p>
+                            <select class="select_gestante form-select" name="mes2" id="mes2" aria-label="Default select example">
+                                <option value="1">ENERO</option>
+                                <option value="2">FEBRERO</option>
+                                <option value="3">MARZO</option>
+                                <option value="4">ABRIL</option>
+                                <option value="5">MAYO</option>
+                                <option value="6">JUNIO</option>
+                                <option value="7">JULIO</option>
+                                <option value="8">AGOSTO</option>
+                                <option value="9">SETIEMBRE</option>
+                                <option value="10">OCTUBRE</option>
+                                <option value="11">NOVIEMBRE</option>
+                                <option value="12">DICIEMBRE</option>
+                            </select>
+                        </div>
+                    </div><hr>
+                    <div class="text-center">
+                        <button name="Buscar" class="btn text-white" type="button" id="btn_buscar2" placeholder="Buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL FILTROSS HIGENE DE MANOS -->
+<div class="modal fade" id="ModalFiltersHigeneManos" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Estilo Saludable Consejeria Higene de Manos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="results_promsa_hand_hygiene.php" method="POST" name="f4">
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-sm-12">
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione una Red: </b></p>
+                            <select class="select_gestante form-select" name="red3" id="red3" onchange="cambia_distrito3()" aria-label="Default select example">
+                                <option value="0" selected>Seleccione Red</option>
+                                <option value="1">DANIEL ALCIDES CARRION</option> 
+                                <option value="2">OXAPAMPA</option>
+                                <option value="3">PASCO</option>
+                                <option value="4">TODOS</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 col-sm-12 text-mobile">
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione un Distrito: </b></p>
+                            <select class="select_gestante form-select" name="distrito3" id="distrito3" onchange="cambia_establecimiento3()" aria-label="Default select example">
+                                <option value="-">-</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione Establecimiento: </b></p>
+                            <select class="select_gestante form-select js-example-basic-single" name="establecimiento3" id="establecimiento3" aria-label="Default select example">
+                                <option value="-">Seleccione Establecimiento</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 text-mobile">
+                            <p style="font-size: 13px;" class="text-start"><b>Seleccione mes a evaluar: </b></p>
+                            <select class="select_gestante form-select" name="mes3" id="mes3" aria-label="Default select example">
+                                <option value="1">ENERO</option>
+                                <option value="2">FEBRERO</option>
+                                <option value="3">MARZO</option>
+                                <option value="4">ABRIL</option>
+                                <option value="5">MAYO</option>
+                                <option value="6">JUNIO</option>
+                                <option value="7">JULIO</option>
+                                <option value="8">AGOSTO</option>
+                                <option value="9">SETIEMBRE</option>
+                                <option value="10">OCTUBRE</option>
+                                <option value="11">NOVIEMBRE</option>
+                                <option value="12">DICIEMBRE</option>
+                            </select>
+                        </div>
+                    </div><hr>
+                    <div class="text-center">
+                        <button name="Buscar" class="btn text-white" type="button" id="btn_buscar3" placeholder="Buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">cancelar</button>
                     </div>
                 </form>
@@ -209,6 +327,16 @@
 		$('#distrito1').select2({ dropdownParent: $('#ModalFilters6Meses') });
         $('#establecimiento1').select2({ dropdownParent: $('#ModalFilters6Meses') });
         $('#mes1').select2({ dropdownParent: $('#ModalFilters6Meses') });
+
+        $('#red2').select2({ dropdownParent: $('#ModalFiltersHabitosLimpieza') });
+		$('#distrito2').select2({ dropdownParent: $('#ModalFiltersHabitosLimpieza') });
+        $('#establecimiento2').select2({ dropdownParent: $('#ModalFiltersHabitosLimpieza') });
+        $('#mes2').select2({ dropdownParent: $('#ModalFiltersHabitosLimpieza') });
+
+        $('#red3').select2({ dropdownParent: $('#ModalFiltersHigeneManos') });
+		$('#distrito3').select2({ dropdownParent: $('#ModalFiltersHigeneManos') });
+        $('#establecimiento3').select2({ dropdownParent: $('#ModalFiltersHigeneManos') });
+        $('#mes3').select2({ dropdownParent: $('#ModalFiltersHigeneManos') });
 	});
 
     $("#btn_buscar1").click(function(){
@@ -222,6 +350,34 @@
         }else if(red1 == 0){
             toastr.error('Seleccione una Red', null, {"closeButton": true, "progressBar": true});
         }else if(distrito1 == '-'){
+            toastr.error('Seleccione un Distrito', null, {"closeButton": true, "progressBar": true});
+        }
+    });
+
+    $("#btn_buscar2").click(function(){
+        var red2 = $("#red2").val();
+        var distrito2 = $("#distrito2").val();
+        var establecimiento2 = $("#establecimiento2").val();
+
+        if (red2 != 0 && distrito2 !='-'){
+            document.getElementById("btn_buscar2").type = "submit";
+        }else if(red2 == 0){
+            toastr.error('Seleccione una Red', null, {"closeButton": true, "progressBar": true});
+        }else if(distrito2 == '-'){
+            toastr.error('Seleccione un Distrito', null, {"closeButton": true, "progressBar": true});
+        }
+    });
+
+    $("#btn_buscar3").click(function(){
+        var red3 = $("#red3").val();
+        var distrito3 = $("#distrito3").val();
+        var establecimiento3 = $("#establecimiento3").val();
+
+        if (red3 != 0 && distrito3 !='-'){
+            document.getElementById("btn_buscar3").type = "submit";
+        }else if(red3 == 0){
+            toastr.error('Seleccione una Red', null, {"closeButton": true, "progressBar": true});
+        }else if(distrito3 == '-'){
             toastr.error('Seleccione un Distrito', null, {"closeButton": true, "progressBar": true});
         }
     });
@@ -290,6 +446,116 @@
                 for(i=0;i<num_distritos;i++){ 
                     document.f2.establecimiento1.options[i].value=listaEstablecimiento[i] 
                     document.f2.establecimiento1.options[i].text=listaEstablecimiento[i] 
+                } 
+            }
+        })
+    }
+
+    function cambia_distrito2(){ 
+        $("#distrito2").empty(); 
+        $("#establecimiento2").empty();
+        var red2 
+        red2 = document.f3.red2[document.f3.red2.selectedIndex].value 
+        if (red2 != 0) { 
+            mis_distritos=todasDistritos[red2]
+            num_distritos = mis_distritos.length 
+            document.f3.distrito2.length = num_distritos 
+
+            for(i=0;i<num_distritos;i++){ 
+            document.f3.distrito2.options[i].value=mis_distritos[i] 
+            document.f3.distrito2.options[i].text=mis_distritos[i] 
+            } 
+
+            var distrito2 = $("#distrito2").val();
+            if(distrito2 == 'TODOS'){
+                $("#establecimiento2").empty();
+                document.f3.establecimiento2.length = 1 
+                document.f3.establecimiento2.options[0].value = "TODOS" 
+                document.f3.establecimiento2.options[0].text = "TODOS" 
+            }
+        }
+        else{ 
+            document.f3.distrito2.length = 1 
+            document.f3.distrito2.options[0].value = "-" 
+            document.f3.distrito2.options[0].text = "-" 
+        } 
+
+        document.f3.distrito2.options[0].selected = true 
+    }
+
+    function cambia_establecimiento2(){
+        $("#establecimiento2").empty();
+        var red = $("#red2").val();
+        var distrito = $("#distrito2").val();
+        $.ajax({
+            url: 'establecimiento.php?red='+red+'&dist='+distrito,
+            method: 'GET',
+            success: function(data) {
+                var establecimiento = data;
+                var expresionRegular = /\s*,\s*/;
+                var listaEstablecimiento = establecimiento.split(expresionRegular);
+                var indice = listaEstablecimiento.length-1;
+                listaEstablecimiento[indice] = 'TODOS';
+                num_distritos = listaEstablecimiento.length 
+                document.f3.establecimiento2.length = num_distritos
+                for(i=0;i<num_distritos;i++){ 
+                    document.f3.establecimiento2.options[i].value=listaEstablecimiento[i] 
+                    document.f3.establecimiento2.options[i].text=listaEstablecimiento[i] 
+                } 
+            }
+        })
+    }
+
+    function cambia_distrito3(){ 
+        $("#distrito3").empty(); 
+        $("#establecimiento3").empty();
+        var red3 
+        red3 = document.f4.red3[document.f4.red3.selectedIndex].value 
+        if (red3 != 0) { 
+            mis_distritos=todasDistritos[red3]
+            num_distritos = mis_distritos.length 
+            document.f4.distrito3.length = num_distritos 
+
+            for(i=0;i<num_distritos;i++){ 
+            document.f4.distrito3.options[i].value=mis_distritos[i] 
+            document.f4.distrito3.options[i].text=mis_distritos[i] 
+            } 
+
+            var distrito3 = $("#distrito3").val();
+            if(distrito3 == 'TODOS'){
+                $("#establecimiento3").empty();
+                document.f4.establecimiento3.length = 1 
+                document.f4.establecimiento3.options[0].value = "TODOS" 
+                document.f4.establecimiento3.options[0].text = "TODOS" 
+            }
+        }
+        else{ 
+            document.f4.distrito3.length = 1 
+            document.f4.distrito3.options[0].value = "-" 
+            document.f4.distrito3.options[0].text = "-" 
+        } 
+
+        document.f4.distrito3.options[0].selected = true 
+    }
+
+    function cambia_establecimiento3(){
+        $("#establecimiento3").empty();
+        var red = $("#red3").val();
+        var distrito = $("#distrito3").val();
+        $.ajax({
+            url: 'establecimiento.php?red='+red+'&dist='+distrito,
+            method: 'GET',
+            success: function(data) {
+                var establecimiento = data;
+                var expresionRegular = /\s*,\s*/;
+                var listaEstablecimiento = establecimiento.split(expresionRegular);
+                var indice = listaEstablecimiento.length-1;
+                listaEstablecimiento[indice] = 'TODOS';
+                num_distritos = listaEstablecimiento.length 
+                document.f4.establecimiento3.length = num_distritos
+                for(i=0;i<num_distritos;i++){ 
+                    document.f4.establecimiento3.options[i].value=listaEstablecimiento[i] 
+                    document.f4.establecimiento3.options[i].text=listaEstablecimiento[i] 
                 } 
             }
         })

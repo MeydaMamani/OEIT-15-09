@@ -30,10 +30,11 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p style="font-size: 13px;" class="text-start"><b>Seleccione Establecimiento: </b></p>
-                                    <!-- <p>Proximamente se estará habilitando esta opción</p> -->
-                                    <select class="select_gestante form-select js-example-basic-single" name="establecimiento" id="establecimiento" aria-label="Default select example">
-                                        <option value="-">Seleccione Establecimiento</option>
+                                    <p style="font-size: 13px;" class="text-start"><b>Seleccione Edad: </b></p>
+                                    <select class="select_gestante form-select js-example-basic-single" name="edad" id="edad" aria-label="Default select example">
+                                        <option value="120">4 MESES</option>
+                                        <option value="180">6 MESES</option>
+                                        <option value="365">1 AÑO</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 text-mobile">

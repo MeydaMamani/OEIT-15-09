@@ -464,3 +464,14 @@ img:hover{
 #advance_cuatro_meses thead tr th#fields_4_meses_nominal {
 	background: black !important;
 }
+
+#bateria_completa thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #c9d0e2 !important;
+}
+
+#bateria_completa thead tr th#fields_bateria_head {
+	background: #6f91e7 !important;
+}

@@ -49,6 +49,8 @@
 
     $consulta1 = sqlsrv_query($conn, $resultadoss);
 
+    
+
     $resultadoss2 = "SELECT T.Anio,Provincia_Establecimiento AS PROVINCIA, Distrito_Establecimiento AS Distrito,
                     -------------------------------------------------------------------------------------------------I-MENORES DE 1 AÑO-------------------------------------------------------------------------------------------------------
                     --BCG
