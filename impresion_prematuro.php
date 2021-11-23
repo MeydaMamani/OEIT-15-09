@@ -57,6 +57,7 @@
                                 on c.Numcnv=t.Numero_Documento_Paciente
                                 AND edad_reg='1' and t.Tipo_Edad ='M' and
                                             Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
+                                ORDER BY Provnacido, Distnacido, Establecimiento
                                 DROP TABLE  BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1
                                 DROP TABLE padron_nino_cnv1";
         }
@@ -72,6 +73,7 @@
                                 on c.Numcnv=t.Numero_Documento_Paciente
                                 AND edad_reg='1' and t.Tipo_Edad ='M' and
                                             Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
+                                ORDER BY Provnacido, Distnacido, Establecimiento
                                 DROP TABLE  BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1
                                 DROP TABLE padron_nino_cnv1";
         }
@@ -88,6 +90,7 @@
                                 on c.Numcnv=t.Numero_Documento_Paciente
                                 AND edad_reg='1' and t.Tipo_Edad ='M' and
                                             Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
+                                ORDER BY Provnacido, Distnacido, Establecimiento
                                 DROP TABLE  BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1
                                 DROP TABLE padron_nino_cnv1";
         }

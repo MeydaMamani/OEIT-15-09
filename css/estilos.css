@@ -253,13 +253,13 @@ canvas.myChartProvince, canvas.myChartDistrict{
 	height: 300px !important; 
 	display: initial !important;
 }
-img{
+/* img{
 	transform: all 0.5s ease;
 
 }
 img:hover{
 	transform: scale(0.9);
-}
+} */
 
 .img-user{
 	background: white;
