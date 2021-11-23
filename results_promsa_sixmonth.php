@@ -1,6 +1,6 @@
 <?php
-    // require('abrir.php');
-    // require('abrir2.php');
+    require('abrir.php');
+    require('abrir2.php');
    
     if (isset($_POST['Buscar'])) {
         header('Content-Type: text/html; charset=UTF-8');
@@ -610,7 +610,7 @@
                                 <h4 class="text-center mb-4 mt-2" style="color: #3e4b5a;">Niños de 6 a 11 Meses Con Anemia</h4>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a id="btn_nominal_sin_dx"><i class="mdi mdi-layers-off font-30"></i></a>
+                                <a id="btn_nominal_sin_dx"><i class="mdi mdi-layers font-30"></i></a>
                             </div>
                         </div>
                         <div class="col-md-12 table-responsive" id="visits_six_month_con_dx">
@@ -956,7 +956,7 @@
                                 <h4 class="text-center mb-4 mt-2" style="color: #3e4b5a;">Niños de 6 a 11 Meses Con Anemia</h4>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a id="btn_resume_sin_dx"><i class="mdi mdi-layers-off font-30"></i></a>
+                                <a id="btn_resume_sin_dx"><i class="mdi mdi-layers font-30"></i></a>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -968,10 +968,10 @@
                                             <div class="align-self-center">
                                                 <h4 class="font-medium mb-3 justify-content-center d-flex">
                                                     <div class="col-md-5 text-end">
-                                                        <img src="./img/user_cant.png" width="60" alt="">
+                                                        <img src="./img/user_cant.png" width="90" alt="">
                                                     </div>
                                                     <div class="mt-3 col-md-7 text-center">
-                                                        <b class="font-25 total"> <?php echo $total_resum_x; ?></b> <i class="mdi mdi-plus font-25 text-secondary"></i>
+                                                        <b class="font-55 total"> <?php echo $total_resum_x; ?></b> <i class="mdi mdi-plus font-55 text-secondary"></i>
                                                     </div>
                                                 </h4>
                                             </div>
@@ -981,15 +981,21 @@
                                 <?php if($prov_dac == true){?>
                                 <div class="card col-md-3 datos_avance">
                                     <div class="card-body p-1">
-                                        <p class="card-title text-secondary text-center font-18 pt-2">D.A.C</p>
-                                        <div class="row pt-2">
-                                            <div class="col-md-12 p-0 text-center ">
-                                                <h1 class="font-light avance mb-1 text-info"><?php 
+                                        <p class="card-title text-secondary text-center font-18 pt-2">DANIEL A. CARRIÓN</p>
+                                        <div class="row pt-4">
+                                            <div class="col-md-7 p-0 text-center">
+                                                <h1 class="font-light avance mb-1 text-primary"><?php 
                                                         if($num_dac_x == 0 and $den_dac_x == 0){ echo '0 %'; }
                                                         else{ echo number_format((float)(($num_dac_x/$den_dac_x)*100), 2, '.', ''), '%'; }
                                                     ?>
                                                 </h1>
                                                 <h4 class="text-muted">Avance</h4></div>
+                                            <div class="col-md-5 text-center align-self-center position-sticky">
+                                                <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php 
+                                                    if($num_dac_x == 0 and $den_dac_x == 0){ echo '0'; }
+                                                    else{  echo number_format((float)(($num_dac_x/$den_dac_x)*100), 0, '.', ''); }
+                                                ?>"><i class="mdi mdi-receipt"></i></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -998,14 +1004,20 @@
                                 <div class="card col-md-3 datos_avance">
                                     <div class="card-body p-1">
                                         <p class="card-title text-secondary text-center font-18 pt-2">PASCO</p>
-                                        <div class="row pt-2">
-                                            <div class="col-md-12 p-0 text-center ">
-                                                <h1 class="font-light avance mb-1 text-info"><?php 
+                                        <div class="row pt-4">
+                                            <div class="col-md-7 p-0 text-center">
+                                                <h1 class="font-light avance mb-1 text-primary"><?php 
                                                         if($num_pasco_x == 0 and $den_pasco_x == 0){ echo '0 %'; }
                                                         else{ echo number_format((float)(($num_pasco_x/$den_pasco_x)*100), 2, '.', ''), '%'; }
                                                     ?>
                                                 </h1>
                                                 <h4 class="text-muted">Avance</h4></div>
+                                            <div class="col-md-5 text-center align-self-center position-sticky">
+                                                <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php 
+                                                    if($num_pasco_x == 0 and $den_pasco_x == 0){ echo '0'; }
+                                                    else{  echo number_format((float)(($num_pasco_x/$den_pasco_x)*100), 0, '.', ''); }
+                                                ?>"><i class="mdi mdi-receipt"></i></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1014,14 +1026,20 @@
                                 <div class="card col-md-3 datos_avance">
                                     <div class="card-body p-1">
                                         <p class="card-title text-secondary text-center font-18 pt-2">OXAPAMPA</p>
-                                        <div class="row pt-2">
-                                            <div class="col-md-12 p-0 text-center ">
-                                                <h1 class="font-light avance mb-1 text-info"><?php 
+                                        <div class="row pt-4">
+                                            <div class="col-md-7 p-0 text-center">
+                                                <h1 class="font-light avance mb-1 text-primary"><?php 
                                                         if($num_oxa_x == 0 and $den_oxa_x == 0){ echo '0 %'; }
                                                         else{ echo number_format((float)(($num_oxa_x/$den_oxa_x)*100), 2, '.', ''), '%'; }
                                                     ?>
                                                 </h1>
                                                 <h4 class="text-muted">Avance</h4></div>
+                                            <div class="col-md-5 text-center align-self-center position-sticky">
+                                                <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php 
+                                                    if($num_oxa_x == 0 and $den_oxa_x == 0){ echo '0'; }
+                                                    else{  echo number_format((float)(($num_oxa_x/$den_oxa_x)*100), 0, '.', ''); }
+                                                ?>"><i class="mdi mdi-receipt"></i></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

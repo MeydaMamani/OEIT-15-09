@@ -4441,11 +4441,12 @@ a.mytooltip {
 
 .sidebar-nav>ul>li.active>a {
     color: #6fa1eb;
-    font-weight: 500
+    font-weight: 500;
 }
 
 .sidebar-nav>ul>li.active>a i {
-    color: white;
+    color: #6fa1eb !important;
+    font-weight: 500;
 }
 
 .sidebar-nav .has-arrow {

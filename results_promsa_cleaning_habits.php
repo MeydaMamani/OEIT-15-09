@@ -9,18 +9,18 @@
         include('query_promsa_cleaning_habits.php');
         $total_visits=0; $med_covid=0; $pulsioximetro=0; $inmunizaciones=0; $pamar=0;
         while ($consulta = sqlsrv_fetch_array($consulta1)){
-            $total_visits++;
+           $total_visits++;
             if($consulta['Valor_Lab'] == 1){
-                $med_covid++;
+                $med_covid = $med_covid + $consulta['TOTAL'];
             }
             elseif($consulta['Valor_Lab'] == 2){
-                $pulsioximetro++;
+                $pulsioximetro = $pulsioximetro + $consulta['TOTAL'];
             }
             elseif($consulta['Valor_Lab'] == 3){
-                $inmunizaciones++;
+                $inmunizaciones = $inmunizaciones + $consulta['TOTAL'];
             }
             elseif($consulta['Valor_Lab'] == 4){
-                $pamar++;
+                $pamar = $pamar + $consulta['TOTAL'];
             }
         }
 
@@ -86,11 +86,8 @@
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium justify-content-center d-flex">
-                                        <div class="col-md-5 text-end">
-                                            <img src="./img/pevent_covid.png" width="70" alt="">
-                                        </div>
-                                        <div class="col-md-7 text-center">
-                                            <b class="font-45 correcto"> <?php echo $med_covid; ?></b>
+                                        <div class="col-md-12 text-center">
+                                            <b class="font-45 correcto"> <?php echo $med_covid; ?></b><i class="mdi mdi-plus font-40 text-secondary"></i>
                                         </div>
                                     </h4>
                                 </div>
@@ -103,11 +100,8 @@
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium justify-content-center d-flex">
-                                        <div class="col-md-5 text-end">
-                                            <img src="./img/oximetro.png" width="70" alt="">
-                                        </div>
-                                        <div class="col-md-7 text-center">
-                                            <b class="font-45 incorrecto"> <?php echo $pulsioximetro; ?></b>
+                                        <div class="col-md-12 text-center">
+                                            <b class="font-45 incorrecto"> <?php echo $pulsioximetro; ?></b><i class="mdi mdi-plus font-40 text-secondary"></i>
                                         </div>
                                     </h4>
                                 </div>
@@ -120,11 +114,8 @@
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium mb-3 justify-content-center d-flex">
-                                        <div class="col-md-5 text-end">
-                                            <img src="./img/jeringuilla.png" width="70" alt="">
-                                        </div>
-                                        <div class="mt-3 col-md-7 text-center">
-                                            <b class="font-55 correcto"> <?php echo $inmunizaciones; ?></b>
+                                        <div class="mt-3 col-md-12 text-center">
+                                            <b class="font-55 correcto"> <?php echo $inmunizaciones; ?></b><i class="mdi mdi-plus font-40 text-secondary"></i>
                                         </div>
                                     </h4>
                                 </div>
@@ -137,11 +128,8 @@
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium mb-3 justify-content-center d-flex mt-4">
-                                        <div class="col-md-7 text-end">
-                                            <img src="./img/pamar.jpg" width="90" alt="">
-                                        </div>
-                                        <div class="col-md-5 text-center">
-                                            <b class="font-55 incorrecto"> <?php echo $pamar; ?></b>
+                                        <div class="col-md-12 text-center">
+                                            <b class="font-55 incorrecto"> <?php echo $pamar; ?></b><i class="mdi mdi-plus font-40 text-secondary"></i>
                                         </div>
                                     </h4>
                                 </div>
