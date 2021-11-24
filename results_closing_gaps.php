@@ -23,18 +23,22 @@
                 </div>
             </div>
             <div class="text-center mb-3">
-                <h3 class="mb-4">Cierre de Brechas</h3>
+                <h3 class="mb-4">Cierre de Brechas de Segunda Dosis</h3>
             </div>
             <div class="mb-3">
 				<div class="row m-2">
+                    <?php
+                        include('query_closing_gaps.php');
+                        while ($consulta = sqlsrv_fetch_array($consulta3)){
+                    ?>
                     <div class="card col-md-2 datos_avance">
 						<div class="card-body p-1">
 							<p class="card-title text-secondary text-center font-18 pt-2">Total Primera Dosis</p>
 							<div class="justify-content-center">
 								<div class="align-self-center">
 									<h4 class="font-medium mb-3 justify-content-center d-flex">
-										<div class="mt-3 col-md-12 text-center">
-											<b class="total font-49 text-secondary"><?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
+										<div class="col-md-12 text-center">
+											<b class="total font-38 text-secondary"><?php echo $consulta['CONTEO_TOTAL_PRIMERAS']; ?></b> <i class="mdi mdi-plus font-38 text-secondary"></i>
 										</div>
 									</h4>
 								</div>
@@ -48,7 +52,7 @@
 								<div class="align-self-center">
 									<h4 class="font-medium mb-3 justify-content-center d-flex">
 										<div class="mt-3 col-md-12 text-center">
-											<b class="total font-49 text-secondary"><?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
+											<b class="total font-38 text-secondary"><?php echo $consulta['DOSIS_COMPLETA']; ?></b> <i class="mdi mdi-plus font-38 text-secondary"></i>
 										</div>
 									</h4>
 								</div>
@@ -61,8 +65,8 @@
 							<div class="justify-content-center">
 								<div class="align-self-center">
 									<h4 class="font-medium mb-3 justify-content-center d-flex">
-										<div class="mt-3 ms-2 col-md-12 text-center">
-											<b class="font-34 text-success cumple"><?php echo $cumple; ?></b> <i class="mdi mdi-check font-34 text-success" style="margin-left: -6px;"></i>
+										<div class="ms-2 col-md-12 text-center">
+											<b class="font-38 text-secondary cumple"><?php echo $consulta['SEGUNDA_FUERA_REGION']; ?></b> <i class="mdi mdi-plus font-38 text-secondary"></i>
 										</div>
 									</h4>
 								</div>
@@ -76,7 +80,7 @@
 								<div class="align-self-center">
 									<h4 class="font-medium mb-3 justify-content-center d-flex">
 										<div class="mt-3 ms-2 col-md-12 text-center">
-											<b class="font-34 text-danger no_cumple"><?php echo $no_cumple; ?></b><i class="mdi mdi-close font-34 text-danger" style="margin-left: -6px;"></i>
+											<b class="font-38 text-secondary no_cumple"><?php echo $consulta['FALLECIDOS']; ?></b><i class="mdi mdi-plus font-38 text-secondary"></i>
 										</div>
 									</h4>
 								</div>
@@ -90,7 +94,7 @@
 								<div class="align-self-center">
 									<h4 class="font-medium mb-3 justify-content-center d-flex">
 										<div class="mt-3 ms-2 col-md-12 text-center">
-											<b class="font-34 text-warning observado"><?php echo $observado; ?></b> <i class="mdi mdi-alert-circle font-34 text-warning" style="margin-left: -6px;"></i>
+											<b class="font-38 text-secondary observado"><?php echo $consulta['RECHAZO']; ?></b><i class="mdi mdi-plus font-38 text-secondary"></i>
 										</div>
 									</h4>
 								</div>
@@ -102,8 +106,11 @@
 							<div class="row pt-4">
 								<div class="col-md-12 p-0 text-center">
 									<h1 class="font-light avance mb-3 text-primary"><?php
-											if($cumple == 0 and $row_cont == 0){ echo '0 %'; }
-											else{ echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%'; }
+											// if($cumple == 0 and $row_cont == 0){ echo '0 %'; }
+											// else{ echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%'; }
+                                            $num = $consulta['RECHAZO'] + $consulta['FALLECIDOS'] + $consulta['SEGUNDA_FUERA_REGION'] + $consulta['DOSIS_COMPLETA'];
+                                            $den = $consulta['CONTEO_TOTAL_PRIMERAS'];
+                                            echo number_format((float)(($num/$den)*100), 2, '.', ''), '%';
 										?>
 									</h1>
 									<h4 class="text-muted">Avance</h4>
@@ -111,17 +118,19 @@
 							</div>
 						</div>
 					</div>
+                    <?php
+                        }
+                    ?>
 				</div>
 			</div>
             <div class="d-flex">
-                <div class="col-md-7 d-flex">
-                    <form action="impresion_4_meses.php" method="POST">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <form action="print_closing_gaps.php" method="POST">
                         <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                         <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                         <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
                         <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                     </form>
-                    <button type="submit" name="Limpiar" class="btn btn-outline-danger m-2 btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
                     <button type="submit" name="Limpiar" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='closing_gaps.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                 </div>
             </div><br>
@@ -133,7 +142,7 @@
                             <th class="align-middle">Provincia</th>
                             <th class="align-middle">Distrito</th>
                             <th class="align-middle">Tipo Documento</th>
-                            <th class="align-middle">N° Documento</th>
+                            <th class="align-middle">Número Documento</th>
                             <th class="align-middle">Paciente</th>
                             <th class="align-middle">Edad</th>
                             <th class="align-middle">Nombre Vacuna</th>
@@ -212,7 +221,7 @@
                             <td class="align-middle"><?php echo utf8_encode($newdate4); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
                             <td class="align-middle"><?php echo $newdate6; ?></td>
-                            <td class="align-middle"><?php echo $newdate7; ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate7); ?></td>
                             <td class="align-middle"><?php echo $newdate8; ?></td>
                             <td class="align-middle"><?php echo $newdate9; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate10); ?></td>

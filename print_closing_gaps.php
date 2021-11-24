@@ -1,11 +1,14 @@
 <?php 
     require('abrir.php');
     require('abrir2.php');
-    require('abrir6.php');
-
-    if (isset($_POST['Buscar'])) {
+    require('abrir6.php'); 
+ 
+    if(isset($_POST["exportarCSV"])) {
+        include('zone_setting.php');
         global $conex;
-        
+        ini_set("default_charset", "UTF-8");
+        header('Content-Type: text/html; charset=UTF-8');
+
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
 
@@ -98,6 +101,127 @@
         $consult = sqlsrv_query($conn2, $my_date_modify);
         while ($cons = sqlsrv_fetch_array($consult)){
             $date_modify = $cons['DATE_MODIFY'] -> format('d/m/y');
+        }
+
+        if(!empty($consulta2)){
+            $ficheroExcel="DEIT_PASCO CG_FT_CIERRE_BRECHAS "._date("d-m-Y", false, 'America/Lima').".xls";        
+            header('Content-Type: application/vnd.ms-excel');
+            header("Content-Type: application/octet-stream");
+            header("Content-Disposition: attachment;filename=".$ficheroExcel);
+            header("Cache-Control: max-age=0");
+            $monday = date( 'd/m/Y', strtotime( 'monday this week' ) );
+
+    ?>
+     
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <table>
+        <thead>
+            <tr></tr>
+            <tr class="text-center">
+                <th colspan="11" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
+            </tr>
+            <tr></tr>
+            <tr class="text-center">
+                <th colspan="11" style="font-size: 28px; border: 1px solid #3A3838;">Cierre de Brechas</th>
+            </tr>
+            <tr></tr>
+            <tr>
+                <th colspan="11" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD PadronCovid con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</th>
+            </tr>
+            <tr></tr>
+        </thead>
+    </table> 
+    <table class="table table-hover">
+        <thead>
+            <tr class="text-center font-12" style="background: #c9d0e2;">
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">#</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Provincia</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Distrito</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Tipo Documento</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Número Documento</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Paciente</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Edad</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Nombre Vacuna</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Grupo Edad</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Primera Dosis</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Segunda Dosis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                $i=1;
+                while ($consulta = sqlsrv_fetch_array($consulta2)){
+                    if(is_null ($consulta['PRIMERA_PROV']) ){
+                        $newdate3 = '  -'; }
+                        else{
+                    $newdate3 = $consulta['PRIMERA_PROV'] ;}
+    
+                    if(is_null ($consulta['PRIMERA_DIST']) ){
+                        $newdate4 = '  -'; }
+                        else{
+                    $newdate4 = $consulta['PRIMERA_DIST'];}
+    
+                    if(is_null ($consulta['TIPO_DOC']) ){
+                        $newdate5 = '  -'; }
+                        else{
+                    $newdate5 = $consulta['TIPO_DOC'];}
+    
+                    if(is_null ($consulta['NUM_DOC']) ){
+                        $newdate6 = '  -'; }
+                        else{
+                    $newdate6 = $consulta['NUM_DOC'];}
+    
+                    if(is_null ($consulta['PRIMERA_PACIEN']) ){
+                        $newdate7 = '  -'; }
+                        else{
+                    $newdate7 = $consulta['PRIMERA_PACIEN'];}
+    
+                    if(is_null ($consulta['PRIMERA_EDAD']) ){
+                        $newdate8 = '  -'; }
+                        else{
+                    $newdate8 = $consulta['PRIMERA_EDAD'];}
+    
+                    if(is_null ($consulta['PRIMERA_FAB']) ){
+                        $newdate9 = '  -'; }
+                        else{
+                    $newdate9 = $consulta['PRIMERA_FAB'];}
+    
+                    if(is_null ($consulta['PRIMERA_GRUPO']) ){
+                        $newdate10 = '  -'; }
+                        else{
+                    $newdate10 = $consulta['PRIMERA_GRUPO'] ;}
+    
+                    if(is_null ($consulta['PRIMERA']) ){
+                        $newdate11 = '  -'; }
+                        else{
+                        $newdate11 = $consulta['PRIMERA'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['FECHA_PARA_SEGUNDA']) ){
+                        $newdate12 = '  -'; }
+                    else{
+                        $newdate12 = $consulta['FECHA_PARA_SEGUNDA'] -> format('d/m/y');}
+    
+            ?>
+            <tr class="text-center font-12">
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $i++; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate3; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate4); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate5); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate6; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate7); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate8; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate9; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate10); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate11; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate12; ?></td>
+            </tr>
+            <?php
+                ;}
+                include("cerrar.php");
+            ?>
+        </tbody>
+    </table>
+<?php
         }
     }
 ?>
