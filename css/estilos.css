@@ -492,6 +492,9 @@ img:hover{
 	background: black !important;
 }
 
+.m-r-4{
+	margin-right: 40px;
+}
 
 /* PARA LOADING */
 .lds-roller {
