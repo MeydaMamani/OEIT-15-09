@@ -6,6 +6,7 @@
         global $conex;
         ini_set("default_charset", "UTF-8");
         mb_internal_encoding("UTF-8");
+        
         $sector = $_POST['sector'];
         $establecimiento = $_POST['establecimiento'];
         $mes = $_POST['mes2'];
@@ -28,48 +29,76 @@
         }else{
             $mes2 = $mes;
         }
+
+        $resultado = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item, Codigo_Unico 
+                            into BDHIS_MINSA.dbo.atencionesneonatal1
+                            FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                            WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
         
-        $resultado = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, CAST(FE_NACIDO as date)fecnacido
-                        into BDHIS_MINSA.dbo.nacidoscnv1
-                        FROM CNV_LUGARNACIDO_PASCO
-                        WHERE YEAR(FE_NACIDO)='2021'";
-
-        $resultado2 = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item, Codigo_Unico 
-                        into BDHIS_MINSA.dbo.atencionesneonatal1
-                        FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
-
         if(($sector != 'TODOS') and $establecimiento == 'TODOS'){
+            $resultado2 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, CAST(FE_NACIDO as date)fecnacido
+                            into BDHIS_MINSA.dbo.nacidoscnv1
+                            FROM CNV_LUGARNACIDO_PASCO
+                            WHERE YEAR(FE_NACIDO)='2021' AND MONTH(FE_NACIDO)='$mes' AND Institucion='$sector'";
+
             $resultado3 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, fecnacido, 
                             a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
+                            INTO BDHIS_MINSA.dbo.TEMPORAL001
                             from BDHIS_MINSA.dbo.nacidoscnv1 n left join BDHIS_MINSA.dbo.atencionesneonatal1 a 
-                            on N.NU_CNV=a.Numero_Documento_Paciente
-                            where n.fecnacido>'2021-$mes2-01' AND Institucion='$sector'
-                            DROP TABLE BDHIS_MINSA.dbo.atencionesneonatal1
-                            DROP TABLE BDHIS_MINSA.dbo.nacidoscnv1";
+                            on N.NU_CNV=a.Numero_Documento_Paciente;
+                            with c as ( select Nu_cnv,  ROW_NUMBER() 
+                                over(partition by Nu_cnv order by Nu_cnv) as duplicado
+                                from BDHIS_MINSA.dbo.TEMPORAL001 )
+                                delete  from c
+                                where duplicado >1";
+
         }
         else if ($establecimiento == 'TODOS' and $sector == 'TODOS') {
+            $resultado2 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, CAST(FE_NACIDO as date)fecnacido
+                            into BDHIS_MINSA.dbo.nacidoscnv1
+                            FROM CNV_LUGARNACIDO_PASCO
+                            WHERE YEAR(FE_NACIDO)='2021' AND MONTH(FE_NACIDO)='$mes'";
+
             $resultado3 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, fecnacido, 
                             a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
+                            INTO BDHIS_MINSA.dbo.TEMPORAL001
                             from BDHIS_MINSA.dbo.nacidoscnv1 n left join BDHIS_MINSA.dbo.atencionesneonatal1 a 
-                            on N.NU_CNV=a.Numero_Documento_Paciente
-                            where n.fecnacido>'2021-$mes2-01'
-                            DROP TABLE BDHIS_MINSA.dbo.atencionesneonatal1
-                            DROP TABLE BDHIS_MINSA.dbo.nacidoscnv1";
+                            on N.NU_CNV=a.Numero_Documento_Paciente;
+                            with c as ( select Nu_cnv,  ROW_NUMBER() 
+                                over(partition by Nu_cnv order by Nu_cnv) as duplicado
+                                from BDHIS_MINSA.dbo.TEMPORAL001 )
+                                delete  from c
+                                where duplicado >1";
+           
         }
         else if($establecimiento != 'TODOS'){
-            $dist=$establecimiento;
+            $resultado2 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, CAST(FE_NACIDO as date)fecnacido
+                            into BDHIS_MINSA.dbo.nacidoscnv1
+                            FROM CNV_LUGARNACIDO_PASCO
+                            WHERE YEAR(FE_NACIDO)='2021' AND Ipress='$establecimiento' AND MONTH(FE_NACIDO)='$mes'";
+
             $resultado3 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, fecnacido, 
                             a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
+                            INTO BDHIS_MINSA.dbo.TEMPORAL001
                             from BDHIS_MINSA.dbo.nacidoscnv1 n left join BDHIS_MINSA.dbo.atencionesneonatal1 a 
-                            on N.NU_CNV=a.Numero_Documento_Paciente
-                            where n.fecnacido>'2021-$mes2-01' AND Institucion='$sector' AND Codigo_Unico='$establecimiento'
-                            DROP TABLE BDHIS_MINSA.dbo.atencionesneonatal1
-                            DROP TABLE BDHIS_MINSA.dbo.nacidoscnv1";
+                            on N.NU_CNV=a.Numero_Documento_Paciente;
+                            with c as ( select Nu_cnv,  ROW_NUMBER() 
+                                over(partition by Nu_cnv order by Nu_cnv) as duplicado
+                                from BDHIS_MINSA.dbo.TEMPORAL001 )
+                                delete  from c
+                                where duplicado >1";
+
         }
 
-        $consulta1 = sqlsrv_query($conn3, $resultado);
-        $consulta2 = sqlsrv_query($conn, $resultado2);
-        $consulta03 = sqlsrv_query($conn, $resultado3);
+        $resultado4 = "SELECT * FROM BDHIS_MINSA.dbo.TEMPORAL001 ORDER BY Institucion, PROV_EESS,DIST_EESS, Nombre_EESS
+                        DROP TABLE BDHIS_MINSA.dbo.atencionesneonatal1
+                        DROP TABLE BDHIS_MINSA.dbo.nacidoscnv1
+                        DROP TABLE BDHIS_MINSA.dbo.TEMPORAL001";
+
+
+        $consulta1 = sqlsrv_query($conn, $resultado);
+        $consulta2 = sqlsrv_query($conn3, $resultado2);
+        $consulta3 = sqlsrv_query($conn, $resultado3);
+        $consulta4 = sqlsrv_query($conn, $resultado4);
     }
 ?>

@@ -65,7 +65,7 @@
                     <div class="col-md-1"></div>
                     <div class="card col-md-2 datos_avance">
                         <div class="card-body p-1">
-                            <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
+                            <p class="card-title text-white text-center font-18 pt-2">Cantidad Registros</p>
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium mb-3 justify-content-center d-flex  mt-4">
@@ -73,7 +73,7 @@
                                             <img src="./img/user_cant.png" width="70" alt="">
                                         </div>
                                         <div class="mt-3 col-md-7 text-center">
-                                            <b class="font-40 total"> <?php echo $total_visits; ?></b><i class="mdi mdi-plus font-40 text-secondary"></i>
+                                            <b class="font-40 total text-white"> <?php echo $total_visits; ?></b><i class="mdi mdi-plus font-40 text-white"></i>
                                         </div>
                                     </h4>
                                 </div>
@@ -82,12 +82,12 @@
                     </div>
                     <div class="card col-md-2 datos_avance">
                         <div class="card-body p-1">
-                            <p class="card-title text-secondary text-center font-18 pt-2">Medidas Preventivas Covid</h4>
+                            <p class="card-title text-white text-center font-18 pt-2">Medidas Preventivas Covid</h4>
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium justify-content-center d-flex">
                                         <div class="col-md-12 text-center">
-                                            <b class="font-45 correcto"> <?php echo $med_covid; ?></b><i class="mdi mdi-plus font-40 text-secondary"></i>
+                                            <b class="font-45 correcto text-white"> <?php echo $med_covid; ?></b><i class="mdi mdi-plus font-40 text-white"></i>
                                         </div>
                                     </h4>
                                 </div>
@@ -96,12 +96,12 @@
                     </div>
                     <div class="card col-md-2 datos_avance">
                         <div class="card-body p-0">
-                        <p class="card-title text-secondary text-center font-18 pt-3">Correcto Uso de Pulsioximetro</h4>
+                        <p class="card-title text-white text-center font-18 pt-3">Correcto Uso de Pulsioximetro</h4>
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium justify-content-center d-flex">
                                         <div class="col-md-12 text-center">
-                                            <b class="font-45 incorrecto"> <?php echo $pulsioximetro; ?></b><i class="mdi mdi-plus font-40 text-secondary"></i>
+                                            <b class="font-45 incorrecto text-white"> <?php echo $pulsioximetro; ?></b><i class="mdi mdi-plus font-40 text-white"></i>
                                         </div>
                                     </h4>
                                 </div>
@@ -110,12 +110,12 @@
                     </div>
                     <div class="card col-md-2 datos_avance">
                         <div class="card-body p-1">
-                            <p class="card-title text-secondary text-center font-18 pt-2">Inmunizaciones</h4>
+                            <p class="card-title text-white text-center font-18 pt-2">Inmunizaciones</h4>
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium mb-3 justify-content-center d-flex">
                                         <div class="mt-3 col-md-12 text-center">
-                                            <b class="font-55 correcto"> <?php echo $inmunizaciones; ?></b><i class="mdi mdi-plus font-40 text-secondary"></i>
+                                            <b class="font-55 correcto text-white"> <?php echo $inmunizaciones; ?></b><i class="mdi mdi-plus font-40 text-white"></i>
                                         </div>
                                     </h4>
                                 </div>
@@ -124,12 +124,12 @@
                     </div>
                     <div class="card col-md-2 datos_avance">
                         <div class="card-body p-0">
-                        <p class="card-title text-secondary text-center font-18 pt-3">Cuidado de PAMAR</h4>
+                        <p class="card-title text-white text-center font-18 pt-3">Cuidado de PAMAR</h4>
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium mb-3 justify-content-center d-flex mt-4">
                                         <div class="col-md-12 text-center">
-                                            <b class="font-55 incorrecto"> <?php echo $pamar; ?></b><i class="mdi mdi-plus font-40 text-secondary"></i>
+                                            <b class="font-55 incorrecto text-white"> <?php echo $pamar; ?></b><i class="mdi mdi-plus font-40 text-white"></i>
                                         </div>
                                     </h4>
                                 </div>

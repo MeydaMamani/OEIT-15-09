@@ -7,20 +7,22 @@
         header('Content-Type: text/html; charset=UTF-8');
         global $conex;
         include('./base.php');
+        include('zone_setting.php');
+        include('consulta_seg_neonatal_sector.php');
+        $row_cnt=0; $correctos=0; $incorrectos=0;
+        while ($consulta = sqlsrv_fetch_array($consulta4)){
+            $row_cnt++;
+        }
 
-    include('consulta_seg_neonatal_sector.php');
-    $row_cnt=0; $correctos=0; $incorrectos=0;
-    while ($consulta = sqlsrv_fetch_array($consulta03)){
-        $row_cnt++;
-    }
+        $monday = date( 'd/m/Y', strtotime( 'monday this week' ) );
 ?>
     <div class="page-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-9"></div>
                 <div class="col-3">
-                    <marquee width="100%" direction="right" height="15px">
-                        <p class="font-12 text-secondary"><b>Fuente: </b> BD HisMinsa y BD CNV con Fecha: 31 de Octubre del 2021 a las 08:30 horas</p>
+                    <marquee width="100%" direction="left" height="18px">
+                        <p class="font-12 text-primary"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> y BD CNV con Fecha: <?php echo $monday; ?> a las 08:30 horas</p>
                     </marquee>
                 </div>
             </div>
@@ -32,19 +34,18 @@
                 <div class="col-8 d-flex justify-content-end">
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 mb-3">
                 <div class="d-flex justify-content-center">
                     <form action="impresion_seg_neonatal_sector.php" method="POST">
                          <input hidden name="sector" value="<?php echo $_POST['sector']; ?>">
                          <input hidden name="establecimiento" value="<?php echo $_POST['establecimiento']; ?>">
                          <input hidden name="mes2" value="<?php echo $_POST['mes2']; ?>">
-                         <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
+                         <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                      </form>
                     <button class="btn btn-outline-secondary btn-sm  m-2 btn_all" onclick="location.href='seguimiento_neonatal.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                 </div>
             </div>
-
-            <div class="col-12 table-responsive">
+            <div class="col-12 table-responsive" id="cuatro_meses">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="font-12 text-center" style="background: #b5c2d6;">
@@ -60,10 +61,10 @@
                             <th class="align-middle">Lugar de Atendido</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-3">
-                        <div class="form-group">
-                            <div id="inputbus" class="input-group">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                    <div class="float-end pb-1 col-md-3">
+                        <div class="mb-3">
+                            <div id="inputbus" class="input-group input-group-sm">
+                                <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
@@ -72,7 +73,7 @@
                         <?php
                             include('consulta_seg_neonatal_sector.php');
                             $i=1;
-                            while ($consulta = sqlsrv_fetch_array($consulta03)){
+                            while ($consulta = sqlsrv_fetch_array($consulta4)){
                                 if(is_null ($consulta['Institucion']) ){
                                     $newdate = '  -'; }
                                     else{

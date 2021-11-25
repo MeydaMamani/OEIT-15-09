@@ -76,11 +76,11 @@
                             <th class="align-middle">Documento</th>
                             <th class="align-middle">Tipo Seguro</th>
                             <th class="align-middle">Fecha Nacimiento Niño</th>
-                            <th class="align-middle">Primer Control</th>
-                            <th class="align-middle">Segundo Control</th>
-                            <th class="align-middle">Cumple</th>
-                            <th class="align-middle">Tercer Control</th>
-                            <th class="align-middle">Cuarto Control</th>
+                            <th class="align-middle" id="fields_cred">Primer Control</th>
+                            <th class="align-middle" id="fields_cred">Segundo Control</th>
+                            <th class="align-middle" id="fields_cred">Tercer Control</th>
+                            <th class="align-middle" id="fields_cred">Cuarto Control</th>
+                            <th class="align-middle">CUMPLE CONTROL MES</th>
                             <th class="align-middle">Primer Control Mes</th>
                             <th class="align-middle">Segundo Control Mes</th>
                             <th class="align-middle">Tercero Control Mes</th>
@@ -152,20 +152,20 @@
                                     else{
                                 $newdate9 = $consulta['SEG_CNTRL'] -> format('d/m/y');}
 
-                                if(is_null ($consulta['CUMPLE_1']) ){
-                                    $newdate10 = '  -'; }
-                                else{
-                                    $newdate10 = $consulta['CUMPLE_1'];}
-
                                 if(is_null ($consulta['TERCER_CNTRL']) ){
-                                    $newdate11 = '  -'; }
+                                    $newdate10 = '  -'; }
                                     else{
-                                $newdate11 = $consulta['TERCER_CNTRL'] -> format('d/m/y');}
+                                $newdate10 = $consulta['TERCER_CNTRL'] -> format('d/m/y');}
 
                                 if(is_null ($consulta['CUARTO_CNTRL']) ){
+                                    $newdate11 = '  -'; }
+                                else{
+                                    $newdate11 = $consulta['CUARTO_CNTRL'] -> format('d/m/y');}
+
+                                if(is_null ($consulta['CUMPLE_CTRLMES']) ){
                                     $newdate12 = '  -'; }
                                 else{
-                                    $newdate12 = $consulta['CUARTO_CNTRL'] -> format('d/m/y');}
+                                    $newdate12 = $consulta['CUMPLE_CTRLMES'];}
 
                                 if(is_null ($consulta['PRIMER_CNTRL_MES']) ){
                                     $newdate13 = '  -'; }
@@ -279,9 +279,9 @@
                             <th class="align-middle">Fecha Nacimiento Niño</th>
                             <th class="align-middle">Primer Control</th>
                             <th class="align-middle">Segundo Control</th>
-                            <th class="align-middle">Cumple</th>
                             <th class="align-middle">Tercer Control</th>
                             <th class="align-middle">Cuarto Control</th>
+                            <th class="align-middle">CUMPLE CONTROL MES</th>
                             <th class="align-middle">Primer Control Mes</th>
                             <th class="align-middle">Segundo Control Mes</th>
                             <th class="align-middle">Tercero Control Mes</th>
@@ -363,20 +363,20 @@
                                         else{
                                     $newdate9 = $consulta['SEG_CNTRL'] -> format('d/m/y');}
 
-                                    if(is_null ($consulta['CUMPLE_1']) ){
+                                    if(is_null ($consulta['TERCER_CNTRL']) ){
                                         $newdate10 = '  -'; }
                                     else{
-                                        $newdate10 = $consulta['CUMPLE_1'];}
-
-                                    if(is_null ($consulta['TERCER_CNTRL']) ){
-                                        $newdate11 = '  -'; }
-                                        else{
-                                    $newdate11 = $consulta['TERCER_CNTRL'] -> format('d/m/y');}
+                                        $newdate10 = $consulta['TERCER_CNTRL'] -> format('d/m/y');}
 
                                     if(is_null ($consulta['CUARTO_CNTRL']) ){
+                                        $newdate11 = '  -'; }
+                                        else{
+                                    $newdate11 = $consulta['CUARTO_CNTRL'] -> format('d/m/y');}
+
+                                    if(is_null ($consulta['CUMPLE_CTRLMES']) ){
                                         $newdate12 = '  -'; }
                                     else{
-                                        $newdate12 = $consulta['CUARTO_CNTRL'] -> format('d/m/y');}
+                                        $newdate12 = $consulta['CUMPLE_CTRLMES'];}
 
                                     if(is_null ($consulta['PRIMER_CNTRL_MES']) ){
                                         $newdate13 = '  -'; }
@@ -478,17 +478,18 @@
             </div>
         </div>
     </div>
-        <!-- MODAL INFORMACION-->
-        <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-              <div class="modal-body">
-                <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <img src="./img/CRED.png" style="width: 100%;">
-              </div>
-            </div>
+
+    <!-- MODAL INFORMACION-->
+    <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <img src="./img/CRED.png" style="width: 100%;">
           </div>
         </div>
+      </div>
+    </div>
     <?php } ?>
 
 <script src="./js/records_menu.js"></script>
