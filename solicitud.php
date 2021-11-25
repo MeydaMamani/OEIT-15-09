@@ -18,34 +18,31 @@
                             <th class="align-middle">TOTAL</th>
                         </tr>
                     </thead>
-                    <div>
-                        <div class="float-end pb-1 table_no_fed">
-                            <div class="form-group">
+                    <div class="float-end pb-1 table_no_fed">
+                        <div class="form-group">
                             <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
-                            </div>
                             </div>
                         </div>
                     </div>
                     <tbody>
                     <?php 
                         $resultado2 = "SELECT Provincia, distrito, COUNT(distrito) as total FROM USER_REQUEST
-                        GROUP BY Provincia, distrito";
+                                        GROUP BY Provincia, distrito";
                         $consulta2 = sqlsrv_query($conn, $resultado2);
                         $i=1;
                         while ($consulta = sqlsrv_fetch_array($consulta2)){ 
                             $newdate = $consulta['Provincia'];
                             $newdate2 = $consulta['distrito'];
-                            $newdate3 = $consulta['total'];
-    
+                            $newdate3 = $consulta['total'];    
                     ?>
-                        <tr class="text-center font-12">
-                            <td class="align-middle"><?php echo $i++; ?></td>
-                            <td class="align-middle"><?php echo $newdate; ?></td>
-                            <td class="align-middle"><?php echo $newdate2; ?></td>
-                            <td class="align-middle"><?php echo $newdate3; ?></td>
-                        </tr>
+                    <tr class="text-center font-12">
+                        <td class="align-middle"><?php echo $i++; ?></td>
+                        <td class="align-middle"><?php echo $newdate; ?></td>
+                        <td class="align-middle"><?php echo $newdate2; ?></td>
+                        <td class="align-middle"><?php echo $newdate3; ?></td>
+                    </tr>
                     <?php
                         ;}              
                         include("cerrar.php");
