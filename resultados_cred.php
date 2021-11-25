@@ -81,10 +81,10 @@
                             <th class="align-middle" id="fields_cred">Tercer Control</th>
                             <th class="align-middle" id="fields_cred">Cuarto Control</th>
                             <th class="align-middle">CUMPLE CONTROL MES</th>
-                            <th class="align-middle">Primer Control Mes</th>
-                            <th class="align-middle">Segundo Control Mes</th>
-                            <th class="align-middle">Tercero Control Mes</th>
-                            <th class="align-middle">Cuarto Control Mes</th>
+                            <th class="align-middle"id="fields_cred1">Primer Control Mes</th>
+                            <th class="align-middle"id="fields_cred1">Segundo Control Mes</th>
+                            <th class="align-middle"id="fields_cred1">Tercero Control Mes</th>
+                            <th class="align-middle"id="fields_cred1">Cuarto Control Mes</th>
                             <th class="align-middle">Quinto Control Mes</th>
                             <th class="align-middle">Sexto Control Mes</th>
                             <th class="align-middle">Séptimo Control Mes</th>
@@ -231,15 +231,21 @@
                             <td class="align-middle"><?php echo $newdate5; ?></td>
                             <td class="align-middle"><?php echo $newdate6; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate7); ?></td>
-                            <td class="align-middle"><?php echo $newdate8; ?></td>
-                            <td class="align-middle"><?php echo $newdate9; ?></td>
-                            <td class="align-middle"><?php echo $newdate10; ?></td>
-                            <td class="align-middle"><?php echo $newdate11; ?></td>
-                            <td class="align-middle"><?php echo $newdate12; ?></td>
-                            <td class="align-middle"><?php echo $newdate13; ?></td>
-                            <td class="align-middle"><?php echo $newdate14; ?></td>
-                            <td class="align-middle"><?php echo $newdate15; ?></td>
-                            <td class="align-middle"><?php echo $newdate16; ?></td>
+                            <td class="align-middle" id="fields_cred_body"><?php echo $newdate8; ?></td>
+                            <td class="align-middle" id="fields_cred_body"><?php echo $newdate9; ?></td>
+                            <td class="align-middle" id="fields_cred_body"><?php echo $newdate10; ?></td>
+                            <td class="align-middle" id="fields_cred_body"><?php echo $newdate11; ?></td>
+                            <td class="align-middle"><?php 
+                                if($newdate12 == 'CUMPLE'){
+                                    echo "<span class='badge bg-correct'>CUMPLE</span>";
+                                }else{
+                                    echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                                }
+                                ?></td>
+                            <td class="align-middle" id="fields_cred_body1"><?php echo $newdate13; ?></td>
+                            <td class="align-middle" id="fields_cred_body1"><?php echo $newdate14; ?></td>
+                            <td class="align-middle" id="fields_cred_body1"><?php echo $newdate15; ?></td>
+                            <td class="align-middle" id="fields_cred_body1"><?php echo $newdate16; ?></td>
                             <td class="align-middle"><?php echo $newdate17; ?></td>
                             <td class="align-middle"><?php echo $newdate18; ?></td>
                             <td class="align-middle"><?php echo $newdate19; ?></td>
@@ -277,15 +283,15 @@
                             <th class="align-middle">Documento</th>
                             <th class="align-middle">Tipo Seguro</th>
                             <th class="align-middle">Fecha Nacimiento Niño</th>
-                            <th class="align-middle">Primer Control</th>
-                            <th class="align-middle">Segundo Control</th>
-                            <th class="align-middle">Tercer Control</th>
-                            <th class="align-middle">Cuarto Control</th>
+                            <th class="align-middle" id="color_fed_head">Primer Control</th>
+                            <th class="align-middle" id="color_fed_head">Segundo Control</th>
+                            <th class="align-middle" id="color_fed_head">Tercer Control</th>
+                            <th class="align-middle" id="color_fed_head">Cuarto Control</th>
                             <th class="align-middle">CUMPLE CONTROL MES</th>
-                            <th class="align-middle">Primer Control Mes</th>
-                            <th class="align-middle">Segundo Control Mes</th>
-                            <th class="align-middle">Tercero Control Mes</th>
-                            <th class="align-middle">Cuarto Control Mes</th>
+                            <th class="align-middle" id="color_fed_head">Primer Control Mes</th>
+                            <th class="align-middle" id="color_fed_head">Segundo Control Mes</th>
+                            <th class="align-middle" id="color_fed_head">Tercero Control Mes</th>
+                            <th class="align-middle" id="color_fed_head">Cuarto Control Mes</th>
                             <th class="align-middle">Quinto Control Mes</th>
                             <th class="align-middle">Sexto Control Mes</th>
                             <th class="align-middle">Séptimo Control Mes</th>
@@ -442,15 +448,21 @@
                             <td class="align-middle"><?php echo $newdate5; ?></td>
                             <td class="align-middle"><?php echo $newdate6; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate7); ?></td>
-                            <td class="align-middle"><?php echo $newdate8; ?></td>
-                            <td class="align-middle"><?php echo $newdate9; ?></td>
-                            <td class="align-middle"><?php echo $newdate10; ?></td>
-                            <td class="align-middle"><?php echo $newdate11; ?></td>
-                            <td class="align-middle"><?php echo $newdate12; ?></td>
-                            <td class="align-middle"><?php echo $newdate13; ?></td>
-                            <td class="align-middle"><?php echo $newdate14; ?></td>
-                            <td class="align-middle"><?php echo $newdate15; ?></td>
-                            <td class="align-middle"><?php echo $newdate16; ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate8; ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate9; ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate10; ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate11; ?></td>
+                            <td class="align-middle"><?php 
+                                if($newdate12 == 'CUMPLE'){
+                                    echo "<span class='badge bg-correct'>CUMPLE</span>";
+                                }else{
+                                    echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                                }
+                            ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate13; ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate14; ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate15; ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate16; ?></td>
                             <td class="align-middle"><?php echo $newdate17; ?></td>
                             <td class="align-middle"><?php echo $newdate18; ?></td>
                             <td class="align-middle"><?php echo $newdate19; ?></td>

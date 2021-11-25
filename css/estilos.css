@@ -442,12 +442,25 @@ img:hover{
 	position: sticky;
 	top: 0;
 	z-index: 10;
-	background: #78469b52 !important;
+	background: #C6DEEF !important;
 }
 
 #cred thead tr th#fields_cred {
-	background: #e9e1ef !important;
+	background: #f1f1c0 !important;
 }
+
+#cred thead tr th#fields_cred1 {
+	background: #f0dfc7 !important;
+}
+
+#fields_cred_body {
+	background: #f1f1c052;
+}
+
+#fields_cred_body1 {
+	background: #f0dfc757;
+}
+
 
 #visitas_cuatro_meses thead tr th { 
 	position: sticky;
