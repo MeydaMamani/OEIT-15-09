@@ -14,19 +14,19 @@
     include('consulta_tamizaje_neonatal.php');
     $row_cont=0; $cumple=0; $no_cumple=0; $observado=0; 
     while ($consulta = sqlsrv_fetch_array($consulta3)){
-      $row_cont++;
-      if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
-        $no_cumple++;
-      }else {
-        $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
-        $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
-        $intvl = $fecha_nacimiento->diff($fecha_atencion);
-          if($intvl->days <= 6 && $intvl->days >=0){
-            $cumple++;
-          }else if($intvl->days > 6){
-            $observado++;
-          }
-      }
+        $row_cont++;
+        if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
+            $no_cumple++;
+        }else {
+            $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
+            $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
+            $intvl = $fecha_nacimiento->diff($fecha_atencion);
+            if($intvl->days <= 6 && $intvl->days >=0){
+                $cumple++;
+            }else if($intvl->days > 6){
+                $observado++;
+            }
+        }
     }
 ?>
 
@@ -55,7 +55,7 @@
 											<img src="./img/user_cant.png" width="90" alt="">
 										</div>
 										<div class="mt-3 col-md-7 text-center">
-											<b class="total font-49 total text-secondary"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
+											<b class="total font-49 text-secondary"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
 										</div>
 									</h4>
 								</div>
@@ -72,7 +72,7 @@
 											<img src="./img/boy.png" width="80" alt="">
 										</div>
 										<div class="mt-3 ms-2 col-md-7 text-center">
-											<b class="total font-34 cumple text-success"> <?php echo $cumple; ?></b> <i class="mdi mdi-check font-34 text-success"></i>
+											<b class="font-34 cumple text-success"> <?php echo $cumple; ?></b> <i class="mdi mdi-check font-34 text-success"></i>
 										</div>
 									</h4>
 								</div>
@@ -81,7 +81,7 @@
 					</div>
 					<div class="card col-md-2 datos_avance">
 						<div class="card-body p-0">
-						<p class="card-title text-secondary text-center font-18 pt-3">No Cumplen</h4>
+						    <p class="card-title text-secondary text-center font-18 pt-3">No Cumplen</h4>
 							<div class="justify-content-center">
 								<div class="align-self-center">
 									<h4 class="font-medium mb-3 justify-content-center d-flex">
@@ -89,7 +89,7 @@
 											<img src="./img/boy_x.png" width="80" alt="">
 										</div>
 										<div class="mt-3 ms-2 col-md-7 text-center">
-											<b class="total font-34 no_cumple text-danger"> <?php echo $no_cumple; ?></b><i class="mdi mdi-close font-34 text-danger"></i>
+											<b class="font-34 no_cumple text-danger"> <?php echo $no_cumple; ?></b><i class="mdi mdi-close font-34 text-danger"></i>
 										</div>
 									</h4>
 								</div>
@@ -98,7 +98,7 @@
 					</div>
 					<div class="card col-md-2 datos_avance">
 						<div class="card-body p-0">
-						<p class="card-title text-secondary text-center font-18 pt-3">Observados</h4>
+						    <p class="card-title text-secondary text-center font-18 pt-3">Observados</h4>
 							<div class="justify-content-center">
 								<div class="align-self-center">
 									<h4 class="font-medium mb-3 justify-content-center d-flex">
@@ -106,7 +106,7 @@
 											<img src="./img/boy_observeds.png" width="80" alt="">
 										</div>
 										<div class="mt-3 ms-2 col-md-7 text-center">
-											<b class="total font-34 observado text-warning"> <?php echo $observado; ?></b> <i class="mdi mdi-alert-circle font-34 text-warning"></i>
+											<b class="font-34 observado text-warning"> <?php echo $observado; ?></b> <i class="mdi mdi-alert-circle font-34 text-warning"></i>
 										</div>
 									</h4>
 								</div>
@@ -153,19 +153,25 @@
             <div class="col-12 table-responsive table_no_fed" id="tmz_neonatal">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
-                        <tr class="text-center font-12" style="background: #AED6F1;">
-                            <th class="align-middle">#</th>
-                            <th class="align-middle">Provincia</th>
-                            <th class="align-middle">Distrito</th>
-                            <th class="align-middle">Documento</th>
-                            <th class="align-middle">Apellidos y Nombres</th>
-                            <th class="align-middle">Fecha de Nacimiento</th>
-                            <th class="align-middle">Nombre ESS</th>
-                            <th class="align-middle" id="color_neonatal_head">Menor Encontrado</th>
-                            <th class="align-middle" id="color_neonatal_head">Tipo de Seguro</th>
-                            <th class="align-middle">Lugar de Tamizaje (HIS)</th>
-                            <th class="align-middle">Fecha Atención</th>
-                            <th class="align-middle">Cumple</th>
+                        <tr class="text-center font-13 border">
+                            <th class="border"></th>
+                            <th colspan="9" class="border" style="background: #AED6F1;">Padrón Nominal</th>
+                            <th colspan="3" class="border" style="background: #AED6F1;">His Minsa</th>
+                        </tr>
+                        <tr class="text-center font-12 border" style="background: #AED6F1;">
+                            <th class="align-middle border">#</th>
+                            <th class="align-middle border">Provincia</th>
+                            <th class="align-middle border">Distrito</th>
+                            <th class="align-middle border">Documento</th>
+                            <th class="align-middle border">Apellidos y Nombres</th>
+                            <th class="align-middle border">Fecha de Nacimiento</th>
+                            <th class="align-middle border">Nombre ESS</th>
+                            <th class="align-middle border" id="color_neonatal_head">Menor Encontrado</th>
+                            <th class="align-middle border" id="color_neonatal_head">Tipo de Seguro</th>
+                            <th class="align-middle border" id="color_neonatal_head2">Nombre ESS Nacimiento</th>
+                            <th class="align-middle border">Lugar de Tamizaje (HIS)</th>
+                            <th class="align-middle border">Fecha Atención</th>
+                            <th class="align-middle border">Cumple</th>
                         </tr>
                     </thead>
                     <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -182,77 +188,84 @@
 							$i=1;
 							while ($consulta = sqlsrv_fetch_array($consulta3)){  
 								if(is_null ($consulta['nombre_prov']) ){
-								$newdate = '  -'; }
+								    $newdate = '  -'; }
 								else{
-								$newdate = $consulta['nombre_prov'] ;}
+								    $newdate = $consulta['nombre_prov'] ;}
+
 								if(is_null ($consulta['nombre_dist']) ){
 									$newdate1 = '  -'; }
-									else{
-								$newdate1 = $consulta['nombre_dist'] ;}
+								else{
+								    $newdate1 = $consulta['nombre_dist'] ;}
 					
-								if(is_null ($consulta['num_dni']) ){
+								if(is_null ($consulta['documento']) ){
 									$newdate2 = '  -'; }
-									else{
-								$newdate2 = $consulta['num_dni'];}
+								else{
+								    $newdate2 = $consulta['documento'];}
+
+                                if(is_null ($consulta['apellidos_nino']) ){
+                                    $newdate3 = '  -'; }
+                                else{
+                                    $newdate3 = $consulta['apellidos_nino'];}
+
+                                if(is_null ($consulta['fecha_nacimiento_nino']) ){
+                                    $newdate4 = '  -'; }
+                                else{
+                                    $newdate4 = $consulta['fecha_nacimiento_nino'] -> format('d/m/y');}
+
+                                if(is_null ($consulta['NOMBRE_EESS']) ){
+                                    $newdate5 = '  -'; }
+                                else{
+                                    $newdate5 = $consulta['NOMBRE_EESS'];}
+
+                                if(is_null ($consulta['MENOR_ENCONTRADO']) ){
+                                    $newdate6 = '  -'; }
+                                else{
+                                    $newdate6 = $consulta['MENOR_ENCONTRADO'];}
 
 								if(is_null ($consulta['tipo_seguro']) ){
-								$newdate3 = '  -'; }
+								    $newdate7 = '  -'; }
 								else{
-								$newdate3 = $consulta['tipo_seguro'];}
-								
-								if(is_null ($consulta['fecha_nacimiento_nino']) ){
-									$newdate4 = '  -'; }
-									else{
-								$newdate4 = $consulta['fecha_nacimiento_nino'] -> format('d/m/y');}
-					
-								if(is_null ($consulta['apellidos_nino']) ){
-								$newdate6 = '  -'; }
-								else{
-								$newdate6 = $consulta['apellidos_nino'];}
-
-								if(is_null ($consulta['MENOR_ENCONTRADO']) ){
-								$newdate7 = '  -'; }
-								else{
-								$newdate7 = $consulta['MENOR_ENCONTRADO'];}
-
-								if(is_null ($consulta['NOMBRE_EESS']) ){
-									$newdate8 = '  -'; }
-									else{
-								$newdate8 = $consulta['NOMBRE_EESS'];}
+								    $newdate7 = $consulta['tipo_seguro'];}
+													
+                                if(is_null ($consulta['NOMBRE_EESS_NACIMIENTO']) ){
+                                    $newdate8 = '  -'; }
+                                else{
+                                    $newdate8 = $consulta['NOMBRE_EESS_NACIMIENTO'];}
+                                    
+                                if(is_null ($consulta['Lugar_TMZ']) ){
+                                    $newdate9 = '  -'; }
+                                else{
+                                    $newdate9 = $consulta['Lugar_TMZ'];}
 
 								if(is_null ($consulta['Fecha_Atencion']) ){
-									$newdate9 = '  -'; }
-									else{
-								$newdate9 = $consulta['Fecha_Atencion'] -> format('d/m/y');}
-
-								if(is_null ($consulta['Lugar_TMZ']) ){
-								$newdate10 = '  -'; }
+									$newdate10 = '  -'; }
 								else{
-								$newdate10 = $consulta['Lugar_TMZ'];}
+								    $newdate10 = $consulta['Fecha_Atencion'] -> format('d/m/y');}
 
 						?>
 						<tr class="font-12 text-center">
 							<td class="align-middle"><?php echo $i++; ?></td>
-							<td class="align-middle"><?php echo $newdate; ?></td>
-							<td class="align-middle"><?php echo $newdate1; ?></td>
+							<td class="align-middle"><?php echo utf8_encode($newdate); ?></td>
+							<td class="align-middle"><?php echo utf8_encode($newdate1); ?></td>
 							<td class="align-middle"><?php echo $newdate2; ?></td>
-							<td class="align-middle"><?php echo utf8_encode($newdate6); ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
 							<td class="align-middle"><?php echo $newdate4; ?></td>                               
-							<td class="align-middle"><?php echo utf8_encode($newdate8); ?></td>
+							<td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
+                            <td class="align-middle" id="color_neonatal_body"><?php echo $newdate6; ?></td>
 							<td class="align-middle" id="color_neonatal_body"><?php echo $newdate7; ?></td>
-							<td class="align-middle" id="color_neonatal_body"><?php echo $newdate3; ?></td>
-							<td class="align-middle"><?php echo $newdate10; ?></td>
+							<td class="align-middle" id="color_neonatal_body2"><?php echo utf8_encode($newdate8); ?></td>
 							<td class="align-middle"><?php echo $newdate9; ?></td>
+							<td class="align-middle"><?php echo $newdate10; ?></td>
 							<td class="align-middle">
 							<?php
 								if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
-								echo "<span class='badge bg-incorrect'>No</span>";
+								echo "<span class='badge bg-incorrect'>No Cumple</span>";
 								}else {
 								$fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
 								$fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
 								$intvl = $fecha_nacimiento->diff($fecha_atencion);
 									if($intvl->days <= 6 && $intvl->days >=0){
-									echo "<span class='badge bg-correct'>Si</span>";
+									echo "<span class='badge bg-correct'>Cumple</span>";
 									}else if($intvl->days > 6){
 									echo "<span class='badge bg-observed'>Observado</span>";
 									}
@@ -280,19 +293,25 @@
             <div class="col-12 table-responsive table_fed" style="display: none;">
                 <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
+                        <tr class="text-center font-13 border">
+                            <th class="border"></th>
+                            <th colspan="9" class="border" style="background: #d9d9d9;">Padrón Nominal</th>
+                            <th colspan="3" class="border" style="background: #d9d9d9;">His Minsa</th>
+                        </tr>
                         <tr class="text-center font-12" style="background: #d9d9d9;">
-                            <th class="align-middle">#</th>
-                            <th class="align-middle">Provincia</th>
-                            <th class="align-middle">Distrito</th>
-                            <th class="align-middle">Documento</th>
-                            <th class="align-middle">Apellidos y Nombres</th>
-                            <th class="align-middle">Fecha de Nacimiento</th>
-                            <th class="align-middle">Nombre ESS</th>
-                            <th class="align-middle" id="color_fed_head">Menor Encontrado</th>
-                            <th class="align-middle" id="color_fed_head">Tipo de Seguro</th>
-                            <th class="align-middle">Lugar de Tamizaje (HIS)</th>
-                            <th class="align-middle">Fecha Atención</th>
-                            <th class="align-middle">Cumple</th>
+                            <th class="align-middle border">#</th>
+                            <th class="align-middle border">Provincia</th>
+                            <th class="align-middle border">Distrito</th>
+                            <th class="align-middle border">Documento</th>
+                            <th class="align-middle border">Apellidos y Nombres</th>
+                            <th class="align-middle border">Fecha de Nacimiento</th>
+                            <th class="align-middle border">Nombre ESS</th>
+                            <th class="align-middle border" id="color_fed_head">Menor Encontrado</th>
+                            <th class="align-middle border" id="color_fed_head">Tipo de Seguro</th>
+                            <th class="align-middle border" id="color_fed_head">Nombre ESS Nacimiento</th>
+                            <th class="align-middle border">Lugar de Tamizaje (HIS)</th>
+                            <th class="align-middle border">Fecha Atención</th>
+                            <th class="align-middle border">Cumple</th>
                         </tr>
                     </thead>
                     <div class="float-end pb-1 col-md-3 table_fed" style="display: none;">
@@ -304,102 +323,109 @@
                         </div>
                     </div>
                     <tbody>
-                    <?php  
-                        include('consulta_tamizaje_neonatal.php');
-                        $i_fed=1; $cumple_fed=0; $no_cumple_fed=0; $observado_fed=0;
-                        while ($consulta = sqlsrv_fetch_array($consulta3)){  
-                          $tipo = strval($consulta['tipo_seguro']);
-                          $tipo2 = strpos($tipo, '2');
-                          $tipo0 = strpos($tipo, '0');
-                          $tipo1 = strpos($tipo, '1');
-                          $tipo3 = strpos($tipo, '3');
-                          $tipo4 = strpos($tipo, '4');
+                        <?php  
+                            include('consulta_tamizaje_neonatal.php');
+                            $i_fed=1; $cumple_fed=0; $no_cumple_fed=0; $observado_fed=0;
+                            while ($consulta = sqlsrv_fetch_array($consulta3)){  
+                                $tipo = strval($consulta['tipo_seguro']);
+                                $tipo2 = strpos($tipo, '2');
+                                $tipo0 = strpos($tipo, '0');
+                                $tipo1 = strpos($tipo, '1');
+                                $tipo3 = strpos($tipo, '3');
+                                $tipo4 = strpos($tipo, '4');
 
-                          if(($tipo2 === 0 || $tipo2 > 0) && (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))
-                              || (($tipo == '') || ($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
+                                if(($tipo2 === 0 || $tipo2 > 0) && (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))
+                                    || (($tipo == '') || ($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
+                            
+                                    if(is_null ($consulta['nombre_prov']) ){
+                                        $newdate = '  -'; }
+                                    else{
+                                        $newdate = $consulta['nombre_prov'] ;}
+
+                                    if(is_null ($consulta['nombre_dist']) ){
+                                        $newdate1 = '  -'; }
+                                    else{
+                                        $newdate1 = $consulta['nombre_dist'] ;}
                         
-                              if(is_null ($consulta['nombre_prov']) ){
-                                $newdate = '  -'; }
-                                else{
-                              $newdate = $consulta['nombre_prov'] ;}
-                              if(is_null ($consulta['nombre_dist']) ){
-                                  $newdate1 = '  -'; }
-                                  else{
-                              $newdate1 = $consulta['nombre_dist'] ;}
-                  
-                              if(is_null ($consulta['num_dni']) ){
-                                  $newdate2 = '  -'; }
-                                  else{
-                              $newdate2 = $consulta['num_dni'];}
+                                    if(is_null ($consulta['documento']) ){
+                                        $newdate2 = '  -'; }
+                                    else{
+                                        $newdate2 = $consulta['documento'];}
 
-                              if(is_null ($consulta['tipo_seguro']) ){
-                                $newdate3 = '  -'; }
-                                else{
-                              $newdate3 = $consulta['tipo_seguro'];}
-                                
-                              if(is_null ($consulta['fecha_nacimiento_nino']) ){
-                                  $newdate4 = '  -'; }
-                                  else{
-                              $newdate4 = $consulta['fecha_nacimiento_nino'] -> format('d/m/y');}
-                  
-                              if(is_null ($consulta['apellidos_nino']) ){
-                                $newdate6 = '  -'; }
-                                else{
-                              $newdate6 = $consulta['apellidos_nino'];}
+                                    if(is_null ($consulta['apellidos_nino']) ){
+                                        $newdate3 = '  -'; }
+                                    else{
+                                        $newdate3 = $consulta['apellidos_nino'];}
 
-                              if(is_null ($consulta['MENOR_ENCONTRADO']) ){
-                                $newdate7 = '  -'; }
-                                else{
-                              $newdate7 = $consulta['MENOR_ENCONTRADO'];}
+                                    if(is_null ($consulta['fecha_nacimiento_nino']) ){
+                                        $newdate4 = '  -'; }
+                                    else{
+                                        $newdate4 = $consulta['fecha_nacimiento_nino'] -> format('d/m/y');}
 
-                              if(is_null ($consulta['NOMBRE_EESS']) ){
-                                  $newdate8 = '  -'; }
-                                  else{
-                              $newdate8 = $consulta['NOMBRE_EESS'];}
+                                    if(is_null ($consulta['NOMBRE_EESS']) ){
+                                        $newdate5 = '  -'; }
+                                    else{
+                                        $newdate5 = $consulta['NOMBRE_EESS'];}
 
-                              if(is_null ($consulta['Fecha_Atencion']) ){
-                                  $newdate9 = '  -'; }
-                                  else{
-                              $newdate9 = $consulta['Fecha_Atencion'] -> format('d/m/y');}
+                                    if(is_null ($consulta['MENOR_ENCONTRADO']) ){
+                                        $newdate6 = '  -'; }
+                                    else{
+                                        $newdate6 = $consulta['MENOR_ENCONTRADO'];}
 
-                              if(is_null ($consulta['Lugar_TMZ']) ){
-                                $newdate10 = '  -'; }
-                                else{
-                              $newdate10 = $consulta['Lugar_TMZ'];}
+                                    if(is_null ($consulta['tipo_seguro']) ){
+                                        $newdate7 = '  -'; }
+                                    else{
+                                        $newdate7 = $consulta['tipo_seguro'];}
+                                                        
+                                    if(is_null ($consulta['NOMBRE_EESS_NACIMIENTO']) ){
+                                        $newdate8 = '  -'; }
+                                    else{
+                                        $newdate8 = $consulta['NOMBRE_EESS_NACIMIENTO'];}
+                                        
+                                    if(is_null ($consulta['Lugar_TMZ']) ){
+                                        $newdate9 = '  -'; }
+                                    else{
+                                        $newdate9 = $consulta['Lugar_TMZ'];}
 
-                            ?>
-                            <tr class="font-12 text-center">
-                                <td class="align-middle"><?php echo $i_fed++; ?></td>
-                                <td class="align-middle"><?php echo $newdate; ?></td>
-                                <td class="align-middle"><?php echo $newdate1; ?></td>
-                                <td class="align-middle"><?php echo $newdate2; ?></td>
-                                <td class="align-middle"><?php echo $newdate6; ?></td>
-                                <td class="align-middle"><?php echo $newdate4; ?></td>                               
-                                <td class="align-middle"><?php echo $newdate8; ?></td>
-                                <td class="align-middle" id="color_fed_body"><?php echo $newdate7; ?></td>
-                                <td class="align-middle" id="color_fed_body"><?php echo $newdate3; ?></td>
-                                <td class="align-middle"><?php echo $newdate10; ?></td>
-                                <td class="align-middle"><?php echo $newdate9; ?></td>
-                                <td class="align-middle">
-                                  <?php
-                                    if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
-                                      echo "<span class='badge bg-incorrect'>No</span>";
-                                      $no_cumple_fed++;
-                                    }else {
-                                      $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
-                                      $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
-                                      $intvl = $fecha_nacimiento->diff($fecha_atencion);
-                                        if($intvl->days <= 6 && $intvl->days >=0){
-                                          echo "<span class='badge bg-correct'>Si</span>";
-                                          $cumple_fed++;
-                                        }else if($intvl->days > 6){
-                                          echo "<span class='badge bg-observed'>Observado</span>";
-                                          $observado_fed++;
-                                        }
+                                    if(is_null ($consulta['Fecha_Atencion']) ){
+                                        $newdate10 = '  -'; }
+                                    else{
+                                        $newdate10 = $consulta['Fecha_Atencion'] -> format('d/m/y');}
+
+                        ?>
+                        <tr class="font-12 text-center">
+                            <td class="align-middle"><?php echo $i_fed++; ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate); ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate1); ?></td>
+                            <td class="align-middle"><?php echo $newdate2; ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
+                            <td class="align-middle"><?php echo $newdate4; ?></td>                               
+                            <td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate6; ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo $newdate7; ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php echo utf8_encode($newdate8); ?></td>
+                            <td class="align-middle"><?php echo $newdate9; ?></td>
+                            <td class="align-middle"><?php echo $newdate10; ?></td>
+                            <td class="align-middle">
+                            <?php
+                                if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
+                                    echo "<span class='badge bg-incorrect'>No Cumple</span>";
+                                    $no_cumple_fed++;
+                                }else {
+                                $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
+                                $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
+                                $intvl = $fecha_nacimiento->diff($fecha_atencion);
+                                    if($intvl->days <= 6 && $intvl->days >=0){
+                                        echo "<span class='badge bg-correct'>Cumple</span>";
+                                        $cumple_fed++;
+                                    }else if($intvl->days > 6){
+                                        echo "<span class='badge bg-observed'>Observado</span>";
+                                        $observado_fed++;
                                     }
-                                  ?>
-                                </td>
-                            </tr>
+                                }
+                            ?>
+                            </td>
+                        </tr>
                         <?php
                               }
                             ;}                    

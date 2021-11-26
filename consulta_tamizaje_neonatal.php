@@ -43,98 +43,59 @@
           $red = 'TODOS';
         }
 
+		$resultado = "SELECT nombre_prov,nombre_dist,num_cnv,NUM_DNI, NOMBRE_EESS_NACIMIENTO, 'DOCUMENTO' = CASE 
+                            WHEN NUM_DNI IS NOT NULL
+                            THEN NUM_DNI
+                            ELSE NUM_CNV
+                        END,
+                       tipo_seguro,fecha_nacimiento_nino, DATEADD(DAY,28,FECHA_NACIMIENTO_NINO) A_medir, apellido_paterno_nino,
+                       apellido_materno_nino, nombre_nino, MENOR_ENCONTRADO,NOMBRE_EESS    
+                       into  bdhis_minsa.dbo.padronneonatal
+                       from nominal_padron_nominal
+                       where year(fecha_nacimiento_nino)='2021' AND MES='2021$mes2'
+                       AND YEAR(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='2021' AND MONTH(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$mes' ;
+                       with c as ( select documento, ROW_NUMBER() over(partition by documento order by documento) as duplicado
+                       from bdhis_minsa.dbo.padronneonatal )
+                       delete  from c
+                       where duplicado >1";
+
+        $resultado2 = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item 
+                        into bdhis_minsa.dbo.atenciones
+                        FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                        WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
+
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
-            $resultado = "SELECT nombre_prov,nombre_dist,num_cnv,NUM_DNI, 'DOCUMENTO' = CASE 
-                                                WHEN NUM_DNI IS NOT NULL
-                                                THEN NUM_DNI
-                                                ELSE NUM_CNV
-                                        END,
-                                        tipo_seguro,fecha_nacimiento_nino, DATEADD(DAY,28,FECHA_NACIMIENTO_NINO) A_medir, apellido_paterno_nino,
-                            apellido_materno_nino, nombre_nino, MENOR_ENCONTRADO,NOMBRE_EESS    
-                            into  bdhis_minsa.dbo.padronneonatal
-                            from nominal_padron_nominal
-                            where year(fecha_nacimiento_nino)='2021' AND MES='2021$mes2'
-                            AND YEAR(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='2021' AND MONTH(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$mes' ;
-                            with c as ( select documento, ROW_NUMBER() over(partition by documento order by documento) as duplicado
-                            from bdhis_minsa.dbo.padronneonatal )
-                            delete  from c
-                            where duplicado >1";
-
-            $resultado2 = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item 
-                                into bdhis_minsa.dbo.atenciones
-                                FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                                WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
-
             $resultado3 = "SELECT p.nombre_prov, p.nombre_dist, p.documento, p.num_cnv, p.num_dni,p.tipo_seguro,p.fecha_nacimiento_nino, p.A_medir, 
                                 p.apellido_paterno_nino + ' '+ p.apellido_materno_nino + ' ' + p.NOMBRE_NINO As apellidos_nino, 
-                                p.MENOR_ENCONTRADO,NOMBRE_EESS, a.Fecha_Atencion, a.Nombre_Establecimiento Lugar_TMZ    
+                                p.MENOR_ENCONTRADO,p.NOMBRE_EESS_NACIMIENTO, NOMBRE_EESS, a.Fecha_Atencion, a.Nombre_Establecimiento Lugar_TMZ    
                                 from bdhis_minsa.dbo.padronneonatal p left join bdhis_minsa.dbo.atenciones a 
                                         on p.documento=a.Numero_Documento_Paciente
                                 where month(p.a_medir)='$mes' AND nombre_prov='$red'
+							ORDER BY p.nombre_prov, p.nombre_dist
                                 DROP TABLE bdhis_minsa.dbo.padronneonatal
                                 DROP TABLE bdhis_minsa.dbo.atenciones";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $dist = '';
-            $resultado = "SELECT nombre_prov,nombre_dist,num_cnv,NUM_DNI, 'DOCUMENTO' = CASE 
-                                                WHEN NUM_DNI IS NOT NULL
-                                                THEN NUM_DNI
-                                                ELSE NUM_CNV
-                                        END,
-                                        tipo_seguro,fecha_nacimiento_nino, DATEADD(DAY,28,FECHA_NACIMIENTO_NINO) A_medir, apellido_paterno_nino,
-                            apellido_materno_nino, nombre_nino, MENOR_ENCONTRADO,NOMBRE_EESS    
-                            into  bdhis_minsa.dbo.padronneonatal
-                            from nominal_padron_nominal
-                            where year(fecha_nacimiento_nino)='2021' AND MES='2021$mes2'
-                            AND YEAR(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='2021' AND MONTH(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$mes' ;
-                            with c as ( select documento, ROW_NUMBER() over(partition by documento order by documento) as duplicado
-                            from bdhis_minsa.dbo.padronneonatal )
-                            delete  from c
-                            where duplicado >1";
-
-            $resultado2 = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item 
-                                into bdhis_minsa.dbo.atenciones
-                                FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                                WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
-
             $resultado3 = "SELECT p.nombre_prov, p.nombre_dist, p.documento, p.num_cnv, p.num_dni,p.tipo_seguro,p.fecha_nacimiento_nino, p.A_medir, 
                                 p.apellido_paterno_nino + ' '+ p.apellido_materno_nino + ' ' + p.NOMBRE_NINO As apellidos_nino, 
-                                p.MENOR_ENCONTRADO,NOMBRE_EESS, a.Fecha_Atencion, a.Nombre_Establecimiento Lugar_TMZ    
+                                p.MENOR_ENCONTRADO, p.NOMBRE_EESS_NACIMIENTO, NOMBRE_EESS, a.Fecha_Atencion, a.Nombre_Establecimiento Lugar_TMZ    
                                 from bdhis_minsa.dbo.padronneonatal p left join bdhis_minsa.dbo.atenciones a 
                                         on p.documento=a.Numero_Documento_Paciente
                                 where month(p.a_medir)='$mes'
+								ORDER BY p.nombre_prov, p.nombre_dist
                                 DROP TABLE bdhis_minsa.dbo.padronneonatal
                                 DROP TABLE bdhis_minsa.dbo.atenciones";
         }
         else if($dist_1 != 'TODOS'){
-          $dist=$dist_1;
-            $resultado = "SELECT nombre_prov,nombre_dist,num_cnv,NUM_DNI, 'DOCUMENTO' = CASE 
-                                                WHEN NUM_DNI IS NOT NULL
-                                                THEN NUM_DNI
-                                                ELSE NUM_CNV
-                                        END,
-                                        tipo_seguro,fecha_nacimiento_nino, DATEADD(DAY,28,FECHA_NACIMIENTO_NINO) A_medir, apellido_paterno_nino,
-                            apellido_materno_nino, nombre_nino, MENOR_ENCONTRADO,NOMBRE_EESS    
-                            into  bdhis_minsa.dbo.padronneonatal
-                            from nominal_padron_nominal
-                            where year(fecha_nacimiento_nino)='2021' AND MES='2021$mes2'
-                            AND YEAR(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='2021' AND MONTH(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$mes' ;
-                            with c as ( select documento, ROW_NUMBER() over(partition by documento order by documento) as duplicado
-                            from bdhis_minsa.dbo.padronneonatal )
-                            delete  from c
-                            where duplicado >1";
-
-            $resultado2 = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item 
-                                into bdhis_minsa.dbo.atenciones
-                                FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                                WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
-
+	        $dist=$dist_1;
             $resultado3 = "SELECT p.nombre_prov, p.nombre_dist, p.documento, p.num_cnv, p.num_dni,p.tipo_seguro,p.fecha_nacimiento_nino, p.A_medir, 
                                 p.apellido_paterno_nino + ' '+ p.apellido_materno_nino + ' ' + p.NOMBRE_NINO As apellidos_nino, 
-                                p.MENOR_ENCONTRADO,NOMBRE_EESS, a.Fecha_Atencion, a.Nombre_Establecimiento Lugar_TMZ    
+                                p.MENOR_ENCONTRADO,p.NOMBRE_EESS_NACIMIENTO, NOMBRE_EESS, a.Fecha_Atencion, a.Nombre_Establecimiento Lugar_TMZ    
                                 from bdhis_minsa.dbo.padronneonatal p left join bdhis_minsa.dbo.atenciones a 
                                         on p.documento=a.Numero_Documento_Paciente
                                 where month(p.a_medir)='$mes' AND nombre_prov='$red' AND nombre_dist='$dist'
+								ORDER BY p.nombre_prov, p.nombre_dist
                                 DROP TABLE bdhis_minsa.dbo.padronneonatal
                                 DROP TABLE bdhis_minsa.dbo.atenciones";
         }
