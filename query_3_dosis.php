@@ -15,7 +15,8 @@
                     LEFT JOIN BD_VACUNADOS_NACIONAL.dbo.VACUNADOS VN 
                     ON V.NUM_DOC=VN.NUM_DOC AND V.TIPO_DOC = VN.TIPO_DOC";
 
-    $resultado2 = "SELECT * FROM T1 WHERE FECHA_PARA_3RA_DOSIS <GETDATE()";
+    $resultado2 = "SELECT * FROM T1 WHERE FECHA_PARA_3RA_DOSIS <GETDATE()
+                    DROP TABLE T1";
            
     $consulta2 = sqlsrv_query($conn6, $resultado);
     $consulta3 = sqlsrv_query($conn6, $resultado2);
