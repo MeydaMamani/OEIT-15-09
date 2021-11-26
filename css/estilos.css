@@ -213,7 +213,11 @@ li a, a{
 }
 
 #color_neonatal_body {
-	background: #65a0c83d;
+	background: #dae9f345;
+}
+
+#color_neonatal_body2 {
+	background: #65a0c83b;
 }
 
 #color_prematuro_head {
@@ -413,10 +417,14 @@ img:hover{
 }
 
 #tmz_neonatal thead tr th#color_neonatal_head {
-	background: #65a0c8 !important;
+	background: #dae9f3 !important;
 }
 
-#cuatro_meses thead tr th { 
+#tmz_neonatal thead tr th#color_neonatal_head2 {
+	background: #91b9d5 !important;
+}
+
+#cuatro_meses thead tr th, #cierre_brechas thead tr th { 
 	position: sticky;
 	top: 0;
 	z-index: 10;
@@ -425,6 +433,22 @@ img:hover{
 
 #cuatro_meses thead tr th#fields_4_meses_head {
 	background: #638bb3 !important;
+}
+
+/* CIERRE DE BRECHASS */
+#cierre_brechas thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #c9d0e2 !important;
+}
+
+#cierre_brechas thead tr th#fields_brechas {
+	background: #e19f9f !important;
+}
+
+#cierre_brechas tbody tr td#fields_brechas_body {
+	background: #e19f9f36 !important;
 }
 
 #seis_ocho_meses thead tr th { 
