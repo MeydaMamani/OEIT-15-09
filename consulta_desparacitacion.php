@@ -36,7 +36,7 @@
                         Min(CASE WHEN (anio='2021' and Tipo_Diagnostico='D' and Codigo_Item in ('99199.28','Z292') AND Valor_Lab='2')THEN A.Fecha_Atencion ELSE NULL END)'SEGUNDA',
                         Min(CASE WHEN (anio='2021' and Tipo_Diagnostico='D' and Codigo_Item in ('99199.28','Z292') AND (Valor_Lab IS NULL OR Valor_Lab > '2'))THEN A.Fecha_Atencion ELSE NULL END)'EN_BLANCO'
                         into dbo.DESPARACITACION
-                          FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A left join MAESTRO_PACIENTE_NOMINAL m
+                          FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A left join MAESTRO_PACIENTE m
                           on a.Numero_Documento_Paciente=m.Numero_Documento_Paciente 
                           WHERE 
                             ANIO='2021' AND ((anio='2021' and Tipo_Diagnostico='D' and Codigo_Item in ('99199.28','Z292') AND Valor_Lab='1') OR
