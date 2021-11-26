@@ -40,6 +40,7 @@
             $resultado2 = "SELECT V.PRIMERA_PROV,V.PRIMERA_DIST,V.TIPO_DOC, V.NUM_DOC,V.PRIMERA_PACIEN,V.PRIMERA_EDAD,V.PRIMERA_FAB,
                             V.PRIMERA_GRUPO,V.PRIMERA,V.FECHA_PARA_SEGUNDA FROM TEMPORAL1 V WHERE FALLECIDOS IS NULL AND RECHAZO IS NULL AND SEGUNDA IS NULL
                             AND V.PRIMERA_PROV = '$red'
+                            ORDER BY V.PRIMERA_PROV,V.PRIMERA_DIST
                             DROP TABLE TEMPORAL1";
 
             $resultado3 = "SELECT SUM (CASE WHEN (V.PRIMERA IS NULL) THEN 0 ELSE 1 END) AS 'CONTEO_TOTAL_PRIMERAS',
@@ -59,6 +60,7 @@
             $resultado2 = "SELECT V.PRIMERA_PROV,V.PRIMERA_DIST,V.TIPO_DOC, V.NUM_DOC,V.PRIMERA_PACIEN,V.PRIMERA_EDAD,V.PRIMERA_FAB,
                             V.PRIMERA_GRUPO,V.PRIMERA,V.FECHA_PARA_SEGUNDA FROM TEMPORAL1 V WHERE FALLECIDOS IS NULL AND RECHAZO IS NULL AND SEGUNDA IS NULL
                             AND V.PRIMERA_PROV='$red' AND V.PRIMERA_DIST='$dist'
+                            ORDER BY V.PRIMERA_PROV,V.PRIMERA_DIST
                             DROP TABLE TEMPORAL1";
 
             $resultado3 = "SELECT SUM (CASE WHEN (V.PRIMERA IS NULL) THEN 0 ELSE 1 END) AS 'CONTEO_TOTAL_PRIMERAS',
@@ -78,6 +80,7 @@
             $resultado2 = "SELECT V.PRIMERA_PROV,V.PRIMERA_DIST,V.TIPO_DOC, V.NUM_DOC,V.PRIMERA_PACIEN,V.PRIMERA_EDAD,V.PRIMERA_FAB,
                             V.PRIMERA_GRUPO,V.PRIMERA,V.FECHA_PARA_SEGUNDA FROM TEMPORAL1 V WHERE FALLECIDOS IS NULL AND RECHAZO IS NULL AND SEGUNDA IS NULL
                             AND V.PRIMERA_PROV='$red' AND V.PRIMERA_DIST='$dist'
+                            ORDER BY V.PRIMERA_PROV,V.PRIMERA_DIST
                             DROP TABLE TEMPORAL1";
 
             $resultado3 = "SELECT SUM (CASE WHEN (V.PRIMERA IS NULL) THEN 0 ELSE 1 END) AS 'CONTEO_TOTAL_PRIMERAS',
@@ -104,7 +107,7 @@
         }
 
         if(!empty($consulta2)){
-            $ficheroExcel="DEIT_PASCO CG_FT_CIERRE_BRECHAS "._date("d-m-Y", false, 'America/Lima').".xls";        
+            $ficheroExcel="DEIT_PASCO CIERRE_BRECHAS "._date("d-m-Y", false, 'America/Lima').".xls";        
             header('Content-Type: application/vnd.ms-excel');
             header("Content-Type: application/octet-stream");
             header("Content-Disposition: attachment;filename=".$ficheroExcel);
@@ -122,7 +125,7 @@
             </tr>
             <tr></tr>
             <tr class="text-center">
-                <th colspan="11" style="font-size: 28px; border: 1px solid #3A3838;">Cierre de Brechas</th>
+                <th colspan="11" style="font-size: 28px; border: 1px solid #3A3838;">Cierre de Brechas - Segunda Dosis</th>
             </tr>
             <tr></tr>
             <tr>
@@ -144,7 +147,7 @@
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Nombre Vacuna</th>
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Grupo Edad</th>
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Primera Dosis</th>
-                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Segunda Dosis</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #e19f9f">Segunda Dosis Pendiente (Debio inmunizarse)</th>
             </tr>
         </thead>
         <tbody>
@@ -203,17 +206,17 @@
     
             ?>
             <tr class="text-center font-12">
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $i++; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $i++; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate3; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate4); ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate5); ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate6; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo utf8_encode($newdate5); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate6; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate7); ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate8; ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate9; ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate10); ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate11; ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate12; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate8; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate9; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo utf8_encode($newdate10); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate11; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center; background: #e19f9f36;"><?php echo $newdate12; ?></td>
             </tr>
             <?php
                 ;}

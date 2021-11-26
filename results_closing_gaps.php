@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="text-center mb-3">
-                <h3 class="mb-4">Cierre de Brechas de Segunda Dosis</h3>
+                <h3 class="mb-4">Cierre de Brechas - Segunda Dosis</h3>
             </div>
             <div class="mb-3">
 				<div class="row m-2">
@@ -147,7 +147,7 @@
                             <th class="align-middle">Nombre Vacuna</th>
                             <th class="align-middle">Grupo Edad</th>
                             <th class="align-middle">Primera Dosis</th>
-                            <th class="align-middle" id="fields_brechas">Segunda Dosis Pendiente</th>
+                            <th class="align-middle" id="fields_brechas">Segunda Dosis Pendiente (Debio inmunizarse)</th>
                         </tr>
                     </thead>
                     <div class="float-end pb-1 col-md-3 table_no_fed">

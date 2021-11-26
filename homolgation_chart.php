@@ -507,7 +507,7 @@
                 $consulta3 = sqlsrv_query($conn2, $resultado3);
                 $list_dists = array();
                 while ($con = sqlsrv_fetch_array($consulta3)){
-                    if($con['NOMBRE_DIST'] == "SAN FCO DE ASIS DE YARUSYACAN"){ 
+                    if($con['NOMBRE_DIST'] == "SAN FRANCISCO DE ASIS DE YARUSYACAN"){ 
                         $list_dists[] = "YARUSYACAN"; 
                     }else if($con['NOMBRE_DIST'] == "SAN PEDRO DE PILLAO"){ 
                         $list_dists[] = "PILLAO"; 

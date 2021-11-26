@@ -18,7 +18,6 @@
                                         <option value="1">DANIEL ALCIDES CARRION</option> 
                                         <option value="2">OXAPAMPA</option>
                                         <option value="3">PASCO</option>
-                                        <option value="4">TODOS</option>
                                     </select>
                                 </div>
                                 <div class="col-md text-mobile">
