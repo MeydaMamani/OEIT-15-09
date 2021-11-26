@@ -128,13 +128,12 @@
                     <form action="print_closing_gaps.php" method="POST">
                         <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                         <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                        <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
                         <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                     </form>
                     <button type="submit" name="Limpiar" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='closing_gaps.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                 </div>
             </div><br>
-            <div class="col-12 table-responsive table_no_fed" id="cuatro_meses">
+            <div class="col-12 table-responsive table_no_fed" id="cierre_brechas">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="text-center font-12" style="background: #c9d0e2;">
@@ -148,7 +147,7 @@
                             <th class="align-middle">Nombre Vacuna</th>
                             <th class="align-middle">Grupo Edad</th>
                             <th class="align-middle">Primera Dosis</th>
-                            <th class="align-middle">Segunda Dosis</th>
+                            <th class="align-middle" id="fields_brechas">Segunda Dosis Pendiente</th>
                         </tr>
                     </thead>
                     <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -226,7 +225,7 @@
                             <td class="align-middle"><?php echo $newdate9; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate10); ?></td>
                             <td class="align-middle"><?php echo $newdate11; ?></td>
-                            <td class="align-middle"><?php echo $newdate12; ?></td>
+                            <td class="align-middle" id="fields_brechas_body"><?php echo $newdate12; ?></td>
                         </tr>
                         <?php
                             ;}
