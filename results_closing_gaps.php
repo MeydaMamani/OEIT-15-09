@@ -33,12 +33,83 @@
                     ?>
                     <div class="card col-md-2 datos_avance">
 						<div class="card-body p-1">
-							<p class="card-title text-secondary text-center font-18 pt-2">Total Primera Dosis</p>
+                            <p class="card-title text-secondary text-center font-18 pt-2">Total 1ra Dosis</p>
+                            <div class="col-md-12 text-center ">
+                                <img src="./img/va_0.png" width="150" aling="center" alt="">
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="align-self-center">
+                                    <h4 class="font-medium mb-3 justify-content-center d-flex">
+                                        <div class="col-md-12 text-center">
+                                            <b class="total font-38 text-secondary"><?php echo $consulta['CONTEO_TOTAL_PRIMERAS']; ?></b> <i class="mdi mdi-check font-38 text-secondary"></i>
+                                        </div>
+                                    </h4>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="card col-md-2 datos_avance">
+						<div class="card-body p-1">
+                            <p class="card-title text-secondary text-center font-18 pt-2">Dosis Completa</p>
+                            <div class="col-md-12 text-center ">
+                                <img src="./img/va_1.png" width="70" alt="" aling="center">
+                            </div>
+                            <div class="justify-content-center">
+							    <div class="align-self-center">
+								    <h4 class="font-medium mb-3 justify-content-center d-flex"> 
+									    <div class="mt-3 col-md-12 text-center">
+										    <b class="total font-38 text-success"><?php echo $consulta['DOSIS_COMPLETA']; ?></b> <i class="mdi mdi-check font-38 text-success"></i>
+									    </div>
+								    </h4>
+							    </div>
+							</div>
+						</div>
+					</div>
+					<div class="card col-md-2 datos_avance">
+						<div class="card-body p-0">
+                            <p class="card-title text-secondary text-center font-18 pt-3">2da Fuera Región</h4>
+                            <div class="col-md-12 text-center " text-success>
+                                <img src="./img/va_2.png" width="100" aling="center">
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="align-self-center">
+                                    <h4 class="font-medium mb-3 justify-content-center d-flex">
+                                        <div class="ms-2 col-md-12 text-center">
+                                            <b class="font-38 cumple"><?php echo $consulta['SEGUNDA_FUERA_REGION']; ?></b> <i class="mdi mdi-check font-38"></i>
+                                        </div>
+                                    </h4>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="card col-md-2 datos_avance">
+						<div class="card-body p-0">
+                            <p class="card-title text-secondary text-center font-18 pt-3">Fallecidos</h4>
+                            <div class="col-md-12 text-center " aling="center">
+                                <img src="./img/at.png" width="90"  alt="" >
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="align-self-center">
+                                    <h4 class="font-medium mb-3 justify-content-center d-flex">
+                                        <div class="mt-2 ms-2 col-md-12 text-center">
+                                            <b class="font-38 no_cumple"><?php echo $consulta['FALLECIDOS']; ?></b> <i class="mdi mdi-close font-38"></i>
+                                        </div>
+                                    </h4>
+                                </div>  
+                            </div>
+						</div>
+					</div>
+					<div class="card col-md-2 datos_avance">
+						<div class="card-body p-0">
+                            <p class="card-title text-secondary text-center font-18 pt-3">Rechazo a Dosis</h4>
+                            <div class="col-md-12 text-center ">
+                                <img src="./img/va_7.png" width="90" aling="center">
+                            </div>
 							<div class="justify-content-center">
 								<div class="align-self-center">
 									<h4 class="font-medium mb-3 justify-content-center d-flex">
-										<div class="col-md-12 text-center">
-											<b class="total font-38 text-secondary"><?php echo $consulta['CONTEO_TOTAL_PRIMERAS']; ?></b> <i class="mdi mdi-plus font-38 text-secondary"></i>
+										<div class="mt-2 ms-2 col-md-12 text-center">
+											<b class="font-38 text-danger observado"><?php echo $consulta['RECHAZO']; ?></b><i class="mdi mdi-close font-38 text-danger"></i>
 										</div>
 									</h4>
 								</div>
@@ -47,73 +118,22 @@
 					</div>
 					<div class="card col-md-2 datos_avance">
 						<div class="card-body p-1">
-							<p class="card-title text-secondary text-center font-18 pt-2">Dosis Completa</p>
-							<div class="justify-content-center">
-								<div class="align-self-center">
-									<h4 class="font-medium mb-3 justify-content-center d-flex">
-										<div class="mt-3 col-md-12 text-center">
-											<b class="total font-38 text-secondary"><?php echo $consulta['DOSIS_COMPLETA']; ?></b> <i class="mdi mdi-plus font-38 text-secondary"></i>
-										</div>
-									</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card col-md-2 datos_avance">
-						<div class="card-body p-0">
-							<p class="card-title text-secondary text-center font-18 pt-3">Segunda Fuera Región</h4>
-							<div class="justify-content-center">
-								<div class="align-self-center">
-									<h4 class="font-medium mb-3 justify-content-center d-flex">
-										<div class="ms-2 col-md-12 text-center">
-											<b class="font-38 text-secondary cumple"><?php echo $consulta['SEGUNDA_FUERA_REGION']; ?></b> <i class="mdi mdi-plus font-38 text-secondary"></i>
-										</div>
-									</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card col-md-2 datos_avance">
-						<div class="card-body p-0">
-						    <p class="card-title text-secondary text-center font-18 pt-3">Fallecidos</h4>
-							<div class="justify-content-center">
-								<div class="align-self-center">
-									<h4 class="font-medium mb-3 justify-content-center d-flex">
-										<div class="mt-3 ms-2 col-md-12 text-center">
-											<b class="font-38 text-secondary no_cumple"><?php echo $consulta['FALLECIDOS']; ?></b><i class="mdi mdi-plus font-38 text-secondary"></i>
-										</div>
-									</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card col-md-2 datos_avance">
-						<div class="card-body p-0">
-						    <p class="card-title text-secondary text-center font-18 pt-3">Rechazo</h4>
-							<div class="justify-content-center">
-								<div class="align-self-center">
-									<h4 class="font-medium mb-3 justify-content-center d-flex">
-										<div class="mt-3 ms-2 col-md-12 text-center">
-											<b class="font-38 text-secondary observado"><?php echo $consulta['RECHAZO']; ?></b><i class="mdi mdi-plus font-38 text-secondary"></i>
-										</div>
-									</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card col-md-2 datos_avance">
-						<div class="card-body p-1">
-							<div class="row pt-4">
+							<div class="row pt-2">
 								<div class="col-md-12 p-0 text-center">
-									<h1 class="font-light avance mb-3 text-primary"><?php
-											// if($cumple == 0 and $row_cont == 0){ echo '0 %'; }
-											// else{ echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%'; }
+                                    <h4 class="text-muted">Avance</h4>
+									<h1 class="font-light avance mb-2 text-primary"><?php
                                             $num = $consulta['RECHAZO'] + $consulta['FALLECIDOS'] + $consulta['SEGUNDA_FUERA_REGION'] + $consulta['DOSIS_COMPLETA'];
                                             $den = $consulta['CONTEO_TOTAL_PRIMERAS'];
                                             echo number_format((float)(($num/$den)*100), 2, '.', ''), '%';
 										?>
 									</h1>
-									<h4 class="text-muted">Avance</h4>
+                                    <div class="col-md-12 text-center align-self-center position-sticky">
+                                        <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php 
+                                            $num = $consulta['RECHAZO'] + $consulta['FALLECIDOS'] + $consulta['SEGUNDA_FUERA_REGION'] + $consulta['DOSIS_COMPLETA'];
+                                            $den = $consulta['CONTEO_TOTAL_PRIMERAS'];
+                                            echo number_format((float)(($num/$den)*100), 0, '.', '');
+                                        ?>"><i class="mdi mdi-receipt"></i></div>
+                                    </div>
 								</div>
 							</div>
 						</div>
