@@ -6,7 +6,7 @@
         header('Content-Type: text/html; charset=UTF-8');
         include('./base.php');
         include('zone_setting.php');
-        include('query_closing_gaps.php');
+        include('query_minsa_vaccine.php');
         $row_cont=0; 
         while ($consulta = sqlsrv_fetch_array($consulta2)){
             $row_cont++;
@@ -25,10 +25,21 @@
             <div class="text-center mb-3">
                 <h3 class="mb-4">Vacunas por Padrón Minsa</h3>
             </div>
-            <div class="mb-3">
+            <div class="d-flex">
+                <div class="col-5 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
+                <div class="col-md-7 d-flex">
+                    <form action="print_minsa_vaccine.php" method="POST">
+                        <input hidden name="red" value="<?php echo $_POST['red']; ?>">
+                        <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
+                        <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
+                    </form>
+                    <button type="submit" name="Limpiar" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='standard_minsa_vaccines.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
+                </div>
+            </div><br>
+            <!-- <div class="mb-3">
 				<div class="row m-2">
                     <?php
-                        include('query_closing_gaps.php');
+                        include('query_minsa_vaccine.php');
                         while ($consulta = sqlsrv_fetch_array($consulta3)){
                     ?>
                     <div class="card col-md-2 datos_avance">
@@ -122,18 +133,7 @@
                         }
                     ?>
 				</div>
-			</div>
-            <div class="d-flex">
-                <div class="col-md-12 d-flex justify-content-center">
-                    <form action="print_closing_gaps.php" method="POST">
-                        <input hidden name="red" value="<?php echo $_POST['red']; ?>">
-                        <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                        <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                        <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
-                    </form>
-                    <button type="submit" name="Limpiar" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='closing_gaps.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
-                </div>
-            </div><br>
+			</div> -->
             <div class="col-12 table-responsive table_no_fed" id="cierre_brechas">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
@@ -163,59 +163,68 @@
                     </div>
                     <tbody>
                         <?php
-                            include('query_closing_gaps.php');
+                            include('query_minsa_vaccine.php');
                             $i=1;
                             while ($consulta = sqlsrv_fetch_array($consulta2)){
-                                if(is_null ($consulta['PRIMERA_PROV']) ){
+                                if(is_null ($consulta['PROVINCIA']) ){
                                     $newdate3 = '  -'; }
-                                    else{
-                                $newdate3 = $consulta['PRIMERA_PROV'] ;}
+                                else{
+                                    $newdate3 = $consulta['PROVINCIA'] ;}
 
-                                if(is_null ($consulta['PRIMERA_DIST']) ){
+                                if(is_null ($consulta['DISTRITO']) ){
                                     $newdate4 = '  -'; }
-                                    else{
-                                $newdate4 = $consulta['PRIMERA_DIST'];}
+                                else{
+                                    $newdate4 = $consulta['DISTRITO'];}
 
                                 if(is_null ($consulta['TIPO_DOC']) ){
                                     $newdate5 = '  -'; }
-                                    else{
-                                $newdate5 = $consulta['TIPO_DOC'];}
+                                else{
+                                    $newdate5 = $consulta['TIPO_DOC'];}
 
                                 if(is_null ($consulta['NUM_DOC']) ){
                                     $newdate6 = '  -'; }
-                                    else{
-                                $newdate6 = $consulta['NUM_DOC'];}
+                                else{
+                                    $newdate6 = $consulta['NUM_DOC'];}
 
-                                if(is_null ($consulta['PRIMERA_PACIEN']) ){
+                                if(is_null ($consulta['FULL_NAME']) ){
                                     $newdate7 = '  -'; }
-                                    else{
-                                $newdate7 = $consulta['PRIMERA_PACIEN'];}
+                                else{
+                                    $newdate7 = $consulta['FULL_NAME'];}
 
-                                if(is_null ($consulta['PRIMERA_EDAD']) ){
+                                if(is_null ($consulta['EDAD']) ){
                                     $newdate8 = '  -'; }
-                                    else{
-                                $newdate8 = $consulta['PRIMERA_EDAD'];}
+                                else{
+                                    $newdate8 = $consulta['EDAD'];}
 
-                                if(is_null ($consulta['PRIMERA_FAB']) ){
+                                if(is_null ($consulta['FECHA_NACIMIENTO']) ){
                                     $newdate9 = '  -'; }
-                                    else{
-                                $newdate9 = $consulta['PRIMERA_FAB'];}
+                                else{
+                                    $newdate9 = $consulta['FECHA_NACIMIENTO'] -> format('d/m/y');}
 
-                                if(is_null ($consulta['PRIMERA_GRUPO']) ){
+                                if(is_null ($consulta['CELULAR']) ){
                                     $newdate10 = '  -'; }
-                                    else{
-                                $newdate10 = $consulta['PRIMERA_GRUPO'] ;}
+                                else{
+                                    $newdate10 = $consulta['CELULAR'] ;}
 
-                                if(is_null ($consulta['PRIMERA']) ){
+                                if(is_null ($consulta['UBIGEO_RENIEC']) ){
                                     $newdate11 = '  -'; }
-                                    else{
-                                    $newdate11 = $consulta['PRIMERA'] -> format('d/m/y');}
+                                else{
+                                    $newdate11 = $consulta['UBIGEO_RENIEC'];}
 
-                                if(is_null ($consulta['FECHA_PARA_SEGUNDA']) ){
+                                if(is_null ($consulta['FECHA_PRIMERA_DOSIS']) ){
                                     $newdate12 = '  -'; }
                                 else{
-                                    $newdate12 = $consulta['FECHA_PARA_SEGUNDA'] -> format('d/m/y');}
+                                    $newdate12 = $consulta['FECHA_PRIMERA_DOSIS'] -> format('d/m/y');}
 
+                                if(is_null ($consulta['FECHA_SEGUNDA_DOSIS']) ){
+                                    $newdate13 = '  -'; }
+                                else{
+                                    $newdate13 = $consulta['FECHA_SEGUNDA_DOSIS'] -> format('d/m/y');}
+
+                                if(is_null ($consulta['TERCERA DOSIS']) ){
+                                    $newdate14 = '  -'; }
+                                else{
+                                    $newdate14 = $consulta['TERCERA DOSIS'] -> format('d/m/y');}
                         ?>
                         <tr class="text-center font-12">
                             <td class="align-middle"><?php echo $i++; ?></td>
@@ -228,7 +237,9 @@
                             <td class="align-middle"><?php echo $newdate9; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate10); ?></td>
                             <td class="align-middle"><?php echo $newdate11; ?></td>
-                            <td class="align-middle" id="fields_brechas_body"><?php echo $newdate12; ?></td>
+                            <td class="align-middle"><?php echo $newdate12; ?></td>
+                            <td class="align-middle"><?php echo $newdate12; ?></td>
+                            <td class="align-middle"><?php echo $newdate12; ?></td>
                         </tr>
                         <?php
                             ;}
