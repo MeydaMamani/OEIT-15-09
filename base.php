@@ -45,6 +45,10 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
+    <!-- para cargar archivos -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700,900|Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./css/dropify.min.css">
+
     <link rel="stylesheet" href="./plugin/chartist-js/chartist.min.css">
     <link rel="stylesheet" href="./plugin/chartist-js/chartist-init.css">
     <link rel="stylesheet" href="./plugin/chartist-js/chartist-plugin-tooltip.min.js">
@@ -122,6 +126,7 @@
 						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-file-document text-white pb-1"></i><span class="hide-menu ml-6"> Solicitud</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="solicitud.php">Mi Solicitud</a></li>
+                                <li><a href="solicitude2.php">Mi Solicitud 2</a></li>
                             </ul>
                         </li>
 						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-calendar-check text-white pb-1"></i><span class="hide-menu ml-6"> Seguimiento</span></a>
@@ -145,7 +150,7 @@
                                 <li><a href="standart_3_dose.php">Aptos para Tercera Dosis</a></li>
                                 <li><a href="nominal_vaccine_advance.php">Avance Vacuna Nominal</a></li>
                                 <li><a href="closing_gaps.php">Cierre de Brechas</a></li>
-                                <!-- <li><a href="standard_minsa_vaccines.php">Vacunas Padrón Minsa</a></li> -->
+                                <li><a href="standard_minsa_vaccines.php">Vacunas Padrón Minsa</a></li>
                             </ul>
                         </li>
 						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-format-list-bulleted text-white pb-1"></i><span class="hide-menu ml-6"> Padrón Nominal</span></a>

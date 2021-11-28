@@ -1,23 +1,69 @@
 <?php 
+    require('abrir2.php');
     require('abrir6.php');
         
     global $conex;
     ini_set("default_charset", "UTF-8");
     mb_internal_encoding("UTF-8");
 
-    $resultado = "SELECT V.TIPO_DOC, V.NUM_DOC,
-                    CASE WHEN (V.PRIMERA_PACIEN IS NULL) THEN V.SEGUNDA_PACIEN ELSE V.PRIMERA_PACIEN END AS 'NOMBRE_PACIENTE',
-                    CASE WHEN (V.SEGUNDA_EDAD IS NULL) THEN V.PRIMERA_EDAD ELSE V.SEGUNDA_EDAD END AS 'EDAD_PACIENTE',
-                    CASE WHEN (V.PRIMERA IS NULL) THEN VN.PRIMERA ELSE V.PRIMERA END AS 'FECHA_PRIMERA_DOSIS',
-                    CASE WHEN (V.SEGUNDA IS NULL) THEN VN.SEGUNDA ELSE V.SEGUNDA END AS 'FECHA_SEGUNDA_DOSIS',
-                    CASE WHEN (V.SEGUNDA IS NULL) THEN DATEADD(DAY,150,VN.SEGUNDA) ELSE DATEADD(DAY,150,V.SEGUNDA) END AS 'FECHA_PARA_3RA_DOSIS'
-                    INTO T1 FROM VACUNADOS V
-                    LEFT JOIN BD_VACUNADOS_NACIONAL.dbo.VACUNADOS VN 
-                    ON V.NUM_DOC=VN.NUM_DOC AND V.TIPO_DOC = VN.TIPO_DOC";
+    if (isset($_POST['Buscar'])) {
+        global $conex;
+        
+        $red_1 = $_POST['red'];
+        $dist_1 = $_POST['distrito'];
 
-    $resultado2 = "SELECT * FROM T1 WHERE FECHA_PARA_3RA_DOSIS <GETDATE()
-                    DROP TABLE T1";
-           
-    $consulta2 = sqlsrv_query($conn6, $resultado);
-    $consulta3 = sqlsrv_query($conn6, $resultado2);
+        if ($red_1 == 1) {
+            $red = 'DANIEL ALCIDES CARRION';
+        }
+        elseif ($red_1 == 2) {
+            $red = 'OXAPAMPA';
+        }
+        elseif ($red_1 == 3) {
+            $red = 'PASCO';
+        }
+        elseif ($red_1 == 4) {
+            $redt = 'PASCO';
+        }
+    
+        if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
+            $resultado = "SELECT V.PRIMERA_PROV, V.PRIMERA_DIST, V.SEGUNDA_PROV, V.SEGUNDA_DIST, V.TIPO_DOC, V.NUM_DOC,
+                                CASE WHEN (V.PRIMERA_PACIEN IS NULL) THEN V.SEGUNDA_PACIEN ELSE V.PRIMERA_PACIEN END AS 'NOMBRE_PACIENTE',
+                                CASE WHEN (V.SEGUNDA_EDAD IS NULL) THEN V.PRIMERA_EDAD ELSE V.SEGUNDA_EDAD END AS 'EDAD_PACIENTE',
+                                CASE WHEN (V.PRIMERA IS NULL) THEN VN.PRIMERA ELSE V.PRIMERA END AS 'FECHA_PRIMERA_DOSIS',
+                                CASE WHEN (V.SEGUNDA IS NULL) THEN VN.SEGUNDA ELSE V.SEGUNDA END AS 'FECHA_SEGUNDA_DOSIS',
+                                CASE WHEN (V.SEGUNDA IS NULL) THEN DATEADD(DAY,150,VN.SEGUNDA) ELSE DATEADD(DAY,150,V.SEGUNDA) END AS 'FECHA_PARA_3RA_DOSIS'
+                                INTO T1 FROM VACUNADOS V
+                                LEFT JOIN BD_VACUNADOS_NACIONAL.dbo.VACUNADOS VN 
+                                ON V.NUM_DOC=VN.NUM_DOC AND V.TIPO_DOC = VN.TIPO_DOC
+                                WHERE (V.PRIMERA_PROV = '$red' or V.SEGUNDA_PROV = '$red') ";
+
+            $resultado2 = "SELECT * FROM T1 WHERE FECHA_PARA_3RA_DOSIS <GETDATE() 
+                            DROP TABLE T1";
+        }
+        else if($dist_1 != 'TODOS'){
+            $dist=$dist_1;
+            $resultado = "SELECT V.PRIMERA_PROV, V.PRIMERA_DIST, V.SEGUNDA_PROV, V.SEGUNDA_DIST, V.TIPO_DOC, V.NUM_DOC,
+                                CASE WHEN (V.PRIMERA_PACIEN IS NULL) THEN V.SEGUNDA_PACIEN ELSE V.PRIMERA_PACIEN END AS 'NOMBRE_PACIENTE',
+                                CASE WHEN (V.SEGUNDA_EDAD IS NULL) THEN V.PRIMERA_EDAD ELSE V.SEGUNDA_EDAD END AS 'EDAD_PACIENTE',
+                                CASE WHEN (V.PRIMERA IS NULL) THEN VN.PRIMERA ELSE V.PRIMERA END AS 'FECHA_PRIMERA_DOSIS',
+                                CASE WHEN (V.SEGUNDA IS NULL) THEN VN.SEGUNDA ELSE V.SEGUNDA END AS 'FECHA_SEGUNDA_DOSIS',
+                                CASE WHEN (V.SEGUNDA IS NULL) THEN DATEADD(DAY,150,VN.SEGUNDA) ELSE DATEADD(DAY,150,V.SEGUNDA) END AS 'FECHA_PARA_3RA_DOSIS'
+                                INTO T1 FROM VACUNADOS V
+                                LEFT JOIN BD_VACUNADOS_NACIONAL.dbo.VACUNADOS VN 
+                                ON V.NUM_DOC=VN.NUM_DOC AND V.TIPO_DOC = VN.TIPO_DOC
+                                WHERE (V.PRIMERA_PROV = '$red' or V.SEGUNDA_PROV = '$red') AND (V.PRIMERA_PROV = '$red' or V.SEGUNDA_PROV = '$red')";
+
+            $resultado2 = "SELECT * FROM T1 WHERE FECHA_PARA_3RA_DOSIS <GETDATE()
+                            DROP TABLE T1";
+        }
+
+        $consulta2 = sqlsrv_query($conn6, $resultado);
+        $consulta3 = sqlsrv_query($conn6, $resultado2);
+
+        $my_date_modify = "SELECT MAX(FECHA_MODIFICACION_REGISTRO) as DATE_MODIFY FROM NOMINAL_PADRON_NOMINAL";
+        $consult = sqlsrv_query($conn2, $my_date_modify);
+        while ($cons = sqlsrv_fetch_array($consult)){
+            $date_modify = $cons['DATE_MODIFY'] -> format('d/m/y');
+        }
+    }
 ?>

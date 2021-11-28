@@ -9,7 +9,8 @@
   <?php
 
   $doc = $_POST['doc'];
-  $resultado = "SELECT * FROM VACUNADOS WHERE num_doc = '$doc' AND (PRIMERA_DEP = 'PASCO' or SEGUNDA_DEP = 'PASCO');";
+  $resultado = "SELECT C.COMORBILIDAD, C.*, V.* FROM VACUNADOS AS V LEFT JOIN T_CONSOLIDADO_VACUNA_COVID AS C ON V.NUM_DOC = C.NUM_DOC 
+                WHERE (PRIMERA_DEP = 'PASCO' or SEGUNDA_DEP = 'PASCO') AND c.NUM_DOC='$doc'";
 
   $consulta2 = sqlsrv_query($conn7, $resultado);
   $consulta = sqlsrv_fetch_array($consulta2);
@@ -49,6 +50,16 @@
                     <p class="font-13"><?php echo $consulta['PRIMERA_DEP'];
                                         echo "/";
                                         echo $consulta['SEGUNDA_DEP']; ?></p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="sl-item">
+                <div class="sl-left"><img src="./img/coronavirus.png" width="160" alt="user" class="img-circle size-icon-information-person"></div>
+                <div class="sl-right">
+                  <div>
+                    <label class="information-person-text">Grupo de Riesgo</label>
+                    <p class="font-13"><?php echo $consulta['GRUPO_RIESGO']; ?></p>
                   </div>
                 </div>
               </div>
