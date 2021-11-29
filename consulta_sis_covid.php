@@ -76,29 +76,35 @@
         
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado2 = "SELECT * FROM SOSPECHOSO WHERE RESIDENCIA_PROVINCIA = '$red'
+                            --ORDER BY PROVINCIA, DISTRITO
                             DROP TABLE SINF0
                             DROP TABLE SOSPECHOSO";
 
             $resultado4 = "SELECT * FROM PRUEBA WHERE PROVINCIA = '$red'
+                            --ORDER BY PROVINCIA, DISTRITO
                             DROP TABLE SINF100
                             DROP TABLE PRUEBA";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $resultado2 = "SELECT * FROM SOSPECHOSO
+                            --ORDER BY PROVINCIA, DISTRITO
                             DROP TABLE SINF0
                             DROP TABLE SOSPECHOSO";
 
             $resultado4 = "SELECT * FROM PRUEBA
+                            --ORDER BY PROVINCIA, DISTRITO
                             DROP TABLE SINF100
                             DROP TABLE PRUEBA";
         }
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
             $resultado2 = "SELECT * FROM SOSPECHOSO WHERE RESIDENCIA_PROVINCIA = '$red' AND RESIDENCIA_DISTRITO = '$dist'
+                            --ORDER BY RESIDENCIA_PROVINCIA, RESIDENCIA_DISTRITO
                             DROP TABLE SINF0
                             DROP TABLE SOSPECHOSO";
 
             $resultado4 = "SELECT * FROM PRUEBA WHERE PROVINCIA = '$red' AND DISTRITO = '$dist'
+                            --ORDER BY PROVINCIA, DISTRITO
                             DROP TABLE SINF100
                             DROP TABLE PRUEBA";
         }

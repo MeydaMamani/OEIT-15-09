@@ -26,15 +26,15 @@
                     </marquee>
                 </div>
             </div>
-            <div class="text-center p-3">
+            <div class="text-center pb-3">
               <h3>Seguimiento Tamizaje Neonatal - <?php echo $nombre_mes; ?></h3>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-1">
                 <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"> <?php echo $row_cnt; ?></b></div>
                 <div class="col-8 d-flex justify-content-end">
                 </div>
             </div>
-            <div class="col-12 mb-3">
+            <div class="col-12 mb-2">
                 <div class="d-flex justify-content-center">
                     <form action="impresion_seg_neonatal_sector.php" method="POST">
                          <input hidden name="sector" value="<?php echo $_POST['sector']; ?>">

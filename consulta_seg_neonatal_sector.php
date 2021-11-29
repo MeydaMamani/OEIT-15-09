@@ -90,7 +90,8 @@
 
         }
 
-        $resultado4 = "SELECT * FROM BDHIS_MINSA.dbo.TEMPORAL001 ORDER BY Institucion, PROV_EESS,DIST_EESS, Nombre_EESS
+        $resultado4 = "SELECT * FROM BDHIS_MINSA.dbo.TEMPORAL001 
+                        ORDER BY Institucion, PROV_EESS,DIST_EESS, Nombre_EESS
                         DROP TABLE BDHIS_MINSA.dbo.atencionesneonatal1
                         DROP TABLE BDHIS_MINSA.dbo.nacidoscnv1
                         DROP TABLE BDHIS_MINSA.dbo.TEMPORAL001";

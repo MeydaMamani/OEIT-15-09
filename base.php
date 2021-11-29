@@ -148,14 +148,14 @@
 								<li><a href="vacuna_padron.php">Consulta Padrón</a></li>
 								<li><a href="https://drive.google.com/file/d/1qR2KiCh3DRyp1OyiJZ2xjBJMpZQxmaSi/view" target="_blank">Descargue su Consentimiento</a></li>
                                 <li><a href="standart_3_dose.php">Aptos para Tercera Dosis</a></li>
-                                <li><a href="nominal_vaccine_advance.php">Avance Vacuna Nominal</a></li>
+                                <li><a href="nominal_vaccine_advance.php">Avance de Tercera Dosis</a></li>
                                 <li><a href="closing_gaps.php">Cierre de Brechas</a></li>
                                 <li><a href="standard_minsa_vaccines.php">Vacunas Padrón Minsa</a></li>
                             </ul>
                         </li>
 						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-format-list-bulleted text-white pb-1"></i><span class="hide-menu ml-6"> Padrón Nominal</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="padron_children.php">Padrón Niños 6 Meses</a></li>
+								<li><a href="padron_children.php">Padrón Niños</a></li>
 								<li><a href="padron_gestantes.php">Padrón Gestantes</a></li>
                             </ul>
                         </li>

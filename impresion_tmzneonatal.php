@@ -62,6 +62,7 @@
                                 from bdhis_minsa.dbo.padronneonatal p left join bdhis_minsa.dbo.atenciones a 
                                         on p.documento=a.Numero_Documento_Paciente
                                 where month(p.a_medir)='$mes' AND nombre_prov='$red'
+                                ORDER BY p.nombre_prov, p.nombre_dist
                                 DROP TABLE bdhis_minsa.dbo.padronneonatal
                                 DROP TABLE bdhis_minsa.dbo.atenciones";
         }
@@ -73,6 +74,7 @@
                                 from bdhis_minsa.dbo.padronneonatal p left join bdhis_minsa.dbo.atenciones a 
                                         on p.documento=a.Numero_Documento_Paciente
                                 where month(p.a_medir)='$mes'
+                                ORDER BY p.nombre_prov, p.nombre_dist
                                 DROP TABLE bdhis_minsa.dbo.padronneonatal
                                 DROP TABLE bdhis_minsa.dbo.atenciones";
         }
@@ -84,6 +86,7 @@
                                 from bdhis_minsa.dbo.padronneonatal p left join bdhis_minsa.dbo.atenciones a 
                                         on p.documento=a.Numero_Documento_Paciente
                                 where month(p.a_medir)='$mes' AND nombre_prov='$red' AND nombre_dist='$dist'
+                                ORDER BY p.nombre_prov, p.nombre_dist
                                 DROP TABLE bdhis_minsa.dbo.padronneonatal
                                 DROP TABLE bdhis_minsa.dbo.atenciones";
         }

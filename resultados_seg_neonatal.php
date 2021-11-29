@@ -64,7 +64,7 @@
             <div class="col-12 table-responsive">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
-                        <tr class="font-12 text-center" style="background: #e0eff5;">
+                        <tr class="font-12 text-center" style="background: #e0eff5;"> 
                             <th class="align-middle">#</th>
                             <th class="align-middle">Sector</th>
                             <th class="align-middle">Financiador</th>

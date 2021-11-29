@@ -238,7 +238,8 @@
                                     PRIMER_CNTRL,SEG_CNTRL,	TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,
                                     CUARTO_CNTRL_MES,QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES,
                                     NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,	ONCEAVO_CNTRL_MES
-                                    drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
+                                ORDER BY NOMBRE_PROV,NOMBRE_DIST
+                                drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
                                 drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn1_2 
                                 drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
                                 drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES1
@@ -298,7 +299,8 @@
                                 PRIMER_CNTRL,SEG_CNTRL,	TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,
                                 CUARTO_CNTRL_MES,QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES,
                                 NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,	ONCEAVO_CNTRL_MES
-                                drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
+                            ORDER BY NOMBRE_PROV,NOMBRE_DIST
+                            drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
                             drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn1_2 
                             drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
                             drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES1
@@ -360,7 +362,8 @@
                                     PRIMER_CNTRL,SEG_CNTRL,	TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,
                                     CUARTO_CNTRL_MES,QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES,
                                     NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,	ONCEAVO_CNTRL_MES
-                                    drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
+                                ORDER BY NOMBRE_PROV,NOMBRE_DIST    
+                                drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
                                 drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn1_2 
                                 drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
                                 drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES1

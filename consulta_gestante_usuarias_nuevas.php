@@ -80,6 +80,7 @@
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
           $resultado6 = "SELECT * FROM BDHIS_MINSA.dbo.PADRONINICIO WHERE Provincia='$red'
+                          ORDER BY Provincia, Distrito, Nombre_Establecimiento
                           DROP TABLE bdhis_minsa.dbo.RENAES
                           DROP TABLE bdhis_minsa.dbo.TRAMAHIS
                           DROP TABLE bdhis_minsa.dbo.NUM 
@@ -88,6 +89,7 @@
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
           $resultado6 = "SELECT * FROM BDHIS_MINSA.dbo.PADRONINICIO
+                          ORDER BY Provincia, Distrito, Nombre_Establecimiento
                           DROP TABLE bdhis_minsa.dbo.RENAES
                           DROP TABLE bdhis_minsa.dbo.TRAMAHIS
                           DROP TABLE bdhis_minsa.dbo.NUM 
@@ -96,7 +98,8 @@
         }
         else if($dist_1 != 'TODOS'){
           $dist=$dist_1;
-          $resultado6 = "SELECT * FROM BDHIS_MINSA.dbo.PADRONINICIO WHERE Provincia='Pasco' AND Distrito='$dist'
+          $resultado6 = "SELECT * FROM BDHIS_MINSA.dbo.PADRONINICIO WHERE Provincia='$red' AND Distrito='$dist'
+                          ORDER BY Provincia, Distrito, Nombre_Establecimiento
                           DROP TABLE bdhis_minsa.dbo.RENAES
                           DROP TABLE bdhis_minsa.dbo.TRAMAHIS
                           DROP TABLE bdhis_minsa.dbo.NUM 

@@ -64,8 +64,7 @@
                                 AND edad_reg='1' and t.Tipo_Edad ='M' and
                                             Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
                                 ORDER BY Provnacido, Distnacido, Establecimiento
-                                DROP TABLE BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1
-                                DROP TABLE padron_nino_cnv1";
+                                DROP TABLE BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $resultado2 = "SELECT C.Periodo, DATEADD(DAY,59,C.FECNACIDO) mide, C.SECTOR, C.Provnacido, C.Distnacido,C.Establecimiento, 
@@ -80,8 +79,7 @@
                                 AND edad_reg='1' and t.Tipo_Edad ='M' and
                                             Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
                                 ORDER BY Provnacido, Distnacido, Establecimiento
-                                DROP TABLE  BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1
-                                DROP TABLE padron_nino_cnv1";
+                                DROP TABLE BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1";
         }
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
@@ -97,8 +95,7 @@
                                 AND edad_reg='1' and t.Tipo_Edad ='M' and
                                             Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
                                 ORDER BY Provnacido, Distnacido, Establecimiento
-                                DROP TABLE  BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1
-                                DROP TABLE padron_nino_cnv1";
+                                DROP TABLE  BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1";
         }
 
         $consulta1 = sqlsrv_query($conn2, $resultado);

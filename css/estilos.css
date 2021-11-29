@@ -435,6 +435,14 @@ img:hover{
 	background: #638bb3 !important;
 }
 
+#paquete_nino thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #afd3b5 !important;
+}
+
+
 /* CIERRE DE BRECHASS */
 #cierre_brechas thead tr th { 
 	position: sticky;
@@ -485,6 +493,12 @@ img:hover{
 	background: #f0dfc757;
 }
 
+#cant_prof thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #f1f5e0 !important;
+}
 
 #visitas_cuatro_meses thead tr th { 
 	position: sticky;
@@ -536,6 +550,29 @@ img:hover{
 .m-r-4{
 	margin-right: 40px;
 }
+
+/* APTOS TERCERA DOSIS */
+#three_dose thead tr th#patient { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #eff0eb !important;
+}
+
+#three_dose thead tr th#first_dose { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #e9e9e1 !important;
+}
+
+#three_dose thead tr th#second_dose { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #dedbd6 !important;
+}
+
 
 /* PARA LOADING */
 .lds-roller {

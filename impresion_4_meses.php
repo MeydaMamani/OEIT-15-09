@@ -75,36 +75,39 @@
             $resultado4 = "SELECT pn.NOMBRE_PROV, pn.NOMBRE_DIST,pn.NOMBRE_EESS EESS_ATENCION,pn.MENOR_VISITADO,PN.MENOR_ENCONTRADO,pn.NUM_DNI,pn.NUM_CNV,
                         pn.FECHA_NACIMIENTO_NINO,PN.DOCUMENTO,PN.APELLIDOS_NOMBRES,
                         P.PREMATURO, S.Edad_Dias_Paciente_FechaAtencion SUPLEMENTADO ,pn.NOMBRE_EESS ULTIMA_ATE_PN, pn.TIPO_SEGURO
-                    from PADRON_EVALUAR41 pn
-                    LEFT JOIN PREMATURO1 P ON PN.DOCUMENTO=P.NUMERO_DOCUMENTO_PACIENTE
-                    LEFT JOIN SUPLEMENTADO41 S ON PN.DOCUMENTO=S.Numero_Documento_Paciente WHERE pn.NOMBRE_PROV ='$red'
-                    DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PREMATURO1
-                    DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41
-                    DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SUPLEMENTADO41";
+                        from PADRON_EVALUAR41 pn
+                        LEFT JOIN PREMATURO1 P ON PN.DOCUMENTO=P.NUMERO_DOCUMENTO_PACIENTE
+                        LEFT JOIN SUPLEMENTADO41 S ON PN.DOCUMENTO=S.Numero_Documento_Paciente WHERE pn.NOMBRE_PROV ='$red'
+                        ORDER BY pn.NOMBRE_PROV, pn.NOMBRE_DIST
+                        DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PREMATURO1
+                        DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41
+                        DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SUPLEMENTADO41";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $dist = '';
             $resultado4 = "SELECT pn.NOMBRE_PROV, pn.NOMBRE_DIST,pn.NOMBRE_EESS EESS_ATENCION,pn.MENOR_VISITADO,PN.MENOR_ENCONTRADO,pn.NUM_DNI,pn.NUM_CNV,
                                 pn.FECHA_NACIMIENTO_NINO,PN.DOCUMENTO,PN.APELLIDOS_NOMBRES,
                                 P.PREMATURO, S.Edad_Dias_Paciente_FechaAtencion SUPLEMENTADO ,pn.NOMBRE_EESS ULTIMA_ATE_PN, pn.TIPO_SEGURO
-                            from PADRON_EVALUAR41 pn
-                            LEFT JOIN PREMATURO1 P ON PN.DOCUMENTO=P.NUMERO_DOCUMENTO_PACIENTE
-                            LEFT JOIN SUPLEMENTADO41 S ON PN.DOCUMENTO=S.Numero_Documento_Paciente
-                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PREMATURO1
-                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41
-                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SUPLEMENTADO41";
+                                from PADRON_EVALUAR41 pn
+                                LEFT JOIN PREMATURO1 P ON PN.DOCUMENTO=P.NUMERO_DOCUMENTO_PACIENTE
+                                LEFT JOIN SUPLEMENTADO41 S ON PN.DOCUMENTO=S.Numero_Documento_Paciente
+                                ORDER BY pn.NOMBRE_PROV, pn.NOMBRE_DIST
+                                DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PREMATURO1
+                                DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41
+                                DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SUPLEMENTADO41";
         }
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
             $resultado4 = "SELECT pn.NOMBRE_PROV, pn.NOMBRE_DIST,pn.NOMBRE_EESS EESS_ATENCION,pn.MENOR_VISITADO,PN.MENOR_ENCONTRADO,pn.NUM_DNI,pn.NUM_CNV,
                         pn.FECHA_NACIMIENTO_NINO,PN.DOCUMENTO,PN.APELLIDOS_NOMBRES,
                         P.PREMATURO, S.Edad_Dias_Paciente_FechaAtencion SUPLEMENTADO ,pn.NOMBRE_EESS ULTIMA_ATE_PN, pn.TIPO_SEGURO
-                    from PADRON_EVALUAR41 pn
-                    LEFT JOIN PREMATURO1 P ON PN.DOCUMENTO=P.NUMERO_DOCUMENTO_PACIENTE
-                    LEFT JOIN SUPLEMENTADO41 S ON PN.DOCUMENTO=S.Numero_Documento_Paciente WHERE pn.NOMBRE_PROV ='$red' AND pn.NOMBRE_DIST ='$dist'
-                    DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PREMATURO1
-                    DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41
-                    DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SUPLEMENTADO41";
+                        from PADRON_EVALUAR41 pn
+                        LEFT JOIN PREMATURO1 P ON PN.DOCUMENTO=P.NUMERO_DOCUMENTO_PACIENTE
+                        LEFT JOIN SUPLEMENTADO41 S ON PN.DOCUMENTO=S.Numero_Documento_Paciente WHERE pn.NOMBRE_PROV ='$red' AND pn.NOMBRE_DIST ='$dist'
+                        ORDER BY pn.NOMBRE_PROV, pn.NOMBRE_DIST
+                        DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PREMATURO1
+                        DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41
+                        DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SUPLEMENTADO41";
         }
 
         $consulta2 = sqlsrv_query($conn, $resultado);

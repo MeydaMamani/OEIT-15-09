@@ -86,6 +86,7 @@
                     from PADRON_EVALUAR41 pn
                     LEFT JOIN PREMATURO1 P ON PN.DOCUMENTO=P.NUMERO_DOCUMENTO_PACIENTE
                     LEFT JOIN SUPLEMENTADO41 S ON PN.DOCUMENTO=S.Numero_Documento_Paciente WHERE pn.NOMBRE_PROV ='$red'
+                    ORDER BY pn.NOMBRE_PROV, pn.NOMBRE_DIST
                     DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PREMATURO1
                     DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41
                     DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SUPLEMENTADO41";
@@ -98,6 +99,7 @@
                             from PADRON_EVALUAR41 pn
                             LEFT JOIN PREMATURO1 P ON PN.DOCUMENTO=P.NUMERO_DOCUMENTO_PACIENTE
                             LEFT JOIN SUPLEMENTADO41 S ON PN.DOCUMENTO=S.Numero_Documento_Paciente
+                            ORDER BY pn.NOMBRE_PROV, pn.NOMBRE_DIST
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PREMATURO1
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SUPLEMENTADO41";
@@ -110,6 +112,7 @@
                     from PADRON_EVALUAR41 pn
                     LEFT JOIN PREMATURO1 P ON PN.DOCUMENTO=P.NUMERO_DOCUMENTO_PACIENTE
                     LEFT JOIN SUPLEMENTADO41 S ON PN.DOCUMENTO=S.Numero_Documento_Paciente WHERE pn.NOMBRE_PROV ='$red' AND pn.NOMBRE_DIST ='$dist'
+                    ORDER BY pn.NOMBRE_PROV, pn.NOMBRE_DIST
                     DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PREMATURO1
                     DROP TABLE BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41
                     DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SUPLEMENTADO41";

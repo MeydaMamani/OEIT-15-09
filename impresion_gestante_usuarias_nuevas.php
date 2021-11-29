@@ -46,35 +46,35 @@
         }
 
         $resultado1 = "SELECT Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Codigo_Item, Tipo_Diagnostico, Fecha_Atencion, Numero_Documento_Paciente, Tipo_Doc_Paciente, Valor_Lab 
-                        into bdhis_minsa.dbo.TRAMAHIS 
-                        from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where ltrim(rtrim(Codigo_Item)) in ('99208','96150','96150.01')
-                        and isnumeric(Numero_Documento_Paciente)=1
-                        and ltrim(rtrim(Genero))='F'
-                        ANd Tipo_Edad='A' AND edad_reg>=18
-                        AND [Id_Condicion_Servicio] in ('N','R')";
+                into bdhis_minsa.dbo.TRAMAHIS 
+                from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
+                where ltrim(rtrim(Codigo_Item)) in ('99208','96150','96150.01')
+                and isnumeric(Numero_Documento_Paciente)=1
+                and ltrim(rtrim(Genero))='F'
+                ANd Tipo_Edad='A' AND edad_reg>=18
+                AND [Id_Condicion_Servicio] in ('N','R')";
 
         $resultado2 = "SELECT Codigo_Unico, Categoria_Establecimiento 
-                        into bdhis_minsa.dbo.RENAES 
-                        from MAESTRO_HIS_ESTABLECIMIENTO";
+                into bdhis_minsa.dbo.RENAES 
+                from MAESTRO_HIS_ESTABLECIMIENTO";
 
         $resultado3 = "SELECT distinct try_convert(int,r.Codigo_Unico) renaes, try_convert(date,Fecha_Atencion) fecha_cita, convert(varchar,Tipo_Doc_Paciente)+convert(varchar,Numero_Documento_Paciente) id, den=1
-                        into bdhis_minsa.dbo.DEN 
-                        from bdhis_minsa.dbo.TRAMAHIS h
-                        left join bdhis_minsa.dbo.RENAES r ON TRY_CONVERT(INT,h.Codigo_Unico) = TRY_CONVERT(INT,R.Codigo_Unico)
-                        where ltrim(rtrim(Codigo_Item)) in ('99208') and ltrim(rtrim(Tipo_Diagnostico)) in ('D')
-                        and month(try_convert(date,Fecha_Atencion))='$mes' and year(try_convert(date,Fecha_Atencion))='2021'
-                        and Numero_Documento_Paciente is not null
-                        AND Categoria_Establecimiento IN ('I-1','I-2','I-3','I-4')";
+                into bdhis_minsa.dbo.DEN 
+                from bdhis_minsa.dbo.TRAMAHIS h
+                left join bdhis_minsa.dbo.RENAES r ON TRY_CONVERT(INT,h.Codigo_Unico) = TRY_CONVERT(INT,R.Codigo_Unico)
+                where ltrim(rtrim(Codigo_Item)) in ('99208') and ltrim(rtrim(Tipo_Diagnostico)) in ('D')
+                and month(try_convert(date,Fecha_Atencion))='$mes' and year(try_convert(date,Fecha_Atencion))='2021'
+                and Numero_Documento_Paciente is not null
+                AND Categoria_Establecimiento IN ('I-1','I-2','I-3','I-4')";
 
         $resultado4 = "SELECT distinct try_convert(int,Codigo_Unico) renaes, try_convert(date,Fecha_Atencion) fecha_cita, convert(varchar,Tipo_Doc_Paciente)+convert(varchar,Numero_Documento_Paciente) id, num=1
-                        into bdhis_minsa.dbo.NUM
-                        from bdhis_minsa.dbo.TRAMAHIS
-                        where (
-                            (	ltrim(rtrim(Codigo_Item)) = '96150' and ltrim(rtrim(Tipo_Diagnostico)) ='D' and ltrim(rtrim(valor_lab)) ='VIF'	)
-                            or 
-                            ( 	ltrim(rtrim(Codigo_Item)) = '96150.01' and ltrim(rtrim(Tipo_Diagnostico)) = 'D' )
-                        ) and month(try_convert(date,Fecha_Atencion))='$mes' and year(try_convert(date,Fecha_Atencion))='2021'";
+                into bdhis_minsa.dbo.NUM
+                from bdhis_minsa.dbo.TRAMAHIS
+                where (
+                    (	ltrim(rtrim(Codigo_Item)) = '96150' and ltrim(rtrim(Tipo_Diagnostico)) ='D' and ltrim(rtrim(valor_lab)) ='VIF'	)
+                    or 
+                    ( 	ltrim(rtrim(Codigo_Item)) = '96150.01' and ltrim(rtrim(Tipo_Diagnostico)) = 'D' )
+                ) and month(try_convert(date,Fecha_Atencion))='$mes' and year(try_convert(date,Fecha_Atencion))='2021'";
 
         $resultado5 = "SELECT  m.Provincia,m.Distrito,m.Nombre_Establecimiento,SUBSTRING(d.id,2,10)documento,d.fecha_cita ATE_PLANIFICACION,n.fecha_cita TMZ_VIF
                     intO PADRONINICIO 
@@ -91,29 +91,32 @@
                     where duplicado >1";
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
-            $resultado6 = "SELECT * FROM BDHIS_MINSA.dbo.PADRONINICIO WHERE Provincia='$red'
-                            DROP TABLE bdhis_minsa.dbo.RENAES
-                            DROP TABLE bdhis_minsa.dbo.TRAMAHIS
-                            DROP TABLE bdhis_minsa.dbo.NUM 
-                            DROP TABLE bdhis_minsa.dbo.DEN
-                            DROP TABLE BDHIS_MINSA.dbo.PADRONINICIO";
+        $resultado6 = "SELECT * FROM BDHIS_MINSA.dbo.PADRONINICIO WHERE Provincia='$red'
+                    ORDER BY Provincia, Distrito, Nombre_Establecimiento
+                    DROP TABLE bdhis_minsa.dbo.RENAES
+                    DROP TABLE bdhis_minsa.dbo.TRAMAHIS
+                    DROP TABLE bdhis_minsa.dbo.NUM 
+                    DROP TABLE bdhis_minsa.dbo.DEN
+                    DROP TABLE BDHIS_MINSA.dbo.PADRONINICIO";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
-            $resultado6 = "SELECT * FROM BDHIS_MINSA.dbo.PADRONINICIO
-                            DROP TABLE bdhis_minsa.dbo.RENAES
-                            DROP TABLE bdhis_minsa.dbo.TRAMAHIS
-                            DROP TABLE bdhis_minsa.dbo.NUM 
-                            DROP TABLE bdhis_minsa.dbo.DEN
-                            DROP TABLE BDHIS_MINSA.dbo.PADRONINICIO";
+        $resultado6 = "SELECT * FROM BDHIS_MINSA.dbo.PADRONINICIO
+                    ORDER BY Provincia, Distrito, Nombre_Establecimiento
+                    DROP TABLE bdhis_minsa.dbo.RENAES
+                    DROP TABLE bdhis_minsa.dbo.TRAMAHIS
+                    DROP TABLE bdhis_minsa.dbo.NUM 
+                    DROP TABLE bdhis_minsa.dbo.DEN
+                    DROP TABLE BDHIS_MINSA.dbo.PADRONINICIO";
         }
         else if($dist_1 != 'TODOS'){
-            $dist=$dist_1;
-            $resultado6 = "SELECT * FROM BDHIS_MINSA.dbo.PADRONINICIO WHERE Provincia='Pasco' AND Distrito='$dist'
-                            DROP TABLE bdhis_minsa.dbo.RENAES
-                            DROP TABLE bdhis_minsa.dbo.TRAMAHIS
-                            DROP TABLE bdhis_minsa.dbo.NUM 
-                            DROP TABLE bdhis_minsa.dbo.DEN
-                            DROP TABLE BDHIS_MINSA.dbo.PADRONINICIO";
+        $dist=$dist_1;
+        $resultado6 = "SELECT * FROM BDHIS_MINSA.dbo.PADRONINICIO WHERE Provincia='$red' AND Distrito='$dist'
+                    ORDER BY Provincia, Distrito, Nombre_Establecimiento
+                    DROP TABLE bdhis_minsa.dbo.RENAES
+                    DROP TABLE bdhis_minsa.dbo.TRAMAHIS
+                    DROP TABLE bdhis_minsa.dbo.NUM 
+                    DROP TABLE bdhis_minsa.dbo.DEN
+                    DROP TABLE BDHIS_MINSA.dbo.PADRONINICIO";
         }
 
         $consulta1 = sqlsrv_query($conn, $resultado1);
@@ -134,6 +137,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <table>
             <thead>
+                <tr></tr>
                 <tr class="text-center">
                     <th colspan="7" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
                 </tr>
@@ -143,7 +147,7 @@
                 </tr>
                 <tr></tr>
                 <tr>
-                    <th colspan="7" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD HisMinsa, con Fecha: <?php echo date("d-m-y"); ?> a las 08:30 horas</th>
+                    <th colspan="7" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</th>
                 </tr>
                 <tr></tr>
             </tfoot>
@@ -200,7 +204,7 @@
                     <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $i++; ?></td>
                     <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate); ?></td>
                     <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate2); ?></td>
-                    <td style="border: 1px solid #DDDDDD;"><?php echo $newdate3; ?></td>
+                    <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate3); ?></td>
                     <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo str_pad($newdate4, 8, "o", STR_PAD_LEFT); ?></td>
                     <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate5; ?></td>
                     <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate6; ?></td>                      

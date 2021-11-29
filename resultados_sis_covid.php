@@ -5,17 +5,17 @@
     require('abrir4.php');
 
     if (isset($_POST['Buscar'])) {
-    global $conex;
-    header('Content-Type: text/html; charset=UTF-8');
-    include('./base.php'); 
-    include('consulta_sis_covid.php');
-    $row_cont=0; $row_cont_p=0; $no_cumple=0; $observado=0;
-    while ($consulta = sqlsrv_fetch_array($consulta2)){
-        $row_cont++;
-    }
-    while ($consulta = sqlsrv_fetch_array($consulta4)){
-        $row_cont_p++;
-    }
+        global $conex;
+        header('Content-Type: text/html; charset=UTF-8');
+        include('./base.php'); 
+        include('consulta_sis_covid.php');
+        $row_cont=0; $row_cont_p=0; $no_cumple=0; $observado=0;
+        while ($consulta = sqlsrv_fetch_array($consulta2)){
+            $row_cont++;
+        }
+        while ($consulta = sqlsrv_fetch_array($consulta4)){
+            $row_cont_p++;
+        }
 ?>
     <div class="page-wrapper">
         <div class="container">
@@ -23,10 +23,6 @@
               <h3>SIS COVID</h3><br>
             </div>
             <!-- TABS -->
-            <!-- <ul class="nav nav-tabs justify-content-center" role="tablist">
-                <li class="nav-item text-center"><a class="nav-link active" data-toggle="tab" href="#sospechoso"> <i class="fa fa-calendar"></i> CASOS SOSPECHOSOS F0</a></li>
-                <li class="nav-item text-center"><a class="nav-link" data-toggle="tab" href="#prueba"><i class="fa fa-calendar-check"></i> CASOS SOSPECHOSOS F100</a></li>
-            </ul> -->
             <nav>
                 <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
                     <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#sospechoso" type="button" role="tab" aria-controls="nav-sospechoso" aria-selected="true">
@@ -42,20 +38,13 @@
                         <div class="row mb-3 mt-3">
                             <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-lg-12 text-center">
-                                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button> -->
-                                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='sis_covid.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
-                            </div>
-                        </div>    
-                        <div class="d-flex">
+                        <div class="d-flex justify-content-center">
                             <form action="impresion_sis_covid.php" method="POST">
                                 <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                                 <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                                <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
                                 <button type="submit" id="export_data" name="exportarCSV_f0" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
                             </form>
+                            <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar m-2" onclick="location.href='sis_covid.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                         </div>
                         <div class="table-responsive">
                             <table id="demo-foo-addrow" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
@@ -77,14 +66,14 @@
                                         <th class="align-middle">Cumple</th>
                                     </tr>
                                 </thead>
-                                <div class="float-end pb-4">
-                                    <div class="form-group">
+                                <div class="float-end pb-1 col-md-3 table_no_fed">
+                                    <div class="mb-3">
                                         <div id="inputbus" class="input-group input-group-sm">
-                                            <input id="demo-input-search" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                            <input id="demo-input-search" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                             <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                                         </div>
                                     </div>
-                                </div>                       
+                                </div>
                                 <tbody>
                                     <?php  
                                         include('consulta_sis_covid.php');
@@ -202,21 +191,13 @@
                         <div class="row mb-3 mt-3">
                             <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont_p; ?></b></div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-lg-12 text-center">
-                                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                                <!-- <button type="submit" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button> -->
-                                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='sis_covid.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
-                            </div>
-                        </div>
-
-                        <div class="d-flex">
+                        <div class="d-flex justify-content-center">
                             <form action="impresion_sis_covid.php" method="POST">
                                 <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                                 <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
-                                <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
                                 <button type="submit" id="export_data" name="exportarCSV_f100" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
                             </form>
+                            <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm m-2" onclick="location.href='sis_covid.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                         </div>
                         <div class="table-responsive">
                             <table id="demo-foo-addrow2" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
@@ -241,10 +222,10 @@
                                         <th class="align-middle">Cumple</th>
                                     </tr>
                                 </thead>
-                                <div class="float-end pb-4">
-                                    <div class="form-group">
+                                <div class="float-end pb-1 col-md-3 table_no_fed">
+                                    <div class="mb-3">
                                         <div id="inputbus" class="input-group input-group-sm">
-                                            <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                            <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                             <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                                         </div>
                                     </div>
@@ -386,7 +367,6 @@
     <script src="./plugin/footable/js/footable-init.js"></script>
     <script src="./plugin/footable/js/footable.all.min.js"></script>
     <script>
-
         $('#demo-input-search').on('input', function (e) {
             e.preventDefault();
             addrow2.trigger('footable_filter', {filter: $(this).val()});

@@ -94,6 +94,7 @@
         }
 
         $resultado4 = "SELECT * FROM BDHIS_MINSA.dbo.TEMPORAL001
+                        ORDER BY Institucion, PROV_EESS,DIST_EESS, Nombre_EESS
                         DROP TABLE BDHIS_MINSA.dbo.atencionesneonatal1
                         DROP TABLE BDHIS_MINSA.dbo.nacidoscnv1
                         DROP TABLE BDHIS_MINSA.dbo.TEMPORAL001";
@@ -110,7 +111,7 @@
         }
 
         if(!empty($consulta4)){
-            $ficheroExcel="DEIT_PASCO CG_FT_SEGUIMIENTO_NEONATAL "._date("d-m-Y", false, 'America/Lima').".xls";        
+            $ficheroExcel="DEIT_PASCO SEGUIMIENTO_NEONATAL "._date("d-m-Y", false, 'America/Lima').".xls";        
             header('Content-Type: application/vnd.ms-excel');
             header("Content-Type: application/octet-stream");
             header("Content-Disposition: attachment;filename=".$ficheroExcel);

@@ -5,7 +5,7 @@
         include('./base.php');
         include('zone_setting.php');
         include('consulta_gestante_usuarias_nuevas.php');
-        $row_cont=0; $numerador=0;
+        $row_cont=0; $numerador=0; $cant_vif=0;
         while ($consulta = sqlsrv_fetch_array($consulta6)){  
             $row_cont++;
             if(!is_null ($consulta['TMZ_VIF']) ){ $numerador++; }
@@ -18,12 +18,12 @@
                 <div class="col-9"></div>
                 <div class="col-3">
                     <marquee width="100%" direction="left" height="18px">
-                        <p class="font-14 text-primary"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo date("d-m-y"); ?> a las 08:30 horas</p>
+                        <p class="font-14 text-primary"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</p>
                     </marquee>
                 </div>
             </div>
             <div class="text-center pt-3 pb-3">
-              <h3>Usuarias Nuevas en el Servicio de Planificación Familiar con DX Violencia - <?php echo $nombre_mes; ?></h3>
+                <h3>Usuarias Nuevas en el Servicio de Planificación Familiar con DX Violencia - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="row">
                 <div class="row justify-content-center">
@@ -47,28 +47,49 @@
                     <div class="col-md-1"></div>
                     <div class="card col-md-3 datos_avance">
                         <div class="card-body p-1">
-                            <div class="row pt-4">
-                                <div class="col-md-7 p-r-0 text-center">
-                                    <h2 class="font-light avance mb-3"><?php
-                                        if($row_cont == 0 and $numerador == 0){ echo '0 %'; }else{
-                                            echo number_format((float)(($numerador/$row_cont)*100), 2, '.', ''), '%'; }
-                                        ?> 
-                                    </h2>
-                                    <h4 class="text-muted">Avance</h4></div>
-                                <div class="col-md-5 text-center align-self-center position-sticky">
-                                    <div data-label="<?php
-                                        if($numerador == 0 and $row_cont == 0){ echo '0 %'; }else{
-                                            echo number_format((float)(($numerador/$row_cont)*100), 2, '.', ''), '%'; }
-                                        ?>" class="css-bar m-b-0 css-bar-info css-bar-<?php if($numerador == 0 and $row_cont == 0){ echo '0'; }else{
-                                            echo number_format((float)(($numerador/$row_cont)*100), 0, '.', ''); }
-                                        ?>"></div>
+                            <p class="card-title text-secondary text-center font-18 pt-2">Tamizaje VIF</h4>
+                            <div class="justify-content-center">
+                                <div class="align-self-center">
+                                    <h4 class="font-medium mb-3 justify-content-center d-flex">
+                                        <div class="col-md-5 text-end">
+                                            <img src="./img/boy.png" width="90" alt="">
+                                        </div>
+                                        <div class="mt-3 col-md-7 text-center">
+                                            <b class="font-49 correcto"> <?php echo $numerador; ?></b> <i class="mdi mdi-check font-49 text-success"></i>
+                                        </div>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="card col-md-3 datos_avance">
+                        <div class="card-body p-1">
+                            <div class="col-md-12">
+                                <div class="row pt-4">
+                                    <div class="col-md-8 p-r-0 text-center">
+                                        <h1 class="avance mb-3 text-primary"><?php
+                                            if($row_cont == 0 and $numerador == 0){ echo '0 %'; }else{
+                                                echo number_format((float)(($numerador/$row_cont)*100), 2, '.', ''), '%'; }
+                                            ?> 
+                                        </h1>
+                                        <h2 class="text-muted">Avance</h2>
+                                    </div>
+                                    <div class="col-md-4 text-center align-self-center position-sticky p-0">
+                                        <div data-label="<?php
+                                            if($numerador == 0 and $row_cont == 0){ echo '0 %'; }else{
+                                                echo number_format((float)(($numerador/$row_cont)*100), 2, '.', ''), '%'; }
+                                            ?>" class="css-bar m-b-0 css-bar-info css-bar-<?php if($numerador == 0 and $row_cont == 0){ echo '0'; }else{
+                                                echo number_format((float)(($numerador/$row_cont)*100), 0, '.', ''); }
+                                            ?>"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 mb-3">
                 <div class="d-flex justify-content-center">
                     <form action="impresion_gestante_usuarias_nuevas.php" method="POST">
                         <input hidden name="red" value="<?php echo $_POST['red']; ?>">
@@ -80,7 +101,7 @@
                     <button class="btn btn-outline-secondary btn-sm m-2" onclick="location.href='gestante_usuarias_nuevas.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                 </div>
             </div>
-            <div class="col-12 table-responsive">
+            <div class="col-12 table-responsive" id="cuatro_meses">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="text-center font-12" style="background: #c9d0e2;">
@@ -93,17 +114,14 @@
                             <th class="align-middle">Tmz VIF</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-1 col-md-3 mt-3">
-                        <div class="form-group">
-                            <div class="text-center">
-                                <p class="font-14 text-secondary">Realice su búsqueda por Nombres o DNI:</p>
-                            </div>
+                    <div class="float-end pb-1 col-md-3 table_no_fed">
+                        <div class="mb-3">
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                     <tbody>
                         <?php 
                             include('consulta_gestante_usuarias_nuevas.php');
@@ -144,7 +162,7 @@
                             <td class="align-middle"><?php echo $i++; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
-                            <td class="align-middle"><?php echo $newdate3; ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
                             <td class="align-middle"><?php echo $newdate4; ?></td>
                             <td class="align-middle"><?php echo $newdate5; ?></td>
                             <td class="align-middle"><?php echo $newdate6; ?></td>                      

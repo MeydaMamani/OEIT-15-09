@@ -56,7 +56,7 @@
                             CONCAT(pn.APELLIDO_PATERNO_NINO,' ',pn.APELLIDO_MATERNO_NINO,' ', pn.NOMBRE_NINO) APELLIDOS_NOMBRES
                         INTO BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred
                         FROM NOMINAL_PADRON_NOMINAL PN
-                        WHERE YEAR(FECHA_NACIMIENTO_NINO)='2021' AND MONTH(FECHA_NACIMIENTO_NINO)='$mes2' AND MES='2021$mes2'
+                        WHERE YEAR(FECHA_NACIMIENTO_NINO)='2021' AND MONTH(FECHA_NACIMIENTO_NINO)='$mes2' AND MES='202111'
                         ;
                         with c as
                         (
@@ -242,7 +242,8 @@
                                     PRIMER_CNTRL,SEG_CNTRL,	TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,
                                     CUARTO_CNTRL_MES,QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES,
                                     NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,	ONCEAVO_CNTRL_MES
-                                    drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
+                                ORDER BY NOMBRE_PROV,NOMBRE_DIST
+                                drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
                                 drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn1_2 
                                 drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
                                 drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES1
@@ -302,7 +303,8 @@
                                 PRIMER_CNTRL,SEG_CNTRL,	TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,
                                 CUARTO_CNTRL_MES,QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES,
                                 NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,	ONCEAVO_CNTRL_MES
-                                drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
+                            ORDER BY NOMBRE_PROV,NOMBRE_DIST
+                            drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
                             drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn1_2 
                             drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
                             drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES1
@@ -364,7 +366,8 @@
                                     PRIMER_CNTRL,SEG_CNTRL,	TERCER_CNTRL,CUARTO_CNTRL,PRIMER_CNTRL_MES,SEGUNDO_CNTRL_MES,TERCER_CNTRL_MES,
                                     CUARTO_CNTRL_MES,QUINTO_CNTRL_MES, SEXTO_CNTRL_MES,SEPTIMO_CNTRL_MES, OCTAVO_CNTRL_MES,
                                     NOVENO_CNTRL_MES, DECIMO_CNTRL_MES,	ONCEAVO_CNTRL_MES
-                                    drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
+                                ORDER BY NOMBRE_PROV,NOMBRE_DIST    
+                                drop table BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred 
                                 drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn1_2 
                                 drop table BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
                                 drop table BDHIS_MINSA_EXTERNO.dbo.CRED_MES1
@@ -430,185 +433,191 @@
         </thead>
 	</table>
 	<table class="table table-hover">
-		<thead>
-			<tr class="font-12 text-center" style="background: #e0ebd8;">
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">#</th>    
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Provincia</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Distrito</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Menor Encontrado</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Apellidos y Nombres</th> 
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Documento</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Tipo Seguro</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Fecha Nacimiento Niño</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;" id="fields_cred">Primer Control</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;" id="fields_cred">Segundo Control</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;" id="fields_cred">Tercer Control</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;" id="fields_cred">Cuarto Control</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">CUMPLE CONTROL MES</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Primer Control Mes</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Segundo Control Mes</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Tercero Control Mes</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Cuarto Control Mes</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Quinto Control Mes</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Sexto Control Mes</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Séptimo Control Mes</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Octavo Control Mes</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Noveno Control Mes</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Decimo Control Mes</th>
-				<th style="border: 1px solid #DDDDDD; font-size: 15px;">Onceavo Control Mes</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php  
-				$i=1;
-				while ($consulta = sqlsrv_fetch_array($consulta15)){
-					if(is_null ($consulta['NOMBRE_PROV']) ){
-						$newdate = '  -'; }
-					else{
-						$newdate = $consulta['NOMBRE_PROV'];}
-
-					if(is_null ($consulta['NOMBRE_DIST']) ){
-						$newdate2 = '  -'; }
-						else{
-					$newdate2 = $consulta['NOMBRE_DIST'];}
-		
-					if(is_null ($consulta['MENOR_ENCONTRADO']) ){
-						$newdate3 = '  -'; }
-						else{
-					$newdate3 = $consulta['MENOR_ENCONTRADO'] ;}
-		
-					if(is_null ($consulta['APELLIDOS_NOMBRES']) ){
-						$newdate4 = '  -'; }
-						else{
-					$newdate4 = $consulta['APELLIDOS_NOMBRES'];}
-		
-					if(is_null ($consulta['DOCUMENTO']) ){
-						$newdate5 = '  -'; }
-						else{
-					$newdate5 = $consulta['DOCUMENTO'];}
-		
-					if(is_null ($consulta['TIPO_SEGURO']) ){
-						$newdate6 = '  -'; }
-						else{
-					$newdate6 = $consulta['TIPO_SEGURO'];}
-		
-					if(is_null ($consulta['FECHA_NACIMIENTO_NINO']) ){
-						$newdate7 = '  -'; }
-						else{
-					$newdate7 = $consulta['FECHA_NACIMIENTO_NINO'] -> format('d/m/y');}
-		
-					if(is_null ($consulta['PRIMER_CNTRL']) ){
-						$newdate8 = '  -'; }
-						else{
-					$newdate8 = $consulta['PRIMER_CNTRL'] -> format('d/m/y');}
-		
-					if(is_null ($consulta['SEG_CNTRL']) ){
-						$newdate9 = '  -'; }
-						else{
-					$newdate9 = $consulta['SEG_CNTRL'] -> format('d/m/y');}
-
-					if(is_null ($consulta['TERCER_CNTRL']) ){
-						$newdate10 = '  -'; }
-						else{
-					$newdate10 = $consulta['TERCER_CNTRL'] -> format('d/m/y');}
-
-					if(is_null ($consulta['CUARTO_CNTRL']) ){
-						$newdate11 = '  -'; }
-					else{
-						$newdate11 = $consulta['CUARTO_CNTRL'] -> format('d/m/y');}
-
-					if(is_null ($consulta['CUMPLE_CTRLMES']) ){
-						$newdate12 = '  -'; }
-					else{
-						$newdate12 = $consulta['CUMPLE_CTRLMES'];}
-
-					if(is_null ($consulta['PRIMER_CNTRL_MES']) ){
-						$newdate13 = '  -'; }
-						else{
-					$newdate13 = $consulta['PRIMER_CNTRL_MES'] -> format('d/m/y');}
-
-					if(is_null ($consulta['SEGUNDO_CNTRL_MES']) ){
-						$newdate14 = '  -'; }
-						else{
-					$newdate14 = $consulta['SEGUNDO_CNTRL_MES'] -> format('d/m/y');}
-
-					if(is_null ($consulta['TERCER_CNTRL_MES']) ){
-						$newdate15 = '  -'; }
-						else{
-					$newdate15 = $consulta['TERCER_CNTRL_MES'] -> format('d/m/y');}
-
-					if(is_null ($consulta['CUARTO_CNTRL_MES']) ){
-						$newdate16 = '  -'; }
-						else{
-					$newdate16 = $consulta['CUARTO_CNTRL_MES'] -> format('d/m/y');}
-
-					if(is_null ($consulta['QUINTO_CNTRL_MES']) ){
-						$newdate17 = '  -'; }
-						else{
-					$newdate17 = $consulta['QUINTO_CNTRL_MES'] -> format('d/m/y');}
-
-					if(is_null ($consulta['SEXTO_CNTRL_MES']) ){
-						$newdate18 = '  -'; }
-						else{
-					$newdate18 = $consulta['SEXTO_CNTRL_MES'] -> format('d/m/y');}
-
-					if(is_null ($consulta['SEPTIMO_CNTRL_MES']) ){
-						$newdate19 = '  -'; }
-						else{
-					$newdate19 = $consulta['SEPTIMO_CNTRL_MES'] -> format('d/m/y');}
-
-					if(is_null ($consulta['OCTAVO_CNTRL_MES']) ){
-						$newdate20 = '  -'; }
-						else{
-					$newdate20 = $consulta['OCTAVO_CNTRL_MES'] -> format('d/m/y');}
-
-					if(is_null ($consulta['NOVENO_CNTRL_MES']) ){
-						$newdate21 = '  -'; }
-						else{
-					$newdate21 = $consulta['NOVENO_CNTRL_MES'] -> format('d/m/y');}
-
-					if(is_null ($consulta['DECIMO_CNTRL_MES']) ){
-						$newdate22 = '  -'; }
-						else{
-					$newdate22 = $consulta['DECIMO_CNTRL_MES'] -> format('d/m/y');}
-
-					if(is_null ($consulta['ONCEAVO_CNTRL_MES']) ){
-						$newdate23 = '  -'; }
-						else{
-					$newdate23 = $consulta['ONCEAVO_CNTRL_MES'] -> format('d/m/y');}                    
-			?>
-			<tr class="text-center font-12">
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $i++; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate); ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate2); ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate3); ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate4); ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate5; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate6; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate7); ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate8; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate9; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate10; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate11; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate12; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate13; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate14; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate15; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate16; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate17; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate18; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate19; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate20; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate21; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate22; ?></td>
-				<td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate23; ?></td>
-			</tr>                        
-			<?php
-				;}                    
-				include("cerrar.php");
-			?>
-		</tbody>
-	</table>
+        <thead>
+            <tr class="font-12 text-center" style="background: #e0ebd8;">
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">#</th>    
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Provincia</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Distrito</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Menor Encontrado</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Apellidos y Nombres</th> 
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Documento</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Tipo Seguro</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Fecha Nacimiento Niño</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #f1f1c0;">Primer Control</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #f1f1c0;">Segundo Control</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #f1f1c0;">Tercer Control</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #f1f1c0;">Cuarto Control</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">CUMPLE CONTROL MES</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #f0dfc7;">Primer Control Mes</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #f0dfc7;">Segundo Control Mes</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #f0dfc7;">Tercero Control Mes</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px; background: #f0dfc7;">Cuarto Control Mes</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Quinto Control Mes</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Sexto Control Mes</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Séptimo Control Mes</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Octavo Control Mes</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Noveno Control Mes</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Decimo Control Mes</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Onceavo Control Mes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php  
+                $i=1;
+                while ($consulta = sqlsrv_fetch_array($consulta15)){
+                    if(is_null ($consulta['NOMBRE_PROV']) ){
+                        $newdate = '  -'; }
+                    else{
+                        $newdate = $consulta['NOMBRE_PROV'];}
+    
+                    if(is_null ($consulta['NOMBRE_DIST']) ){
+                        $newdate2 = '  -'; }
+                        else{
+                    $newdate2 = $consulta['NOMBRE_DIST'];}
+        
+                    if(is_null ($consulta['MENOR_ENCONTRADO']) ){
+                        $newdate3 = '  -'; }
+                        else{
+                    $newdate3 = $consulta['MENOR_ENCONTRADO'] ;}
+        
+                    if(is_null ($consulta['APELLIDOS_NOMBRES']) ){
+                        $newdate4 = '  -'; }
+                        else{
+                    $newdate4 = $consulta['APELLIDOS_NOMBRES'];}
+        
+                    if(is_null ($consulta['DOCUMENTO']) ){
+                        $newdate5 = '  -'; }
+                        else{
+                    $newdate5 = $consulta['DOCUMENTO'];}
+        
+                    if(is_null ($consulta['TIPO_SEGURO']) ){
+                        $newdate6 = '  -'; }
+                        else{
+                    $newdate6 = $consulta['TIPO_SEGURO'];}
+        
+                    if(is_null ($consulta['FECHA_NACIMIENTO_NINO']) ){
+                        $newdate7 = '  -'; }
+                        else{
+                    $newdate7 = $consulta['FECHA_NACIMIENTO_NINO'] -> format('d/m/y');}
+        
+                    if(is_null ($consulta['PRIMER_CNTRL']) ){
+                        $newdate8 = '  -'; }
+                        else{
+                    $newdate8 = $consulta['PRIMER_CNTRL'] -> format('d/m/y');}
+        
+                    if(is_null ($consulta['SEG_CNTRL']) ){
+                        $newdate9 = '  -'; }
+                        else{
+                    $newdate9 = $consulta['SEG_CNTRL'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['TERCER_CNTRL']) ){
+                        $newdate10 = '  -'; }
+                        else{
+                    $newdate10 = $consulta['TERCER_CNTRL'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['CUARTO_CNTRL']) ){
+                        $newdate11 = '  -'; }
+                    else{
+                        $newdate11 = $consulta['CUARTO_CNTRL'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['CUMPLE_CTRLMES']) ){
+                        $newdate12 = '  -'; }
+                    else{
+                        $newdate12 = $consulta['CUMPLE_CTRLMES'];}
+    
+                    if(is_null ($consulta['PRIMER_CNTRL_MES']) ){
+                        $newdate13 = '  -'; }
+                        else{
+                    $newdate13 = $consulta['PRIMER_CNTRL_MES'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['SEGUNDO_CNTRL_MES']) ){
+                        $newdate14 = '  -'; }
+                        else{
+                    $newdate14 = $consulta['SEGUNDO_CNTRL_MES'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['TERCER_CNTRL_MES']) ){
+                        $newdate15 = '  -'; }
+                        else{
+                    $newdate15 = $consulta['TERCER_CNTRL_MES'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['CUARTO_CNTRL_MES']) ){
+                        $newdate16 = '  -'; }
+                        else{
+                    $newdate16 = $consulta['CUARTO_CNTRL_MES'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['QUINTO_CNTRL_MES']) ){
+                        $newdate17 = '  -'; }
+                        else{
+                    $newdate17 = $consulta['QUINTO_CNTRL_MES'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['SEXTO_CNTRL_MES']) ){
+                        $newdate18 = '  -'; }
+                        else{
+                    $newdate18 = $consulta['SEXTO_CNTRL_MES'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['SEPTIMO_CNTRL_MES']) ){
+                        $newdate19 = '  -'; }
+                        else{
+                    $newdate19 = $consulta['SEPTIMO_CNTRL_MES'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['OCTAVO_CNTRL_MES']) ){
+                        $newdate20 = '  -'; }
+                        else{
+                    $newdate20 = $consulta['OCTAVO_CNTRL_MES'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['NOVENO_CNTRL_MES']) ){
+                        $newdate21 = '  -'; }
+                        else{
+                    $newdate21 = $consulta['NOVENO_CNTRL_MES'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['DECIMO_CNTRL_MES']) ){
+                        $newdate22 = '  -'; }
+                        else{
+                    $newdate22 = $consulta['DECIMO_CNTRL_MES'] -> format('d/m/y');}
+    
+                    if(is_null ($consulta['ONCEAVO_CNTRL_MES']) ){
+                        $newdate23 = '  -'; }
+                        else{
+                    $newdate23 = $consulta['ONCEAVO_CNTRL_MES'] -> format('d/m/y');}                    
+            ?>
+            <tr class="text-center font-12">
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $i++; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate2); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo utf8_encode($newdate3); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate4); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate5; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate6; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo utf8_encode($newdate7); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_cred_body"><?php echo $newdate8; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_cred_body"><?php echo $newdate9; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_cred_body"><?php echo $newdate10; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_cred_body"><?php echo $newdate11; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php 
+                    if($newdate12 == 'CUMPLE'){
+                        echo "<span class='badge bg-correct'>CUMPLE</span>";
+                    }else{
+                        echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                    }
+                    ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_cred_body1"><?php echo $newdate13; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_cred_body1"><?php echo $newdate14; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_cred_body1"><?php echo $newdate15; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_cred_body1"><?php echo $newdate16; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate17; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate18; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate19; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate20; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate21; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate22; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate23; ?></td>
+            </tr>                        
+            <?php
+                ;}                    
+                include("cerrar.php");
+            ?>
+        </tbody>
+    </table>
 <?php
 		}
     }
