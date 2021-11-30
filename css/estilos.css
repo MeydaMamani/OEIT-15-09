@@ -51,6 +51,14 @@ body {background:#FEFEFE;}
     color: #383838;
 }
 
+.font-10{
+    font-size: 10px;
+}
+
+.font-11{
+    font-size: 11px;
+}
+
 .font-12{
     font-size: 12px;
 }
@@ -391,6 +399,18 @@ img:hover{
 
 #prematuro thead tr th#color_prematuro_head {
 	background: #a3c8d7 !important;
+}
+
+#prematuro_resume thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: black !important;
+	color: white;
+}
+#prematuro_resume { 
+	height: 335px;
+	overflow:scroll;
 }
 
 .table-responsive { 

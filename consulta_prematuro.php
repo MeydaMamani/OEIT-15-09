@@ -50,6 +50,73 @@
                         from dbo.padron_nino_cnv1)
                         delete  from c
                         where duplicado >1";
+        // PARA RESUMEN
+        $resume = "SELECT num_cnv,nombre_prov,nombre_dist,tipo_seguro,fecha_nacimiento_nino, apellido_paterno_nino,
+                    apellido_materno_nino, nombre_nino, MENOR_ENCONTRADO,NOMBRE_EESS    
+                    into BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO
+                    from nominal_padron_nominal
+                    where year(fecha_nacimiento_nino)='2021';
+                    with c as ( select num_cnv, nombre_dist, ROW_NUMBER() 
+                            over(partition by num_cnv order by num_cnv) as duplicado
+                    from RESUME_PASO_UNO_PREMATURO)
+                    delete  from c
+                    where duplicado >1";
+
+        $resume1 = "SELECT C.Periodo, DATEADD(DAY,59,C.FECNACIDO) mide, C.SECTOR, C.Provnacido, C.Distnacido,C.Establecimiento, 
+                    p.MENOR_ENCONTRADO,FECNACIDO,Numcnv, CONCAT(P.APELLIDO_PATERNO_NINO,' ',P.APELLIDO_MATERNO_NINO,' ',P.NOMBRE_NINO)NOMBRES_MENOR,C.PESO, C.SEMANAGESTACION, 'SI' PREMATURO,
+                    T.Fecha_Atencion SUPLEMENTADO,T.Tipo_Doc_Paciente, P.TIPO_SEGURO, p.NOMBRE_EESS SE_ATIENDE               
+                    into BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO
+                    from BD_CNV.dbo.nominal_trama_cnv c INNER JOIN BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO p
+                    ON  C.NUMCNV=p.num_cnv
+                    AND (c.SEMANAGESTACION IN ('34','35','36') OR (c.PESO>'1499' AND c.PESO<'2500')) AND YEAR(c.FECNACIDO)='2021' 
+                        AND Provnacido in ('PASCO', 'OXAPAMPA', 'DANIEL ALCIDES CARRION')
+                    LEFT join BDHIS_MINSA.dbo.T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
+                    on c.Numcnv=t.Numero_Documento_Paciente
+                    AND edad_reg='1' and t.Tipo_Edad ='M' and
+                                Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
+                    ORDER BY Provnacido, Distnacido, Establecimiento";
+
+        $resume2 = "SELECT Provnacido,Distnacido,
+                    COUNT(CASE WHEN mide>='2021-03-01' AND mide<='2021-03-31' THEN Numcnv END) '2021-3',
+                    COUNT(CASE WHEN mide>='2021-04-01' AND mide<='2021-04-30' THEN Numcnv END) '2021-4',
+                    COUNT(CASE WHEN mide>='2021-05-01' AND mide<='2021-05-31' THEN Numcnv END) '2021-5',
+                    COUNT(CASE WHEN mide>='2021-06-01' AND mide<='2021-06-30' THEN Numcnv END) '2021-6',
+                    COUNT(CASE WHEN mide>='2021-07-01' AND mide<='2021-07-31' THEN Numcnv END) '2021-7',
+                    COUNT(CASE WHEN mide>='2021-08-01' AND mide<='2021-08-31' THEN Numcnv END) '2021-8',
+                    COUNT(CASE WHEN mide>='2021-09-01' AND mide<='2021-09-30' THEN Numcnv END) '2021-9',
+                    COUNT(CASE WHEN mide>='2021-10-01' AND mide<='2021-10-31' THEN Numcnv END) '2021-10',
+                    COUNT(CASE WHEN mide>='2021-11-01' AND mide<='2021-11-30' THEN Numcnv END) '2021-11',
+                    COUNT(CASE WHEN mide>='2021-12-01' AND mide<='2021-12-31' THEN Numcnv END) '2021-12'
+                    INTO BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
+                    FROM BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO A
+                    WHERE ((TIPO_SEGURO IN('1,','0,','1, 2, ','0, 1, '))OR (TIPO_SEGURO IS NULL))
+                    GROUP BY   Provnacido,Distnacido";
+
+        $resume3 = "SELECT Provnacido,Distnacido,
+                    COUNT(CASE WHEN mide>='2021-03-01' AND mide<='2021-03-31' THEN Numcnv END) '2021-3',
+                    COUNT(CASE WHEN mide>='2021-04-01' AND mide<='2021-04-30' THEN Numcnv END) '2021-4',
+                    COUNT(CASE WHEN mide>='2021-05-01' AND mide<='2021-05-31' THEN Numcnv END) '2021-5',
+                    COUNT(CASE WHEN mide>='2021-06-01' AND mide<='2021-06-30' THEN Numcnv END) '2021-6',
+                    COUNT(CASE WHEN mide>='2021-07-01' AND mide<='2021-07-31' THEN Numcnv END) '2021-7',
+                    COUNT(CASE WHEN mide>='2021-08-01' AND mide<='2021-08-31' THEN Numcnv END) '2021-8',
+                    COUNT(CASE WHEN mide>='2021-09-01' AND mide<='2021-09-30' THEN Numcnv END) '2021-9',
+                    COUNT(CASE WHEN mide>='2021-10-01' AND mide<='2021-10-31' THEN Numcnv END) '2021-10',
+                    COUNT(CASE WHEN mide>='2021-11-01' AND mide<='2021-11-30' THEN Numcnv END) '2021-11',
+                    COUNT(CASE WHEN mide>='2021-12-01' AND mide<='2021-12-31' THEN Numcnv END) '2021-12'
+                    INTO BDHIS_MINSA.dbo.NUMERADOR_PREMATURO
+                    FROM BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO A
+                    WHERE ((TIPO_SEGURO IN('1,','0,','1, 2, ','0, 1, '))OR (TIPO_SEGURO IS NULL)) AND (SUPLEMENTADO IS NOT NULL)
+                    GROUP BY   Provnacido,Distnacido";
+
+        $resume4 = "SELECT A.Provnacido,A.Distnacido
+                    ,B.[2021-3] ,A.[2021-3] ,B.[2021-4],A.[2021-4],B.[2021-5],A.[2021-5],B.[2021-6],A.[2021-6],B.[2021-7],A.[2021-7],B.[2021-8],A.[2021-8],B.[2021-9],A.[2021-9],B.[2021-10],A.[2021-10],B.[2021-11],A.[2021-11],B.[2021-12],A.[2021-12]
+                    FROM BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO A
+                    LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR_PREMATURO B ON A.Distnacido=B.Distnacido
+                    ORDER BY A.Provnacido,A.Distnacido
+                    DROP TABLE BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO
+                    DROP TABLE BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO
+                    DROP TABLE BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
+                    DROP TABLE BDHIS_MINSA.dbo.NUMERADOR_PREMATURO";
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado2 = "SELECT C.Periodo, DATEADD(DAY,59,C.FECNACIDO) mide, C.SECTOR, C.Provnacido, C.Distnacido,C.Establecimiento, 
@@ -100,6 +167,12 @@
 
         $consulta1 = sqlsrv_query($conn2, $resultado);
         $consulta2 = sqlsrv_query($conn3, $resultado2);
+
+        $consult_resume1 = sqlsrv_query($conn2, $resume);
+        $consult_resume2 = sqlsrv_query($conn, $resume1);
+        $consult_resume3 = sqlsrv_query($conn, $resume2);
+        $consult_resume4 = sqlsrv_query($conn, $resume3);
+        $consult_resume5 = sqlsrv_query($conn, $resume4);
 
         $my_date_modify = "SELECT MAX(FECHA_MODIFICACION_REGISTRO) as DATE_MODIFY FROM NOMINAL_PADRON_NOMINAL";
         $consult = sqlsrv_query($conn2, $my_date_modify);
