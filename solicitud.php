@@ -7,7 +7,7 @@
     <div class="container text-center mb-2">
         <div class="bd-example">
             <br>
-            <button type="button" class="btn btn-outline-primary mb-4" data-bs-toggle="modal" data-bs-target="#ModalSolicitud"><i class="fa fa-plus"></i> Agregar Solicitud</button>
+            <button type="button" class="btn btn-outline-primary mb-4" data-bs-toggle="modal" data-bs-target="#ModalSolicitud"><i class="mdi mdi-plus"></i> Agregar Solicitud</button>
             <div class="table-responsive">
                 <table id="demo-foo-addrow2" class="table footable m-b-0" data-paging="true" data-page-size="10" data-limit-navigation="10">
                     <thead>
@@ -18,14 +18,6 @@
                             <th class="align-middle">TOTAL</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-1 table_no_fed">
-                        <div class="form-group">
-                            <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
-                                <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
-                            </div>
-                        </div>
-                    </div>
                     <tbody>
                     <?php 
                         $resultado2 = "SELECT Provincia, distrito, COUNT(distrito) as total FROM USER_REQUEST

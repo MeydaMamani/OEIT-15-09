@@ -571,6 +571,21 @@ img:hover{
 	margin-right: 40px;
 }
 
+#gestante_tratamiento thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #44688c !important;
+}
+
+#gestante_tratamiento thead tr th#gestante_tratamiento_head { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #093560 !important;
+}
+
+
 /* APTOS TERCERA DOSIS */
 #three_dose thead tr th#patient { 
 	position: sticky;

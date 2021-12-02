@@ -166,13 +166,13 @@
                         </li>
 						<li><a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-chart-bar text-white pb-1"></i><span class="hide-menu ml-6">Tableros</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <!-- <li><a href="graph_advance_vaccine.php">Avance de Vacunas</a></li> -->
+                                <li><a href="management_agreements.php">Avance de Convenios de Gestión</a></li>
 								<li><a href="#">Avance ESNI Regular</a></li>
                                 <li>
                                     <a class="has-arrow" href="#" aria-expanded="false">Niño Sello</a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="https://app.powerbi.com/view?r=eyJrIjoiYjlhNDlmNzItYTdlYS00ZjEwLWFhNjktOGZjOTUxMDA4MmZkIiwidCI6IjE2ZWJhMGRlLTYwNDktNDczNS1iMGE3LWIwOGE3YWE4YjdhNSJ9" target="_blank">Avance Covid</a></li>
-                                        <li><a href="#">Avance Indicadores FED</a></li>
+                                        <li><a href="fed_indicator_board.php">Avance Indicadores FED</a></li>
                                     </ul>
                                 </li>
                                 <li>

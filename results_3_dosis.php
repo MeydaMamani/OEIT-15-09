@@ -20,14 +20,14 @@
                 </form>
                 <button type="button" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='standart_3_dose.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
             </div>
-            <div class="col-12 table-responsive" id="three_dose">
+            <div class="col-12 table-responsive" id="cuatro_meses">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="text-center font-13 border" style="background: #c9d0e2;">
                             <th id="patient"></th>
-                            <th colspan="5" class="border" id="patient">Paciente</th>
-                            <th colspan="5" class="border" id="first_dose">Primera Dosis</th>
-                            <th colspan="7" class="border" id="second_dose">Segunda Dosis</th>
+                            <th colspan="4" class="border" id="patient">Paciente</th>
+                            <th colspan="4" class="border" id="first_dose">Primera Dosis</th>
+                            <th colspan="6" class="border" id="second_dose">Segunda Dosis</th>
                             <th colspan="1" class="border">Tercera Dosis</th>
                         </tr>
                         <tr class="text-center font-12" style="background: #c9d0e2;">
@@ -35,16 +35,13 @@
                             <th class="align-middle border" id="patient">Tipo Documento</th>
                             <th class="align-middle border" id="patient">Documento</th> 
                             <th class="align-middle border" id="patient">Paciente</th> 
-                            <th class="align-middle border" id="patient">Dirección</th>
                             <th class="align-middle border" id="patient">Celular</th>
                             <th class="align-middle border" id="first_dose">Provincia</th>
                             <th class="align-middle border" id="first_dose">Distrito</th>
-                            <th class="align-middle border" id="first_dose">Establecimiento</th>
                             <th class="align-middle border" id="first_dose">Fecha de Vacunación</th>
                             <th class="align-middle border" id="first_dose">Nombre Vacuna</th>
                             <th class="align-middle border" id="second_dose">Provincia</th>
                             <th class="align-middle border" id="second_dose">Distrito</th>
-                            <th class="align-middle border" id="second_dose">Establecimiento</th>
                             <th class="align-middle border" id="second_dose">Fecha de Vacunación</th>
                             <th class="align-middle border" id="second_dose">Nombre Vacuna</th>
                             <th class="align-middle border" id="second_dose">Edad</th>
@@ -61,7 +58,7 @@
                         </div>
                     </div>
                     <tbody>
-                        <!-- <?php 
+                        <?php 
                             include('query_3_dosis.php');
                             $i=1;
                             while ($consulta = sqlsrv_fetch_array($consulta3)){  
@@ -80,25 +77,66 @@
                                 else{
                                     $newdate3 = $consulta['NOMBRE_PACIENTE'];}
 
-                                if(is_null ($consulta['EDAD_PACIENTE']) ){
+                                if(is_null ($consulta['NUM_CELULAR']) ){
                                     $newdate4 = '  -'; }
                                 else{
-                                    $newdate4 = $consulta['EDAD_PACIENTE'];}
+                                    $newdate4 = $consulta['NUM_CELULAR'];}
 
-                                if(is_null ($consulta['FECHA_PRIMERA_DOSIS']) ){
+                                if(is_null ($consulta['PROVINCIA_UNO']) ){
                                     $newdate5 = '  -'; }
                                 else{
-                                    $newdate5 = $consulta['FECHA_PRIMERA_DOSIS'] -> format('d/m/y');}
-                                
-                                if(is_null ($consulta['FECHA_SEGUNDA_DOSIS']) ){
+                                    $newdate5 = $consulta['PROVINCIA_UNO'];}
+
+                                if(is_null ($consulta['DISTRITO_UNO']) ){
                                     $newdate6 = '  -'; }
                                 else{
-                                    $newdate6 = $consulta['FECHA_SEGUNDA_DOSIS'] -> format('d/m/y');}
+                                    $newdate6 = $consulta['DISTRITO_UNO'];}
 
-                                if(is_null ($consulta['FECHA_PARA_3RA_DOSIS']) ){
+                                if(is_null ($consulta['FECHA_PRIMERA_DOSIS']) ){
                                     $newdate7 = '  -'; }
                                 else{
-                                    $newdate7 = $consulta['FECHA_PARA_3RA_DOSIS'] -> format('d/m/y');}
+                                    $newdate7 = $consulta['FECHA_PRIMERA_DOSIS'] -> format('d/m/y');}
+
+                                if(is_null ($consulta['NOMBRE_PRIMERA_DOSIS']) ){
+                                    $newdate8 = '  -'; }
+                                else{
+                                    $newdate8 = $consulta['NOMBRE_PRIMERA_DOSIS'];}
+                                
+                                if(is_null ($consulta['PROVINCIA_DOS']) ){
+                                    $newdate9 = '  -'; }
+                                else{
+                                    $newdate9 = $consulta['PROVINCIA_DOS'];}
+
+                                if(is_null ($consulta['DISTRITO_DOS']) ){
+                                    $newdate10 = '  -'; }
+                                else{
+                                    $newdate10 = $consulta['DISTRITO_DOS'];}
+
+                                if(is_null ($consulta['FECHA_SEGUNDA_DOSIS']) ){
+                                    $newdate11 = '  -'; }
+                                else{
+                                    $newdate11 = $consulta['FECHA_SEGUNDA_DOSIS'] -> format('d/m/y');}
+
+                                if(is_null ($consulta['NOMBRE_SEGUNDA_DOSIS']) ){
+                                    $newdate12 = '  -'; }
+                                else{
+                                    $newdate12 = $consulta['NOMBRE_SEGUNDA_DOSIS'];}
+
+                                if(is_null ($consulta['EDAD']) ){
+                                    $newdate13 = '  -'; }
+                                else{
+                                    $newdate13 = $consulta['EDAD'];}
+
+                                if(is_null ($consulta['GRUPO_RIESGO']) ){
+                                    $newdate14 = '  -'; }
+                                else{
+                                    $newdate14 = $consulta['GRUPO_RIESGO'];}
+
+                                if(is_null ($consulta['FECHA_PARA_3RA_DOSIS']) ){
+                                    $newdate15 = '  -'; }
+                                else{
+                                    $newdate15 = $consulta['FECHA_PARA_3RA_DOSIS'] -> format('d/m/y');}
+
         
                         ?>
                         <tr class="text-center font-12" id="table_fed">
@@ -109,12 +147,20 @@
                             <td class="align-middle"><?php echo $newdate4; ?></td>
                             <td class="align-middle"><?php echo $newdate5; ?></td>
                             <td class="align-middle"><?php echo $newdate6; ?></td>
-                            <td class="align-middle" id="fields_brechas_body"><?php echo $newdate7; ?></td>
+                            <td class="align-middle"><?php echo $newdate7; ?></td>
+                            <td class="align-middle"><?php echo $newdate8; ?></td>
+                            <td class="align-middle"><?php echo $newdate9; ?></td>
+                            <td class="align-middle"><?php echo $newdate10; ?></td>
+                            <td class="align-middle"><?php echo $newdate11; ?></td>
+                            <td class="align-middle"><?php echo $newdate12; ?></td>
+                            <td class="align-middle"><?php echo $newdate13; ?></td>
+                            <td class="align-middle"><?php echo $newdate14; ?></td>
+                            <td class="align-middle" id="fields_brechas_body"><?php echo utf8_encode($newdate15); ?></td>
                         </tr>
                         <?php
                             ;}              
                             sqlsrv_close($conn6);
-                        ?> -->
+                        ?>
                     </tbody>
                     <tfoot>
                         <tr>
