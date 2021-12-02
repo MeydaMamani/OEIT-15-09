@@ -17,6 +17,24 @@
         else{ $correctos++; }
     }
 
+    $num_red_pasco=0; $den_red_pasco=0;
+    $num_red_oxa=0; $den_red_oxa=0;
+    $num_red_dac=0; $den_red_dac=0;
+    while ($consulta = sqlsrv_fetch_array($consult_resume5)){
+        if($consulta['Provnacido'] == 'PASCO'){
+            $den_red_pasco = $den_red_pasco + $consulta['MIDENOMINADOR'];
+            $num_red_pasco = $num_red_pasco + $consulta['MINUMERADOR'];
+        }
+        if($consulta['Provnacido'] == 'DANIEL ALCIDES CARRION'){
+            $den_red_dac = $den_red_dac + $consulta['MIDENOMINADOR'];
+            $num_red_dac = $num_red_dac + $consulta['MINUMERADOR'];
+        }
+        if($consulta['Provnacido'] == 'OXAPAMPA'){
+            $den_red_oxa = $den_red_oxa + $consulta['MIDENOMINADOR'];
+            $num_red_oxa = $num_red_oxa + $consulta['MINUMERADOR'];
+        }
+    }
+
     $monday = date( 'd/m/Y', strtotime( 'monday this week' ) );
 ?>
 
@@ -92,15 +110,15 @@
                             </div>
                             <div class="card col-md-6 datos_avance">
                                 <div class="card-body p-1">
-                                    <div class="row pt-4">
-                                        <div class="col-md-8 p-r-0 text-center">
-                                            <h1 class="font-light avance mb-3 text-primary"><?php
+                                    <div class="row pt-4 m-0">
+                                        <div class="col-md-7 p-0 text-center">
+                                            <h2 class="font-light avance mb-3 text-primary"><?php
                                                 if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
                                                     echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
                                                 ?> 
-                                            </h1>
+                                            </h2>
                                             <h4 class="text-muted">Avance</h4></div>
-                                        <div class="col-md-4 p-0 text-center align-self-center position-sticky">
+                                        <div class="col-md-5 p-0 text-center align-self-center position-sticky">
                                             <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php if($correctos == 0 and $incorrectos == 0){ echo '0'; }else{
                                                     echo number_format((float)(($correctos/$row_cnt)*100), 0, '.', ''); }
                                                 ?>"><i class="mdi mdi-receipt"></i></div>
@@ -111,101 +129,95 @@
                         </div>
                     </div>
                     <div class="col-md-5">
-                            <div class="col-12 table-responsive" id="prematuro_resume">
-                                <table id="demo-foo-addrow" class="table table-hover table-bordered">
-                                    <thead>
-                                        <tr class="font-11 text-center" style="background: #e0eff5;">
-                                            <th class="align-middle">#</th>
-                                            <th class="align-middle">Provincia</th>
-                                            <th class="align-middle">Distrito</th>
-                                            <th class="align-middle">Numerador</th>
-                                            <th class="align-middle">Denominador</th>
-                                            <th class="align-middle">Avance</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                            include('consulta_prematuro.php');
-                                            $i=1;
-                                            while ($consulta = sqlsrv_fetch_array($consult_resume5)){
-                                                if(is_null ($consulta['Provnacido']) ){
-                                                    $newdate2 = '  -'; }
-                                                    else{
-                                                $newdate2 = $consulta['Provnacido'];}
-                            
-                                                if(is_null ($consulta['Distnacido']) ){
-                                                    $newdate3 = '  -'; }
-                                                    else{
-                                                $newdate3 = $consulta['Distnacido'] ;}
-                            
-                                                if(is_null ($consulta['2021-3']) ){
-                                                    $newdate4 = '  -'; }
-                                                    else{
-                                                $newdate4 = $consulta['2021-3'];}
-                            
-                                                if(is_null ($consulta['2021-3']) ){
-                                                    $newdate5 = '  -'; }
-                                                    else{
-                                                $newdate5 = $consulta['2021-3'];}
-                            
-                                        ?>
-                                        <tr class="font-11">
-                                            <td class="align-middle text-center"><?php echo $i++; ?></td>
-                                            <td class="align-middle text-left"><?php echo utf8_encode($newdate2); ?></td>
-                                            <td class="align-middle text-left"><?php echo utf8_encode($newdate3); ?></td>
-                                            <td class="align-middle text-center"><?php echo ($newdate4); ?></td>
-                                            <td class="align-middle text-center"><?php echo $newdate5; ?></td>
-                                            <td class="align-middle text-center"><?php if($newdate4 == 0 and $newdate5 == 0){ echo '0 %'; }else{
-                                                        echo number_format((float)(($newdate4/$newdate5)*100), 2, '.', ''), '%'; } ?></td>
-                                        </tr>
-                                        <?php
-                                            ;}
-                                            include("cerrar.php");
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="col-12 table-responsive" id="prematuro_resume">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr class="font-11 text-center" style="background: #e0eff5;">
+                                        <th class="align-middle">#</th>
+                                        <th class="align-middle">Provincia</th>
+                                        <th class="align-middle">Distrito</th>
+                                        <th class="align-middle">Denominador</th>
+                                        <th class="align-middle">Numerador</th>
+                                        <th class="align-middle">Avance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        include('consulta_prematuro.php');
+                                        $i=1;
+                                        while ($consulta = sqlsrv_fetch_array($consult_resume5)){
+                                            if(is_null ($consulta['Provnacido']) ){
+                                                $newdate2 = '  -'; }
+                                                else{
+                                            $newdate2 = $consulta['Provnacido'];}
+                        
+                                            if(is_null ($consulta['Distnacido']) ){
+                                                $newdate3 = '  -'; }
+                                                else{
+                                            $newdate3 = $consulta['Distnacido'] ;}
+                        
+                                            if(is_null ($consulta['MIDENOMINADOR']) ){
+                                                $newdate4 = 0; }
+                                                else{
+                                            $newdate4 = $consulta['MIDENOMINADOR'];}
+                        
+                                            if(is_null ($consulta['MINUMERADOR']) ){
+                                                $newdate5 = 0; }
+                                                else{
+                                            $newdate5 = $consulta['MINUMERADOR'];}
+                        
+                                    ?>
+                                    <tr class="font-11">
+                                        <td class="align-middle text-center"><?php echo $i++; ?></td>
+                                        <td class="align-middle text-left"><?php echo utf8_encode($newdate2); ?></td>
+                                        <td class="align-middle text-left"><?php echo utf8_encode($newdate3); ?></td>
+                                        <td class="align-middle text-center"><?php echo ($newdate4); ?></td>
+                                        <td class="align-middle text-center"><?php echo $newdate5; ?></td>
+                                        <td class="align-middle text-center"><?php if($newdate4 == 0 and $newdate5 == 0){ echo '0 %'; }
+                                        else{ echo number_format((float)(($newdate5/$newdate4)*100), 2, '.', ''), '%'; } ?></td>
+                                    </tr>
+                                    <?php
+                                        ;}
+                                        include("cerrar.php");
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="col-md-2">
                         <div class="card col-md-12">
                             <div class="card-body p-1">
                                 <p class="card-title text-secondary text-center font-18 pt-2">Daniel A. Carrión</p>
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <h2 class="font-light avance mb-2"><?php
-                                            if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
-                                                echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
-                                            ?> 
-                                        </h2>
-                                    </div>
+                                <div class="col-md-12 text-center">
+                                    <h2 class="font-light avance mb-2"><?php
+                                        if($num_red_dac == 0 and $den_red_dac == 0){ echo '0 %'; }else{
+                                            echo number_format((float)(($num_red_dac/$den_red_dac)*100), 2, '.', ''), '%'; }
+                                        ?> 
+                                    </h2>
                                 </div>
                             </div>
                         </div>
                         <div class="card col-md-12">
                             <div class="card-body p-1">
                                 <p class="card-title text-secondary text-center font-18 pt-2">Pasco</p>
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <h2 class="font-light avance mb-2"><?php
-                                            if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
-                                                echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
-                                            ?> 
-                                        </h2>
-                                    </div>
+                                <div class="col-md-12 text-center">
+                                    <h2 class="font-light avance mb-2"><?php
+                                        if($num_red_pasco == 0 and $den_red_pasco == 0){ echo '0 %'; }else{
+                                            echo number_format((float)(($num_red_pasco/$den_red_pasco)*100), 2, '.', ''), '%'; }
+                                        ?> 
+                                    </h2>
                                 </div>
                             </div> 
                         </div>
                         <div class="card col-md-12">
                             <div class="card-body p-1">
                                 <p class="card-title text-secondary text-center font-18 pt-2">Oxapampa</p>
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <h2 class="font-light avance mb-2"><?php
-                                            if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
-                                                echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
-                                            ?> 
-                                        </h2>
-                                    </div>
+                                <div class="col-md-12 text-center">
+                                    <h2 class="font-light avance mb-2"><?php
+                                        if($num_red_oxa == 0 and $den_red_oxa == 0){ echo '0 %'; }else{
+                                            echo number_format((float)(($num_red_oxa/$den_red_oxa)*100), 2, '.', ''), '%'; }
+                                        ?> 
+                                    </h2>
                                 </div>
                             </div>
                        </div>
@@ -499,14 +511,14 @@
     </div>
     <!-- MODAL INFORMACION-->
     <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-            <img src="./img/inf_prematuros.png" style="width: 100%;">
-          </div>
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <img src="./img/inf_prematuros.png" style="width: 100%;">
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 <?php } ?>
 

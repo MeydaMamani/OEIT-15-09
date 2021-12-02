@@ -39,7 +39,7 @@
         elseif ($red_1 == 4) {
             $redt = 'PASCO';
         }
-        
+
         $resultado = "SELECT num_cnv,nombre_prov,nombre_dist,tipo_seguro,fecha_nacimiento_nino, apellido_paterno_nino,
                         apellido_materno_nino, nombre_nino, MENOR_ENCONTRADO,NOMBRE_EESS    
                         into  padron_nino_cnv1
@@ -77,39 +77,20 @@
                     ORDER BY Provnacido, Distnacido, Establecimiento";
 
         $resume2 = "SELECT Provnacido,Distnacido,
-                    COUNT(CASE WHEN mide>='2021-03-01' AND mide<='2021-03-31' THEN Numcnv END) '2021-3',
-                    COUNT(CASE WHEN mide>='2021-04-01' AND mide<='2021-04-30' THEN Numcnv END) '2021-4',
-                    COUNT(CASE WHEN mide>='2021-05-01' AND mide<='2021-05-31' THEN Numcnv END) '2021-5',
-                    COUNT(CASE WHEN mide>='2021-06-01' AND mide<='2021-06-30' THEN Numcnv END) '2021-6',
-                    COUNT(CASE WHEN mide>='2021-07-01' AND mide<='2021-07-31' THEN Numcnv END) '2021-7',
-                    COUNT(CASE WHEN mide>='2021-08-01' AND mide<='2021-08-31' THEN Numcnv END) '2021-8',
-                    COUNT(CASE WHEN mide>='2021-09-01' AND mide<='2021-09-30' THEN Numcnv END) '2021-9',
-                    COUNT(CASE WHEN mide>='2021-10-01' AND mide<='2021-10-31' THEN Numcnv END) '2021-10',
-                    COUNT(CASE WHEN mide>='2021-11-01' AND mide<='2021-11-30' THEN Numcnv END) '2021-11',
-                    COUNT(CASE WHEN mide>='2021-12-01' AND mide<='2021-12-31' THEN Numcnv END) '2021-12'
+                    COUNT(CASE WHEN mide>='2021-$mes2-01' AND mide<=CONCAT('2021-$mes2-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/2021'),0)))) THEN Numcnv END) 'MIDENOMINADOR'
                     INTO BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
                     FROM BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO A
                     WHERE ((TIPO_SEGURO IN('1,','0,','1, 2, ','0, 1, '))OR (TIPO_SEGURO IS NULL))
-                    GROUP BY   Provnacido,Distnacido";
+                    GROUP BY Provnacido,Distnacido";
 
         $resume3 = "SELECT Provnacido,Distnacido,
-                    COUNT(CASE WHEN mide>='2021-03-01' AND mide<='2021-03-31' THEN Numcnv END) '2021-3',
-                    COUNT(CASE WHEN mide>='2021-04-01' AND mide<='2021-04-30' THEN Numcnv END) '2021-4',
-                    COUNT(CASE WHEN mide>='2021-05-01' AND mide<='2021-05-31' THEN Numcnv END) '2021-5',
-                    COUNT(CASE WHEN mide>='2021-06-01' AND mide<='2021-06-30' THEN Numcnv END) '2021-6',
-                    COUNT(CASE WHEN mide>='2021-07-01' AND mide<='2021-07-31' THEN Numcnv END) '2021-7',
-                    COUNT(CASE WHEN mide>='2021-08-01' AND mide<='2021-08-31' THEN Numcnv END) '2021-8',
-                    COUNT(CASE WHEN mide>='2021-09-01' AND mide<='2021-09-30' THEN Numcnv END) '2021-9',
-                    COUNT(CASE WHEN mide>='2021-10-01' AND mide<='2021-10-31' THEN Numcnv END) '2021-10',
-                    COUNT(CASE WHEN mide>='2021-11-01' AND mide<='2021-11-30' THEN Numcnv END) '2021-11',
-                    COUNT(CASE WHEN mide>='2021-12-01' AND mide<='2021-12-31' THEN Numcnv END) '2021-12'
+                    COUNT(CASE WHEN mide>='2021-$mes2-01' AND mide<=CONCAT('2021-$mes2-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/2021'),0)))) THEN Numcnv END) 'MINUMERADOR'
                     INTO BDHIS_MINSA.dbo.NUMERADOR_PREMATURO
                     FROM BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO A
                     WHERE ((TIPO_SEGURO IN('1,','0,','1, 2, ','0, 1, '))OR (TIPO_SEGURO IS NULL)) AND (SUPLEMENTADO IS NOT NULL)
-                    GROUP BY   Provnacido,Distnacido";
+                    GROUP BY Provnacido,Distnacido";
 
-        $resume4 = "SELECT A.Provnacido,A.Distnacido
-                    ,B.[2021-3] ,A.[2021-3] ,B.[2021-4],A.[2021-4],B.[2021-5],A.[2021-5],B.[2021-6],A.[2021-6],B.[2021-7],A.[2021-7],B.[2021-8],A.[2021-8],B.[2021-9],A.[2021-9],B.[2021-10],A.[2021-10],B.[2021-11],A.[2021-11],B.[2021-12],A.[2021-12]
+        $resume4 = "SELECT A.Provnacido, A.Distnacido, MIDENOMINADOR, MINUMERADOR
                     FROM BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO A
                     LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR_PREMATURO B ON A.Distnacido=B.Distnacido
                     ORDER BY A.Provnacido,A.Distnacido
