@@ -50,7 +50,7 @@
                             THEN pn.NUM_DNI
                             ELSE pn.NUM_CNV
                           END,
-                        CONCAT(pn.APELLIDO_PATERNO_NINO,' ',pn.APELLIDO_MATERNO_MADRE,' ', pn.NOMBRE_NINO) AS APELLIDOS_NOMBRES,
+                        CONCAT(pn.APELLIDO_PATERNO_NINO,' ',pn.APELLIDO_MATERNO_NINO,' ', pn.NOMBRE_NINO) AS APELLIDOS_NOMBRES,
                         pn.TIPO_SEGURO, pn.NOMBRE_EESS AS ULTIMA_ATE_PN
                             into BDHIS_MINSA.dbo.PADRON_EVALUAR6
                         from NOMINAL_PADRON_NOMINAL AS pn
