@@ -1,8 +1,7 @@
 <?php
     require('abrir.php');
     require('abrir2.php');
-    require('abrir3.php');
-    require('abrir4.php');    
+    require('abrir6.php');    
     global $conex;
     include('./base.php');
 ?>
@@ -11,46 +10,45 @@
             <div class="text-center p-1">
                 <h3>Ficha 2 - Niños Menores de 18 meses</h3>
             </div>
-            <form name="f1" method="post" action="#" class="_form_gestante">
+            <!-- <?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?> -->
+            <div name="f1" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>">
                 <div class="row">
                     <div class="col-md-4">
-                        <select class="select_gestante form-select" name="red" id="red" onchange="cambia_distrito()" aria-label="Default select example">
+                        <select class="select_gestante form-select" name="provincia" id="provincia" onchange="cargarPueblos();" aria-label="Default select example">
                             <option value="0" selected>Seleccione Red</option>
-                            <option value="1">DANIEL ALCIDES CARRION</option> 
-                            <option value="2">OXAPAMPA</option>
-                            <option value="3">PASCO</option>
                         </select>
                     </div>
                     <div class="col-md-4 text-mobile">
-                        <select class="select_gestante form-select" name="distrito" id="distrito" aria-label="Default select example">
+                        <select class="select_gestante form-select" name="pueblo" id="pueblo" aria-label="Default select example">
                             <option value="-" selected>Seleccione Distrito</option>
                         </select>
                     </div>
                     <div class="col-md-2 text-mobile">
-                        <select class="select_gestante form-select" name="distrito" id="distrito" aria-label="Default select example">
+                        <select class="select_gestante form-select" name="anio" id="anio" aria-label="Default select example">
                             <option value="-" selected>Seleccione Año</option>
                             <option value="2019">2019</option>
                             <option value="2020">2020</option>
                             <option value="2021">2021</option>
                         </select>
                     </div>
-                    <div class="col-md-2 text-center">
-                        <button name="Buscar" class="btn text-white" type="button" id="btn_buscar" placeholder="Buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
+                    <div class="col-md-2">
+                        <button name="Buscar" class="btn text-white" type="button" id="btn_buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
                     </div>
                 </div>
-            </form><br>
+            </div><br>
             <div class="row">
                 <div class="col-md-8 border border-secondary">
-                    <h4 class="p-2 text-center">Avance Distrital</h4>
+                    <h4 class="p-2 text-center">Avance Distrital <?php 
+                        $dist_1 = '';
+                        echo $dist_1;
+                        ?>
+                    </h4>
                     <div style="height: 250px;">
                         <canvas id="myChartDistrict"></canvas>
                     </div>
                 </div>
                 <div class="col-md-4 border border-secondary">
                     <h4 class="p-2 text-center">Avance Regional</h4>
-                    <!-- <button class="btn-sm btn_dac" id="btn_dac" name="province" value="DANIEL ALCIDES CARRION"> DANIEL A. CARRION</button>
-                            <button class="btn-sm btn_pasco" name="province"> PASCO</button>
-                            <button class="btn-sm btn_oxa" name="province"> OXAPAMPA</button> -->
                 </div>
             </div>
             <br>
@@ -163,7 +161,7 @@
                     </div><br>
                     <div class="border border-secondary" style="width: 110%;">
                         <h4 class="p-2">Avance Distrital</h4>
-                        <div class="dac" style="height: 410px;">
+                        <!-- <div class="dac" style="height: 410px;">
                             <canvas id="myChartDistrict"></canvas>
                         </div>
                         <div class="oxa" style="height: 410px; display: none;">
@@ -171,7 +169,7 @@
                         </div>
                         <div class="pasco" style="height: 500px; display: none;">
                             <canvas id="myChartDistrict2"></canvas>
-                        </div>
+                        </div> -->
                     </div><br>
                 </div>
             </div>
@@ -180,112 +178,119 @@
    
     <script src="./js/records_menu.js"></script>
     <script src="./js/select2.js"></script>
-    <script src="./js/district.js"></script>
+    <!-- <script src="./js/district.js"></script> -->
     <script src="./js/Chart.min.js"></script>
     <script src="./js/chartjs-plugin-datalabels.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <!-- <script>
-        $("#btn_buscar").click(function(){           
-            var distrito = $("#distrito").val();
-            console.log(distrito);
+    <script>
+        $('#provincia').select2();
+        $('#pueblo').select2();
+        $('#anio').select2();
+        function cargarProvincias() {
+            var array = ["DANIEL ALCIDES CARRION", "OXAPAMPA", "PASCO"];
+            array.sort();
+            addOptions("provincia", array);
+        }
+
+        function addOptions(domElement, array) {
+            var selector = document.getElementsByName(domElement)[0];
+            for (provincia in array) {
+                var opcion = document.createElement("option");
+                opcion.text = array[provincia];
+                opcion.value = array[provincia].toLowerCase().replace(/\s+/g, '');
+                selector.add(opcion);
+            }
+        }
+
+        function cargarPueblos() {
+            var listaPueblos = {
+                danielalcidescarrion: ["CHACAYAN","GOYLLARISQUIZGA","PAUCAR","SAN PEDRO DE PILLAO","SANTA ANA DE TUSI","TAPUC","VILCABAMBA","YANAHUANCA"],
+                oxapampa: ["CHONTABAMBA","CONSTITUCIÓN","HUANCABAMBA","OXAPAMPA","PALCAZU","POZUZO","PUERTO BERMUDEZ","VILLA RICA"],
+                pasco: ["CHAUPIMARCA","HUACHON","HUARIACA","HUAYLLAY","NINACACA","PALLANCHACRA","PAUCARTAMBO","SAN FRANCISCO DE ASIS DE YARUSYACAN","SIMON BOLIVAR","TICLACAYAN","TINYAHUARCO","VICCO","YANACANCHA"]
+            }
+            
+            var provincias = document.getElementById('provincia')
+            var pueblos = document.getElementById('pueblo')
+            var provinciaSeleccionada = provincias.value            
+            // Se limpian los pueblos
+            pueblos.innerHTML = '<option value="">Seleccione un Distrito...</option>'            
+            if(provinciaSeleccionada !== ''){
+                // Se seleccionan los pueblos y se ordenan
+                provinciaSeleccionada = listaPueblos[provinciaSeleccionada]
+                provinciaSeleccionada.sort()                
+                // Insertamos los pueblos
+                provinciaSeleccionada.forEach(function(pueblo){
+                    let opcion = document.createElement('option')
+                    opcion.value = pueblo
+                    opcion.text = pueblo
+                    pueblos.add(opcion)
+                });
+            }            
+        }  
+        cargarProvincias();
+    </script>
+    <script>
+        $("#btn_buscar").click(function(){
+            var distrito = $("#pueblo").val();
+            var anio = $("#anio").val();
+            console.log("ME DISTE CLICK", distrito);
+            console.log("ME DISTE ------", anio);
             $.ajax({
-                url: 'query_board_prematuros.php?&dist='+distrito,
+                url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio,
                 method: 'GET',
                 success: function(data) {
-                    
-                    // var establecimiento = data;
-                    // var expresionRegular = /\s*,\s*/;
-                    // var listaEstablecimiento = establecimiento.split(expresionRegular);
-                    // var indice = listaEstablecimiento.length-1;
-                    // listaEstablecimiento[indice] = 'TODOS';
-                    // num_distritos = listaEstablecimiento.length 
-                    // document.f1.establecimiento.length = num_distritos
-                    // for(i=0;i<num_distritos;i++){ 
-                    //     document.f1.establecimiento.options[i].value=listaEstablecimiento[i] 
-                    //     document.f1.establecimiento.options[i].text=listaEstablecimiento[i] 
-                    // } 
+                    console.log('SOY DATA', data);
+                    //POR DISTRITO
+                    var ctx_province= document.getElementById("myChartDistrict").getContext("2d");
+                    var myChartProvince= new Chart(ctx_province,{
+                        type: 'bar',
+                        data: {
+                            labels:[ "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC"],
+                            datasets:[
+                                {
+                                    label:'DATOSSSS',
+                                    data:[
+                                        <?php
+                                            include('query_ficha2.php');
+                                            $dist_1 = '';
+                                            $anio = '';
+                                            echo "$ene, $feb, $mar, $abr, $may, $jun, $jul, $ago, $set, $oct, $nov, $dic";
+                                        ?>
+                                    ],
+                                    backgroundColor: '#1d3f74',
+                                },
+                            ]
+                        },
+                        plugins: [ChartDataLabels],
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: true
+                                },
+                                datalabels: {
+                                    formatter: (value, ctx) => {
+                                        let percentage = value.toFixed(2)+"%";
+                                        console.log(percentage);
+                                        return percentage;
+                                    },
+                                    color: 'black',
+                                    anchor: 'end',
+                                    align: 'top',
+                                    offset: 3
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        },
+                    });
                 }
             })
         });
-        //POR DISTRITO
-        new Chart(document.getElementById("myChartDistrict"), {
-            type: 'bar',
-            data: {
-                labels:[ "JUNIO", "JULIO", "AGOSTO", "SETIEMBRE", "OCTUBRE", "NOVIEMBRE"],
-                datasets:[
-                    {
-                        label:'DATOSSSS',
-                        data:[
-                            <?php
-                                include('query_board_prematuros.php');
-                                $list_junio[] = array(); $list_julio[] = array(); $list_agost[] = array();
-                                $list_junio[] = array(); $list_junio[] = array(); $list_junio[] = array(); 
-                                while ($con = sqlsrv_fetch_array($consult_resume6)){
-                                    if($con['JUNIO_NUM'] == 0 and $con['JUNIO_DEN'] == 0){ $junio = 0; }
-                                    else{  $junio = ($con['JUNIO_NUM']/$con['JUNIO_DEN'])*100; }
-
-                                    if($con['JULIO_NUM'] == 0 and $con['JULIO_DEN'] == 0){ $julio = 0; }
-                                    else{  $julio = ($con['JULIO_NUM']/$con['JULIO_DEN'])*100; }
-
-                                    if($con['AGOSTO_NUM'] == 0 and $con['AGOSTO_DEN'] == 0){ $agosto = 0; }
-                                    else{ $agosto = ($con['AGOSTO_NUM']/$con['AGOSTO_DEN'])*100; }
-
-                                    if($con['SETIEMBRE_NUM'] == 0 and $con['SETIEMBRE_DEN'] == 0){ $setiembre = 0; }
-                                    else{  $setiembre = ($con['SETIEMBRE_NUM']/$con['SETIEMBRE_DEN'])*100; }
-
-                                    if($con['OCTUBRE_NUM'] == 0 and $con['OCTUBRE_DEN'] == 0){ $octubre = 0; }
-                                    else{  $octubre = ($con['OCTUBRE_NUM']/$con['OCTUBRE_DEN'])*100; }
-
-                                    if($con['NOVIEMBRE_NUM'] == 0 and $con['NOVIEMBRE_DEN'] == 0){ $noviembre = 0; }
-                                    else{  $noviembre = ($con['NOVIEMBRE_NUM']/$con['NOVIEMBRE_DEN'])*100; }
-
-                                }
-                                echo "$junio, $julio, $agosto, $setiembre, $octubre, $noviembre";
-                            ?>
-                        ],
-                        backgroundColor: '#1d3f74',
-                    },
-                ]
-            },
-            plugins: [ChartDataLabels],
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true
-                    },
-                    datalabels: {
-                        formatter: (value, ctx) => {
-                            let percentage = value.toFixed(2)+"%";
-                            console.log(percentage);
-                            return percentage;
-                        },
-                        color: 'black',
-                        anchor: 'end',
-                        align: 'top',
-                        offset: 3
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            },
-        });
-    </script> -->
-
-    <!-- <script src="./plugin/footable/js/footable-init.js"></script>
-    <script src="./plugin/footable/js/footable.all.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.0/Chart.bundle.min.js"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-    <!-- <?php include('board_prematuros_graph.php'); ?> -->
-    <!-- <script>
-        $( document ).ready(function() {
-            $("#btn_dac").click();
-        });
-    </script> -->
+    </script>    
 </body>
 </html>

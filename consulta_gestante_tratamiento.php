@@ -34,7 +34,7 @@
         }
         elseif ($red_1 == 4) {
           $red = 'TODOS';
-        }        
+        }
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
           $resultado = "SELECT Provincia_Establecimiento,Distrito_Establecimiento,Numero_Documento_Paciente,
@@ -56,7 +56,8 @@
                           ( (Anio='2021' AND Mes='$mes') AND Provincia_Establecimiento='$red' and Descripcion_Sector='GOBIERNO REGIONAL' AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') ) AND  ((Codigo_Item IN ('T741','T742','T743','T748','T749','Y070','Y078'))or (Codigo_Item like 'X85%')OR(Codigo_Item like 'X86%')OR(Codigo_Item like 'X87%')OR(Codigo_Item like 'X88%')OR(Codigo_Item like 'X89%')
                           OR(Codigo_Item like 'X90%')OR(Codigo_Item like 'X91%')OR(Codigo_Item like 'X92%')OR(Codigo_Item like 'X93%')OR(Codigo_Item like 'X94%')OR(Codigo_Item like 'X95%')OR(Codigo_Item like 'X96%')OR(Codigo_Item like 'X97%')OR(Codigo_Item like 'X98%')OR(Codigo_Item like 'X99%')OR(Codigo_Item like 'X97%')) )                                                                       
                           gROUP BY Provincia_Establecimiento,Distrito_Establecimiento,Numero_Documento_Paciente) b
-                          where GESTANTES_ATENDIDAS is not null and TAMIZAJE_VIOLENCIA is not null";
+                          where GESTANTES_ATENDIDAS is not null and TAMIZAJE_VIOLENCIA is not null
+                          ORDER BY Provincia_Establecimiento,Distrito_Establecimiento,Numero_Documento_Paciente";
 
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
@@ -80,7 +81,8 @@
                           ( (Anio='2021' AND Mes='$mes')  and Descripcion_Sector='GOBIERNO REGIONAL' AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') ) AND  ((Codigo_Item IN ('T741','T742','T743','T748','T749','Y070','Y078'))or (Codigo_Item like 'X85%')OR(Codigo_Item like 'X86%')OR(Codigo_Item like 'X87%')OR(Codigo_Item like 'X88%')OR(Codigo_Item like 'X89%')
                           OR(Codigo_Item like 'X90%')OR(Codigo_Item like 'X91%')OR(Codigo_Item like 'X92%')OR(Codigo_Item like 'X93%')OR(Codigo_Item like 'X94%')OR(Codigo_Item like 'X95%')OR(Codigo_Item like 'X96%')OR(Codigo_Item like 'X97%')OR(Codigo_Item like 'X98%')OR(Codigo_Item like 'X99%')OR(Codigo_Item like 'X97%')) )                                                                       
                           gROUP BY Provincia_Establecimiento,Distrito_Establecimiento,Numero_Documento_Paciente) b
-                          where GESTANTES_ATENDIDAS is not null and TAMIZAJE_VIOLENCIA is not null";
+                          where GESTANTES_ATENDIDAS is not null and TAMIZAJE_VIOLENCIA is not null
+                          ORDER BY Provincia_Establecimiento,Distrito_Establecimiento,Numero_Documento_Paciente";
         }
         else if($dist_1 != 'TODOS'){
           $dist=$dist_1;
@@ -103,7 +105,8 @@
                             ( (Anio='2021' AND Mes='$mes') AND Provincia_Establecimiento='$red' and Distrito_Establecimiento='$dist' and Descripcion_Sector='GOBIERNO REGIONAL' AND  (Codigo_Unico NOT IN ('000000979','000000980','000000981') ) AND  ((Codigo_Item IN ('T741','T742','T743','T748','T749','Y070','Y078'))or (Codigo_Item like 'X85%')OR(Codigo_Item like 'X86%')OR(Codigo_Item like 'X87%')OR(Codigo_Item like 'X88%')OR(Codigo_Item like 'X89%')
                             OR(Codigo_Item like 'X90%')OR(Codigo_Item like 'X91%')OR(Codigo_Item like 'X92%')OR(Codigo_Item like 'X93%')OR(Codigo_Item like 'X94%')OR(Codigo_Item like 'X95%')OR(Codigo_Item like 'X96%')OR(Codigo_Item like 'X97%')OR(Codigo_Item like 'X98%')OR(Codigo_Item like 'X99%')OR(Codigo_Item like 'X97%')) )                                                                       
                             gROUP BY Provincia_Establecimiento,Distrito_Establecimiento,Numero_Documento_Paciente) b
-                            where GESTANTES_ATENDIDAS is not null and TAMIZAJE_VIOLENCIA is not null";
+                            where GESTANTES_ATENDIDAS is not null and TAMIZAJE_VIOLENCIA is not null
+                            ORDER BY Provincia_Establecimiento,Distrito_Establecimiento,Numero_Documento_Paciente";
         }
 
         $params = array(); 

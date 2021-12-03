@@ -5,53 +5,41 @@
     require('abrir4.php');
 
     if (isset($_POST['Buscar'])) {
-    header('Content-Type: text/html; charset=UTF-8');
-    include('./base.php'); 
-    include('consulta_desparacitacion.php');
-    $row_cont=0;
-    while ($consulta = sqlsrv_fetch_array($consulta2)){
-        $row_cont++;
-    }
+        header('Content-Type: text/html; charset=UTF-8');
+        include('./base.php'); 
+        include('zone_setting.php');
+        include('consulta_desparacitacion.php');
+        $row_cont=0;
+        while ($consulta = sqlsrv_fetch_array($consulta2)){
+            $row_cont++;
+        }
 ?>
     <div class="page-wrapper">
         <div class="container">
-            <div class="text-center p-3">
-              <h3>Desparacitación </h3>
+            <div class="row">
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <marquee width="100%" direction="left" height="18px">
+                        <p class="font-14 text-primary"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</p>
+                    </marquee>
+                </div>
             </div>
-            <div class="row mb-3 mt-3">
+            <div class="text-center p-2">
+                <h3>Desparacitación </h3>
+            </div>
+            <div class="row mb-1">
                 <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"><?php echo $row_cont; ?></b></div>
             </div>
-            <div class="row mb-3">
-              <div class="col-lg-12 text-center">
-                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='desparacitacion.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
-              </div>
-            </div>
-            <div class="d-flex">
+            <div class="d-flex justify-content-center mb-3">
                 <form action="print_deworming.php" method="POST">
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                     <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                     <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
+                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                 </form>
+                <button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm m-2" onclick="location.href='desparacitacion.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
             </div>
-            <!-- <div class="col-lg-12 col-md-12 justify-content-center p-t-20" style="display: flex;">
-                <div class="row">
-                    <div class="col-lg-5 col-md-5">
-                        <div class="input-group">
-                            <input type="date" class="form-control" id="start" onchange="filterdatedespara()" aria-label="Default select example">
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-md-5">
-                        <div class="input-group">
-                            <input type="date" class="form-control" id="end" onchange="filterdatedespara()" aria-label="Default select example">
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-2 m-t--5">
-                        <button class="btn btn-outline-secondary btn-round btn-sm">Mes Actual</button>
-                    </div>
-                </div>
-            </div> -->
-            <div class="col-12 table-responsive">
+            <div class="col-12 table-responsive" id="cuatro_meses">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="text-center font-12" style="background: #c9d0e2;">
@@ -61,10 +49,10 @@
                             <th class="align-middle">Cantidad</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-4">
-                        <div class="form-group">
+                    <div class="float-end pb-1 col-md-3 table_no_fed">
+                        <div class="mb-3">
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>

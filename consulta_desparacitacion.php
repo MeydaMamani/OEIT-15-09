@@ -54,6 +54,7 @@
                           SUM(CASE WHEN (Provincia_Establecimiento='$red') THEN 1 ELSE 0 END) AS CANTIDAD_PROV
                               FROM dbo.DESPARACITACION WHERE Provincia_Establecimiento='$red'
                           GROUP BY Provincia_Establecimiento, Distrito_Establecimiento) A 
+                          ORDER BY Provincia_Establecimiento, Distrito_Establecimiento
                           DROP TABLE dbo.DESPARACITACION";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
@@ -61,6 +62,7 @@
                           FROM (SELECT Provincia_Establecimiento, Distrito_Establecimiento, COUNT(Provincia_Establecimiento) AS CANTIDAD_PROV
                           FROM dbo.DESPARACITACION  
                           GROUP BY Provincia_Establecimiento, Distrito_Establecimiento) A
+                          ORDER BY Provincia_Establecimiento, Distrito_Establecimiento
                           DROP TABLE dbo.DESPARACITACION";
         }
         else if($dist_1 != 'TODOS'){
@@ -71,6 +73,7 @@
                           SUM(CASE WHEN (Distrito_Establecimiento='$dist') THEN 1 ELSE 0 END) AS CANTIDAD_DIST
                               FROM dbo.DESPARACITACION WHERE Provincia_Establecimiento='$red' AND Distrito_Establecimiento='$dist'
                           GROUP BY Provincia_Establecimiento, Distrito_Establecimiento) A
+                          ORDER BY Provincia_Establecimiento, Distrito_Establecimiento
                           DROP TABLE dbo.DESPARACITACION";
         }
 
