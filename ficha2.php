@@ -4,6 +4,7 @@
     require('abrir6.php');    
     global $conex;
     include('./base.php');
+    include('query_ficha2.php');
 ?>
     <div class="page-wrapper">
         <div class="homologation">
@@ -11,39 +12,50 @@
                 <h3>Ficha 2 - Niños Menores de 18 meses</h3>
             </div>
             <!-- <?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?> -->
-            <div name="f1" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>">
-                <div class="row">
-                    <div class="col-md-4">
-                        <select class="select_gestante form-select" name="provincia" id="provincia" onchange="cargarPueblos();" aria-label="Default select example">
-                            <option value="0" selected>Seleccione Red</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 text-mobile">
-                        <select class="select_gestante form-select" name="pueblo" id="pueblo" aria-label="Default select example">
-                            <option value="-" selected>Seleccione Distrito</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2 text-mobile">
-                        <select class="select_gestante form-select" name="anio" id="anio" aria-label="Default select example">
-                            <option value="-" selected>Seleccione Año</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <button name="Buscar" class="btn text-white" type="button" id="btn_buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
-                    </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <select class="select_gestante form-select" name="provincia" id="provincia" onchange="cargarPueblos();" aria-label="Default select example">
+                        <option value="0" selected>Seleccione Red</option>
+                    </select>
+                </div>
+                <div class="col-md-3 text-mobile">
+                    <select class="select_gestante form-select" name="pueblo" id="pueblo" aria-label="Default select example">
+                        <option value="-" selected>Seleccione Distrito</option>
+                    </select>
+                </div>
+                <div class="col-md-2 text-mobile">
+                    <select class="select_gestante form-select" name="anio" id="anio" aria-label="Default select example">
+                        <option value="-" selected>Seleccione Año</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                    </select>
+                </div>
+                <div class="col-md-2 text-mobile">
+                    <select class="select_gestante form-select" name="mes" id="mes" aria-label="Default select example">
+                        <option value="-" selected>Seleccione Mes</option>
+                        <option value="1">ENERO</option>
+                        <option value="2">FEBRERO</option>
+                        <option value="3">MARZO</option>
+                        <option value="4">ABRIL</option>
+                        <option value="5">MAYO</option>
+                        <option value="6">JUNIO</option>
+                        <option value="7">JULIO</option>
+                        <option value="8">AGOSTO</option>
+                        <option value="9">SETIEMBRE</option>
+                        <option value="10">OCTUBRE</option>
+                        <option value="11">NOVIEMBRE</option>
+                        <option value="12">DICIEMBRE</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button name="Buscar" class="btn text-white" type="submit" id="btn_buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
                 </div>
             </div><br>
             <div class="row">
-                <div class="col-md-8 border border-secondary">
-                    <h4 class="p-2 text-center">Avance Distrital <?php 
-                        $dist_1 = '';
-                        echo $dist_1;
-                        ?>
-                    </h4>
-                    <div style="height: 250px;">
+                <div class="col-md-12 border border-secondary">
+                    <h4 class="p-2 text-center">Avance Distrital Para <span><?php echo $nombre_mes; ?></span></h4>
+                    <div style="height: 300px;">
                         <canvas id="myChartDistrict"></canvas>
                     </div>
                 </div>
@@ -186,6 +198,7 @@
         $('#provincia').select2();
         $('#pueblo').select2();
         $('#anio').select2();
+        $('#mes').select2();
         function cargarProvincias() {
             var array = ["DANIEL ALCIDES CARRION", "OXAPAMPA", "PASCO"];
             array.sort();
@@ -230,6 +243,9 @@
         cargarProvincias();
     </script>
     <script>
+        $( document ).ready(function() {
+            $("#btn_buscar").click();
+        });
         $("#btn_buscar").click(function(){
             var distrito = $("#pueblo").val();
             var anio = $("#anio").val();
@@ -245,16 +261,27 @@
                     var myChartProvince= new Chart(ctx_province,{
                         type: 'bar',
                         data: {
-                            labels:[ "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC"],
+                            labels:[ 
+                                <?php
+                                    include('query_ficha2.php');
+                                    $num_dists = sizeof($list_dists);         
+                                    for ($i = 0; $i < $num_dists; $i++) {
+                                        $data = ($list_dists[$i]);
+                                        echo "'$data', ";
+                                    }
+                                ?>
+                            ],
                             datasets:[
                                 {
                                     label:'DATOSSSS',
                                     data:[
                                         <?php
                                             include('query_ficha2.php');
-                                            $dist_1 = '';
-                                            $anio = '';
-                                            echo "$ene, $feb, $mar, $abr, $may, $jun, $jul, $ago, $set, $oct, $nov, $dic";
+                                            $datos = sizeof($list_total);         
+                                            for ($i = 0; $i < $datos; $i++) {
+                                                $data = ($list_total[$i]);
+                                                echo "'$data', ";
+                                            }
                                         ?>
                                     ],
                                     backgroundColor: '#1d3f74',
@@ -265,13 +292,14 @@
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
+                            // indexAxis: 'y',
                             plugins: {
                                 legend: {
                                     display: true
                                 },
                                 datalabels: {
                                     formatter: (value, ctx) => {
-                                        let percentage = value.toFixed(2)+"%";
+                                        let percentage = value+"%";
                                         console.log(percentage);
                                         return percentage;
                                     },
