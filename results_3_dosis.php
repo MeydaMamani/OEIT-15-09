@@ -26,7 +26,6 @@
             <div class="text-center pt-2">
                 <h3>Aptos Para Tercera Dosis</h3>
             </div>
-            <!-- <p>El presente reporte muestra todas las personas al día de hoy aptos para Tercera dosis, esto según procedimiento aprobado por el Ministerio de Salud, a los 150 días desde su segunda dosis.</p> -->
             <div class="col-md-12 d-flex mb-3 mt-3 justify-content-center">
                 <form action="print_3_dosis.php" method="POST">
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">

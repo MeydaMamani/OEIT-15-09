@@ -26,7 +26,6 @@
         }
     
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
-            echo "TOY AQUIIII";
             $resultado = "SELECT 
                             CASE WHEN (V.PRIMERA_PROV IS NULL) THEN VN.PRIMERA_PROV ELSE V.PRIMERA_PROV END AS 'PROVINCIA_UNO',
                             CASE WHEN (V.PRIMERA_DIST IS NULL) THEN VN.PRIMERA_DIST ELSE V.PRIMERA_DIST END AS 'DISTRITO_UNO',

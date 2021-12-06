@@ -20,7 +20,7 @@ body {background:#FEFEFE;}
 	margin: auto;
 	width: 65%;
 	height: 72%;
-	/* background: rgba(104, 104, 143, 0.884); */
+	background: rgba(104, 104, 143, 0.884);
     border-radius: 10px;
 }	
 #cerrar {
