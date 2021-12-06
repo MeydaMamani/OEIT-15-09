@@ -1,5 +1,59 @@
 body {background:#FEFEFE;}
 
+.modal-img{
+	width: 100%;
+	height: 100vh;
+	background: rgba(133, 128, 128, 0.158);
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	/* transition: all .5s; */
+	animation: modal 36s ;
+	animation-delay:  0s ;
+	/* animation-fill-mode: forwards; */
+	visibility: hidden;
+	opacity:  0; 
+	z-index: 99;
+}
+.contenido {
+	margin: auto;
+	width: 65%;
+	height: 72%;
+	/* background: rgba(104, 104, 143, 0.884); */
+    border-radius: 10px;
+}	
+#cerrar {
+	display: none;
+}
+#cerrar + label {
+	position: fixed;
+	color:rgba(249, 247, 253, 0.788);
+	font-size: 25px;
+	z-index: 50;
+	background: rgb(139, 0, 0);
+	height: 40px;
+	width: 40px;
+	/* line-height: 40%; */
+	border-radius: 50%;
+	right: 10px;
+	cursor: pointer;
+
+	/* animation: modal 6s ; */
+	animation-delay:  0s ;
+	visibility: hidden;
+	opacity: 0;
+}
+#cerrar:checked + label, #cerrar:checked ~ .modal {
+	display: none;
+}
+@keyframes modal {
+	100%{
+		visibility: visible ;
+		opacity: 1;
+	}
+}
+
 .border-rounded{
 	border-radius: 50% !important;
 }
@@ -15,9 +69,22 @@ body {background:#FEFEFE;}
 }
 
 @media screen and (max-width: 800px) {
-	.datos_avance{
+	.data_advance{
 		margin: 10px;
 	}
+}
+
+.p-l-2{
+	padding-left: 20px;
+}
+
+.container_fed{
+	margin: 0 50px;
+}
+
+.btn_fed:active{
+	background: black;
+	color: white;
 }
 
 .profiletimeline {
@@ -390,6 +457,10 @@ img:hover{
 	/* background: #f1f2f5; */
 }
 
+.card.data_advance{
+	margin-bottom: 10px;
+}
+
 #prematuro thead tr th { 
 	position: sticky;
 	top: 0;
@@ -408,8 +479,9 @@ img:hover{
 	background: black !important;
 	color: white;
 }
+
 #prematuro_resume { 
-	height: 335px;
+	height: 220px;
 	overflow:scroll;
 }
 

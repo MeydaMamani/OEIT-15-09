@@ -1,17 +1,32 @@
 <?php
     include('./base.php');
+    include('zone_setting.php');
     include('query_3_dosis.php');
     $row_cont=0; $correctos=0; $incorrectos=0;
     while ($consulta = sqlsrv_fetch_array($consulta3)){  
         $row_cont++;
     }  
 ?>
+
     <div class="page-wrapper">
         <div class="container">
-            <div class="text-center p-3">
+            <div class="modal-img text-center">
+                <div class="contenido">
+                    <img src="./img/text_3_dose.png" width="600" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <marquee width="100%" direction="left" height="18px">
+                        <p class="font-14 text-primary"><b>Fuente: </b> BD PadronCovid con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</p>
+                    </marquee>
+                </div>
+            </div>
+            <div class="text-center pt-2">
                 <h3>Aptos Para Tercera Dosis</h3>
             </div>
-            <p>El presente reporte muestra todas las personas al día de hoy aptos para Tercera dosis, esto según procedimiento aprobado por el Ministerio de Salud, a los 150 días desde su segunda dosis.</p>
+            <!-- <p>El presente reporte muestra todas las personas al día de hoy aptos para Tercera dosis, esto según procedimiento aprobado por el Ministerio de Salud, a los 150 días desde su segunda dosis.</p> -->
             <div class="col-md-12 d-flex mb-3 mt-3 justify-content-center">
                 <form action="print_3_dosis.php" method="POST">
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">
@@ -28,7 +43,7 @@
                             <th colspan="4" class="border" id="patient">Paciente</th>
                             <th colspan="4" class="border" id="first_dose">Primera Dosis</th>
                             <th colspan="6" class="border" id="second_dose">Segunda Dosis</th>
-                            <th colspan="1" class="border">Tercera Dosis</th>
+                            <th colspan="1" class="border">3era Dosis</th>
                         </tr>
                         <tr class="text-center font-12" style="background: #c9d0e2;">
                             <th class="align-middle border" id="patient">#</th>
@@ -154,7 +169,7 @@
                             <td class="align-middle"><?php echo $newdate11; ?></td>
                             <td class="align-middle"><?php echo $newdate12; ?></td>
                             <td class="align-middle"><?php echo $newdate13; ?></td>
-                            <td class="align-middle"><?php echo $newdate14; ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate14); ?></td>
                             <td class="align-middle" id="fields_brechas_body"><?php echo utf8_encode($newdate15); ?></td>
                         </tr>
                         <?php

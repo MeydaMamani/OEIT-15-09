@@ -7,19 +7,6 @@
     ini_set("default_charset", "UTF-8");
     mb_internal_encoding("UTF-8");
 
-    // if (isset($_POST['Buscar'])) {
-        // $red_1 = $_GET['red'];
-        // echo $red_1, '<br>';
-        // echo $dist_1, '<br>';
-        // echo $anio, '<br>';
-            
-            // if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
-                //     echo "TOY AQUIIII";
-                // }
-                // else if($dist_1 != 'TODOS'){
-                    // echo $dist_1, '<br>';
-                    // echo $anio, '<br>';
-        // }
         $dist_1 = 'POZUZO';
         $anio = date("Y");
         $mes = date("m");
@@ -102,54 +89,118 @@
                         )
                         GROUP BY A.Numero_Documento_Paciente";
 
-        $resultado4 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
+                           
+        $consulta1 = sqlsrv_query($conn, $resultado);
+        $consulta2 = sqlsrv_query($conn2, $resultado2);
+        $consulta3 = sqlsrv_query($conn, $resultado3);
+
+        $list_total_pro = array();
+        $list_dists_pro = array();
+
+        if($_GET){
+            $red = $_GET['red'];
+            $distrito = $_GET['distrito'];
+            $anio = $_GET['anio'];
+            $mes = $_GET['mes'];
+
+            if($red == "danielalcidescarrion"){
+                $red = "DANIEL ALCIDES CARRION";
+            }
+
+            $red = strtoupper($red);
+            $date_fin = date("Y-m-t", strtotime($anio-$mes-01));
+
+            $resultado4 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
+                            COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$date_fin' THEN NUM_DNI END) 'DENOMINADOR1'
+                            into BDHIS_MINSA.dbo.denominador    
+                            FROM BDHIS_MINSA.dbo.PASO_NUM2
+                            where (DX_ANEMIA IS NULL)
+                            GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
+
+            $resultado5 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
+                            COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$date_fin' THEN NUM_DNI END) 'NUMERADOR1'
+                            into BDHIS_MINSA.dbo.NUMERADOR    
+                            FROM BDHIS_MINSA.dbo.PASO_NUM2 A
+                            LEFT JOIN BDHIS_MINSA.dbo.PASO_NUM3 B ON A.NUM_DNI=B.Numero_Documento_Paciente
+                            where (DX_ANEMIA IS NULL)AND (B.[3° APO] IS NOT NULL) AND (B.[3° PENTA] IS NOT NULL) AND (B.[2° ROTA] IS NOT NULL)AND (B.[3° NEUMO] IS NOT NULL)AND (B.[1° SPR] IS NOT NULL)AND (B.[1° INFLUENZA] IS NOT NULL) AND (B.[1CTRL] IS NOT NULL)AND (B.[2CTRL] IS NOT NULL)AND
+                            (B.[3CTRL] IS NOT NULL)AND (B.[4CTRL] IS NOT NULL)AND (B.[5CTRL] IS NOT NULL)AND (B.[DOSAJE_HEMOGLOBINA] IS NOT NULL)AND (B.[1 SUPLE] IS NOT NULL)AND (B.[2 SUPLE] IS NOT NULL)AND (B.[3 SUPLE] IS NOT NULL)AND (B.[4 SUPLE] IS NOT NULL)AND (B.[5 SUPLE] IS NOT NULL)AND
+                            (B.[6 SUPLE] IS NOT NULL)
+                            GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
+
+            $resultado6 = "SELECT A.NOMBRE_DEPAR,A.NOMBRE_PROV,A.NOMBRE_DIST, NUMERADOR1, DENOMINADOR1
+                                FROM BDHIS_MINSA.dbo.denominador A
+                                LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR B ON A.NOMBRE_DIST=B.NOMBRE_DIST
+                                WHERE A.NOMBRE_PROV='$red'
+                                DROP TABLE BDHIS_MINSA.dbo.PASO_NUM1
+                                DROP TABLE BDHIS_MINSA.dbo.PASO_NUM2
+                                DROP TABLE BDHIS_MINSA.dbo.PASO_NUM3
+                                DROP TABLE BDHIS_MINSA.dbo.denominador
+                                DROP TABLE BDHIS_MINSA.dbo.NUMERADOR";
+
+            $consulta4 = sqlsrv_query($conn, $resultado4);
+            $consulta5 = sqlsrv_query($conn, $resultado5);
+            $consulta6 = sqlsrv_query($conn, $resultado6);
+
+            while ($con = sqlsrv_fetch_array($consulta6)){
+                if($con['NUMERADOR1'] == 0 and $con['DENOMINADOR1'] == 0){ $nov = 0; }
+                else{  $nov = number_format((float)(($con['NUMERADOR1']/$con['DENOMINADOR1'])*100), 2, '.', ''); }
+                $list_total_pro[] = $nov;
+                // $list_dists_pro = $con['NOMBRE_DIST'];
+                if($con['NOMBRE_DIST'] == "SAN FCO DE ASIS DE YARUSYACAN"){ $list_dists = "YARUSYACAN"; }
+                else if($con['NOMBRE_DIST'] == "SAN PEDRO DE PILLAO"){ $list_dists = "PILLAO"; }
+                else if($con['NOMBRE_DIST'] == "SANTA ANA DE TUSI"){ $list_dists = "TUSI"; }
+                else if($con['NOMBRE_DIST'] == "PUERTO BERMUDEZ"){ $list_dists = "P. BERMUDEZ"; }
+                else if($con['NOMBRE_DIST'] == "GOYLLARISQUIZGA"){ $list_dists = "GOYLLAR"; }
+                else{ $list_dists = $con['NOMBRE_DIST']; }
+                echo $nov, '---', $list_dists, '---';
+            }
+        }
+        else{
+            $resultado4 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
                         COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$date_fin' THEN NUM_DNI END) 'DENOMINADOR1'
                         into BDHIS_MINSA.dbo.denominador    
                         FROM BDHIS_MINSA.dbo.PASO_NUM2
                         where (DX_ANEMIA IS NULL)
                         GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
 
-        $resultado5 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
-                        COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$date_fin' THEN NUM_DNI END) 'NUMERADOR1'
-                        into BDHIS_MINSA.dbo.NUMERADOR    
-                        FROM BDHIS_MINSA.dbo.PASO_NUM2 A
-                        LEFT JOIN BDHIS_MINSA.dbo.PASO_NUM3 B ON A.NUM_DNI=B.Numero_Documento_Paciente
-                        where (DX_ANEMIA IS NULL)AND (B.[3° APO] IS NOT NULL) AND (B.[3° PENTA] IS NOT NULL) AND (B.[2° ROTA] IS NOT NULL)AND (B.[3° NEUMO] IS NOT NULL)AND (B.[1° SPR] IS NOT NULL)AND (B.[1° INFLUENZA] IS NOT NULL) AND (B.[1CTRL] IS NOT NULL)AND (B.[2CTRL] IS NOT NULL)AND
-                        (B.[3CTRL] IS NOT NULL)AND (B.[4CTRL] IS NOT NULL)AND (B.[5CTRL] IS NOT NULL)AND (B.[DOSAJE_HEMOGLOBINA] IS NOT NULL)AND (B.[1 SUPLE] IS NOT NULL)AND (B.[2 SUPLE] IS NOT NULL)AND (B.[3 SUPLE] IS NOT NULL)AND (B.[4 SUPLE] IS NOT NULL)AND (B.[5 SUPLE] IS NOT NULL)AND
-                        (B.[6 SUPLE] IS NOT NULL)
-                        GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
+            $resultado5 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
+                            COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$date_fin' THEN NUM_DNI END) 'NUMERADOR1'
+                            into BDHIS_MINSA.dbo.NUMERADOR    
+                            FROM BDHIS_MINSA.dbo.PASO_NUM2 A
+                            LEFT JOIN BDHIS_MINSA.dbo.PASO_NUM3 B ON A.NUM_DNI=B.Numero_Documento_Paciente
+                            where (DX_ANEMIA IS NULL)AND (B.[3° APO] IS NOT NULL) AND (B.[3° PENTA] IS NOT NULL) AND (B.[2° ROTA] IS NOT NULL)AND (B.[3° NEUMO] IS NOT NULL)AND (B.[1° SPR] IS NOT NULL)AND (B.[1° INFLUENZA] IS NOT NULL) AND (B.[1CTRL] IS NOT NULL)AND (B.[2CTRL] IS NOT NULL)AND
+                            (B.[3CTRL] IS NOT NULL)AND (B.[4CTRL] IS NOT NULL)AND (B.[5CTRL] IS NOT NULL)AND (B.[DOSAJE_HEMOGLOBINA] IS NOT NULL)AND (B.[1 SUPLE] IS NOT NULL)AND (B.[2 SUPLE] IS NOT NULL)AND (B.[3 SUPLE] IS NOT NULL)AND (B.[4 SUPLE] IS NOT NULL)AND (B.[5 SUPLE] IS NOT NULL)AND
+                            (B.[6 SUPLE] IS NOT NULL)
+                            GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
 
-        $resultado6 = "SELECT A.NOMBRE_DEPAR,A.NOMBRE_PROV,A.NOMBRE_DIST, NUMERADOR1, DENOMINADOR1
-                            FROM BDHIS_MINSA.dbo.denominador A
-                            LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR B ON A.NOMBRE_DIST=B.NOMBRE_DIST
-                            DROP TABLE BDHIS_MINSA.dbo.PASO_NUM1
-                            DROP TABLE BDHIS_MINSA.dbo.PASO_NUM2
-                            DROP TABLE BDHIS_MINSA.dbo.PASO_NUM3
-                            DROP TABLE BDHIS_MINSA.dbo.denominador
-                            DROP TABLE BDHIS_MINSA.dbo.NUMERADOR";
-                           
-        $consulta1 = sqlsrv_query($conn, $resultado);
-        $consulta2 = sqlsrv_query($conn2, $resultado2);
-        $consulta3 = sqlsrv_query($conn, $resultado3);
-        $consulta4 = sqlsrv_query($conn, $resultado4);
-        $consulta5 = sqlsrv_query($conn, $resultado5);
-        $consulta6 = sqlsrv_query($conn, $resultado6);
-
-        $list_total = array();
-        $list_dists = array();
-        while ($con = sqlsrv_fetch_array($consulta6)){
-            if($con['NUMERADOR1'] == 0 and $con['DENOMINADOR1'] == 0){ $nov = 0; }
-            else{  $nov = number_format((float)(($con['NUMERADOR1']/$con['DENOMINADOR1'])*100), 2, '.', ''); }
-            $list_total[] = $nov;
-            // $list_dists[] = $con['NOMBRE_DIST'];
-            if($con['NOMBRE_DIST'] == "SAN FCO DE ASIS DE YARUSYACAN"){ $list_dists[] = "YARUSYACAN"; }
-            else if($con['NOMBRE_DIST'] == "SAN PEDRO DE PILLAO"){ $list_dists[] = "PILLAO"; }
-            else if($con['NOMBRE_DIST'] == "SANTA ANA DE TUSI"){ $list_dists[] = "TUSI"; }
-            else if($con['NOMBRE_DIST'] == "PUERTO BERMUDEZ"){ $list_dists[] = "P. BERMUDEZ"; }
-            else if($con['NOMBRE_DIST'] == "GOYLLARISQUIZGA"){ $list_dists[] = "GOYLLAR"; }
-            else{ $list_dists[] = $con['NOMBRE_DIST']; }
+            $resultado6 = "SELECT A.NOMBRE_DEPAR,A.NOMBRE_PROV,A.NOMBRE_DIST, NUMERADOR1, DENOMINADOR1
+                                FROM BDHIS_MINSA.dbo.denominador A
+                                LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR B ON A.NOMBRE_DIST=B.NOMBRE_DIST
+                                DROP TABLE BDHIS_MINSA.dbo.PASO_NUM1
+                                DROP TABLE BDHIS_MINSA.dbo.PASO_NUM2
+                                DROP TABLE BDHIS_MINSA.dbo.PASO_NUM3
+                                DROP TABLE BDHIS_MINSA.dbo.denominador
+                                DROP TABLE BDHIS_MINSA.dbo.NUMERADOR";
+            
+            $consulta4 = sqlsrv_query($conn, $resultado4);
+            $consulta5 = sqlsrv_query($conn, $resultado5);
+            $consulta6 = sqlsrv_query($conn, $resultado6);
+            $list_total = array();
+            $list_dists = array();
+            while ($con = sqlsrv_fetch_array($consulta6)){
+                if($con['NUMERADOR1'] == 0 and $con['DENOMINADOR1'] == 0){ $nov = 0; }
+                else{  $nov = number_format((float)(($con['NUMERADOR1']/$con['DENOMINADOR1'])*100), 2, '.', ''); }
+                $list_total[] = $nov;
+                // $list_dists[] = $con['NOMBRE_DIST'];
+                if($con['NOMBRE_DIST'] == "SAN FCO DE ASIS DE YARUSYACAN"){ $list_dists[] = "YARUSYACAN"; }
+                else if($con['NOMBRE_DIST'] == "SAN PEDRO DE PILLAO"){ $list_dists[] = "PILLAO"; }
+                else if($con['NOMBRE_DIST'] == "SANTA ANA DE TUSI"){ $list_dists[] = "TUSI"; }
+                else if($con['NOMBRE_DIST'] == "PUERTO BERMUDEZ"){ $list_dists[] = "P. BERMUDEZ"; }
+                else if($con['NOMBRE_DIST'] == "GOYLLARISQUIZGA"){ $list_dists[] = "GOYLLAR"; }
+                else{ $list_dists[] = $con['NOMBRE_DIST']; }
+            }
         }
-
+       
         if(isset($_POST['Buscar'])) {
             $distrito = $_GET['distrito'];
             $anio = $_GET['anio'];

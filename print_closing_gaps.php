@@ -26,7 +26,7 @@
         }
     
         $resultado = "SELECT V.PRIMERA_PROV,V.PRIMERA_DIST,V.TIPO_DOC, V.NUM_DOC,V.PRIMERA_PACIEN,V.PRIMERA_EDAD,V.PRIMERA_FAB,
-                        V.PRIMERA_GRUPO,V.PRIMERA,VN.SEGUNDA,VN.SEGUNDA_DEP, 
+                        V.PRIMERA_GRUPO,V.PRIMERA,VN.SEGUNDA,VN.SEGUNDA_DEP, V.PRIMERA_CEL,
                         CASE WHEN (V.PRIMERA_FAB ='ASTRAZENECA') THEN DATEADD(DAY,27,V.PRIMERA) ELSE DATEADD(DAY,20,V.PRIMERA) END AS 'FECHA_PARA_SEGUNDA',
                         CASE WHEN (N.NUMERO_DOCUMENTO_FALLECIDO IS NULL) THEN NULL ELSE 'FALLECIDO' END AS 'FALLECIDOS',
                         CASE WHEN (R.NUM_DOC_PACIENTE IS NULL) THEN NULL ELSE 'RECHAZO' END AS 'RECHAZO'
@@ -38,7 +38,7 @@
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado2 = "SELECT V.PRIMERA_PROV,V.PRIMERA_DIST,V.TIPO_DOC, V.NUM_DOC,V.PRIMERA_PACIEN,V.PRIMERA_EDAD,V.PRIMERA_FAB,
-                            V.PRIMERA_GRUPO,V.PRIMERA,V.FECHA_PARA_SEGUNDA FROM TEMPORAL1 V WHERE FALLECIDOS IS NULL AND RECHAZO IS NULL AND SEGUNDA IS NULL
+                            V.PRIMERA_GRUPO,V.PRIMERA,V.FECHA_PARA_SEGUNDA, V.PRIMERA_CEL FROM TEMPORAL1 V WHERE FALLECIDOS IS NULL AND RECHAZO IS NULL AND SEGUNDA IS NULL
                             AND V.PRIMERA_PROV = '$red'
                             ORDER BY V.PRIMERA_PROV,V.PRIMERA_DIST
                             DROP TABLE TEMPORAL1";
@@ -58,7 +58,7 @@
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $dist = '';
             $resultado2 = "SELECT V.PRIMERA_PROV,V.PRIMERA_DIST,V.TIPO_DOC, V.NUM_DOC,V.PRIMERA_PACIEN,V.PRIMERA_EDAD,V.PRIMERA_FAB,
-                            V.PRIMERA_GRUPO,V.PRIMERA,V.FECHA_PARA_SEGUNDA FROM TEMPORAL1 V WHERE FALLECIDOS IS NULL AND RECHAZO IS NULL AND SEGUNDA IS NULL
+                            V.PRIMERA_GRUPO,V.PRIMERA,V.FECHA_PARA_SEGUNDA, V.PRIMERA_CEL FROM TEMPORAL1 V WHERE FALLECIDOS IS NULL AND RECHAZO IS NULL AND SEGUNDA IS NULL
                             AND V.PRIMERA_PROV='$red' AND V.PRIMERA_DIST='$dist'
                             ORDER BY V.PRIMERA_PROV,V.PRIMERA_DIST
                             DROP TABLE TEMPORAL1";
@@ -78,7 +78,7 @@
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
             $resultado2 = "SELECT V.PRIMERA_PROV,V.PRIMERA_DIST,V.TIPO_DOC, V.NUM_DOC,V.PRIMERA_PACIEN,V.PRIMERA_EDAD,V.PRIMERA_FAB,
-                            V.PRIMERA_GRUPO,V.PRIMERA,V.FECHA_PARA_SEGUNDA FROM TEMPORAL1 V WHERE FALLECIDOS IS NULL AND RECHAZO IS NULL AND SEGUNDA IS NULL
+                            V.PRIMERA_GRUPO,V.PRIMERA,V.FECHA_PARA_SEGUNDA, V.PRIMERA_CEL FROM TEMPORAL1 V WHERE FALLECIDOS IS NULL AND RECHAZO IS NULL AND SEGUNDA IS NULL
                             AND V.PRIMERA_PROV='$red' AND V.PRIMERA_DIST='$dist'
                             ORDER BY V.PRIMERA_PROV,V.PRIMERA_DIST
                             DROP TABLE TEMPORAL1";
@@ -121,15 +121,15 @@
         <thead>
             <tr></tr>
             <tr class="text-center">
-                <th colspan="11" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
+                <th colspan="12" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
             </tr>
             <tr></tr>
             <tr class="text-center">
-                <th colspan="11" style="font-size: 28px; border: 1px solid #3A3838;">Cierre de Brechas - Segunda Dosis</th>
+                <th colspan="12" style="font-size: 28px; border: 1px solid #3A3838;">Cierre de Brechas - Segunda Dosis</th>
             </tr>
             <tr></tr>
             <tr>
-                <th colspan="11" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD PadronCovid con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</th>
+                <th colspan="12" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD PadronCovid con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</th>
             </tr>
             <tr></tr>
         </thead>
@@ -144,6 +144,7 @@
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Número Documento</th>
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Paciente</th>
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Edad</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Celular</th>
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Nombre Vacuna</th>
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Grupo Edad</th>
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Primera Dosis</th>
@@ -203,6 +204,11 @@
                         $newdate12 = '  -'; }
                     else{
                         $newdate12 = $consulta['FECHA_PARA_SEGUNDA'] -> format('d/m/y');}
+
+                    if(is_null ($consulta['PRIMERA_CEL']) ){
+                        $newdate13 = '  -'; }
+                    else{
+                        $newdate13 = $consulta['PRIMERA_CEL'] ;}
     
             ?>
             <tr class="text-center font-12">
@@ -213,6 +219,7 @@
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate6; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate7); ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate8; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate13; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate9; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo utf8_encode($newdate10); ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate11; ?></td>

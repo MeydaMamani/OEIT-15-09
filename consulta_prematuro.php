@@ -90,15 +90,6 @@
                     WHERE ((TIPO_SEGURO IN('1,','0,','1, 2, ','0, 1, '))OR (TIPO_SEGURO IS NULL)) AND (SUPLEMENTADO IS NOT NULL)
                     GROUP BY Provnacido,Distnacido";
 
-        $resume4 = "SELECT A.Provnacido, A.Distnacido, MIDENOMINADOR, MINUMERADOR
-                    FROM BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO A
-                    LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR_PREMATURO B ON A.Distnacido=B.Distnacido
-                    ORDER BY A.Provnacido,A.Distnacido
-                    DROP TABLE BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO
-                    DROP TABLE BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO
-                    DROP TABLE BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
-                    DROP TABLE BDHIS_MINSA.dbo.NUMERADOR_PREMATURO";
-
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado2 = "SELECT C.Periodo, DATEADD(DAY,59,C.FECNACIDO) mide, C.SECTOR, C.Provnacido, C.Distnacido,C.Establecimiento, 
                                 p.MENOR_ENCONTRADO,FECNACIDO,Numcnv, CONCAT(P.APELLIDO_PATERNO_NINO,' ',P.APELLIDO_MATERNO_NINO,' ',P.NOMBRE_NINO)NOMBRES_MENOR,C.PESO, C.SEMANAGESTACION, 'SI' PREMATURO,
@@ -113,6 +104,16 @@
                                             Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
                                 ORDER BY Provnacido, Distnacido, Establecimiento
                                 DROP TABLE BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1";
+
+            $resume4 = "SELECT A.Provnacido, A.Distnacido, MIDENOMINADOR, MINUMERADOR
+                        FROM BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO A
+                        LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR_PREMATURO B ON A.Distnacido=B.Distnacido
+                        WHERE A.Provnacido = '$red'
+                        ORDER BY A.Provnacido,A.Distnacido
+                        DROP TABLE BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO
+                        DROP TABLE BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO
+                        DROP TABLE BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
+                        DROP TABLE BDHIS_MINSA.dbo.NUMERADOR_PREMATURO";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $resultado2 = "SELECT C.Periodo, DATEADD(DAY,59,C.FECNACIDO) mide, C.SECTOR, C.Provnacido, C.Distnacido,C.Establecimiento, 
@@ -128,6 +129,15 @@
                                             Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
                                 ORDER BY Provnacido, Distnacido, Establecimiento
                                 DROP TABLE BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1";
+            
+            $resume4 = "SELECT A.Provnacido, A.Distnacido, MIDENOMINADOR, MINUMERADOR
+                        FROM BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO A
+                        LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR_PREMATURO B ON A.Distnacido=B.Distnacido
+                        ORDER BY A.Provnacido,A.Distnacido
+                        DROP TABLE BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO
+                        DROP TABLE BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO
+                        DROP TABLE BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
+                        DROP TABLE BDHIS_MINSA.dbo.NUMERADOR_PREMATURO";
         }
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
@@ -144,6 +154,16 @@
                                             Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
                                 ORDER BY Provnacido, Distnacido, Establecimiento
                                 DROP TABLE  BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1";
+
+            $resume4 = "SELECT A.Provnacido, A.Distnacido, MIDENOMINADOR, MINUMERADOR
+                        FROM BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO A
+                        LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR_PREMATURO B ON A.Distnacido=B.Distnacido
+                        WHERE A.Provnacido = '$red'
+                        ORDER BY A.Provnacido,A.Distnacido
+                        DROP TABLE BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO
+                        DROP TABLE BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO
+                        DROP TABLE BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
+                        DROP TABLE BDHIS_MINSA.dbo.NUMERADOR_PREMATURO";
         }
 
         $consulta1 = sqlsrv_query($conn2, $resultado);

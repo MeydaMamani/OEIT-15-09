@@ -52,105 +52,60 @@
                     <button name="Buscar" class="btn text-white" type="submit" id="btn_buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
                 </div>
             </div><br>
-            <div class="row">
-                <div class="col-md-12 border border-secondary">
-                    <h4 class="p-2 text-center">Avance Distrital Para <span><?php echo $nombre_mes; ?></span></h4>
-                    <div style="height: 300px;">
-                        <canvas id="myChartDistrict"></canvas>
-                    </div>
-                </div>
-                <div class="col-md-4 border border-secondary">
-                    <h4 class="p-2 text-center">Avance Regional</h4>
+            <div class="col-md-12 border border-secondary">
+                <h4 class="p-2 text-center">Avance Distrital Para <span><?php echo $nombre_mes; ?></span></h4>
+                <div style="height: 300px;" id="district">
+                    <canvas id="myChartDistrict"></canvas>
                 </div>
             </div>
             <br>
             <div class="row">
-                <!-- <div class="col-md-8 table-responsive">
+                <div class="col-md-12 border border-secondary">
+                    <h4 class="p-2 text-center">Avance Para <span><?php echo $nombre_mes; ?></span></h4>
+                    <div style="height: 300px; display: none;" id="province">
+                        <canvas id="myChartProvince"></canvas>
+                    </div>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-8 table-responsive">
                     <table class="table table-hover table-bordered table-striped">
                         <thead>
                             <tr class="text-light font-11 text-center" style="background: #0f81db;">
                                 <th class="align-middle">#</th>
                                 <th class="align-middle">Provincia</th>
                                 <th class="align-middle">Distrito</th>
-                                <th class="align-middle">Junio</th>
-                                <th class="align-middle">Julio</th>
-                                <th class="align-middle">Agosto</th>
-                                <th class="align-middle">Setiembre</th>
-                                <th class="align-middle">Octubre</th>
-                                <th class="align-middle">Noviembre</th>
+                                <th class="align-middle">Numerador</th>
+                                <th class="align-middle">Avance</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php  
-                                include('query_board_prematuros.php');
+                                include('query_ficha2.php');
                                 $i=1;
-                                while ($consulta = sqlsrv_fetch_array($consult_resume5)){  
+                                while ($consulta = sqlsrv_fetch_array($consulta6)){  
                                     // CAMBIO AQUI
-                                    if(is_null ($consulta['Provnacido']) ){
-                                        $newdate1 = '  -'; }
-                                    else{
-                                        $newdate1 = $consulta['Provnacido'] ;
-                                        if($newdate1 == 'DANIEL ALCIDES CARRION'){
-                                            $newdate1 = 'DANIEL CARRION';
-                                        }
-                                    }
+                                    if(is_null ($consulta['NOMBRE_PROV']) ){ $newdate1 = '  -'; }
+                                    else{ $newdate1 = $consulta['NOMBRE_PROV']; }
                     
-                                    if(is_null ($consulta['Distnacido'])){ $newdate2 = '  -'; }
-                                    else{ $newdate2 = $consulta['Distnacido'] ;}
+                                    if(is_null ($consulta['NOMBRE_DIST'])){ $newdate2 = '  -'; }
+                                    else{ $newdate2 = $consulta['NOMBRE_DIST'] ;}
                         
-                                    if(is_null ($consulta['JUNIO_NUM']) ){ $newdate9 = 0; }
-                                    else{ $newdate9 = $consulta['JUNIO_NUM'];}
+                                    if(is_null ($consulta['NUMERADOR1']) ){ $newdate3 = 0; }
+                                    else{ $newdate3 = $consulta['NUMERADOR1'];}
 
-                                    if(is_null ($consulta['JUNIO_DEN']) ){ $newdate10 = 0; }
-                                    else{ $newdate10 = $consulta['JUNIO_DEN'];}
-
-                                    if(is_null ($consulta['JULIO_NUM']) ){ $newdate11 = 0; }
-                                    else{ $newdate11 = $consulta['JULIO_NUM'];}
-
-                                    if(is_null ($consulta['JULIO_DEN']) ){ $newdate12 = 0; }
-                                    else{ $newdate12 = $consulta['JULIO_DEN'];}
-
-                                    if(is_null ($consulta['AGOSTO_NUM']) ){ $newdate13 = 0; }
-                                    else{ $newdate13 = $consulta['AGOSTO_NUM'];}
-
-                                    if(is_null ($consulta['AGOSTO_DEN']) ){ $newdate14 = 0; }
-                                    else{ $newdate14 = $consulta['AGOSTO_DEN'];}
-
-                                    if(is_null ($consulta['SETIEMBRE_NUM']) ){ $newdate15 = 0; }
-                                    else{ $newdate15 = $consulta['SETIEMBRE_NUM'];}
-
-                                    if(is_null ($consulta['SETIEMBRE_DEN']) ){ $newdate16 = 0; }
-                                    else{ $newdate16 = $consulta['SETIEMBRE_DEN'];}
-
-                                    if(is_null ($consulta['OCTUBRE_NUM']) ){ $newdate17 = 0; }
-                                    else{ $newdate17 = $consulta['OCTUBRE_NUM'];}
-
-                                    if(is_null ($consulta['OCTUBRE_DEN']) ){ $newdate18 = 0; }
-                                    else{ $newdate18 = $consulta['OCTUBRE_DEN'];}
-
-                                    if(is_null ($consulta['NOVIEMBRE_NUM']) ){ $newdate19 = 0; }
-                                    else{ $newdate19 = $consulta['NOVIEMBRE_NUM'];}
-
-                                    if(is_null ($consulta['NOVIEMBRE_DEN']) ){ $newdate20 = 0; }
-                                    else{ $newdate20 = $consulta['NOVIEMBRE_DEN'];}
+                                    if(is_null ($consulta['DENOMINADOR1']) ){ $newdate4 = 0; }
+                                    else{ $newdate4 = $consulta['DENOMINADOR1'];}
 
                             ?>
                             <tr class="font-10 text-center">
                                 <td class="align-middle"><?php echo $i++; ?></td>
                                 <td class="align-middle" style="text-align: left;"><?php echo utf8_encode($newdate1); ?></td>
                                 <td class="align-middle" style="text-align: left;"><?php echo utf8_encode($newdate2); ?></td>
-                                <td class="align-middle"><?php if($newdate9 == 0 and $newdate10 == 0){ echo '0%'; }
-                                    else{ echo number_format((float)(($newdate9/$newdate10)*100), 2, '.', ''), '%'; } ?></td>
-                                <td class="align-middle"><?php if($newdate11 == 0 and $newdate12 == 0){ echo '0%'; }
-                                    else{ echo number_format((float)(($newdate11/$newdate12)*100), 2, '.', ''), '%'; } ?></td>    
-                                <td class="align-middle"><?php if($newdate13 == 0 and $newdate14 == 0){ echo '0%'; }
-                                    else{ echo number_format((float)(($newdate13/$newdate14)*100), 2, '.', ''), '%'; } ?></td>
-                                <td class="align-middle"><?php if($newdate15 == 0 and $newdate16 == 0){ echo '0%'; }
-                                    else{ echo number_format((float)(($newdate15/$newdate16)*100), 2, '.', ''), '%'; } ?></td>
-                                <td class="align-middle"><?php if($newdate17 == 0 and $newdate18 == 0){ echo '0%'; }
-                                    else{ echo number_format((float)(($newdate17/$newdate18)*100), 2, '.', ''), '%'; } ?></td>   
-                                <td class="align-middle"><?php if($newdate19 == 0 and $newdate20 == 0){ echo '0%'; }
-                                    else{ echo number_format((float)(($newdate19/$newdate20)*100), 2, '.', ''), '%'; } ?></td>
+                                <td class="align-middle" style="text-align: left;"><?php echo ($newdate3); ?></td>
+                                <td class="align-middle" style="text-align: left;"><?php echo ($newdate4); ?></td>
+                                <td class="align-middle"><?php if($newdate3 == 0 and $newdate4 == 0){ echo '0%'; }
+                                    else{ echo number_format((float)(($newdate3/$newdate4)*100), 2, '.', ''), '%'; } ?></td>
                             </tr>
                             <?php
                                 ;}                    
@@ -158,7 +113,7 @@
                             ?>
                         </tbody>
                     </table>
-                </div> -->
+                </div>
                 <div class="col-md-4 p-0 text-center">
                     <div class="border border-secondary" style="width: 110%;">
                         <h4 class="p-2">Avance Regional</h4>
@@ -190,7 +145,6 @@
    
     <script src="./js/records_menu.js"></script>
     <script src="./js/select2.js"></script>
-    <!-- <script src="./js/district.js"></script> -->
     <script src="./js/Chart.min.js"></script>
     <script src="./js/chartjs-plugin-datalabels.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -217,9 +171,9 @@
 
         function cargarPueblos() {
             var listaPueblos = {
-                danielalcidescarrion: ["CHACAYAN","GOYLLARISQUIZGA","PAUCAR","SAN PEDRO DE PILLAO","SANTA ANA DE TUSI","TAPUC","VILCABAMBA","YANAHUANCA"],
-                oxapampa: ["CHONTABAMBA","CONSTITUCIÓN","HUANCABAMBA","OXAPAMPA","PALCAZU","POZUZO","PUERTO BERMUDEZ","VILLA RICA"],
-                pasco: ["CHAUPIMARCA","HUACHON","HUARIACA","HUAYLLAY","NINACACA","PALLANCHACRA","PAUCARTAMBO","SAN FRANCISCO DE ASIS DE YARUSYACAN","SIMON BOLIVAR","TICLACAYAN","TINYAHUARCO","VICCO","YANACANCHA"]
+                danielalcidescarrion: ["CHACAYAN","GOYLLARISQUIZGA","PAUCAR","SAN PEDRO DE PILLAO","SANTA ANA DE TUSI","TAPUC","VILCABAMBA","YANAHUANCA", "TODOS"],
+                oxapampa: ["CHONTABAMBA","CONSTITUCIÓN","HUANCABAMBA","OXAPAMPA","PALCAZU","POZUZO","PUERTO BERMUDEZ","VILLA RICA", "TODOS"],
+                pasco: ["CHAUPIMARCA","HUACHON","HUARIACA","HUAYLLAY","NINACACA","PALLANCHACRA","PAUCARTAMBO","SAN FRANCISCO DE ASIS DE YARUSYACAN","SIMON BOLIVAR","TICLACAYAN","TINYAHUARCO","VICCO","YANACANCHA", "TODOS"]
             }
             
             var provincias = document.getElementById('provincia')
@@ -243,47 +197,104 @@
         cargarProvincias();
     </script>
     <script>
-        $( document ).ready(function() {
-            $("#btn_buscar").click();
+        var ctx_province= document.getElementById("myChartDistrict").getContext("2d");
+        var myChartProvince= new Chart(ctx_province,{
+            type: 'bar',
+            data: {
+                labels:[ 
+                    <?php
+                        $num_dists = sizeof($list_dists);         
+                        for ($i = 0; $i < $num_dists; $i++) {
+                            $data = ($list_dists[$i]);
+                            echo "'$data', ";
+                        }
+                    ?>
+                ],
+                datasets:[
+                    {
+                        //label:'DATOSSSS',
+                        data:[
+                            <?php                                            
+                                $datos = sizeof($list_total);         
+                                for ($i = 0; $i < $datos; $i++) {
+                                    $data = ($list_total[$i]);
+                                    echo "'$data', ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: '#1d3f74',
+                    },
+                ]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                // indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let percentage = value+"%";
+                            //console.log(percentage);
+                            return percentage;
+                        },
+                        color: 'black',
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 3
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
         });
+
         $("#btn_buscar").click(function(){
+            var red = $("#provincia").val();
             var distrito = $("#pueblo").val();
             var anio = $("#anio").val();
+            var mes = $("#mes").val();
+            console.log("ME DISTE red", red);
             console.log("ME DISTE CLICK", distrito);
             console.log("ME DISTE ------", anio);
             $.ajax({
-                url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio,
+                url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio+'&mes='+mes+'&red='+red,
                 method: 'GET',
                 success: function(data) {
+                    $("#province").show();
+                    $("#district").hide();
                     console.log('SOY DATA', data);
+                    var establecimiento = data;
+                    var expresionRegular = /\s*---\s*/;
+                    var lista_id =establecimiento.split(expresionRegular);
+                    var id = []; var names = [];
+                    for(i=0;i<lista_id.length;i++){
+                        if(i % 2 == 0){
+                            id.push(lista_id[i]);
+                        }else{
+                            names.push(lista_id[i]);
+                        }
+                    }
+                    
+                    console.log(id);
+                    console.log(names);
+                    $("#myChartProvince").empty();
                     //POR DISTRITO
-                    var ctx_province= document.getElementById("myChartDistrict").getContext("2d");
-                    var myChartProvince= new Chart(ctx_province,{
+                    var ctx_district= document.getElementById("myChartProvince").getContext("2d");
+                    var myChartProvince= new Chart(ctx_district,{
                         type: 'bar',
                         data: {
-                            labels:[ 
-                                <?php
-                                    include('query_ficha2.php');
-                                    $num_dists = sizeof($list_dists);         
-                                    for ($i = 0; $i < $num_dists; $i++) {
-                                        $data = ($list_dists[$i]);
-                                        echo "'$data', ";
-                                    }
-                                ?>
-                            ],
+                            labels: names,
                             datasets:[
                                 {
-                                    label:'DATOSSSS',
-                                    data:[
-                                        <?php
-                                            include('query_ficha2.php');
-                                            $datos = sizeof($list_total);         
-                                            for ($i = 0; $i < $datos; $i++) {
-                                                $data = ($list_total[$i]);
-                                                echo "'$data', ";
-                                            }
-                                        ?>
-                                    ],
+                                    //label:'DATOSSSS',
+                                    data: id,
                                     backgroundColor: '#1d3f74',
                                 },
                             ]
@@ -300,7 +311,7 @@
                                 datalabels: {
                                     formatter: (value, ctx) => {
                                         let percentage = value+"%";
-                                        console.log(percentage);
+                                        //console.log(percentage);
                                         return percentage;
                                     },
                                     color: 'black',

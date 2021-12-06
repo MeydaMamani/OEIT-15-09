@@ -20,18 +20,22 @@
     $num_red_pasco=0; $den_red_pasco=0;
     $num_red_oxa=0; $den_red_oxa=0;
     $num_red_dac=0; $den_red_dac=0;
+    $prov_dac = false; $prov_pasco = false; $prov_oxa = false;
     while ($consulta = sqlsrv_fetch_array($consult_resume5)){
         if($consulta['Provnacido'] == 'PASCO'){
             $den_red_pasco = $den_red_pasco + $consulta['MIDENOMINADOR'];
             $num_red_pasco = $num_red_pasco + $consulta['MINUMERADOR'];
+            $prov_pasco = true;
         }
         if($consulta['Provnacido'] == 'DANIEL ALCIDES CARRION'){
             $den_red_dac = $den_red_dac + $consulta['MIDENOMINADOR'];
             $num_red_dac = $num_red_dac + $consulta['MINUMERADOR'];
+            $prov_dac = true;
         }
         if($consulta['Provnacido'] == 'OXAPAMPA'){
             $den_red_oxa = $den_red_oxa + $consulta['MIDENOMINADOR'];
             $num_red_oxa = $num_red_oxa + $consulta['MINUMERADOR'];
+            $prov_oxa = true;
         }
     }
 
@@ -39,7 +43,7 @@
 ?>
 
     <div class="page-wrapper">
-        <div class="container">
+        <div class="container_fed">
             <div class="row">
                 <div class="col-9"></div>
                 <div class="col-3">
@@ -53,18 +57,18 @@
             </div>
             <div class="mb-1">
                 <div class="row m-2">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="row">
-                            <div class="card col-md-6 datos_avance">
+                            <div class="card col-md-6 data_advance">
                                 <div class="card-body p-1">
-                                    <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
+                                    <p class="card-title text-secondary text-center font-18 pt-1">Cantidad Registros</p>
                                     <div class="justify-content-center">
                                         <div class="align-self-center">
-                                            <h4 class="font-medium mb-3 justify-content-center d-flex">
+                                            <h4 class="font-medium mb-1 justify-content-center d-flex">
                                                 <div class="col-md-5 text-end">
-                                                    <img src="./img/user_cant.png" width="90" alt="">
+                                                    <img src="./img/user_cant.png" width="55" alt="">
                                                 </div>
-                                                <div class="mt-3 col-md-7 text-center">
+                                                <div class="mt-1 col-md-7 text-center">
                                                     <b class="font-49 total text-secondary"> <?php echo $row_cnt; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
                                                 </div>
                                             </h4>
@@ -72,16 +76,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card col-md-6 datos_avance">
+                            <div class="card col-md-6 data_advance">
                                 <div class="card-body p-1">
-                                    <p class="card-title text-secondary text-center font-18 pt-2">Suplementados</h4>
+                                    <p class="card-title text-secondary text-center font-18 pt-1">Suplementados</h4>
                                     <div class="justify-content-center">
                                         <div class="align-self-center">
-                                            <h4 class="font-medium mb-3 justify-content-center d-flex">
+                                            <h4 class="font-medium mb-1 justify-content-center d-flex">
                                                 <div class="col-md-5 text-end">
-                                                    <img src="./img/boy.png" width="90" alt="">
+                                                    <img src="./img/boy.png" width="55" alt="">
                                                 </div>
-                                                <div class="mt-3 col-md-7 text-center">
+                                                <div class="mt-1 col-md-7 text-center">
                                                     <b class="font-49 correcto text-success"> <?php echo $correctos; ?></b> <i class="mdi mdi-check font-49 text-success"></i>
                                                 </div>
                                             </h4>
@@ -91,16 +95,16 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="card col-md-6 datos_avance">
+                            <div class="card col-md-6 data_advance">
                                 <div class="card-body p-0">
-                                <p class="card-title text-secondary text-center font-18 pt-3">No Suplementados</h4>
+                                <p class="card-title text-secondary text-center font-18 pt-1">No Suplementados</h4>
                                     <div class="justify-content-center">
                                         <div class="align-self-center">
-                                            <h4 class="font-medium mb-3 justify-content-center d-flex">
+                                            <h4 class="font-medium mb-1 justify-content-center d-flex">
                                                 <div class="col-md-5 text-end">
-                                                    <img src="./img/boy_x.png" width="90" alt="">
+                                                    <img src="./img/boy_x.png" width="55" alt="">
                                                 </div>
-                                                <div class="mt-3 col-md-7 text-center">
+                                                <div class="mt-1 col-md-7 text-center">
                                                     <b class="font-49 incorrecto text-danger"> <?php echo $incorrectos; ?></b> <i class="mdi mdi-close font-49 text-danger"></i>
                                                 </div>
                                             </h4>
@@ -108,18 +112,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card col-md-6 datos_avance">
+                            <div class="card col-md-6 data_advance p-0">
                                 <div class="card-body p-1">
-                                    <div class="row pt-4 m-0">
+                                    <div class="row pt-2 m-0">
                                         <div class="col-md-7 p-0 text-center">
-                                            <h2 class="font-light avance mb-3 text-primary"><?php
+                                            <h2 class="font-light avance mb-2 text-primary"><?php
                                                 if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
                                                     echo number_format((float)(($correctos/$row_cnt)*100), 2, '.', ''), '%'; }
                                                 ?> 
                                             </h2>
                                             <h4 class="text-muted">Avance</h4></div>
                                         <div class="col-md-5 p-0 text-center align-self-center position-sticky">
-                                            <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php if($correctos == 0 and $incorrectos == 0){ echo '0'; }else{
+                                            <div id="chart" class="css-bar mb-2 css-bar-info css-bar-<?php if($correctos == 0 and $incorrectos == 0){ echo '0'; }else{
                                                     echo number_format((float)(($correctos/$row_cnt)*100), 0, '.', ''); }
                                                 ?>"><i class="mdi mdi-receipt"></i></div>
                                         </div>
@@ -128,7 +132,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="col-12 table-responsive" id="prematuro_resume">
                             <table class="table table-hover table-bordered">
                                 <thead>
@@ -136,8 +140,8 @@
                                         <th class="align-middle">#</th>
                                         <th class="align-middle">Provincia</th>
                                         <th class="align-middle">Distrito</th>
-                                        <th class="align-middle">Denominador</th>
-                                        <th class="align-middle">Numerador</th>
+                                        <th class="align-middle">Den</th>
+                                        <th class="align-middle">Num</th>
                                         <th class="align-middle">Avance</th>
                                     </tr>
                                 </thead>
@@ -184,47 +188,70 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="card col-md-12">
-                            <div class="card-body p-1">
-                                <p class="card-title text-secondary text-center font-18 pt-2">Daniel A. Carrión</p>
-                                <div class="col-md-12 text-center">
-                                    <h2 class="font-light avance mb-2"><?php
-                                        if($num_red_dac == 0 and $den_red_dac == 0){ echo '0 %'; }else{
-                                            echo number_format((float)(($num_red_dac/$den_red_dac)*100), 2, '.', ''), '%'; }
-                                        ?> 
-                                    </h2>
+                    <div class="col-md-4 mt-3 p-l-2 text-center">
+                        <div class="row">
+                            <?php if($prov_dac == true){?>
+                            <div class="card col-md-4 data_advance p-0">
+                                <div class="card-header p-2">
+                                    Daniel A. Carrión
+                                </div>
+                                <div class="card-body p-1">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center mt-2 mb-3">
+                                            <h2 class="font-light mb-2 text-danger"><?php
+                                                if($num_red_dac == 0 and $den_red_dac == 0){ echo '0 %'; }else{
+                                                    echo number_format((float)(($num_red_dac/$den_red_dac)*100), 2, '.', ''), '%'; }
+                                                ?> 
+                                            </h2>
+                                            <img src="./img/m_dac.png" alt="Imagen mapa DAC" width="100">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card col-md-12">
-                            <div class="card-body p-1">
-                                <p class="card-title text-secondary text-center font-18 pt-2">Pasco</p>
-                                <div class="col-md-12 text-center">
-                                    <h2 class="font-light avance mb-2"><?php
-                                        if($num_red_pasco == 0 and $den_red_pasco == 0){ echo '0 %'; }else{
-                                            echo number_format((float)(($num_red_pasco/$den_red_pasco)*100), 2, '.', ''), '%'; }
-                                        ?> 
-                                    </h2>
+                            <?php } ?>
+                            <?php if($prov_pasco == true){?>
+                            <div class="card col-md-4 data_advance p-0">
+                                <div class="card-header">
+                                    Pasco
                                 </div>
-                            </div> 
-                        </div>
-                        <div class="card col-md-12">
-                            <div class="card-body p-1">
-                                <p class="card-title text-secondary text-center font-18 pt-2">Oxapampa</p>
-                                <div class="col-md-12 text-center">
-                                    <h2 class="font-light avance mb-2"><?php
-                                        if($num_red_oxa == 0 and $den_red_oxa == 0){ echo '0 %'; }else{
-                                            echo number_format((float)(($num_red_oxa/$den_red_oxa)*100), 2, '.', ''), '%'; }
-                                        ?> 
-                                    </h2>
-                                </div>
+                                <div class="card-body p-1">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center mt-2">
+                                            <h2 class="font-light mb-2" style="color: #c7c712;"><?php
+                                                if($num_red_pasco == 0 and $den_red_pasco == 0){ echo '0 %'; }else{
+                                                    echo number_format((float)(($num_red_pasco/$den_red_pasco)*100), 2, '.', ''), '%'; }
+                                                ?> 
+                                            </h2>
+                                            <img src="./img/m_pas.png" alt="Imagen mapa Pasco" width="100">
+                                        </div>
+                                    </div>
+                                </div> 
                             </div>
-                       </div>
+                            <?php } ?>
+                            <?php if($prov_oxa == true){?>
+                            <div class="card col-md-4 data_advance p-0">
+                                <div class="card-header">
+                                    Oxapampa
+                                </div>
+                                <div class="card-body p-1">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center mt-2">
+                                            <h2 class="font-light mb-2 text-success"><?php
+                                                if($num_red_oxa == 0 and $den_red_oxa == 0){ echo '0 %'; }else{
+                                                    echo number_format((float)(($num_red_oxa/$den_red_oxa)*100), 2, '.', ''), '%'; }
+                                                    ?> 
+                                            </h2>
+                                            <img src="./img/m_oxa.png" alt="Imagen mapa Oxapampa" width="100">
+                                        </div>
+                                    </div>
+                                </div>
+                           </div>
+                           <?php } ?>
+                        </div>
                    </div>
                 </div>
             </div>
-            <div class="d-flex">
+            <div class="d-flex mb-2">
                 <div class="col-md-5 d-flex">
                     <button class="btn btn-outline-dark btn-sm  m-2 btn_fed"><i class="mdi mdi-checkbox-multiple-blank"></i> FED</button>
                     <button class="btn btn-outline-primary btn-sm  m-2 btn_all"><i class="mdi mdi-checkbox-blank-circle"></i> Todo</button>
@@ -240,7 +267,6 @@
                     <button type="button" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='prematuros.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                 </div>
             </div>
-            <br>
             <div class="col-12 table-responsive table_no_fed" id="prematuro">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
@@ -254,13 +280,12 @@
                             <th class="align-middle">Apellidos y Nombres</th>
                             <th class="align-middle" id="color_prematuro_head">Fecha Nacido</th>
                             <th class="align-middle" id="color_prematuro_head">Menor Encontrado</th>
-                            <th class="align-middle" id="color_prematuro_head">Prematuro</th>
                             <th class="align-middle">Suplementado</th>
                             <th class="align-middle" id="color_prematuro_head">Tipo Seguro</th>
                             <th class="align-middle" id="color_prematuro_head">Se Atiende</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-1 col-md-3 table_no_fed">
+                    <div class="float-end col-md-3 table_no_fed">
                         <div class="mb-3">
                             <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
@@ -344,7 +369,6 @@
                             <td class="align-middle"><?php echo utf8_encode($newdate8); ?></td>
                             <td class="align-middle" id="color_prematuro_body"><?php echo $newdate6; ?></td>
                             <td class="align-middle" id="color_prematuro_body"><?php echo $newdate5; ?></td>
-                            <td class="align-middle" id="color_prematuro_body"><?php echo $newdate10; ?></td>
                             <td class="align-middle"><?php if($newdate11 == 'Si'){ echo "<span class='badge bg-correct'>$newdate11</span>"; }
                             else{ echo "<span class='badge bg-incorrect'>$newdate11</span>"; } ?></td>
                             <td class="align-middle" id="color_prematuro_body"><?php echo $newdate13; ?></td>
@@ -380,13 +404,12 @@
                             <th class="align-middle">Apellidos y Nombres</th>
                             <th class="align-middle" id="color_fed_head">Fecha Nacido</th>
                             <th class="align-middle" id="color_fed_head">Menor Encontrado</th>
-                            <th class="align-middle" id="color_fed_head">Prematuro</th>
                             <th class="align-middle">Suplementado</th>
                             <th class="align-middle" id="color_fed_head">Tipo Seguro</th>
                             <th class="align-middle" id="color_fed_head">Se Atiende</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-1 col-md-3 table_fed" style="display: none;">
+                    <div class="float-end col-md-3 table_fed" style="display: none;">
                         <div class="mb-3">
                             <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
@@ -483,7 +506,6 @@
                             <td class="align-middle"><?php echo utf8_encode($newdate8); ?></td>
                             <td class="align-middle" id="color_fed_body"><?php echo $newdate6; ?></td>
                             <td class="align-middle" id="color_fed_body"><?php echo $newdate5; ?></td>
-                            <td class="align-middle" id="color_fed_body"><?php echo $newdate10; ?></td>
                             <td class="align-middle"><?php if($newdate11 == 'Si'){ echo "<span class='badge bg-correct'>$newdate11</span>"; }
                             else{ echo "<span class='badge bg-incorrect'>$newdate11</span>"; } ?></td>
                             <td class="align-middle" id="color_fed_body"><?php echo $newdate13; ?></td>
@@ -528,8 +550,10 @@
     <script src="./plugin/chartist-js/jquery.sparkline.min.js"></script>
 
     <script>
-         $(function(){
+        $(function(){
             $(".btn_fed").click(function(){
+                $(".btn_fed").addClass("active");
+                $(".btn_all").removeClass("active");
                 $(".total").text(<?php echo $fed-1; ?>);
                 $(".correcto").text(<?php echo $fed_supl; ?>);
                 $(".incorrecto").text(<?php echo $fed_no_supl; ?>);
@@ -546,6 +570,8 @@
                 $(".table_no_fed").hide();
             });
             $(".btn_all").click(function(){
+                $(".btn_all").addClass("active");
+                $(".btn_fed").removeClass("active");
                 $(".total").text(<?php echo $row_cnt; ?>);
                 $(".correcto").text(<?php echo $correctos; ?>);
                 $(".incorrecto").text(<?php echo $incorrectos; ?>);

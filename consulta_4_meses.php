@@ -46,7 +46,7 @@
         $resultado = "SELECT distinct(Numero_Documento_Paciente), 'PREMATURO' PREMATURO
                         INTO bdhis_minsa_externo.dbo.PREMATURO1
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where anio='2021' and codigo_item in ('P0711','P0712','P0713','P073')";
+                        where anio='2021' and codigo_item in ('P0711','P0712','P0713','P073', 'P071')";
 
         $resultado2 = "SELECT pn.NOMBRE_PROV, pn.NOMBRE_DIST,pn.NOMBRE_EESS,pn.MENOR_VISITADO,PN.MENOR_ENCONTRADO,pn.NUM_DNI,pn.NUM_CNV,
                         pn.FECHA_NACIMIENTO_NINO, 'DOCUMENTO' = CASE 
