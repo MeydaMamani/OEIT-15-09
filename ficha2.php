@@ -24,7 +24,7 @@
                     </select>
                 </div>
                 <div class="col-md-3 text-mobile">
-                    <select class="select_gestante form-select" name="pueblo" id="pueblo" aria-label="Default select example">
+                    <select class="select_gestante form-select" name="pueblo" id="pueblo" onchange="misDistricts();" aria-label="Default select example">
                         <option value="-" selected>Seleccione Distrito</option>
                     </select>
                 </div>
@@ -36,7 +36,7 @@
                         <option value="2021">2021</option>
                     </select>
                 </div>
-                <div class="col-md-2 text-mobile">
+                <div class="col-md-2 divmes">
                     <select class="select_gestante form-select" name="mes" id="mes" aria-label="Default select example">
                         <option value="-" selected>Seleccione Mes</option>
                         <option value="1">ENERO</option>
@@ -62,14 +62,6 @@
                     <h4 class="p-2 text-center">Avance Distrital Para <span><?php echo $nombre_mes; ?></span></h4>
                     <div style="height: 300px;" id="carga">
                         <canvas id="myChartDistrict"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 border border-secondary" style="display: none;" id="province">
-                    <h4 class="p-2 text-center">Avance Red <span class="name_red"></span></h4>
-                    <div style="height: 250px;">
-                        <canvas id="myChartProvince"></canvas>
                     </div>
                 </div>
             </div>
@@ -123,15 +115,15 @@
                 </div>
                 <div class="col-md-5 text-center">
                     <div class="border border-secondary">
-                        <h4 class="p-2">Avance por Red</h4>
-                        <div style="height: 250px;">
+                        <h3 class="pt-2">Avance por Red</h3>
+                        <div style="height: 250px;" class="mb-4">
                             <canvas id="myChartRed"></canvas>
                         </div>
                     </div><br>
                 </div>
                 <div class="col-md-3 text-center">
                     <div class="border border-secondary">
-                        <h4 class="pt-2">Avance Regional</h4>
+                        <h3 class="pt-2">Avance Regional</h3>
                         <div class="col-md-12 text-center align-self-center position-sticky" id="grafico">
                             <h1 class="font-light avance mb-3 text-primary"><?php 
                                 if($num_reg == 0 and $den_reg == 0){ echo '0 %'; }else{
@@ -317,8 +309,8 @@
                             ?>
                         ],
                         backgroundColor: [
-                            'rgb(243, 57, 16)',
-                            'rgb(25 155 17)',
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
                             'rgb(255, 205, 86)'
                         ],
                         hoverOffset: 4
@@ -329,7 +321,6 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                // indexAxis: 'y',
                 plugins: {
                     legend: {
                         display: true
@@ -337,90 +328,174 @@
                     datalabels: {
                         formatter: (value, ctx) => {
                             let percentage = value+"%";
-                            //console.log(percentage);
                             return percentage;
                         },
                         color: 'black',
-                        anchor: 'end',
-                        align: 'top',
-                        offset: 3
                     }
                 },
             },
         });
     </script>
     <script>
-         $("#btn_buscar").click(function(){
+        function misDistricts(){
+            var distrito = $("#pueblo").val();
+            if(distrito != "TODOS"){
+                $(".divmes").hide();
+            }else{
+                $(".divmes").show();
+            }
+        }
+
+        $("#btn_buscar").click(function(){
             var red = $("#provincia").val();
             var distrito = $("#pueblo").val();
             var anio = $("#anio").val();
             var mes = $("#mes").val();
             console.log("ME DISTE red", red);
             console.log("ME DISTE CLICK", distrito);
-            console.log("ME DISTE ------", anio);
-            $(".name_red").text(red);
-            $.ajax({
-                url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio+'&mes='+mes+'&red='+red,
-                method: 'GET',
-                success: function(data) {
-                    $("#province").show();
-                    $("#district").hide();
-                    console.log('SOY DATA', data);
-                    var establecimiento = data;
-                    var expresionRegular = /\s*---\s*/;
-                    var lista_id =establecimiento.split(expresionRegular);
-                    var id = []; var names = [];
-                    for(i=0;i<lista_id.length;i++){
-                        if(i % 2 == 0){
+            console.log("ME DISTE ------", mes);
+
+            if(mes == '-'){
+                $(".name_red").text(red);
+                canvas = document.getElementById("myChartDistrict");
+                ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                $('canvas#myChartDistrict').remove();
+
+                $.ajax({
+                    url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio+'&mes='+mes+'&red='+red,
+                    method: 'GET',
+                    success: function(data) {
+                        // $("#province").show();
+                        // $("#district").hide();
+                        // $("#carga").html('<div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+                        $('#carga').append("<canvas id='myChartDistrict'></canvas>");
+                        console.log('SOY DATA', data);
+                        var establecimiento = data;
+                        var expresionRegular = /\s*---\s*/;
+                        var lista_id =establecimiento.split(expresionRegular);
+                        var id = [];
+                        for(i=0;i<lista_id.length;i++){
                             id.push(lista_id[i]);
-                        }else{
-                            names.push(lista_id[i]);
                         }
-                    }
-                    //POR DISTRITO
-                    var ctx_district= document.getElementById("myChartProvince").getContext("2d");
-                    var myChartProvince= new Chart(ctx_district,{
-                        type: 'bar',
-                        data: {
-                            labels: names,
-                            datasets:[
-                                {
-                                    //label:'DATOSSSS',
-                                    data: id,
-                                    backgroundColor: '#1d3f74',
-                                },
-                            ]
-                        },
-                        plugins: [ChartDataLabels],
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            // indexAxis: 'y',
-                            plugins: {
-                                legend: {
-                                    display: true
-                                },
-                                datalabels: {
-                                    formatter: (value, ctx) => {
-                                        let percentage = value+"%";
-                                        //console.log(percentage);
-                                        return percentage;
+                        console.log('+++', id);
+                        
+                        //POR DISTRITO
+                        var ctx_district= document.getElementById("myChartDistrict").getContext("2d");
+                        var myChartProvince= new Chart(ctx_district,{
+                            type: 'bar',
+                            data: {
+                                labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
+                                datasets:[
+                                    {
+                                        label: 'Avance',
+                                        data: id,
+                                        backgroundColor: '#1d3f74',
                                     },
-                                    color: 'black',
-                                    anchor: 'end',
-                                    align: 'top',
-                                    offset: 3
+                                ]
+                            },
+                            plugins: [ChartDataLabels],
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                // indexAxis: 'y',
+                                plugins: {
+                                    legend: {
+                                        display: true
+                                    },
+                                    datalabels: {
+                                        formatter: (value, ctx) => {
+                                            let percentage = value+"%";
+                                            //console.log(percentage);
+                                            return percentage;
+                                        },
+                                        color: 'black',
+                                        anchor: 'end',
+                                        align: 'top',
+                                        offset: 3
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
                                 }
                             },
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
+                        });
+                    }
+                })
+            }else{
+                $(".name_red").text(red);
+                canvas = document.getElementById("myChartDistrict");
+                ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                $('canvas#myChartDistrict').remove();
+
+                $.ajax({
+                    url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio+'&mes='+mes+'&red='+red,
+                    method: 'GET',
+                    success: function(data) {
+                        // $("#province").show();
+                        // $("#district").hide();
+                        // $("#carga").html('<div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+                        $('#carga').append("<canvas id='myChartDistrict'></canvas>");
+                        console.log('SOY DATA', data);
+                        var establecimiento = data;
+                        var expresionRegular = /\s*---\s*/;
+                        var lista_id =establecimiento.split(expresionRegular);
+                        var id = []; var names = [];
+                        for(i=0;i<lista_id.length;i++){
+                            if(i % 2 == 0){
+                                id.push(lista_id[i]);
+                            }else{
+                                names.push(lista_id[i]);
                             }
-                        },
-                    });
-                }
-            })
+                        }
+                        //POR DISTRITO
+                        var ctx_district= document.getElementById("myChartDistrict").getContext("2d");
+                        var myChartProvince= new Chart(ctx_district,{
+                            type: 'bar',
+                            data: {
+                                labels: names,
+                                datasets:[
+                                    {
+                                        label: 'Avance',
+                                        data: id,
+                                        backgroundColor: '#1d3f74',
+                                    },
+                                ]
+                            },
+                            plugins: [ChartDataLabels],
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                // indexAxis: 'y',
+                                plugins: {
+                                    legend: {
+                                        display: true
+                                    },
+                                    datalabels: {
+                                        formatter: (value, ctx) => {
+                                            let percentage = value+"%";
+                                            //console.log(percentage);
+                                            return percentage;
+                                        },
+                                        color: 'black',
+                                        anchor: 'end',
+                                        align: 'top',
+                                        offset: 3
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            },
+                        });
+                    }
+                })
+            }
         });
     </script>
 </body>

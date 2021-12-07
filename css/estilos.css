@@ -55,8 +55,8 @@ body {background:#FEFEFE;}
 }
 
 #grafico .css-bar{
-	width: 165px !important;
-	height: 165px !important;
+	width: 185px !important;
+	height: 185px !important;
 }
 
 .border-rounded{
@@ -467,7 +467,7 @@ img:hover{
 }
 
 .table-responsive#ficha2 { 
-	height: 300px;
+	height: 330px;
 	overflow: scroll;
 }
 

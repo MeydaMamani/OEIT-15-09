@@ -108,51 +108,159 @@
             }
 
             $red = strtoupper($red);
-            $date_fin = date("Y-m-t", strtotime($anio-$mes-01));
-            echo $date_fin;
-            $resultado4 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
-                            COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$date_fin' THEN NUM_DNI END) 'DENOMINADOR1'
-                            into BDHIS_MINSA.dbo.denominador    
-                            FROM BDHIS_MINSA.dbo.PASO_NUM2
-                            where (DX_ANEMIA IS NULL)
-                            GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
 
-            $resultado5 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
-                            COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$date_fin' THEN NUM_DNI END) 'NUMERADOR1'
-                            into BDHIS_MINSA.dbo.NUMERADOR    
-                            FROM BDHIS_MINSA.dbo.PASO_NUM2 A
-                            LEFT JOIN BDHIS_MINSA.dbo.PASO_NUM3 B ON A.NUM_DNI=B.Numero_Documento_Paciente
-                            where (DX_ANEMIA IS NULL)AND (B.[3° APO] IS NOT NULL) AND (B.[3° PENTA] IS NOT NULL) AND (B.[2° ROTA] IS NOT NULL)AND (B.[3° NEUMO] IS NOT NULL)AND (B.[1° SPR] IS NOT NULL)AND (B.[1° INFLUENZA] IS NOT NULL) AND (B.[1CTRL] IS NOT NULL)AND (B.[2CTRL] IS NOT NULL)AND
-                            (B.[3CTRL] IS NOT NULL)AND (B.[4CTRL] IS NOT NULL)AND (B.[5CTRL] IS NOT NULL)AND (B.[DOSAJE_HEMOGLOBINA] IS NOT NULL)AND (B.[1 SUPLE] IS NOT NULL)AND (B.[2 SUPLE] IS NOT NULL)AND (B.[3 SUPLE] IS NOT NULL)AND (B.[4 SUPLE] IS NOT NULL)AND (B.[5 SUPLE] IS NOT NULL)AND
-                            (B.[6 SUPLE] IS NOT NULL)
-                            GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
+            if($mes == '-'){
+                $red = $_GET['red'];
+                $distrito = $_GET['distrito'];
+                $anio = $_GET['anio'];
 
-            $resultado6 = "SELECT A.NOMBRE_DEPAR,A.NOMBRE_PROV,A.NOMBRE_DIST, NUMERADOR1, DENOMINADOR1
-                                FROM BDHIS_MINSA.dbo.denominador A
-                                LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR B ON A.NOMBRE_DIST=B.NOMBRE_DIST
-                                WHERE A.NOMBRE_PROV='$red'
-                                DROP TABLE BDHIS_MINSA.dbo.PASO_NUM1
-                                DROP TABLE BDHIS_MINSA.dbo.PASO_NUM2
-                                DROP TABLE BDHIS_MINSA.dbo.PASO_NUM3
-                                DROP TABLE BDHIS_MINSA.dbo.denominador
-                                DROP TABLE BDHIS_MINSA.dbo.NUMERADOR";
+                if($red == "danielalcidescarrion"){
+                    $red = "DANIEL ALCIDES CARRION";
+                }
+    
+                $red = strtoupper($red);
+                $resultado4 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-01-01' AND CUMPLE_544_DIAS<='$anio-01-31' THEN NUM_DNI END) 'DEN_ENE',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-02-01' AND CUMPLE_544_DIAS<='$anio-02-28' THEN NUM_DNI END) 'DEN_FEB',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-03-01' AND CUMPLE_544_DIAS<='$anio-03-31' THEN NUM_DNI END) 'DEN_MAR',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-04-01' AND CUMPLE_544_DIAS<='$anio-04-30' THEN NUM_DNI END) 'DEN_ABR',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-05-01' AND CUMPLE_544_DIAS<='$anio-05-31' THEN NUM_DNI END) 'DEN_MAY',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-06-01' AND CUMPLE_544_DIAS<='$anio-06-30' THEN NUM_DNI END) 'DEN_JUN',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-07-01' AND CUMPLE_544_DIAS<='$anio-07-31' THEN NUM_DNI END) 'DEN_JUL',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-08-01' AND CUMPLE_544_DIAS<='$anio-08-31' THEN NUM_DNI END) 'DEN_AGO',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-09-01' AND CUMPLE_544_DIAS<='$anio-09-30' THEN NUM_DNI END) 'DEN_SET',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-10-01' AND CUMPLE_544_DIAS<='$anio-10-31' THEN NUM_DNI END) 'DEN_OCT',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-11-01' AND CUMPLE_544_DIAS<='$anio-11-30' THEN NUM_DNI END) 'DEN_NOV',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-12-01' AND CUMPLE_544_DIAS<='$anio-12-31' THEN NUM_DNI END) 'DEN_DIC'
+                                into BDHIS_MINSA.dbo.denominador    
+                                FROM BDHIS_MINSA.dbo.PASO_NUM2
+                                where (DX_ANEMIA IS NULL)
+                                GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
 
-            $consulta4 = sqlsrv_query($conn, $resultado4);
-            $consulta5 = sqlsrv_query($conn, $resultado5);
-            $consulta6 = sqlsrv_query($conn, $resultado6);
+                $resultado5 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-01-01' AND CUMPLE_544_DIAS<='$anio-01-31' THEN NUM_DNI END) 'NUM_ENE',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-02-01' AND CUMPLE_544_DIAS<='$anio-02-29' THEN NUM_DNI END) 'NUM_FEB',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-03-01' AND CUMPLE_544_DIAS<='$anio-03-31' THEN NUM_DNI END) 'NUM_MAR',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-04-01' AND CUMPLE_544_DIAS<='$anio-04-30' THEN NUM_DNI END) 'NUM_ABR',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-05-01' AND CUMPLE_544_DIAS<='$anio-05-31' THEN NUM_DNI END) 'NUM_MAY',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-06-01' AND CUMPLE_544_DIAS<='$anio-06-30' THEN NUM_DNI END) 'NUM_JUN',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-07-01' AND CUMPLE_544_DIAS<='$anio-07-31' THEN NUM_DNI END) 'NUM_JUL',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-08-01' AND CUMPLE_544_DIAS<='$anio-08-31' THEN NUM_DNI END) 'NUM_AGO',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-09-01' AND CUMPLE_544_DIAS<='$anio-09-30' THEN NUM_DNI END) 'NUM_SET',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-10-01' AND CUMPLE_544_DIAS<='$anio-10-31' THEN NUM_DNI END) 'NUM_OCT',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-11-01' AND CUMPLE_544_DIAS<='$anio-11-30' THEN NUM_DNI END) 'NUM_NOV',
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-12-01' AND CUMPLE_544_DIAS<='$anio-12-31' THEN NUM_DNI END) 'NUM_DIC'
+                                into BDHIS_MINSA.dbo.NUMERADOR    
+                                FROM BDHIS_MINSA.dbo.PASO_NUM2 A
+                                LEFT JOIN BDHIS_MINSA.dbo.PASO_NUM3 B ON A.NUM_DNI=B.Numero_Documento_Paciente
+                                where (DX_ANEMIA IS NULL)AND (B.[3° APO] IS NOT NULL) AND (B.[3° PENTA] IS NOT NULL) AND (B.[2° ROTA] IS NOT NULL)AND (B.[3° NEUMO] IS NOT NULL)AND (B.[1° SPR] IS NOT NULL)AND (B.[1° INFLUENZA] IS NOT NULL) AND (B.[1CTRL] IS NOT NULL)AND (B.[2CTRL] IS NOT NULL)AND
+                                (B.[3CTRL] IS NOT NULL)AND (B.[4CTRL] IS NOT NULL)AND (B.[5CTRL] IS NOT NULL)AND (B.[DOSAJE_HEMOGLOBINA] IS NOT NULL)AND (B.[1 SUPLE] IS NOT NULL)AND (B.[2 SUPLE] IS NOT NULL)AND (B.[3 SUPLE] IS NOT NULL)AND (B.[4 SUPLE] IS NOT NULL)AND (B.[5 SUPLE] IS NOT NULL)AND
+                                (B.[6 SUPLE] IS NOT NULL)
+                                GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
 
-            while ($con = sqlsrv_fetch_array($consulta6)){
-                if($con['NUMERADOR1'] == 0 and $con['DENOMINADOR1'] == 0){ $nov = 0; }
-                else{  $nov = number_format((float)(($con['NUMERADOR1']/$con['DENOMINADOR1'])*100), 2, '.', ''); }
-                $list_total_pro[] = $nov;
-                // $list_dists_pro = $con['NOMBRE_DIST'];
-                if($con['NOMBRE_DIST'] == "SAN FCO DE ASIS DE YARUSYACAN"){ $list_dists = "YARUSYACAN"; }
-                else if($con['NOMBRE_DIST'] == "SAN PEDRO DE PILLAO"){ $list_dists = "PILLAO"; }
-                else if($con['NOMBRE_DIST'] == "SANTA ANA DE TUSI"){ $list_dists = "TUSI"; }
-                else if($con['NOMBRE_DIST'] == "PUERTO BERMUDEZ"){ $list_dists = "P. BERMUDEZ"; }
-                else if($con['NOMBRE_DIST'] == "GOYLLARISQUIZGA"){ $list_dists = "GOYLLAR"; }
-                else{ $list_dists = $con['NOMBRE_DIST']; }
-                echo $nov, '---', $list_dists, '---';
+                $resultado6 = "SELECT A.NOMBRE_DEPAR,A.NOMBRE_PROV,A.NOMBRE_DIST, DEN_ENE, DEN_FEB, DEN_MAR, DEN_ABR, DEN_MAY, DEN_JUN, DEN_JUL, DEN_AGO, DEN_SET, 
+                                DEN_OCT, DEN_NOV, DEN_DIC, NUM_ENE, NUM_FEB, NUM_MAR, NUM_ABR, NUM_MAY, NUM_JUN, NUM_JUL, NUM_AGO, NUM_SET, NUM_OCT, NUM_NOV, NUM_DIC
+                                    FROM BDHIS_MINSA.dbo.denominador A
+                                    LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR B ON A.NOMBRE_DIST=B.NOMBRE_DIST
+                                    WHERE A.NOMBRE_DIST='$distrito'
+                                    DROP TABLE BDHIS_MINSA.dbo.PASO_NUM1
+                                    DROP TABLE BDHIS_MINSA.dbo.PASO_NUM2
+                                    DROP TABLE BDHIS_MINSA.dbo.PASO_NUM3
+                                    DROP TABLE BDHIS_MINSA.dbo.denominador
+                                    DROP TABLE BDHIS_MINSA.dbo.NUMERADOR";
+
+                $consulta4 = sqlsrv_query($conn, $resultado4);
+                $consulta5 = sqlsrv_query($conn, $resultado5);
+                $consulta6 = sqlsrv_query($conn, $resultado6);
+
+                while ($con = sqlsrv_fetch_array($consulta6)){
+                    if($con['NUM_ENE'] == 0 and $con['DEN_ENE'] == 0){ $ene = 0; }
+                    else{  $ene = number_format((float)(($con['NUM_ENE']/$con['DEN_ENE'])*100), 2, '.', ''); }
+
+                    if($con['NUM_FEB'] == 0 and $con['DEN_FEB'] == 0){ $feb = 0; }
+                    else{  $feb = number_format((float)(($con['NUM_FEB']/$con['DEN_FEB'])*100), 2, '.', ''); }
+
+                    if($con['NUM_MAR'] == 0 and $con['DEN_MAR'] == 0){ $mar = 0; }
+                    else{  $mar = number_format((float)(($con['NUM_MAR']/$con['DEN_MAR'])*100), 2, '.', ''); }
+
+                    if($con['NUM_ABR'] == 0 and $con['DEN_ABR'] == 0){ $abr = 0; }
+                    else{ $abr = number_format((float)(($con['NUM_ABR']/$con['DEN_ABR'])*100), 2, '.', ''); }
+
+                    if($con['NUM_MAY'] == 0 and $con['DEN_MAY'] == 0){ $may = 0; }
+                    else{  $may = number_format((float)(($con['NUM_MAY']/$con['DEN_MAY'])*100), 2, '.', ''); }
+
+                    if($con['NUM_JUN'] == 0 and $con['DEN_JUN'] == 0){ $jun = 0; }
+                    else{  $jun = number_format((float)(($con['NUM_JUN']/$con['DEN_JUN'])*100), 2, '.', ''); }
+
+                    if($con['NUM_JUL'] == 0 and $con['DEN_JUL'] == 0){ $jul = 0; }
+                    else{  $jul = number_format((float)(($con['NUM_JUL']/$con['DEN_JUL'])*100), 2, '.', ''); }
+
+                    if($con['NUM_AGO'] == 0 and $con['DEN_AGO'] == 0){ $ago = 0; }
+                    else{  $ago = number_format((float)(($con['NUM_AGO']/$con['DEN_AGO'])*100), 2, '.', ''); }
+
+                    if($con['NUM_SET'] == 0 and $con['DEN_SET'] == 0){ $set = 0; }
+                    else{  $set = number_format((float)(($con['NUM_SET']/$con['DEN_SET'])*100), 2, '.', ''); }
+
+                    if($con['NUM_OCT'] == 0 and $con['DEN_OCT'] == 0){ $oct = 0; }
+                    else{  $oct = number_format((float)(($con['NUM_OCT']/$con['DEN_OCT'])*100), 2, '.', ''); }
+
+                    if($con['NUM_NOV'] == 0 and $con['DEN_NOV'] == 0){ $nov = 0; }
+                    else{  $nov = number_format((float)(($con['NUM_NOV']/$con['DEN_NOV'])*100), 2, '.', '')*100; }
+
+                    if($con['NUM_DIC'] == 0 and $con['DEN_DIC'] == 0){ $dic = 0; }
+                    else{  $dic = number_format((float)(($con['NUM_DIC']/$con['DEN_DIC'])*100), 2, '.', ''); }
+
+                }
+
+                echo $ene, '---', $feb, '---', $mar, '---', $abr, '---', $may, '---', $jun, '---', $jul, '---', $ago, '---', $set, '---', $oct, '---', $nov, '---', $dic, '---';
+            }
+            else{
+                $date_fin = date("Y-m-t", strtotime($anio-$mes-01));
+                echo $date_fin;
+                $resultado4 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$date_fin' THEN NUM_DNI END) 'DENOMINADOR1'
+                                into BDHIS_MINSA.dbo.denominador    
+                                FROM BDHIS_MINSA.dbo.PASO_NUM2
+                                where (DX_ANEMIA IS NULL)
+                                GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
+    
+                $resultado5 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,
+                                COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$date_fin' THEN NUM_DNI END) 'NUMERADOR1'
+                                into BDHIS_MINSA.dbo.NUMERADOR    
+                                FROM BDHIS_MINSA.dbo.PASO_NUM2 A
+                                LEFT JOIN BDHIS_MINSA.dbo.PASO_NUM3 B ON A.NUM_DNI=B.Numero_Documento_Paciente
+                                where (DX_ANEMIA IS NULL)AND (B.[3° APO] IS NOT NULL) AND (B.[3° PENTA] IS NOT NULL) AND (B.[2° ROTA] IS NOT NULL)AND (B.[3° NEUMO] IS NOT NULL)AND (B.[1° SPR] IS NOT NULL)AND (B.[1° INFLUENZA] IS NOT NULL) AND (B.[1CTRL] IS NOT NULL)AND (B.[2CTRL] IS NOT NULL)AND
+                                (B.[3CTRL] IS NOT NULL)AND (B.[4CTRL] IS NOT NULL)AND (B.[5CTRL] IS NOT NULL)AND (B.[DOSAJE_HEMOGLOBINA] IS NOT NULL)AND (B.[1 SUPLE] IS NOT NULL)AND (B.[2 SUPLE] IS NOT NULL)AND (B.[3 SUPLE] IS NOT NULL)AND (B.[4 SUPLE] IS NOT NULL)AND (B.[5 SUPLE] IS NOT NULL)AND
+                                (B.[6 SUPLE] IS NOT NULL)
+                                GROUP BY NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST";
+    
+                $resultado6 = "SELECT A.NOMBRE_DEPAR,A.NOMBRE_PROV,A.NOMBRE_DIST, NUMERADOR1, DENOMINADOR1
+                                    FROM BDHIS_MINSA.dbo.denominador A
+                                    LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR B ON A.NOMBRE_DIST=B.NOMBRE_DIST
+                                    WHERE A.NOMBRE_PROV='$red'
+                                    DROP TABLE BDHIS_MINSA.dbo.PASO_NUM1
+                                    DROP TABLE BDHIS_MINSA.dbo.PASO_NUM2
+                                    DROP TABLE BDHIS_MINSA.dbo.PASO_NUM3
+                                    DROP TABLE BDHIS_MINSA.dbo.denominador
+                                    DROP TABLE BDHIS_MINSA.dbo.NUMERADOR";
+    
+                $consulta4 = sqlsrv_query($conn, $resultado4);
+                $consulta5 = sqlsrv_query($conn, $resultado5);
+                $consulta6 = sqlsrv_query($conn, $resultado6);
+    
+                while ($con = sqlsrv_fetch_array($consulta6)){
+                    if($con['NUMERADOR1'] == 0 and $con['DENOMINADOR1'] == 0){ $nov = 0; }
+                    else{  $nov = number_format((float)(($con['NUMERADOR1']/$con['DENOMINADOR1'])*100), 2, '.', ''); }
+                    $list_total_pro[] = $nov;
+                    // $list_dists_pro = $con['NOMBRE_DIST'];
+                    if($con['NOMBRE_DIST'] == "SAN FCO DE ASIS DE YARUSYACAN"){ $list_dists = "YARUSYACAN"; }
+                    else if($con['NOMBRE_DIST'] == "SAN PEDRO DE PILLAO"){ $list_dists = "PILLAO"; }
+                    else if($con['NOMBRE_DIST'] == "SANTA ANA DE TUSI"){ $list_dists = "TUSI"; }
+                    else if($con['NOMBRE_DIST'] == "PUERTO BERMUDEZ"){ $list_dists = "P. BERMUDEZ"; }
+                    else if($con['NOMBRE_DIST'] == "GOYLLARISQUIZGA"){ $list_dists = "GOYLLAR"; }
+                    else{ $list_dists = $con['NOMBRE_DIST']; }
+                    echo $nov, '---', $list_dists, '---';
+                }
             }
         }
         else{
@@ -214,8 +322,11 @@
             $consulta7 = sqlsrv_query($conn, $resultado7);
             $consulta8 = sqlsrv_query($conn, $resultado8);
             $consulta9 = sqlsrv_query($conn, $resultado9);
+        }
+       
+        if(isset($_POST['Buscar'])) {
 
-            // $list_total = array();
+             // $list_total = array();
             // $list_dists = array();
             // while ($con = sqlsrv_fetch_array($consulta6)){
             //     if($con['NUMERADOR1'] == 0 and $con['DENOMINADOR1'] == 0){ $nov = 0; }
@@ -229,9 +340,7 @@
             //     else if($con['NOMBRE_DIST'] == "GOYLLARISQUIZGA"){ $list_dists[] = "GOYLLAR"; }
             //     else{ $list_dists[] = $con['NOMBRE_DIST']; }
             // }
-        }
-       
-        if(isset($_POST['Buscar'])) {
+
             $distrito = $_GET['distrito'];
             $anio = $_GET['anio'];
             echo $distrito, '<br>';
@@ -290,42 +399,7 @@
 
             // $list_total = array();
             // while ($con = sqlsrv_fetch_array($consulta6)){
-            //     if($con['NUM_ENE'] == 0 and $con['DEN_ENE'] == 0){ $ene = 0; }
-            //     else{  $ene = ($con['NUM_ENE']/$con['DEN_ENE'])*100; }
-
-            //     if($con['NUM_FEB'] == 0 and $con['DEN_FEB'] == 0){ $feb = 0; }
-            //     else{  $feb = ($con['NUM_FEB']/$con['DEN_FEB'])*100; }
-
-            //     if($con['NUM_MAR'] == 0 and $con['DEN_MAR'] == 0){ $mar = 0; }
-            //     else{  $mar = ($con['NUM_MAR']/$con['DEN_MAR'])*100; }
-
-            //     if($con['NUM_ABR'] == 0 and $con['DEN_ABR'] == 0){ $abr = 0; }
-            //     else{ $abr = ($con['NUM_ABR']/$con['DEN_ABR'])*100; }
-
-            //     if($con['NUM_MAY'] == 0 and $con['DEN_MAY'] == 0){ $may = 0; }
-            //     else{  $may = ($con['NUM_MAY']/$con['DEN_MAY'])*100; }
-
-            //     if($con['NUM_JUN'] == 0 and $con['DEN_JUN'] == 0){ $jun = 0; }
-            //     else{  $jun = ($con['NUM_JUN']/$con['DEN_JUN'])*100; }
-
-            //     if($con['NUM_JUL'] == 0 and $con['DEN_JUL'] == 0){ $jul = 0; }
-            //     else{  $jul = ($con['NUM_JUL']/$con['DEN_JUL'])*100; }
-
-            //     if($con['NUM_AGO'] == 0 and $con['DEN_AGO'] == 0){ $ago = 0; }
-            //     else{  $ago = ($con['NUM_AGO']/$con['DEN_AGO'])*100; }
-
-            //     if($con['NUM_SET'] == 0 and $con['DEN_SET'] == 0){ $set = 0; }
-            //     else{  $set = ($con['NUM_SET']/$con['DEN_SET'])*100; }
-
-            //     if($con['NUM_OCT'] == 0 and $con['DEN_OCT'] == 0){ $oct = 0; }
-            //     else{  $oct = ($con['NUM_OCT']/$con['DEN_OCT'])*100; }
-
-            //     if($con['NUM_NOV'] == 0 and $con['DEN_NOV'] == 0){ $nov = 0; }
-            //     else{  $nov = ($con['NUM_NOV']/$con['DEN_NOV'])*100; }
-
-            //     if($con['NUM_DIC'] == 0 and $con['DEN_DIC'] == 0){ $dic = 0; }
-            //     else{  $dic = ($con['NUM_DIC']/$con['DEN_DIC'])*100; }
-
+            //  
             // }
         }
 

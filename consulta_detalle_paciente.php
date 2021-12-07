@@ -7,7 +7,7 @@ if (isset($_POST['Buscar'])) {
     //  header('Content-Type: text/html; charset=ISO-8859-1');
     include('./base.php');
     $doc = $_POST['doc'];
-    $resultado = "SELECT distinct(t.Id_Cita), t.Fecha_Atencion, t.Provincia_Establecimiento, t.Distrito_Establecimiento, t.Nombre_Establecimiento
+    $resultado = "SELECT distinct(t.Id_Cita), t.Fecha_Atencion, t.Provincia_Establecimiento, t.Distrito_Establecimiento, t.Nombre_Establecimiento, t.Fecha_Nacimiento_Paciente, t.Lote, t.Valor_Lab, t.Descripcion_Item
                     from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t 
                     where Numero_Documento_Paciente='$doc' and anio='2021' and Fecha_Nacimiento_Paciente>='1960-01-01'
                     order by Fecha_Atencion DESC";
@@ -34,8 +34,10 @@ if (isset($_POST['Buscar'])) {
                 <div class="card" style="border: 1px solid #5172a3;">
                     <div class="card-header p-3 text-white text-center" style="background: #5172a3;"> <!-- style="background: #4b0393;" -->
                         <div class="row">
-                            <span class="col-md-6"><b>Id Cita:</b> <?php echo $consulta['Id_Cita']; ?> </span>
-                            <span class="col-md-6"><b>Fecha Atención:</b> <?php echo $consulta['Fecha_Atencion']-> format('d/m/y'); ?> </span>
+                            <span class="col-md-5"><b>Id Cita:</b> <?php echo $consulta['Id_Cita']; ?> </span>
+                            <span class="col-md-5"><b>Fecha Atención:</b> <?php echo $consulta['Fecha_Atencion']-> format('d/m/y'); ?> </span>
+                            <span class="col-md-5"><b>Fecha Nacimiento:</b> <?php echo $consulta['Fecha_Nacimiento_Paciente']-> format('d/m/y'); ?> </span>
+
                         </div>
                     </div>
                     <div class="card-body mt-1">
@@ -46,6 +48,7 @@ if (isset($_POST['Buscar'])) {
                             <thead>
                                 <tr class="font-12 text-center">
                                     <th class="align-middle">#</th>
+                                    <th class="align-middle">Lote</th>
                                     <th class="align-middle">Tipo Diagnóstico</th>
                                     <th class="align-middle">Código Item</th>
                                     <th class="align-middle">Valor Lab</th>
@@ -55,7 +58,7 @@ if (isset($_POST['Buscar'])) {
                             <tbody>
                                 <?php
                                     $id_cita =  $consulta['Id_Cita'];
-                                    $resultado2 = "SELECT t.Provincia_Establecimiento,t.Distrito_Establecimiento,t.Nombre_Establecimiento, t.Tipo_Doc_Paciente, t.Numero_Documento_Paciente,
+                                    $resultado2 = "SELECT t.Provincia_Establecimiento,t.Distrito_Establecimiento,t.Nombre_Establecimiento, t.Tipo_Doc_Paciente, t.Numero_Documento_Paciente, t.Lote,
                                                     t.Fecha_Nacimiento_Paciente, t.Id_Cita, t.Fecha_Atencion,t.Tipo_Diagnostico, t.Codigo_Item, t.Valor_Lab, t.Descripcion_Item
                                                     from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t 
                                                     where Numero_Documento_Paciente='$doc' AND Id_Cita='$id_cita' and anio='2021' and Fecha_Nacimiento_Paciente>='1960-01-01'
@@ -64,32 +67,38 @@ if (isset($_POST['Buscar'])) {
                                     $consulta2 = sqlsrv_query($conn, $resultado2);
                                     $i=1;
                                     while ($consulta = sqlsrv_fetch_array($consulta2)){
-                                        if(is_null ($consulta['Tipo_Diagnostico']) ){
+                                        if(is_null ($consulta['Lote']) ){
                                             $newdate2 = '  -'; }
                                             else{
-                                        $newdate2 = $consulta['Tipo_Diagnostico'];}
-                    
-                                        if(is_null ($consulta['Codigo_Item']) ){
+                                        $newdate2 = $consulta['Lote'];}
+                                        
+                                        if(is_null ($consulta['Tipo_Diagnostico']) ){
                                             $newdate3 = '  -'; }
                                             else{
-                                        $newdate3 = $consulta['Codigo_Item'] ;}
+                                        $newdate3 = $consulta['Tipo_Diagnostico'];}
                     
-                                        if(is_null ($consulta['Valor_Lab']) ){
+                                        if(is_null ($consulta['Codigo_Item']) ){
                                             $newdate4 = '  -'; }
                                             else{
-                                        $newdate4 = $consulta['Valor_Lab'];}
+                                        $newdate4 = $consulta['Codigo_Item'] ;}
                     
-                                        if(is_null ($consulta['Descripcion_Item']) ){
+                                        if(is_null ($consulta['Valor_Lab']) ){
                                             $newdate5 = '  -'; }
                                             else{
-                                        $newdate5 = $consulta['Descripcion_Item'];}
+                                        $newdate5 = $consulta['Valor_Lab'];}
+                    
+                                        if(is_null ($consulta['Descripcion_Item']) ){
+                                            $newdate6 = '  -'; }
+                                            else{
+                                        $newdate6 = $consulta['Descripcion_Item'];}
                                 ?>
                                 <tr class="text-center font-12">
                                     <td class="align-middle"><?php echo $i++; ?></td>
                                     <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
                                     <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
-                                    <td class="align-middle"><?php echo ($newdate4); ?></td>
-                                    <td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
+                                    <td class="align-middle"><?php echo utf8_encode($newdate4); ?></td>
+                                    <td class="align-middle"><?php echo ($newdate5); ?></td>
+                                    <td class="align-middle"><?php echo utf8_encode($newdate6); ?></td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
