@@ -5,6 +5,11 @@
     global $conex;
     include('./base.php');
     include('query_ficha2.php');
+    $num_reg=0; $den_reg=0;
+    while ($con = sqlsrv_fetch_array($consulta9)){
+        $num_reg = $num_reg + $con['NUMERADOR1'];
+        $den_reg = $den_reg + $con['DENOMINADOR1'];
+    }
 ?>
     <div class="page-wrapper">
         <div class="homologation">
@@ -52,37 +57,39 @@
                     <button name="Buscar" class="btn text-white" type="submit" id="btn_buscar" style="background: #337ab7;"><i class="mdi mdi-magnify"></i> Buscar</button>
                 </div>
             </div><br>
-            <div class="col-md-12 border border-secondary">
-                <h4 class="p-2 text-center">Avance Distrital Para <span><?php echo $nombre_mes; ?></span></h4>
-                <div style="height: 300px;" id="district">
-                    <canvas id="myChartDistrict"></canvas>
+            <div class="mb-4">
+                <div class="col-md-12 border border-secondary" id="district">
+                    <h4 class="p-2 text-center">Avance Distrital Para <span><?php echo $nombre_mes; ?></span></h4>
+                    <div style="height: 300px;" id="carga">
+                        <canvas id="myChartDistrict"></canvas>
+                    </div>
                 </div>
             </div>
-            <br>
             <div class="row">
-                <div class="col-md-12 border border-secondary">
-                    <h4 class="p-2 text-center">Avance Para <span><?php echo $nombre_mes; ?></span></h4>
-                    <div style="height: 300px; display: none;" id="province">
+                <div class="col-md-12 border border-secondary" style="display: none;" id="province">
+                    <h4 class="p-2 text-center">Avance Red <span class="name_red"></span></h4>
+                    <div style="height: 250px;">
                         <canvas id="myChartProvince"></canvas>
                     </div>
                 </div>
-            </div><br>
+            </div>
             <div class="row">
-                <div class="col-md-8 table-responsive">
+                <div class="col-md-4 table-responsive" id="ficha2">
                     <table class="table table-hover table-bordered table-striped">
                         <thead>
-                            <tr class="text-light font-11 text-center" style="background: #0f81db;">
+                            <tr class="text-light font-11 text-center" style="background: black;">
                                 <th class="align-middle">#</th>
                                 <th class="align-middle">Provincia</th>
                                 <th class="align-middle">Distrito</th>
-                                <th class="align-middle">Numerador</th>
+                                <th class="align-middle">Num</th>
+                                <th class="align-middle">Den</th>
                                 <th class="align-middle">Avance</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php  
-                                include('query_ficha2.php');
                                 $i=1;
+                                include('query_ficha2.php');
                                 while ($consulta = sqlsrv_fetch_array($consulta6)){  
                                     // CAMBIO AQUI
                                     if(is_null ($consulta['NOMBRE_PROV']) ){ $newdate1 = '  -'; }
@@ -98,12 +105,12 @@
                                     else{ $newdate4 = $consulta['DENOMINADOR1'];}
 
                             ?>
-                            <tr class="font-10 text-center">
+                            <tr class="font-11 text-center">
                                 <td class="align-middle"><?php echo $i++; ?></td>
                                 <td class="align-middle" style="text-align: left;"><?php echo utf8_encode($newdate1); ?></td>
                                 <td class="align-middle" style="text-align: left;"><?php echo utf8_encode($newdate2); ?></td>
-                                <td class="align-middle" style="text-align: left;"><?php echo ($newdate3); ?></td>
-                                <td class="align-middle" style="text-align: left;"><?php echo ($newdate4); ?></td>
+                                <td class="align-middle"><?php echo ($newdate3); ?></td>
+                                <td class="align-middle"><?php echo ($newdate4); ?></td>
                                 <td class="align-middle"><?php if($newdate3 == 0 and $newdate4 == 0){ echo '0%'; }
                                     else{ echo number_format((float)(($newdate3/$newdate4)*100), 2, '.', ''), '%'; } ?></td>
                             </tr>
@@ -114,29 +121,27 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-4 p-0 text-center">
-                    <div class="border border-secondary" style="width: 110%;">
-                        <h4 class="p-2">Avance Regional</h4>
-                        <canvas id="myChartProvince"></canvas>
-                    </div><br>
-                    <div class="col-12" style="width: 110%;">
-                        <div class="d-flex justify-content-center">
-                            <button class="btn-sm btn_dac" id="btn_dac" name="province" value="DANIEL ALCIDES CARRION"> DANIEL A. CARRION</button>
-                            <button class="btn-sm btn_pasco" name="province"> PASCO</button>
-                            <button class="btn-sm btn_oxa" name="province"> OXAPAMPA</button>
+                <div class="col-md-5 text-center">
+                    <div class="border border-secondary">
+                        <h4 class="p-2">Avance por Red</h4>
+                        <div style="height: 250px;">
+                            <canvas id="myChartRed"></canvas>
                         </div>
                     </div><br>
-                    <div class="border border-secondary" style="width: 110%;">
-                        <h4 class="p-2">Avance Distrital</h4>
-                        <!-- <div class="dac" style="height: 410px;">
-                            <canvas id="myChartDistrict"></canvas>
-                        </div>
-                        <div class="oxa" style="height: 410px; display: none;">
-                            <canvas id="myChartDistrict1"></canvas>
-                        </div>
-                        <div class="pasco" style="height: 500px; display: none;">
-                            <canvas id="myChartDistrict2"></canvas>
-                        </div> -->
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="border border-secondary">
+                        <h4 class="pt-2">Avance Regional</h4>
+                        <div class="col-md-12 text-center align-self-center position-sticky" id="grafico">
+                            <h1 class="font-light avance mb-3 text-primary"><?php 
+                                if($num_reg == 0 and $den_reg == 0){ echo '0 %'; }else{
+                                echo number_format((float)(($num_reg/$den_reg)*100), 2, '.', ''), '%'; } 
+                            ?></h1>
+                            <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php 
+                                if($num_reg == 0 and $den_reg == 0){ echo '0'; }else{
+                                echo number_format((float)(($num_reg/$den_reg)*100), 0, '.', ''); }
+                            ?>"><i class="mdi mdi-receipt"></i></div>
+                        </div>    
                     </div><br>
                 </div>
             </div>
@@ -155,7 +160,7 @@
         $('#mes').select2();
         function cargarProvincias() {
             var array = ["DANIEL ALCIDES CARRION", "OXAPAMPA", "PASCO"];
-            array.sort();
+            // array.sort();
             addOptions("provincia", array);
         }
 
@@ -184,7 +189,7 @@
             if(provinciaSeleccionada !== ''){
                 // Se seleccionan los pueblos y se ordenan
                 provinciaSeleccionada = listaPueblos[provinciaSeleccionada]
-                provinciaSeleccionada.sort()                
+                // provinciaSeleccionada.sort()                
                 // Insertamos los pueblos
                 provinciaSeleccionada.forEach(function(pueblo){
                     let opcion = document.createElement('option')
@@ -197,12 +202,23 @@
         cargarProvincias();
     </script>
     <script>
+        // $("#carga").html('<div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
         var ctx_province= document.getElementById("myChartDistrict").getContext("2d");
         var myChartProvince= new Chart(ctx_province,{
             type: 'bar',
             data: {
                 labels:[ 
                     <?php
+                        include('query_ficha2.php');
+                        $list_dists = array();
+                        while ($con = sqlsrv_fetch_array($consulta6)){
+                            if($con['NOMBRE_DIST'] == "SAN FCO DE ASIS DE YARUSYACAN"){ $list_dists[] = "YARUSYACAN"; }
+                            else if($con['NOMBRE_DIST'] == "SAN PEDRO DE PILLAO"){ $list_dists[] = "PILLAO"; }
+                            else if($con['NOMBRE_DIST'] == "SANTA ANA DE TUSI"){ $list_dists[] = "TUSI"; }
+                            else if($con['NOMBRE_DIST'] == "PUERTO BERMUDEZ"){ $list_dists[] = "P. BERMUDEZ"; }
+                            else if($con['NOMBRE_DIST'] == "GOYLLARISQUIZGA"){ $list_dists[] = "GOYLLAR"; }
+                            else{ $list_dists[] = $con['NOMBRE_DIST']; }
+                        }
                         $num_dists = sizeof($list_dists);         
                         for ($i = 0; $i < $num_dists; $i++) {
                             $data = ($list_dists[$i]);
@@ -212,9 +228,16 @@
                 ],
                 datasets:[
                     {
-                        //label:'DATOSSSS',
+                        label:'Avance',
                         data:[
-                            <?php                                            
+                            <?php
+                                include('query_ficha2.php');
+                                $list_total = array();
+                                while ($con = sqlsrv_fetch_array($consulta6)){
+                                    if($con['NUMERADOR1'] == 0 and $con['DENOMINADOR1'] == 0){ $nov = 0; }
+                                    else{  $nov = number_format((float)(($con['NUMERADOR1']/$con['DENOMINADOR1'])*100), 2, '.', ''); }
+                                    $list_total[] = $nov;
+                                }
                                 $datos = sizeof($list_total);         
                                 for ($i = 0; $i < $datos; $i++) {
                                     $data = ($list_total[$i]);
@@ -255,7 +278,79 @@
             },
         });
 
-        $("#btn_buscar").click(function(){
+        var ctx_red= document.getElementById("myChartRed").getContext("2d");
+        var myChartProvince= new Chart(ctx_red,{
+            type: 'doughnut',
+            data: {
+                labels:[ 
+                    <?php
+                        include('query_ficha2.php');
+                        $list_dists = array();
+                        while ($con = sqlsrv_fetch_array($consulta9)){
+                            if($con['NOMBRE_PROV'] == "DANIEL ALCIDES CARRION"){ $list_dists[] = "DANIEL A. CARRION"; }
+                            else{ $list_dists[] = $con['NOMBRE_PROV']; }
+                        }
+                        $num_dists = sizeof($list_dists);         
+                        for ($i = 0; $i < $num_dists; $i++) {
+                            $data = ($list_dists[$i]);
+                            echo "'$data', ";
+                        }
+                    ?>
+                ],
+                datasets:[
+                    {
+                        label:'Avance',
+                        data:[
+                            <?php
+                                include('query_ficha2.php');
+                                $list_total = array();
+                                while ($con = sqlsrv_fetch_array($consulta9)){
+                                    if($con['NUMERADOR1'] == 0 and $con['DENOMINADOR1'] == 0){ $nov = 0; }
+                                    else{  $nov = number_format((float)(($con['NUMERADOR1']/$con['DENOMINADOR1'])*100), 2, '.', ''); }
+                                    $list_total[] = $nov;
+                                }
+                                $datos = sizeof($list_total);         
+                                for ($i = 0; $i < $datos; $i++) {
+                                    $data = ($list_total[$i]);
+                                    echo "'$data', ";
+                                }
+                            ?>
+                        ],
+                        backgroundColor: [
+                            'rgb(243, 57, 16)',
+                            'rgb(25 155 17)',
+                            'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 4
+                    },
+                ]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                // indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let percentage = value+"%";
+                            //console.log(percentage);
+                            return percentage;
+                        },
+                        color: 'black',
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 3
+                    }
+                },
+            },
+        });
+    </script>
+    <script>
+         $("#btn_buscar").click(function(){
             var red = $("#provincia").val();
             var distrito = $("#pueblo").val();
             var anio = $("#anio").val();
@@ -263,6 +358,7 @@
             console.log("ME DISTE red", red);
             console.log("ME DISTE CLICK", distrito);
             console.log("ME DISTE ------", anio);
+            $(".name_red").text(red);
             $.ajax({
                 url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio+'&mes='+mes+'&red='+red,
                 method: 'GET',
@@ -281,10 +377,6 @@
                             names.push(lista_id[i]);
                         }
                     }
-                    
-                    console.log(id);
-                    console.log(names);
-                    $("#myChartProvince").empty();
                     //POR DISTRITO
                     var ctx_district= document.getElementById("myChartProvince").getContext("2d");
                     var myChartProvince= new Chart(ctx_district,{
@@ -330,6 +422,6 @@
                 }
             })
         });
-    </script>    
+    </script>
 </body>
 </html>

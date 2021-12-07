@@ -54,6 +54,11 @@ body {background:#FEFEFE;}
 	}
 }
 
+#grafico .css-bar{
+	width: 165px !important;
+	height: 165px !important;
+}
+
 .border-rounded{
 	border-radius: 50% !important;
 }
@@ -459,6 +464,18 @@ img:hover{
 
 .card.data_advance{
 	margin-bottom: 10px;
+}
+
+.table-responsive#ficha2 { 
+	height: 300px;
+	overflow: scroll;
+}
+
+#ficha2 thead tr th { 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: black !important;
 }
 
 #prematuro thead tr th { 

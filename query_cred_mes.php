@@ -56,7 +56,7 @@
                         pn.TIPO_SEGURO, pn.NOMBRE_EESS ULTIMA_ATE_PN
                                 into BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUARcred
                     from NOMINAL_PADRON_NOMINAL pn
-                    where YEAR  (DATEADD(DAY,364,FECHA_NACIMIENTO_NINO))='2021' and month(DATEADD(DAY,364,FECHA_NACIMIENTO_NINO))='$mes'
+                    where YEAR  (DATEADD(DAY,364,FECHA_NACIMIENTO_NINO))='2021' and month(DATEADD(DAY,364,FECHA_NACIMIENTO_NINO)) in ('8', '9', '10', '11')
                     and mes='202111';
                     with c as (
                     select DOCUMENTO,  ROW_NUMBER() 

@@ -96,8 +96,8 @@
                                         <li><a href="tamizaje_neonatal.php">TMZ Neonatal (CG SI-02)</a></li>
                                         <li><a href="4_meses.php">Suplementación 4 meses (CG SI-04)</a></li>
 										<li><a href="6-8_meses.php">Inicio Oportuno (CG SI-05)</a></li>
+                                        <li><a href="cred_x_mes.php">Cred Avance Mensual</a></li>
 										<li><a href="cred.php">CRED (CG SI-06)</a></li>
-                                        <li><a href="cred_x_mes.php">Cred Mensual</a></li>
 										<li><a href="paquete_nino.php">Paquete Completo</a></li>
                                     </ul>
                                 </li>
