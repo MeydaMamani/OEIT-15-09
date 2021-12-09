@@ -123,7 +123,7 @@
                         <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                     </form>
                     <button type="button" name="Limpiar" class="btn btn-outline-danger m-2 btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
-                    <button type="button" name="Limpiar" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='cred.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
+                    <button type="button" name="Limpiar" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='cred_x_mes.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
                 </div>
             </div><br>
             <div class="col-12 table-responsive table_no_fed" id="cred">

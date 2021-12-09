@@ -34,7 +34,7 @@
                 </form>
                 <button type="button" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='standart_3_dose.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
             </div>
-            <div class="col-12 table-responsive" id="cuatro_meses">
+            <div class="col-12 table-responsive" id="aptos_3_dose">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="text-center font-13 border" style="background: #c9d0e2;">
@@ -60,7 +60,7 @@
                             <th class="align-middle border" id="second_dose">Nombre Vacuna</th>
                             <th class="align-middle border" id="second_dose">Edad</th>
                             <th class="align-middle border" id="second_dose">Grupo de Riesgo</th>
-                            <th class="align-middle border">Fecha de Vacunación</th>
+                            <th class="align-middle border" id="head_3_dose">Fecha de Vacunación</th>
                         </tr>
                     </thead>
                     <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -169,7 +169,7 @@
                             <td class="align-middle"><?php echo $newdate12; ?></td>
                             <td class="align-middle"><?php echo $newdate13; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate14); ?></td>
-                            <td class="align-middle" id="fields_brechas_body"><?php echo utf8_encode($newdate15); ?></td>
+                            <td class="align-middle" id="body_3_dose"><?php echo utf8_encode($newdate15); ?></td>
                         </tr>
                         <?php
                             ;}              

@@ -59,7 +59,7 @@
             </div><br>
             <div class="mb-4">
                 <div class="col-md-12 border border-secondary" id="district">
-                    <h4 class="p-2 text-center">Avance Distrital Para <span><?php echo $nombre_mes; ?></span></h4>
+                    <h4 class="p-2 text-center">Avance <span class="name_red">Por Distritos Para <?php echo $nombre_mes; ?></span></h4>
                     <div style="height: 300px;" id="carga">
                         <canvas id="myChartDistrict"></canvas>
                     </div>
@@ -151,7 +151,7 @@
         $('#anio').select2();
         $('#mes').select2();
         function cargarProvincias() {
-            var array = ["DANIEL ALCIDES CARRION", "OXAPAMPA", "PASCO"];
+            var array = ["DANIEL ALCIDES CARRION", "OXAPAMPA", "PASCO", "TODOS"];
             // array.sort();
             addOptions("provincia", array);
         }
@@ -170,7 +170,8 @@
             var listaPueblos = {
                 danielalcidescarrion: ["CHACAYAN","GOYLLARISQUIZGA","PAUCAR","SAN PEDRO DE PILLAO","SANTA ANA DE TUSI","TAPUC","VILCABAMBA","YANAHUANCA", "TODOS"],
                 oxapampa: ["CHONTABAMBA","CONSTITUCIÓN","HUANCABAMBA","OXAPAMPA","PALCAZU","POZUZO","PUERTO BERMUDEZ","VILLA RICA", "TODOS"],
-                pasco: ["CHAUPIMARCA","HUACHON","HUARIACA","HUAYLLAY","NINACACA","PALLANCHACRA","PAUCARTAMBO","SAN FRANCISCO DE ASIS DE YARUSYACAN","SIMON BOLIVAR","TICLACAYAN","TINYAHUARCO","VICCO","YANACANCHA", "TODOS"]
+                pasco: ["CHAUPIMARCA","HUACHON","HUARIACA","HUAYLLAY","NINACACA","PALLANCHACRA","PAUCARTAMBO","SAN FRANCISCO DE ASIS DE YARUSYACAN","SIMON BOLIVAR","TICLACAYAN","TINYAHUARCO","VICCO","YANACANCHA", "TODOS"],
+                todos: ["TODOS"]
             }
             
             var provincias = document.getElementById('provincia')
@@ -345,29 +346,29 @@
                 $(".divmes").show();
             }
         }
-
         $("#btn_buscar").click(function(){
             var red = $("#provincia").val();
             var distrito = $("#pueblo").val();
             var anio = $("#anio").val();
             var mes = $("#mes").val();
-            console.log("ME DISTE red", red);
-            console.log("ME DISTE CLICK", distrito);
-            console.log("ME DISTE ------", mes);
-
+            console.log(red);
+            console.log(distrito);
+            console.log(anio);
+            console.log(mes);
             if(mes == '-'){
-                $(".name_red").text(red);
+                if(red == 'danielalcidescarrion'){
+                    $(".name_red").text('Red Daniel Alcides Carrion');
+                }else {
+                    $(".name_red").text('Red '+ red).css("text-transform", "capitalize");
+                }
                 canvas = document.getElementById("myChartDistrict");
                 ctx = canvas.getContext("2d");
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 $('canvas#myChartDistrict').remove();
-
                 $.ajax({
                     url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio+'&mes='+mes+'&red='+red,
                     method: 'GET',
                     success: function(data) {
-                        // $("#province").show();
-                        // $("#district").hide();
                         // $("#carga").html('<div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
                         $('#carga').append("<canvas id='myChartDistrict'></canvas>");
                         console.log('SOY DATA', data);
@@ -425,18 +426,27 @@
                     }
                 })
             }else{
-                $(".name_red").text(red);
+                if(mes == 1){ name_mes="Enero"; }
+                if(mes == 2){ name_mes="Febrero"; }
+                if(mes == 3){ name_mes="Marzo"; }
+                if(mes == 4){ name_mes="Abril"; }
+                if(mes == 5){ name_mes="Mayo"; }
+                if(mes == 6){ name_mes="Junio"; }
+                if(mes == 7){ name_mes="Julio"; }
+                if(mes == 8){ name_mes="Agosto"; }
+                if(mes == 9){ name_mes="Setiembre"; }
+                if(mes == 10){ name_mes="Octubre"; }
+                if(mes == 11){ name_mes="Noviembre"; }
+                if(mes == 12){ name_mes="Diciembre"; }
+                $(".name_red").text('Por Distritos Para '+ name_mes + ' - ' + anio).css("text-transform", "capitalize");
                 canvas = document.getElementById("myChartDistrict");
                 ctx = canvas.getContext("2d");
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 $('canvas#myChartDistrict').remove();
-
                 $.ajax({
                     url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio+'&mes='+mes+'&red='+red,
                     method: 'GET',
                     success: function(data) {
-                        // $("#province").show();
-                        // $("#district").hide();
                         // $("#carga").html('<div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
                         $('#carga').append("<canvas id='myChartDistrict'></canvas>");
                         console.log('SOY DATA', data);

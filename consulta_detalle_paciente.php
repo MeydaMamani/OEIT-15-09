@@ -7,24 +7,39 @@ if (isset($_POST['Buscar'])) {
     //  header('Content-Type: text/html; charset=ISO-8859-1');
     include('./base.php');
     $doc = $_POST['doc'];
-    $resultado = "SELECT distinct(t.Id_Cita), t.Fecha_Atencion, t.Provincia_Establecimiento, t.Distrito_Establecimiento, t.Nombre_Establecimiento, t.Fecha_Nacimiento_Paciente, t.Lote, t.Valor_Lab, t.Descripcion_Item
+    $resultado = "SELECT distinct(t.Id_Cita), t.Fecha_Atencion, t.Fecha_Nacimiento_Paciente, t.Provincia_Establecimiento, t.Distrito_Establecimiento, t.Nombre_Establecimiento
                     from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t 
                     where Numero_Documento_Paciente='$doc' and anio='2021' and Fecha_Nacimiento_Paciente>='1960-01-01'
                     order by Fecha_Atencion DESC";
 
-    $consulta1 = sqlsrv_query($conn, $resultado);    
+    $consulta1 = sqlsrv_query($conn, $resultado); 
+    $consulta2 = sqlsrv_query($conn, $resultado);    
 ?>
 <br>
 <div class="page-wrapper">
     <div class="container">
         <div class="row mb-4">
             <div class="col-lg-10">
-                <h4 class="m-b-30"> INFORMACIÓN - <?php echo $doc; ?></h4>
+                <h4 class="m-b-30"> INFORMACIÓN </h4>
             </div>
             <div class="col-lg-2 text-end">
                 <button type="submit" name="Limpiar" class="btn btn-outline-info btn-sm 1btn_buscar" onclick="location.href='detalle_paciente.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
             </div>
         </div>
+        <ul class="list-group mb-4">
+            <li class="list-group-item d-flex border-primary text-center">
+                <div class="col-md-6">
+                    <b>Número de DNI: </b><span><?php echo $doc; ?></span>
+                </div>
+                <div class="col-md-6">
+                    <b>Fecha de Nacimiento:</b>
+                    <?php while ($consulta = sqlsrv_fetch_array($consulta2)){
+                       $fecha_nac =  $consulta['Fecha_Nacimiento_Paciente']-> format('d/m/y');
+                    }?>
+                    <span><?php echo $fecha_nac; ?></span>
+                </div>
+            </li>
+        </ul>
         <div class="row">
             <?php  
             $cont = 1;
@@ -34,10 +49,8 @@ if (isset($_POST['Buscar'])) {
                 <div class="card" style="border: 1px solid #5172a3;">
                     <div class="card-header p-3 text-white text-center" style="background: #5172a3;"> <!-- style="background: #4b0393;" -->
                         <div class="row">
-                            <span class="col-md-5"><b>Id Cita:</b> <?php echo $consulta['Id_Cita']; ?> </span>
-                            <span class="col-md-5"><b>Fecha Atención:</b> <?php echo $consulta['Fecha_Atencion']-> format('d/m/y'); ?> </span>
-                            <span class="col-md-5"><b>Fecha Nacimiento:</b> <?php echo $consulta['Fecha_Nacimiento_Paciente']-> format('d/m/y'); ?> </span>
-
+                            <span class="col-md-6"><b>Id Cita:</b> <?php echo $consulta['Id_Cita']; ?> </span>
+                            <span class="col-md-6"><b>Fecha Atención:</b> <?php echo $consulta['Fecha_Atencion']-> format('d/m/y'); ?> </span>
                         </div>
                     </div>
                     <div class="card-body mt-1">

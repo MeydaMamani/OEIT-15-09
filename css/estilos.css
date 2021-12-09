@@ -9,7 +9,7 @@ body {background:#FEFEFE;}
 	left: 0;
 	display: flex;
 	/* transition: all .5s; */
-	animation: modal 36s ;
+	animation: modal 26s ;
 	animation-delay:  0s ;
 	/* animation-fill-mode: forwards; */
 	visibility: hidden;
@@ -533,11 +533,19 @@ img:hover{
 	background: #91b9d5 !important;
 }
 
-#cuatro_meses thead tr th, #cierre_brechas thead tr th { 
+#cuatro_meses thead tr th, #cierre_brechas thead tr th, #aptos_3_dose thead tr th { 
 	position: sticky;
 	top: 0;
 	z-index: 10;
 	background: #c9d0e2 !important;
+}
+
+#aptos_3_dose thead tr th#head_3_dose {
+	background: #dfcbc5 !important;
+}
+
+#aptos_3_dose tbody td#body_3_dose {
+	background: #e7d6d161 !important;
 }
 
 #cuatro_meses thead tr th#fields_4_meses_head {
