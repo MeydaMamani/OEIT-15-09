@@ -58,10 +58,10 @@
                 </div>
             </div><br>
             <div class="mb-4">
-                <div class="col-md-12 border border-secondary" id="district">
+                <div class="col-md-12 border border-secondary text-center" id="district">
                     <h4 class="p-2 text-center">Avance <span class="name_red">Por Distritos Para <?php echo $nombre_mes; ?></span></h4>
                     <div style="height: 300px;" id="carga">
-                        <canvas id="myChartDistrict"></canvas>
+                        <div id="micarga"></div>
                     </div>
                 </div>
             </div>
@@ -195,7 +195,11 @@
         cargarProvincias();
     </script>
     <script>
-        // $("#carga").html('<div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+        $("#micarga").html('<div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+    </script>
+    <script>
+        $("#micarga").remove();
+        $('#carga').append("<canvas id='myChartDistrict'></canvas>");
         var ctx_province= document.getElementById("myChartDistrict").getContext("2d");
         var myChartProvince= new Chart(ctx_province,{
             type: 'bar',
@@ -347,6 +351,11 @@
             }
         }
         $("#btn_buscar").click(function(){
+            $('#carga').append("<div id='micarga'></div>");
+            $("#micarga").html('<div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+        });
+
+        $("#btn_buscar").click(function(){
             var red = $("#provincia").val();
             var distrito = $("#pueblo").val();
             var anio = $("#anio").val();
@@ -355,6 +364,7 @@
             console.log(distrito);
             console.log(anio);
             console.log(mes);
+            // $(".carga").remove();
             if(mes == '-'){
                 if(red == 'danielalcidescarrion'){
                     $(".name_red").text('Red Daniel Alcides Carrion');
@@ -369,7 +379,10 @@
                     url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio+'&mes='+mes+'&red='+red,
                     method: 'GET',
                     success: function(data) {
-                        // $("#carga").html('<div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+                        $("#micarga").remove();
+                        $("#provincia").val('0').trigger("change");
+                        $("#pueblo").val('-').trigger("change");
+                        $('#anio').val(null).trigger("change");
                         $('#carga').append("<canvas id='myChartDistrict'></canvas>");
                         console.log('SOY DATA', data);
                         var establecimiento = data;
@@ -447,7 +460,6 @@
                     url: 'query_ficha2.php?distrito='+distrito+'&anio='+anio+'&mes='+mes+'&red='+red,
                     method: 'GET',
                     success: function(data) {
-                        // $("#carga").html('<div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
                         $('#carga').append("<canvas id='myChartDistrict'></canvas>");
                         console.log('SOY DATA', data);
                         var establecimiento = data;
