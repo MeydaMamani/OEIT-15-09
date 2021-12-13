@@ -24,6 +24,10 @@
         elseif ($red_1 == 4) {
             $redt = 'PASCO';
         }
+
+        if($dist_1 == 'CONSTITUCIÓN') {
+            $dist_1 = 'CONSTITUCION';
+        }
     
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado = "SELECT 

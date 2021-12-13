@@ -9,7 +9,7 @@ body {background:#FEFEFE;}
 	left: 0;
 	display: flex;
 	/* transition: all .5s; */
-	animation: modal 26s ;
+	animation: modal 10s ;
 	animation-delay:  0s ;
 	/* animation-fill-mode: forwards; */
 	visibility: hidden;
