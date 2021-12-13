@@ -107,7 +107,7 @@
                                         <li><a href="bateria_completa.php">Bateria Completa (CG SI-01)</a></li>
                                         <li><a href="gestante_tratamiento.php">Gestantes con TMZ e Inicio de Tratamiento por Violencia (CG VI-01)</a></li>
                                         <li><a href="gestante_usuarias_nuevas.php">Usuarias Nuevas con TMZ de Violencia (CG VI-02)</a></li>
-										<li><a href="#">Paquete Completo</a></li>
+										<li><a href="paquete_gestante.php">Paquete Completo</a></li>
                                     </ul>
                                 </li>
 								<li>

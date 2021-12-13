@@ -214,7 +214,6 @@
                 $consulta4 = sqlsrv_query($conn, $resultado4);
                 $consulta5 = sqlsrv_query($conn, $resultado5);
                 $consulta6 = sqlsrv_query($conn, $resultado6);
-
                 while ($con = sqlsrv_fetch_array($consulta6)){
                     if($con['NUMERADOR1'] == 0 and $con['DENOMINADOR1'] == 0){ $nov = 0; }
                     else{  $nov = number_format((float)(($con['NUMERADOR1']/$con['DENOMINADOR1'])*100), 2, '.', ''); }
@@ -226,20 +225,19 @@
                     else if($con['NOMBRE_DIST'] == "PUERTO BERMUDEZ"){ $list_dists = "P. BERMUDEZ"; }
                     else if($con['NOMBRE_DIST'] == "GOYLLARISQUIZGA"){ $list_dists = "GOYLLAR"; }
                     else{ $list_dists = $con['NOMBRE_DIST']; }
-                    // echo $nov, '---', $list_dists, '---';
+                    echo $nov, '---', $list_dists, '---';
                 }
 
-                echo $anio, '-', $mes, '-', $date_fines;
                 $resultado7 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,
                                 COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$anio-$mes-$date_fines' THEN NUM_DNI END) 'DENOMINADOR1'
-                                into BDHIS_MINSA.dbo.denominador
+                                into BDHIS_MINSA.dbo.DEN_ALL
                                 FROM BDHIS_MINSA.dbo.PASO_NUM2
                                 where (DX_ANEMIA IS NULL)
                                 GROUP BY NOMBRE_DEPAR,NOMBRE_PROV";
 
                 $resultado8 = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,
                                 COUNT(CASE WHEN CUMPLE_544_DIAS>='$anio-$mes-01' AND CUMPLE_544_DIAS<='$anio-$mes-$date_fines' THEN NUM_DNI END) 'NUMERADOR1'
-                                into BDHIS_MINSA.dbo.NUMERADOR
+                                into BDHIS_MINSA.dbo.NUM_ALL
                                 FROM BDHIS_MINSA.dbo.PASO_NUM2 A
                                 LEFT JOIN BDHIS_MINSA.dbo.PASO_NUM3 B ON A.NUM_DNI=B.Numero_Documento_Paciente
                                 where (DX_ANEMIA IS NULL)AND (B.[3° APO] IS NOT NULL) AND (B.[3° PENTA] IS NOT NULL) AND (B.[2° ROTA] IS NOT NULL)AND (B.[3° NEUMO] IS NOT NULL)AND (B.[1° SPR] IS NOT NULL)AND (B.[1° INFLUENZA] IS NOT NULL) AND (B.[1CTRL] IS NOT NULL)AND (B.[2CTRL] IS NOT NULL)AND
@@ -248,19 +246,25 @@
                                 GROUP BY NOMBRE_DEPAR,NOMBRE_PROV";
 
                 $resultado9 = "SELECT A.NOMBRE_DEPAR, A.NOMBRE_PROV, B.NUMERADOR1, A.DENOMINADOR1
-                                    FROM BDHIS_MINSA.dbo.denominador A
-                                    LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR B ON A.NOMBRE_PROV=B.NOMBRE_PROV
-                                    ORDER BY A.NOMBRE_PROV";
+                                    FROM BDHIS_MINSA.dbo.DEN_ALL A
+                                    LEFT JOIN BDHIS_MINSA.dbo.NUM_ALL B ON A.NOMBRE_PROV=B.NOMBRE_PROV
+                                    ORDER BY A.NOMBRE_PROV
+                                    DROP TABLE BDHIS_MINSA.dbo.PASO_NUM1
+                                    DROP TABLE BDHIS_MINSA.dbo.PASO_NUM2
+                                    DROP TABLE BDHIS_MINSA.dbo.PASO_NUM3
+                                    DROP TABLE BDHIS_MINSA.dbo.denominador
+                                    DROP TABLE BDHIS_MINSA.dbo.NUMERADOR
+                                    DROP TABLE BDHIS_MINSA.dbo.DEN_ALL
+                                    DROP TABLE BDHIS_MINSA.dbo.NUM_ALL";
 
                 $consulta7 = sqlsrv_query($conn, $resultado7);
                 $consulta8 = sqlsrv_query($conn, $resultado8);
                 $consulta9 = sqlsrv_query($conn, $resultado9);
-
-                $list_dist1 = array();
+                $list_dist1 = array(); $cont = 0;
                 while ($conex = sqlsrv_fetch_array($consulta9)){
-                    // if($con['NOMBRE_PROV'] == "DANIEL ALCIDES CARRION"){ $list_dist1[] = "DANIEL A. CARRION"; }
-                    // else{ $list_dist1[] = $con['NOMBRE_PROV']; }
-                    echo $conex['NOMBRE_PROV'];
+                    if($conex['NUMERADOR1'] == 0 and $conex['DENOMINADOR1'] == 0){ $data = 0; }
+                    else{  $data = number_format((float)(($conex['NUMERADOR1']/$conex['DENOMINADOR1'])*100), 2, '.', ''); }
+                    echo $data, '---';
                 }
                 // $num_dists = sizeof($list_dist1);    
                 // echo $num_dists;

@@ -473,7 +473,10 @@
                         var establecimiento = data;
                         var expresionRegular = /\s*---\s*/;
                         var lista_id =establecimiento.split(expresionRegular);
-                        var id = []; var names = [];
+                        var id = []; var names = []; 
+                        console.log(lista_id);
+                        console.log('mi id', lista_id.slice(-4));
+                        id_red = lista_id.slice(-4);
                         for(i=0;i<lista_id.length;i++){
                             if(i % 2 == 0){
                                 id.push(lista_id[i]);
@@ -529,15 +532,11 @@
                         var myChartProvince= new Chart(ctx_red,{
                             type: 'doughnut',
                             data: {
-                                labels:[ 
-                                    
-                                ],
+                                labels:[ "DANIEL A. CARRION", "OXAPAMPA", "PASCO" ],
                                 datasets:[
                                     {
                                         label:'Avance',
-                                        data:[
-                                            
-                                        ],
+                                        data: id_red,
                                         backgroundColor: [
                                             'rgb(255, 99, 132)',
                                             'rgb(54, 162, 235)',

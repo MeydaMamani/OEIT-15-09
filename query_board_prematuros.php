@@ -62,8 +62,8 @@
                 ";
 
     // POR DISTRITO
-    $distrito = $_GET['dist'];
-    echo $distrito;
+    // $distrito = $_GET['dist'];
+    // echo $distrito;
     $resume5 = "SELECT A.Provnacido, A.Distnacido, JUNIO_NUM, JUNIO_DEN, JULIO_NUM, JULIO_DEN,
                 AGOSTO_NUM, AGOSTO_DEN, SETIEMBRE_NUM, SETIEMBRE_DEN, OCTUBRE_NUM, OCTUBRE_DEN, NOVIEMBRE_NUM, NOVIEMBRE_DEN
                 FROM BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO A
