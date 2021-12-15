@@ -10,12 +10,12 @@
     include('zone_setting.php');
     include('consulta_gestante_tratamiento.php');
     $v2=0; $row_cont1=0;
-    while ($consulta = sqlsrv_fetch_array($consulta1)){
+    while ($consulta = sqlsrv_fetch_array($consulta3)){
         $row_cont1++;
-        if(!is_null ($consulta['TMZ_POSTIVO_PROBLEMAS_VIOLENCIA']) ){ $v2++; }
+        if(!is_null ($consulta['R456']) ){ $v2++; }
     }
     $t=0; $v=0; $row_cont2=0;
-    while ($consulta = sqlsrv_fetch_array($consulta2)){ 
+    while ($consulta = sqlsrv_fetch_array($consulta5)){ 
         $row_cont2++;
         if(!is_null ($consulta['DIAGNOSTICO_INICIO_TRATAMIENTO']) ){ $t++; }
         if(!is_null ($consulta['TMZ_POSTIVO_PROBLEMAS_VIOLENCIA']) ){ $v++; }
@@ -121,11 +121,11 @@
                                         <th class="align-middle">#</th>
                                         <th class="align-middle">Provincia</th>
                                         <th class="align-middle">Distrito</th>
-                                        <th class="align-middle">Documento Paciente</th>
-                                        <th class="align-middle">Gestantes Atendidas</th>
-                                        <th class="align-middle">N° Control</th>
-                                        <th class="align-middle" id="gestante_tratamiento_head">Tamizaje Violencia</th>
-                                        <th class="align-middle" id="gestante_tratamiento_head">Problemas relacionados con violencia</th> 
+                                        <th class="align-middle">Tipo Documento</th>
+                                        <th class="align-middle">Documento</th>
+                                        <th class="align-middle">Fecha Atención</th>
+                                        <th class="align-middle">Tamizaje VIF</th>
+                                        <th class="align-middle">Sospecha Violencia</th>
                                     </tr>
                                 </thead>
                                 <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -140,7 +140,7 @@
                                     <?php  
                                         include('consulta_gestante_tratamiento.php');
                                         $i=1;
-                                        while ($consulta = sqlsrv_fetch_array($consulta1)){  
+                                        while ($consulta = sqlsrv_fetch_array($consulta3)){  
                                             // CAMBIO AQUI
                                             if(is_null ($consulta['Provincia_Establecimiento']) ){
                                             $newdate1 = '  -'; }
@@ -152,37 +152,44 @@
                                                 else{
                                             $newdate2 = $consulta['Distrito_Establecimiento'] ;}
                                 
-                                            if(is_null ($consulta['Numero_Documento_Paciente']) ){
+                                            if(is_null ($consulta['Tipo_Doc_Paciente']) ){
                                                 $newdate3 = '  -'; }
                                                 else{
-                                            $newdate3 = $consulta['Numero_Documento_Paciente'];}
+                                            $newdate3 = $consulta['Tipo_Doc_Paciente'];}
 
-                                            if(is_null ($consulta['GESTANTES_ATENDIDAS']) ){
+                                            if(is_null ($consulta['Numero_Documento_Paciente']) ){
                                             $newdate4 = '  -'; }
                                             else{
-                                            $newdate4 = $consulta['GESTANTES_ATENDIDAS'] -> format('d/m/y');}
+                                            $newdate4 = $consulta['Numero_Documento_Paciente'];}
                                             
-                                            if(is_null ($consulta['nro_control']) ){
+                                            if(is_null ($consulta['Fecha_Atencion']) ){
                                                 $newdate5 = '  -'; }
                                                 else{
-                                            $newdate5 = $consulta['nro_control'];}
+                                            $newdate5 = $consulta['Fecha_Atencion']-> format('d/m/y');}
                                 
-                                            if(is_null ($consulta['TAMIZAJE_VIOLENCIA']) ){
+                                            if(is_null ($consulta['VIF']) ){
                                                 $newdate6 = '  -'; }
                                                 else{
-                                            $newdate6 = $consulta['TAMIZAJE_VIOLENCIA'] -> format('d/m/y');}
+                                            $newdate6 = $consulta['VIF'] -> format('d/m/y');}
 
-                                            if(is_null ($consulta['TMZ_POSTIVO_PROBLEMAS_VIOLENCIA']) ){
+                                            if(is_null ($consulta['R456']) ){
                                                 $newdate7 = '  -'; }
                                                 else{
-                                            $newdate7 = $consulta['TMZ_POSTIVO_PROBLEMAS_VIOLENCIA'] -> format('d/m/y');}
+                                            $newdate7 = $consulta['R456'] -> format('d/m/y');}
 
                                     ?>
                                     <tr style="font-size: 12px; text-align: center;">
                                         <td class="align-middle"><?php echo $i++; ?></td>
                                         <td class="align-middle"><?php echo utf8_encode($newdate1); ?></td>
                                         <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
-                                        <td class="align-middle"><?php echo $newdate3; ?></td>
+                                        <td class="align-middle"><?php 
+                                            if($newdate3 == 1) { echo 'DNI'; }
+                                            else if($newdate3 == 2) { echo 'CE'; }
+                                            else if($newdate3 == 3) { echo 'PASS'; }
+                                            else if($newdate3 == 4) { echo 'DIE'; }
+                                            else if($newdate3 == 5) { echo 'SIN DOCUMENTO'; }
+                                            else if($newdate3 == 6) { echo 'CNV'; }
+                                        ?></td>
                                         <td class="align-middle"><?php echo $newdate4; ?></td>
                                         <td class="align-middle"><?php echo $newdate5; ?></td>
                                         <td class="align-middle"><?php echo $newdate6; ?></td>
@@ -318,7 +325,7 @@
                                     <?php  
                                         include('consulta_gestante_tratamiento.php');
                                         $i=1;
-                                        while ($consulta = sqlsrv_fetch_array($consulta2)){  
+                                        while ($consulta = sqlsrv_fetch_array($consulta5)){  
                                             // CAMBIO AQUI
                                             if(is_null ($consulta['Provincia_Establecimiento']) ){
                                             $newdate1 = '  -'; }
