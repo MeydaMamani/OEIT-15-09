@@ -44,7 +44,7 @@
                 </select>
                 <br>
                 <div class="col-12 text-center pb-3">
-                    <button type="button" name="Buscar" class="btn text-white" id="btn_buscar" style="background: #337ab7; width: 100%; border-radius:30px;">Iniciar Sesion</button>
+                    <button type="button" name="Buscar" class="btn text-white" id="btn_buscar" style="background: #337ab7; width: 100%; border-radius:10px;">Iniciar Sesion</button>
                 </div>
                 <div class="row text-center">
                     <div class="col-md-6">
