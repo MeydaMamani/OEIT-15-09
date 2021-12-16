@@ -3,8 +3,16 @@
 ?>
 <div class="page-wrapper">
     <div class="container border">
-        <h3 class="mb-3 text-center mt-4">Avance Convenios de Gestión</h3>
-        <div class="d-flex">
+        <h3 class="mb-3 text-center mt-4">Avance Convenios de Gestión</h3><br>
+        <div class="one">
+            <img src="./img/ejem.png" class="" alt="" style="width: 100%;">
+        </div>
+        <div class="one_img">
+            <a href="ficha2.php" class="button">
+                <h1>AAAAAA</h1>
+            </a>
+        </div>
+        <!-- <div class="d-flex">
             <div class="row mb-3">
                 <div class="col-md-4 text-center">
                     <a href="ficha2.php" class="btn btn-outline">
@@ -13,7 +21,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 

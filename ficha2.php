@@ -528,42 +528,42 @@
                         });
 
                         // POR RED
-                        var ctx_red= document.getElementById("myChartRed").getContext("2d");
-                        var myChartProvince= new Chart(ctx_red,{
-                            type: 'doughnut',
-                            data: {
-                                labels:[ "DANIEL A. CARRION", "OXAPAMPA", "PASCO" ],
-                                datasets:[
-                                    {
-                                        label:'Avance',
-                                        data: id_red,
-                                        backgroundColor: [
-                                            'rgb(255, 99, 132)',
-                                            'rgb(54, 162, 235)',
-                                            'rgb(255, 205, 86)'
-                                        ],
-                                        hoverOffset: 4
-                                    },
-                                ]
-                            },
-                            plugins: [ChartDataLabels],
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                plugins: {
-                                    legend: {
-                                        display: true
-                                    },
-                                    datalabels: {
-                                        formatter: (value, ctx) => {
-                                            let percentage = value+"%";
-                                            return percentage;
-                                        },
-                                        color: 'black',
-                                    }
-                                },
-                            },
-                        });
+                        // var ctx_red= document.getElementById("myChartRed").getContext("2d");
+                        // var myChartProvince= new Chart(ctx_red,{
+                        //     type: 'doughnut',
+                        //     data: {
+                        //         labels:[ "DANIEL A. CARRION", "OXAPAMPA", "PASCO" ],
+                        //         datasets:[
+                        //             {
+                        //                 label:'Avance',
+                        //                 data: id_red,
+                        //                 backgroundColor: [
+                        //                     'rgb(255, 99, 132)',
+                        //                     'rgb(54, 162, 235)',
+                        //                     'rgb(255, 205, 86)'
+                        //                 ],
+                        //                 hoverOffset: 4
+                        //             },
+                        //         ]
+                        //     },
+                        //     plugins: [ChartDataLabels],
+                        //     options: {
+                        //         responsive: true,
+                        //         maintainAspectRatio: false,
+                        //         plugins: {
+                        //             legend: {
+                        //                 display: true
+                        //             },
+                        //             datalabels: {
+                        //                 formatter: (value, ctx) => {
+                        //                     let percentage = value+"%";
+                        //                     return percentage;
+                        //                 },
+                        //                 color: 'black',
+                        //             }
+                        //         },
+                        //     },
+                        // });
                     }
                 })
             }
