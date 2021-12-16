@@ -1,4 +1,7 @@
-body {background:#FEFEFE;}
+body {
+	background:#FEFEFE;
+	background: url(../img/AG1.png);
+}
 
 .modal-img{
 	width: 100%;
@@ -810,3 +813,32 @@ img:hover{
 	  transform: rotate(360deg);
 	}
 }
+
+
+
+.		 {
+    background: rgb(255, 255, 255);
+ 
+    /* top: 50px;
+    left: 50px; */
+ z-index: 10;
+}
+/* .btn:before,
+.btn:after {
+    background: rgb(115, 44, 136);
+    content:"";
+    width: 50%;
+    height: 30px;
+     
+    position: absolute;
+} */
+.button {
+ background: rgba(160, 49, 49, 0);
+ position: relative;
+   
+    left: 9px;
+ top: -535.5px;
+    z-index: 30;
+}
+
+
