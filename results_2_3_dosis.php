@@ -75,7 +75,7 @@
                                         <img src="./img/va_7.png" width="90" alt="">
                                     </div>
                                     <div class="mt-3 col-md-7 text-center">
-                                        <b class="font-45 cumple_completo"> <?php echo $rechazo; ?></b> <i class="mdi mdi-check font-45 text-success"></i>
+                                        <b class="font-45 cumple_completo"> <?php echo $rechazo; ?></b> <i class="mdi mdi-close font-45 text-danger"></i>
                                     </div>
                                 </h4>
                             </div>
@@ -101,15 +101,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 d-flex mb-3 mt-3 justify-content-center">
-                <!-- <form action="print_3_dosis.php" method="POST">
+            <div class="col-md-12 d-flex mb-2 mt-2 justify-content-center">
+                <form action="print_cruce_2_3_dosis.php" method="POST">
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                     <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                     <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
-                </form>-->
+                </form>
                 <button type="button" class="btn btn-outline-secondary m-2 btn-sm 1btn_buscar" onclick="location.href='cruce_2_3_dosis.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
             </div>
-            <div class="col-12 table-responsive" id="aptos_3_dose">
+            <div class="col-12 table-responsive" id="prematuro">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="text-center font-13 border" style="background: #c9d0e2;">
@@ -142,7 +142,7 @@
                         </tr>
                     </thead>
                     <div class="float-end pb-1 col-md-3 table_no_fed">
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <div id="inputbus" class="input-group input-group-sm">
                                 <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
@@ -259,7 +259,7 @@
                             <td class="align-middle"><?php echo $newdate10; ?></td>
                             <td class="align-middle"><?php  
                                 $resultado = str_replace("anios", "años", $newdate11);
-                                echo $newdate11;
+                                echo $resultado;
                             ?></td>
                             <td class="align-middle"><?php echo $newdate12; ?></td>
                             <td class="align-middle"><?php echo $newdate13; ?></td>
@@ -276,7 +276,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="15">
+                            <td colspan="20">
                             <div class="">
                                 <ul class="pagination"></ul>
                             </div>
