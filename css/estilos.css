@@ -814,31 +814,16 @@ img:hover{
 	}
 }
 
-
-
-.		 {
+/* PARA CONVENIOS DE GESTION */
+.one {
     background: rgb(255, 255, 255);
- 
-    /* top: 50px;
-    left: 50px; */
- z-index: 10;
+ 	z-index: 10;
 }
-/* .btn:before,
-.btn:after {
-    background: rgb(115, 44, 136);
-    content:"";
-    width: 50%;
-    height: 30px;
-     
-    position: absolute;
-} */
+
 .button {
- background: rgba(160, 49, 49, 0);
- position: relative;
-   
+	background: rgba(160, 49, 49, 0);
+	position: relative;   
     left: 9px;
- top: -535.5px;
+ 	top: -457.5px;
     z-index: 30;
 }
-
-
