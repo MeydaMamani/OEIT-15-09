@@ -84,8 +84,11 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">PERSONAL</li>
-                        <li><a class="has-arrow waves-effect" href="index.php" aria-expanded="false">
-                            <i class="mdi mdi-home text-white pb-1 m-r-2"></i><span class="hide-menu ml-6"> Inicio</span></a>
+                        <li><a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-home text-white pb-1 m-r-2"></i><span class="hide-menu ml-6"> Home</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="index2.php">Inicio</a></li>
+								<li><a href="index.php">Cerrar Sesion</a></li>
+                            </ul>
                         </li>
                         <li><a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-account text-white pb-1"></i><span class="hide-menu ml-6"> FED</span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -105,15 +108,9 @@
                                     <a class="has-arrow" href="#" aria-expanded="false">Gestantes</a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="bateria_completa.php">Bateria Completa (CG SI-01)</a></li>
-                                        <li><a href="gestante_tratamiento.php">Gestantes con TMZ e Inicio de Tratamiento por Violencia (CG VI-01)</a></li>
+                                        <!-- <li><a href="gestante_tratamiento.php">Gestantes con TMZ e Inicio de Tratamiento por Violencia (CG VI-01)</a></li> -->
                                         <li><a href="gestante_usuarias_nuevas.php">Usuarias Nuevas con TMZ de Violencia (CG VI-02)</a></li>
 										<li><a href="paquete_gestante.php">Paquete Completo</a></li>
-                                    </ul>
-                                </li>
-								<li>
-                                    <a class="has-arrow" href="#" aria-expanded="false">SIS-COVID</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="sis_covid.php">SIS-COVID</a></li>
                                     </ul>
                                 </li>
 								<li>
@@ -133,11 +130,15 @@
 						<li> <a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-calendar-check text-white pb-1"></i><span class="hide-menu ml-6"> Seguimiento</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="detalle_paciente.php">Detalle Paciente</a></li>
-								<li><a href="seguimiento_neonatal.php">Tamizaje Neonatal</a></li>
+								<li>
+                                    <a class="has-arrow" href="#" aria-expanded="false">Niños</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="seguimiento_neonatal.php">Tamizaje Neonatal</a></li>
+                                    </ul>
+                                </li>
 								<li><a href="desparacitacion.php">Desparacitación</a></li>
 								<li><a href="homologation.php">Homologación</a></li>
 								<li><a href="arch_plane.php">Archivos Planos</a></li>
-								<li><a href="observed_records.php">Registros Observados</a></li>
 								<li><a href="promsa.php">PROMSA</a></li>
 								<!-- <li><a href="#">Promsa (Visitas-Niños)</a></li>
 								<li><a href="#">Promsa (Visitas-Gestantes)</a></li> -->
@@ -147,10 +148,18 @@
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="vacuna_covid.php">Consulta tu Vacunación</a></li>
 								<li><a href="vacuna_padron.php">Consulta Padrón</a></li>
-								<li><a href="https://drive.google.com/file/d/1qR2KiCh3DRyp1OyiJZ2xjBJMpZQxmaSi/view" target="_blank">Descargue su Consentimiento</a></li>
+								<li><a href="https://drive.google.com/file/d/1qR2KiCh3DRyp1OyiJZ2xjBJMpZQxmaSi/view" target="_blank">Descargue Consentimiento</a></li>
                                 <li><a href="standart_3_dose.php">Aptos para Tercera Dosis</a></li>
                                 <li><a href="nominal_vaccine_advance.php">Avance de Tercera Dosis</a></li>
                                 <li><a href="closing_gaps.php">Cierre de Brechas</a></li>
+                                <li><a href="observed_records.php">Registros Observados</a></li>
+                                <li><a href="cruce_2_3_dosis.php">Cruce 2da y 3ra dosis</a></li>
+                                <li>
+                                    <a class="has-arrow" href="#" aria-expanded="false">SIS-COVID</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="sis_covid.php">SIS-COVID</a></li>
+                                    </ul>
+                                </li>
                                 <!-- <li><a href="standard_minsa_vaccines.php">Vacunas Padrón Minsa</a></li> -->
                             </ul>
                         </li>
@@ -160,11 +169,11 @@
 								<li><a href="padron_gestantes.php">Padrón Gestantes</a></li>
                             </ul>
                         </li>
-						<li> <a class="has-arrow waves-effect" aria-expanded="false" style="color: #d8e24e;"><i class="mdi mdi-school pb-1" style="color: #d8e24e;"></i><span class="hide-menu ml-6"> Educación</span></a>
+						<!-- <li> <a class="has-arrow waves-effect" aria-expanded="false" style="color: #d8e24e;"><i class="mdi mdi-school pb-1" style="color: #d8e24e;"></i><span class="hide-menu ml-6"> Educación</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="reincorporacion.php">Reincorporación</a></li>
                             </ul>
-                        </li>
+                        </li> -->
 						<li><a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-chart-bar text-white pb-1"></i><span class="hide-menu ml-6">Tableros</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="management_agreements.php">Avance de Convenios de Gestión</a></li>
@@ -173,12 +182,12 @@
                                     <a class="has-arrow" href="#" aria-expanded="false">Niño Sello</a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="https://app.powerbi.com/view?r=eyJrIjoiYjlhNDlmNzItYTdlYS00ZjEwLWFhNjktOGZjOTUxMDA4MmZkIiwidCI6IjE2ZWJhMGRlLTYwNDktNDczNS1iMGE3LWIwOGE3YWE4YjdhNSJ9" target="_blank">Avance Covid</a></li>
-                                        <li><a href="fed_indicator_board.php">Avance Indicadores FED</a></li>
+                                        <!-- <li><a href="fed_indicator_board.php">Avance Indicadores FED</a></li> -->
                                     </ul>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a class="has-arrow" href="#" aria-expanded="false">Gestante</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                     </ul>
