@@ -10,15 +10,19 @@
     include('zone_setting.php');
     include('consulta_gestante_tratamiento.php');
     $v2=0; $row_cont1=0;
-    while ($consulta = sqlsrv_fetch_array($consulta3)){
+    while ($consulta = sqlsrv_fetch_array($consulta6)){
         $row_cont1++;
         if(!is_null ($consulta['R456']) ){ $v2++; }
     }
     $t=0; $v=0; $row_cont2=0;
-    while ($consulta = sqlsrv_fetch_array($consulta5)){ 
+    while ($consulta = sqlsrv_fetch_array($consulta8)){ 
         $row_cont2++;
-        if(!is_null ($consulta['DIAGNOSTICO_INICIO_TRATAMIENTO']) ){ $t++; }
-        if(!is_null ($consulta['TMZ_POSTIVO_PROBLEMAS_VIOLENCIA']) ){ $v++; }
+        if(!is_null ($consulta['VIF']) && !is_null ($consulta['R456'])){
+            $v++; 
+            if(!is_null ($consulta['diagnostico']) && !is_null ($consulta['iniciotto'])){ 
+                $t++; 
+            }
+        }
     }
 ?>
     <div class="page-wrapper">
@@ -140,7 +144,7 @@
                                     <?php  
                                         include('consulta_gestante_tratamiento.php');
                                         $i=1;
-                                        while ($consulta = sqlsrv_fetch_array($consulta3)){  
+                                        while ($consulta = sqlsrv_fetch_array($consulta6)){  
                                             // CAMBIO AQUI
                                             if(is_null ($consulta['Provincia_Establecimiento']) ){
                                             $newdate1 = '  -'; }
@@ -214,7 +218,6 @@
                     </div>
                     <!-- INICIO TRATAMIENTO -->
                     <div class="tab-pane fade p-3" id="nominal_advance" role="tabpanel" aria-labelledby="profile-tab">
-                        <!-- <h4 class="text-center mb-4 mt-2" style="color: #000073;">Gestantes con Inicio de Tratamiento</h4> -->
                         <div class="row m-2">
                             <div class="card col-md-3">
                                 <div class="card-body p-1">
@@ -296,21 +299,19 @@
                             </form>
                         </div>
                         <div class="col-12 table-responsive" id="gestante_tratamiento">
-                            <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
+                            <!-- <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                                 <thead>
                                     <tr class="text-light font-12 text-center" style="background: #44688c;">
                                         <th class="align-middle">#</th>
                                         <th class="align-middle">Provincia</th>
                                         <th class="align-middle">Distrito</th>
-                                        <th class="align-middle">Documento Paciente</th>
-                                        <th class="align-middle">Gestantes Atendidas</th>
-                                        <th class="align-middle">N° Control</th>
-                                        <th class="align-middle" id="gestante_tratamiento_head">Tamizaje Violencia</th>
-                                        <th class="align-middle" id="gestante_tratamiento_head">Problemas relacionados con violencia</th> 
-                                        <th class="align-middle" id="gestante_tratamiento_head">Diagnóstico Inicio de Tratamiento</th>
-                                        <th class="align-middle">Día Atención</th>
-                                        <th class="align-middle">Atendido</th>
-                                        <th class="align-middle">Cumple</th>
+                                        <th class="align-middle">Tipo Documento</th>
+                                        <th class="align-middle">Documento</th>
+                                        <th class="align-middle">Fecha Atención</th>
+                                        <th class="align-middle">Tamizaje VIF </th>
+                                        <th class="align-middle">Sospecha Violencia</th>
+                                        <th class="align-middle">Diagnóstico</th>
+                                        <th class="align-middle">Inicio Tratamiento</th>
                                     </tr>
                                 </thead>
                                 <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -325,57 +326,52 @@
                                     <?php  
                                         include('consulta_gestante_tratamiento.php');
                                         $i=1;
-                                        while ($consulta = sqlsrv_fetch_array($consulta5)){  
-                                            // CAMBIO AQUI
+                                        while ($consulta = sqlsrv_fetch_array($consulta8)){
                                             if(is_null ($consulta['Provincia_Establecimiento']) ){
-                                            $newdate1 = '  -'; }
+                                                $newdate1 = '  -'; }
                                             else{
-                                            $newdate1 = $consulta['Provincia_Establecimiento'] ;}
+                                                $newdate1 = $consulta['Provincia_Establecimiento'] ;}
 
                                             if(is_null ($consulta['Distrito_Establecimiento']) ){
                                                 $newdate2 = '  -'; }
-                                                else{
-                                            $newdate2 = $consulta['Distrito_Establecimiento'] ;}
+                                            else{
+                                                $newdate2 = $consulta['Distrito_Establecimiento'] ;}
+
+                                            if(is_null ($consulta['Tipo_Doc_Paciente']) ){
+                                                $newdate3 = '  -'; }
+                                            else{
+                                                $newdate3 = $consulta['Tipo_Doc_Paciente'];}
                                 
                                             if(is_null ($consulta['Numero_Documento_Paciente']) ){
-                                                $newdate3 = '  -'; }
-                                                else{
-                                            $newdate3 = $consulta['Numero_Documento_Paciente'];}
-
-                                            if(is_null ($consulta['GESTANTES_ATENDIDAS']) ){
-                                            $newdate4 = '  -'; }
+                                                $newdate4 = '  -'; }
                                             else{
-                                            $newdate4 = $consulta['GESTANTES_ATENDIDAS'] -> format('d/m/y');}
-                                            
-                                            if(is_null ($consulta['nro_control']) ){
+                                                $newdate4 = $consulta['Numero_Documento_Paciente'];}
+
+                                            if(is_null ($consulta['Fecha_Atencion']) ){
                                                 $newdate5 = '  -'; }
-                                                else{
-                                            $newdate5 = $consulta['nro_control'];}
-                                
-                                            if(is_null ($consulta['TAMIZAJE_VIOLENCIA']) ){
+                                            else{
+                                                $newdate5 = $consulta['Fecha_Atencion'] -> format('d/m/y');}
+                                            
+                                            if(is_null ($consulta['VIF']) ){
                                                 $newdate6 = '  -'; }
-                                                else{
-                                            $newdate6 = $consulta['TAMIZAJE_VIOLENCIA'] -> format('d/m/y');}
-
-                                            if(is_null ($consulta['TMZ_POSTIVO_PROBLEMAS_VIOLENCIA']) ){
+                                            else{
+                                                $newdate6 = $consulta['VIF'] -> format('d/m/y');}
+                                
+                                            if(is_null ($consulta['R456']) ){
                                                 $newdate7 = '  -'; }
-                                                else{
-                                            $newdate7 = $consulta['TMZ_POSTIVO_PROBLEMAS_VIOLENCIA'] -> format('d/m/y');}
-
-                                            if(is_null ($consulta['DIAGNOSTICO_INICIO_TRATAMIENTO']) ){
-                                            $newdate8 = '  -'; }
                                             else{
-                                            $newdate8 = $consulta['DIAGNOSTICO_INICIO_TRATAMIENTO'] -> format('d/m/y');}
+                                                $newdate7 = $consulta['R456'] -> format('d/m/y');}
 
-                                            if(is_null ($consulta['DIAS_ATENCION']) ){
-                                            $newdate9 = '  -'; }
+                                            if(is_null ($consulta['diagnostico']) ){
+                                                $newdate8 = '  -'; }
                                             else{
-                                            $newdate9 = $consulta['DIAS_ATENCION'];}
+                                                $newdate8 = $consulta['diagnostico'] -> format('d/m/y');}
 
-                                            if(is_null ($consulta['ATENDIO']) ){
-                                            $newdate10 = '  -'; }
+                                            if(is_null ($consulta['iniciotto']) ){
+                                                $newdate9 = '  -'; }
                                             else{
-                                            $newdate10 = $consulta['ATENDIO'];}
+                                                $newdate9 = $consulta['iniciotto'];}
+
                                     ?>
                                     <tr style="font-size: 12px; text-align: center;">
                                         <td class="align-middle"><?php echo $i++; ?></td>
@@ -388,7 +384,6 @@
                                         <td class="align-middle"><?php echo $newdate7; ?></td>
                                         <td class="align-middle"><?php echo $newdate8; ?></td>
                                         <td class="align-middle"><?php echo $newdate9; ?></td>
-                                        <td class="align-middle"><?php echo utf8_encode($newdate10); ?></td>
                                         <td class="align-middle"><?php 
                                         if($consulta['DIAS_ATENCION'] <= 7 && $consulta['DIAS_ATENCION'] >= 0 && !is_null ($consulta['DIAS_ATENCION'])){
                                             echo "<span class='badge bg-correct'>Si</span>";
@@ -413,7 +408,7 @@
                                         </td>
                                     </tr>
                                 </tfoot>
-                            </table>
+                            </table> -->
                         </div>
                     </div>
                 </div>
@@ -423,70 +418,70 @@
 
     <!-- MODAL CUADRO RESUMEN-->
     <div class="modal fade" id="ModalResumen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 1250px;">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Cuadro Resumen</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md table-responsive">
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr class="text-light text-center" style="font-size: 12px; background: #5a6a77;">
-                        <th class="align-middle">#</th>
-                        <th class="align-middle">Provincia</th>
-                        <th class="align-middle">Distrito</th>
-                        <th class="align-middle">Gestantes Atendidas</th>
-                        <th class="align-middle">Tamizaje Violencia</th>
-                        <th class="align-middle">Problemas relacionados con violencia</th> 
-                        <th class="align-middle">Diagnóstico de Tratamiento</th>
-                        <th class="align-middle">Avance</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php 
-                      include('consulta_resumen_gestante_tratamiento.php'); 
-                      $i=1;
-                      while ($consulta = sqlsrv_fetch_array($consulta2)){  
-                        $violencia=$consulta['PROBLEMAS_RELACIONADOS_CON_LA_VIOLENCIA'];
-                        $tratamiento=$consulta['DIAGNOSTICO_E_INICIO_DE_TRATAMIENTO'];
-                    ?>
-                      <tr style="font-size: 11px; text-align: center;">
-                        <td class="align-middle"><?php echo $i++; ?></td>
-                        <td class="align-middle"><?php echo utf8_encode($consulta['Provincia_Establecimiento']); ?></td>
-                        <td class="align-middle"><?php echo utf8_encode($consulta['Distrito_Establecimiento']); ?></td>
-                        <td class="align-middle"><?php echo $consulta['GESTANTES_ATENDIDAS']; ?></td>
-                        <td class="align-middle"><?php echo $consulta['TAMIZAJE_VIOLENCIA']; ?></td>
-                        <td class="align-middle"><?php echo $violencia; ?></td>
-                        <td class="align-middle"><?php echo $tratamiento; ?></td>
-                        <td class="align-middle"><?php 
-                            if($tratamiento == 0 and $violencia == 0){
-                              echo '0 %';
-                            }else{
-                              echo ($tratamiento/$violencia)* 100, ' %';
-                            }                                
-                          ?>
-                        </td>
-                      </tr>
-                      <?php
-                      ;}
-                      include('cerrar2.php');
-                      ?>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-md">
-                <canvas id="myChart" style="width: 500px !important; height: 350px !important;"></canvas>
-              </div>
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 1250px;">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cuadro Resumen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-md table-responsive">
+                    <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="text-light text-center" style="font-size: 12px; background: #5a6a77;">
+                            <th class="align-middle">#</th>
+                            <th class="align-middle">Provincia</th>
+                            <th class="align-middle">Distrito</th>
+                            <th class="align-middle">Gestantes Atendidas</th>
+                            <th class="align-middle">Tamizaje Violencia</th>
+                            <th class="align-middle">Problemas relacionados con violencia</th> 
+                            <th class="align-middle">Diagnóstico de Tratamiento</th>
+                            <th class="align-middle">Avance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        include('consulta_resumen_gestante_tratamiento.php'); 
+                        $i=1;
+                        while ($consulta = sqlsrv_fetch_array($consulta2)){  
+                            $violencia=$consulta['PROBLEMAS_RELACIONADOS_CON_LA_VIOLENCIA'];
+                            $tratamiento=$consulta['DIAGNOSTICO_E_INICIO_DE_TRATAMIENTO'];
+                        ?>
+                        <tr style="font-size: 11px; text-align: center;">
+                            <td class="align-middle"><?php echo $i++; ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($consulta['Provincia_Establecimiento']); ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($consulta['Distrito_Establecimiento']); ?></td>
+                            <td class="align-middle"><?php echo $consulta['GESTANTES_ATENDIDAS']; ?></td>
+                            <td class="align-middle"><?php echo $consulta['TAMIZAJE_VIOLENCIA']; ?></td>
+                            <td class="align-middle"><?php echo $violencia; ?></td>
+                            <td class="align-middle"><?php echo $tratamiento; ?></td>
+                            <td class="align-middle"><?php 
+                                if($tratamiento == 0 and $violencia == 0){
+                                echo '0 %';
+                                }else{
+                                echo ($tratamiento/$violencia)* 100, ' %';
+                                }                                
+                            ?>
+                            </td>
+                        </tr>
+                        <?php
+                        ;}
+                        include('cerrar2.php');
+                        ?>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="col-md">
+                    <canvas id="myChart" style="width: 500px !important; height: 350px !important;"></canvas>
+                </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- MODAL INFORMACION-->
     <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
