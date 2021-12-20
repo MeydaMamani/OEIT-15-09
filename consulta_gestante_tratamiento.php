@@ -175,8 +175,8 @@
                             T.Tipo_Doc_Paciente,T.Numero_Documento_Paciente,T.Fecha_Atencion, TM.Fecha_Atencion VIF, R.Fecha_Atencion R456,
                             dx.Fecha_Atencion diagnostico, tto.Fecha_Atencion iniciotto
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA T
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.tmz TM ON (T.Numero_Documento_Paciente=TM.Numero_Documento_Paciente) and (t.Fecha_Atencion=tm.Fecha_Atencion)
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.r456 R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
+                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TAMIZAJE TM ON (T.Numero_Documento_Paciente=TM.Numero_Documento_Paciente) and (t.Fecha_Atencion=tm.Fecha_Atencion)
+                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.SOSPECHA R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA dx ON (T.Numero_Documento_Paciente=dx.Numero_Documento_Paciente) and (t.Fecha_Atencion=dx.Fecha_Atencion)
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.ttoviolencia tto ON (T.Numero_Documento_Paciente=tto.Numero_Documento_Paciente) and (t.Fecha_Atencion=tto.Fecha_Atencion)
                             where ANIO='2021' AND MES in ('$mes_ant') AND  ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
