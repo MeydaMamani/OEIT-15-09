@@ -54,7 +54,7 @@
                             V.NUM_DOC = V3.NUM_DOC AND V.TIPO_DOC = V3.TIPO_DOC AND V3.DOSIS_APLICADA='3ª dosis'
                             LEFT JOIN BD_VACUNADOS_NACIONAL.dbo.T_CONSOLIDADO_VACUNA_COVID VN3
                             ON V.NUM_DOC = VN3.NUM_DOC AND V.TIPO_DOC = VN3.TIPO_DOC AND VN3.DOSIS_APLICADA='3ª dosis'
-                            WHERE (V.PRIMERA_PROV = 'PASCO' or V.SEGUNDA_PROV = 'PASCO')";
+                            WHERE (V.PRIMERA_PROV = '$red' or V.SEGUNDA_PROV = '$red')";
 
             $resultado2 = "SELECT * FROM T1 WHERE FECHA_PARA_3RA_DOSIS < DATEADD(DAY,7,GETDATE())  AND FECHA_TERCERA_DOSIS IS NULL
                             DROP TABLE T1";

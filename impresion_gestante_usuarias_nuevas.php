@@ -156,13 +156,13 @@
         <table>
             <thead>
                 <tr class="text-center font-14" style="background: #c9d0e2;">
-                    <th style="border: 1px solid #DDDDDD;">#</th>
-                    <th style="border: 1px solid #DDDDDD;">PROVINCIA</th>
-                    <th style="border: 1px solid #DDDDDD;">DISTRITO</th>
-                    <th style="border: 1px solid #DDDDDD;">ESTABLECIMIENTO</th>
-                    <th style="border: 1px solid #DDDDDD;">DOCUMENTO</th>
-                    <th style="border: 1px solid #DDDDDD;">ATE PLANIFICACIÓN</th>
-                    <th style="border: 1px solid #DDDDDD;">TMZ VIF</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">#</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">PROVINCIA</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">DISTRITO</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">ESTABLECIMIENTO</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">DOCUMENTO</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">ATE PLANIFICACIÓN</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">TMZ VIF</th>
                 </tr>
             </thead>
             <tbody>
@@ -201,13 +201,13 @@
     
                 ?>
                 <tr class="text-center font-14">
-                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $i++; ?></td>
-                    <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate); ?></td>
-                    <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate2); ?></td>
-                    <td style="border: 1px solid #DDDDDD;"><?php echo utf8_encode($newdate3); ?></td>
-                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo str_pad($newdate4, 8, "o", STR_PAD_LEFT); ?></td>
-                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate5; ?></td>
-                    <td style="border: 1px solid #DDDDDD; text-align: center;"><?php echo $newdate6; ?></td>                      
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $i++; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate); ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate2); ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate3); ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo str_pad($newdate4, 8, "o", STR_PAD_LEFT); ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate5; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate6; ?></td>                      
                 </tr>
                 <?php
                     ;}
