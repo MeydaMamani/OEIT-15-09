@@ -24,10 +24,10 @@
                     </marquee>
                 </div>
             </div>
-            <div class="text-center p-3">
+            <div class="text-center p-2">
               <h3>Seguimiento Tamizaje Neonatal - <?php echo $nombre_mes; ?></h3>
             </div>
-            <div class="row mb-3 mt-3">
+            <div class="row">
                 <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"> <?php echo $row_cnt; ?></b></div>
                 <div class="col-8 d-flex justify-content-end">
                   <ul class="list-group list-group-horizontal-sm">
@@ -45,28 +45,20 @@
                   </ul>
                 </div>
             </div>
-            <div class="row mb-3">
-              <div class="col-lg-12 text-center">
-                <!-- <button type="button" name="Limpiar" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-pie-chart"></i> Cuadro Resumen</button> -->
-                <!-- <button type="button" name="Limpiar" class="btn btn-outline-danger btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Información</button> -->
-                <button type="button" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar" onclick="location.href='seguimiento_neonatal.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
-              </div>
-            </div>
-            <div class="d-flex">
+            <div class="d-flex justify-content-center mb-3">
                 <form action="impresion_seg_neonatal.php" method="POST">
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                     <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                     <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
-                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir CSV</button>
+                    <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                 </form>
+                <button type="button" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar m-2" onclick="location.href='seguimiento_neonatal.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
             </div>
-
-            <div class="col-12 table-responsive">
+            <div class="col-12 table-responsive" id="prematuro">
                 <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
                         <tr class="font-12 text-center" style="background: #e0eff5;"> 
                             <th class="align-middle">#</th>
-                            <th class="align-middle">Sector</th>
                             <th class="align-middle">Financiador</th>
                             <th class="align-middle">Provincia</th>
                             <th class="align-middle">Distrito</th>
@@ -77,10 +69,10 @@
                             <th class="align-middle">Atendido</th>
                         </tr>
                     </thead>
-                    <div class="float-end pb-3">
-                        <div class="form-group">
+                    <div class="float-end col-md-3 table_no_fed">
+                        <div class="mb-3">
                             <div id="inputbus" class="input-group input-group-sm">
-                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off" class="form-control">
+                                <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
                                 <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
                             </div>
                         </div>
@@ -90,40 +82,35 @@
                             include('consulta_seg_neonatal.php');
                             $i=1;
                             while ($consulta = sqlsrv_fetch_array($consulta3)){
-                                if(is_null ($consulta['Sector']) ){
-                                    $newdate = '  -'; }
-                                    else{
-                                $newdate = $consulta['Sector'];}
-
-                                if(is_null ($consulta['FINANCIADOR']) ){
+                                if(is_null ($consulta['Financiador_Parto']) ){
                                     $newdate2 = '  -'; }
                                     else{
-                                $newdate2 = $consulta['FINANCIADOR'] ;}
+                                $newdate2 = $consulta['Financiador_Parto'] ;}
 
-                                if(is_null ($consulta['Provnacido']) ){
+                                if(is_null ($consulta['PROV_EESS']) ){
                                     $newdate3 = '  -'; }
                                     else{
-                                $newdate3 = $consulta['Provnacido'];}
+                                $newdate3 = $consulta['PROV_EESS'];}
 
-                                if(is_null ($consulta['Distnacido']) ){
+                                if(is_null ($consulta['DIST_EESS']) ){
                                     $newdate4 = '  -'; }
                                     else{
-                                $newdate4 = $consulta['Distnacido'];}
+                                $newdate4 = $consulta['DIST_EESS'];}
 
-                                if(is_null ($consulta['Numcnv']) ){
+                                if(is_null ($consulta['NU_CNV']) ){
                                     $newdate5 = '  -'; }
                                     else{
-                                $newdate5 = $consulta['Numcnv'];}
+                                $newdate5 = $consulta['NU_CNV'];}
 
-                                if(is_null ($consulta['FECNACIDO']) ){
+                                if(is_null ($consulta['FE_NACIDO']) ){
                                     $newdate6 = '  -'; }
                                     else{
-                                $newdate6 = $consulta['FECNACIDO']-> format('d/m/y');}
+                                $newdate6 = $consulta['FE_NACIDO'];}
 
-                                if(is_null ($consulta['Provdommadre']) ){
+                                if(is_null ($consulta['Prov_Madre']) ){
                                     $newdate7 = '  -'; }
                                     else{
-                                $newdate7 = $consulta['Provdommadre'];}
+                                $newdate7 = $consulta['Prov_Madre'];}
 
                                 if(is_null ($consulta['Fecha_Atencion']) ){
                                     $newdate8 = '  -'; }
@@ -138,7 +125,6 @@
                         ?>
                         <tr class="text-center font-12">
                             <td class="align-middle"><?php echo $i++; ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
                             <td class="align-middle"><?php echo $newdate4; ?></td>
@@ -146,7 +132,7 @@
                             <td class="align-middle"><?php echo $newdate6; ?></td>
                             <td class="align-middle"><?php echo $newdate7; ?></td>
                             <td class="align-middle"><?php echo $newdate8; ?></td>
-                            <td class="align-middle"><?php echo $newdate9; ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate9); ?></td>
                         </tr>
                         <?php
                             ;}

@@ -53,7 +53,7 @@
                        into  bdhis_minsa.dbo.padronneonatal
                        from nominal_padron_nominal
                        where year(fecha_nacimiento_nino)='2021' AND MES='2021$mes2'
-                       AND YEAR(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='2021' AND MONTH(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$mes' ;
+                       AND YEAR(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='2021' AND MONTH(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$mes';
                        with c as ( select documento, ROW_NUMBER() over(partition by documento order by documento) as duplicado
                        from bdhis_minsa.dbo.padronneonatal )
                        delete  from c

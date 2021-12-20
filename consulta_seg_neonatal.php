@@ -40,10 +40,14 @@
             $redt = 'PASCO';
         }
         
-        $resultado = "SELECT Sector,FINANCIADOR,Provnacido,Distnacido, Numcnv,FECNACIDO,Provdommadre
+        // $resultado = "SELECT Sector,FINANCIADOR,Provnacido,Distnacido, Numcnv,FECNACIDO,Provdommadre
+        //                 into BDHIS_MINSA.dbo.nacidoscnv
+        //                 FROM NOMINAL_TRAMA_CNV
+        //                 WHERE YEar(FECNACIDO)='2021'";
+        $resultado = "SELECT Financiador_Parto, PROV_EESS, DIST_EESS, NU_CNV, FE_NACIDO, Prov_Madre
                         into BDHIS_MINSA.dbo.nacidoscnv
-                        FROM NOMINAL_TRAMA_CNV
-                        WHERE YEar(FECNACIDO)='2021'";
+                        FROM CNV_LUGARNACIDO_PASCO 
+                        WHERE YEAR(FE_NACIDO)='2021'";
 
         $resultado2 = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item
                         into atencionesneonatal
@@ -53,16 +57,16 @@
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado3 = "SELECT n.*,a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
                             from nacidoscnv n left join atencionesneonatal a 
-                            on N.numcnv=a.Numero_Documento_Paciente
-                            where n.fecnacido>='2021-$mes2-01' AND Provnacido='$red'
+                            on N.NU_CNV=a.Numero_Documento_Paciente
+                            where n.FE_NACIDO>='2021-$mes2-01' AND Provnacido='$red'
                             DROP TABLE BDHIS_MINSA.dbo.nacidoscnv
                             DROP TABLE BDHIS_MINSA.dbo.atencionesneonatal";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $resultado3 = "SELECT n.*,a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
                             from nacidoscnv n left join atencionesneonatal a 
-                            on N.numcnv=a.Numero_Documento_Paciente
-                            where n.fecnacido>='2021-$mes2-01'
+                            on N.NU_CNV=a.Numero_Documento_Paciente
+                            where n.FE_NACIDO>='2021-$mes2-01'
                             DROP TABLE BDHIS_MINSA.dbo.nacidoscnv
                             DROP TABLE BDHIS_MINSA.dbo.atencionesneonatal";
         }
@@ -70,8 +74,8 @@
             $dist=$dist_1;
             $resultado3 = "SELECT n.*,a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
                             from nacidoscnv n left join atencionesneonatal a 
-                            on N.numcnv=a.Numero_Documento_Paciente
-                            where n.fecnacido>='2021-$mes2-01' AND Provnacido='$red' AND Distnacido='$dist'
+                            on N.NU_CNV=a.Numero_Documento_Paciente
+                            where n.FE_NACIDO>='2021-$mes2-01' AND Provnacido='$red' AND Distnacido='$dist'
                             DROP TABLE BDHIS_MINSA.dbo.nacidoscnv
                             DROP TABLE BDHIS_MINSA.dbo.atencionesneonatal";
         }
