@@ -140,6 +140,7 @@
 								<li><a href="homologation.php">Homologación</a></li>
 								<li><a href="arch_plane.php">Archivos Planos</a></li>
 								<li><a href="promsa.php">PROMSA</a></li>
+                                <li><a href="r40.php">R40</a></li>
 								<!-- <li><a href="#">Promsa (Visitas-Niños)</a></li>
 								<li><a href="#">Promsa (Visitas-Gestantes)</a></li> -->
                             </ul>
