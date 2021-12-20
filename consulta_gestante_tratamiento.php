@@ -99,7 +99,7 @@
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.SOSPECHA R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA dx ON (T.Numero_Documento_Paciente=dx.Numero_Documento_Paciente) and (t.Fecha_Atencion=dx.Fecha_Atencion)
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA tto ON (T.Numero_Documento_Paciente=tto.Numero_Documento_Paciente) and (t.Fecha_Atencion=tto.Fecha_Atencion)
-                            where ANIO='2021' AND MES in ('$mes_ant', '$mes') AND T.Provincia_Establecimiento='$red' AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
+                            where ANIO='2021' AND MES in ('$mes_ant') AND T.Provincia_Establecimiento='$red' AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
                             and Tipo_Diagnostico='D') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))  ) a
                             where r456 is not null
                             ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, ATENDIDOS
@@ -108,7 +108,7 @@
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA";
         }
-        if ($red_1 == 4 and $dist_1 == 'TODOS') {
+        else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $mes_ant = $mes-1;
             $resultado = "SELECT DISTINCT(Numero_Documento_Paciente) AS ATENDIDOS, Numero_Documento_Paciente,
                             Tipo_Doc_Paciente,Fecha_Atencion
@@ -179,7 +179,7 @@
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.r456 R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA dx ON (T.Numero_Documento_Paciente=dx.Numero_Documento_Paciente) and (t.Fecha_Atencion=dx.Fecha_Atencion)
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.ttoviolencia tto ON (T.Numero_Documento_Paciente=tto.Numero_Documento_Paciente) and (t.Fecha_Atencion=tto.Fecha_Atencion)
-                            where ANIO='2021' AND MES in ('$mes_ant', '$mes') AND  ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
+                            where ANIO='2021' AND MES in ('$mes_ant') AND  ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
                             and Tipo_Diagnostico='D') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))  ) a
                             where r456 is not null
                             ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, ATENDIDOS
@@ -260,7 +260,7 @@
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.SOSPECHA R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA dx ON (T.Numero_Documento_Paciente=dx.Numero_Documento_Paciente) and (t.Fecha_Atencion=dx.Fecha_Atencion)
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA tto ON (T.Numero_Documento_Paciente=tto.Numero_Documento_Paciente) and (t.Fecha_Atencion=tto.Fecha_Atencion)
-                            where ANIO='2021' AND MES in ('$mes_ant', '$mes') AND T.Distrito_Establecimiento='$dist' AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
+                            where ANIO='2021' AND MES in ('$mes_ant') AND T.Distrito_Establecimiento='$dist' AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
                             and Tipo_Diagnostico='D') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))  ) a
                             where r456 is not null
                             ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, ATENDIDOS
