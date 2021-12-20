@@ -108,7 +108,7 @@
                                     <a class="has-arrow" href="#" aria-expanded="false">Gestantes</a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="bateria_completa.php">Bateria Completa (CG SI-01)</a></li>
-                                        <!-- <li><a href="gestante_tratamiento.php">Gestantes con TMZ e Inicio de Tratamiento por Violencia (CG VI-01)</a></li> -->
+                                        <li><a href="gestante_tratamiento.php">Gestantes con TMZ e Inicio de Tratamiento por Violencia (CG VI-01)</a></li>
                                         <li><a href="gestante_usuarias_nuevas.php">Usuarias Nuevas con TMZ de Violencia (CG VI-02)</a></li>
 										<li><a href="paquete_gestante.php">Paquete Completo</a></li>
                                     </ul>
@@ -176,7 +176,7 @@
                         </li> -->
 						<li><a class="has-arrow waves-effect" aria-expanded="false"><i class="mdi mdi-chart-bar text-white pb-1"></i><span class="hide-menu ml-6">Tableros</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="management_agreements.php">Avance de Convenios de Gestión</a></li>
+                                <li><a href="#">Avance de Convenios de Gestión</a></li>
 								<li><a href="#">Avance ESNI Regular</a></li>
                                 <li>
                                     <a class="has-arrow" href="#" aria-expanded="false">Niño Sello</a>

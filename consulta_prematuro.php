@@ -40,140 +40,109 @@
             $redt = 'PASCO';
         }
 
-        $resultado = "SELECT num_cnv,nombre_prov,nombre_dist,tipo_seguro,fecha_nacimiento_nino, apellido_paterno_nino,
-                        apellido_materno_nino, nombre_nino, MENOR_ENCONTRADO,NOMBRE_EESS    
-                        into  padron_nino_cnv1
-                        from nominal_padron_nominal
-                        where year(fecha_nacimiento_nino)='2021' AND MES='2021$mes2';
-                        with c as ( select num_cnv, nombre_dist, ROW_NUMBER() 
-                                over(partition by num_cnv order by num_cnv) as duplicado
-                        from dbo.padron_nino_cnv1)
-                        delete  from c
-                        where duplicado >1";
-        // PARA RESUMEN
-        $resume = "SELECT num_cnv,nombre_prov,nombre_dist,tipo_seguro,fecha_nacimiento_nino, apellido_paterno_nino,
-                    apellido_materno_nino, nombre_nino, MENOR_ENCONTRADO,NOMBRE_EESS    
-                    into BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO
-                    from nominal_padron_nominal
-                    where year(fecha_nacimiento_nino)='2021';
-                    with c as ( select num_cnv, nombre_dist, ROW_NUMBER() 
-                            over(partition by num_cnv order by num_cnv) as duplicado
-                    from RESUME_PASO_UNO_PREMATURO)
-                    delete  from c
-                    where duplicado >1";
+        $resultado = "SELECT NOMBRE_DEPAR,NOMBRE_PROV,NOMBRE_DIST,NOMBRE_EESS, NUM_CNV,NUM_DNI,
+                        CASE WHEN (NUM_CNV IS NULL AND NUM_DNI IS NULL)  THEN 'NO TIENE'
+                                WHEN NUM_CNV=NUM_DNI                        THEN NUM_DNI
+                                WHEN NUM_CNV<>NUM_DNI                       THEN NUM_DNI
+                                WHEN (NUM_DNI IS NULL)                      THEN NUM_CNV
+                                WHEN (NUM_CNV IS NULL)                      THEN NUM_DNI  Else ' '
+                        END AS CNV_O_DNI, APELLIDO_MATERNO_NINO,APELLIDO_PATERNO_NINO,NOMBRE_NINO,FECHA_NACIMIENTO_NINO,DATEADD(DAY,59,FECHA_NACIMIENTO_NINO) AS 'CUMPLE_59_DIAS',
+                        MENOR_VISITADO,MENOR_ENCONTRADO,TIPO_SEGURO,MES
+                        INTO BDHIS_MINSA.dbo.FED_PADRON_NINO_PREMATURO FROM NOMINAL_PADRON_NOMINAL A 
+                        WHERE ((TIPO_SEGURO IN  ('0,', '0, 1,', '0, 1, 2,', '0, 1, 4,', '1,', '1, 2,', '1, 2, 3,', '1, 2, 4,', '1, 3,', '1, 3, 4,', '1, 4,')) OR TIPO_SEGURO IS NULL) 
+                        AND (MES IN ('2021$mes2'))";
 
-        $resume1 = "SELECT C.Periodo, DATEADD(DAY,59,C.FECNACIDO) mide, C.SECTOR, C.Provnacido, C.Distnacido,C.Establecimiento, 
-                    p.MENOR_ENCONTRADO,FECNACIDO,Numcnv, CONCAT(P.APELLIDO_PATERNO_NINO,' ',P.APELLIDO_MATERNO_NINO,' ',P.NOMBRE_NINO)NOMBRES_MENOR,C.PESO, C.SEMANAGESTACION, 'SI' PREMATURO,
-                    T.Fecha_Atencion SUPLEMENTADO,T.Tipo_Doc_Paciente, P.TIPO_SEGURO, p.NOMBRE_EESS SE_ATIENDE               
-                    into BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO
-                    from BD_CNV.dbo.nominal_trama_cnv c INNER JOIN BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO p
-                    ON  C.NUMCNV=p.num_cnv
-                    AND (c.SEMANAGESTACION IN ('34','35','36') OR (c.PESO>'1499' AND c.PESO<'2500')) AND YEAR(c.FECNACIDO)='2021' 
-                        AND Provnacido in ('PASCO', 'OXAPAMPA', 'DANIEL ALCIDES CARRION')
-                    LEFT join BDHIS_MINSA.dbo.T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
-                    on c.Numcnv=t.Numero_Documento_Paciente
-                    AND edad_reg='1' and t.Tipo_Edad ='M' and
-                                Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
-                    ORDER BY Provnacido, Distnacido, Establecimiento";
+        $resultado2 = "SELECT PERIODO,Institucion,DPTO_EESS,PROV_EESS,DIST_EESS,CO_LOCAL,Nombre_EESS AS Establecimiento, NU_CNV,FE_NACIDO,Financiador_Parto,PESO_NACIDO,DUR_EMB_PARTO  FED_CNV_PREMATURO 
+                        INTO BDHIS_MINSA.dbo.FED_CNV_PREMATURO
+                        FROM CNV_LUGARNACIDO_PASCO 
+                        WHERE ((DUR_EMB_PARTO BETWEEN 34 AND 36) OR (PESO_NACIDO BETWEEN 1500 AND 2499)) ";
 
-        $resume2 = "SELECT Provnacido,Distnacido,
-                    COUNT(CASE WHEN mide>='2021-$mes2-01' AND mide<=CONCAT('2021-$mes2-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/2021'),0)))) THEN Numcnv END) 'MIDENOMINADOR'
-                    INTO BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
-                    FROM BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO A
-                    WHERE ((TIPO_SEGURO IN('1,','0,','1, 2, ','0, 1, '))OR (TIPO_SEGURO IS NULL))
-                    GROUP BY Provnacido,Distnacido";
+        $resultado3 = "SELECT A.Numero_Documento_Paciente, A.Tipo_Doc_Paciente, A.Fecha_Nacimiento_Paciente, A.Fecha_Atencion 
+                        INTO BDHIS_MINSA.dbo.MIPASO1  
+                        FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A LEFT JOIN MAESTRO_PACIENTE B ON A.Id_Paciente = B.Id_Paciente
+                        LEFT JOIN MAESTRO_HIS_TIPO_DOC C ON B.Id_Tipo_Documento_Paciente = C.Id_Tipo_Documento
+                        WHERE (A.Edad_Dias_Paciente_FechaAtencion BETWEEN 0 AND 59) AND (A.Abrev_Tipo_Doc_Paciente IN ('DNI','CNV')) AND
+                        (A.Codigo_Item IN ('D500','D509','D508','D649')) AND (A.Tipo_Diagnostico IN ('D','R'))";
 
-        $resume3 = "SELECT Provnacido,Distnacido,
-                    COUNT(CASE WHEN mide>='2021-$mes2-01' AND mide<=CONCAT('2021-$mes2-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/2021'),0)))) THEN Numcnv END) 'MINUMERADOR'
-                    INTO BDHIS_MINSA.dbo.NUMERADOR_PREMATURO
-                    FROM BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO A
-                    WHERE ((TIPO_SEGURO IN('1,','0,','1, 2, ','0, 1, '))OR (TIPO_SEGURO IS NULL)) AND (SUPLEMENTADO IS NOT NULL)
-                    GROUP BY Provnacido,Distnacido";
+        $resultado4 = "SELECT A.Numero_Documento_Paciente, A.Tipo_Doc_Paciente, A.Fecha_Nacimiento_Paciente, A.Fecha_Atencion 
+                        INTO BDHIS_MINSA.dbo.MIPASO2
+                        FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A
+                        LEFT JOIN MAESTRO_PACIENTE B ON A.Id_Paciente=B.Id_Paciente
+                        LEFT JOIN MAESTRO_HIS_TIPO_DOC C ON B.Id_Tipo_Documento_Paciente=C.Id_Tipo_Documento
+                        WHERE (A.Edad_Dias_Paciente_FechaAtencion BETWEEN 0 AND 59) AND
+                        (A.Numero_Documento_Paciente in (select Numero_Documento_Paciente from BDHIS_MINSA.dbo.MIPASO1) )AND
+                        (Codigo_Item='U310' AND(Valor_Lab IN ('SF1','PO1','P01','1')))";
+
+        $resultado5 = "SELECT A.Numero_Documento_Paciente, A.Tipo_Doc_Paciente, A.Fecha_Nacimiento_Paciente, MIN(Fecha_Atencion) AS FECHA_ATENCION 
+                        INTO BDHIS_MINSA.dbo.SUPLEMENTACION_PREMATUROS
+                        FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A
+                        LEFT JOIN MAESTRO_PACIENTE B ON A.Id_Paciente=B.Id_Paciente
+                        LEFT JOIN MAESTRO_HIS_TIPO_DOC C ON B.Id_Tipo_Documento_Paciente=C.Id_Tipo_Documento
+                        WHERE (Edad_Dias_Paciente_FechaAtencion BETWEEN 0 AND 59)AND 
+                        (C.Abrev_Tipo_Doc IN ('DNI','CNV')) AND
+                        (Codigo_Item IN ('Z298','99199.17')) AND
+                        (Valor_Lab IN ('SF1','P01','PO1'))
+                        GROUP BY A.Numero_Documento_Paciente, A.Tipo_Doc_Paciente, A.Fecha_Nacimiento_Paciente UNION ALL  SELECT * FROM BDHIS_MINSA.dbo.MIPASO2";
+
+        $resultado6 = "SELECT A.NOMBRE_PROV,A.NOMBRE_DIST,A.NOMBRE_EESS, A.FECHA_NACIMIENTO_NINO, c.Tipo_Doc_Paciente,
+                        A.CNV_O_DNI,B.Establecimiento, CONCAT(A.APELLIDO_PATERNO_NINO, ' ', A.APELLIDO_MATERNO_NINO, ' ', A.NOMBRE_NINO) as full_name,
+                        A.MENOR_VISITADO,A.MENOR_ENCONTRADO,A.TIPO_SEGURO,A.MES AS CORTE_PADRON,
+                            CASE
+                                WHEN (Numero_Documento_Paciente IS NULL)  THEN 'NO'  
+                                WHEN (Numero_Documento_Paciente IS NOT  NULL)  THEN 'SI'  
+                            Else ' ' END AS SUPLEMENTADO,    
+                            CASE
+                                WHEN (B.NU_CNV IS NULL)  THEN 'NO'
+                                WHEN (B.NU_CNV IS NOT  NULL)  THEN 'SI'
+                            Else ' ' END AS 'BAJO_PESO_PREMATURO' 
+                        INTO BDHIS_MINSA.dbo.MIPASO3
+                        FROM BDHIS_MINSA.dbo.FED_PADRON_NINO_PREMATURO A 
+                        LEFT JOIN BDHIS_MINSA.dbo.FED_CNV_PREMATURO B ON A.CNV_O_DNI=B.NU_CNV
+                        LEFT JOIN BDHIS_MINSA.dbo.SUPLEMENTACION_PREMATUROS C ON A.CNV_O_DNI=C.Numero_Documento_Paciente
+                        WHERE YEAR(A.CUMPLE_59_DIAS)='2021' AND MONTH(A.CUMPLE_59_DIAS)='$mes'";
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
-            $resultado2 = "SELECT C.Periodo, DATEADD(DAY,59,C.FECNACIDO) mide, C.SECTOR, C.Provnacido, C.Distnacido,C.Establecimiento, 
-                                p.MENOR_ENCONTRADO,FECNACIDO,Numcnv, CONCAT(P.APELLIDO_PATERNO_NINO,' ',P.APELLIDO_MATERNO_NINO,' ',P.NOMBRE_NINO)NOMBRES_MENOR,C.PESO, C.SEMANAGESTACION, 'SI' PREMATURO,
-                                T.Fecha_Atencion SUPLEMENTADO,T.Tipo_Doc_Paciente, P.TIPO_SEGURO, p.NOMBRE_EESS SE_ATIENDE               
-                                from BD_CNV.dbo.nominal_trama_cnv c INNER JOIN BD_PADRON_NOMINAL.dbo.padron_nino_cnv1 p
-                                ON  C.NUMCNV=p.num_cnv
-                                AND (c.SEMANAGESTACION IN ('34','35','36') OR (c.PESO>'1499' AND c.PESO<'2500')) AND YEAR(c.FECNACIDO)='2021' 
-                                    AND MONTH(DATEADD(DAY,59,c.FECNACIDO))='$mes' and Provnacido = '$red'
-                                LEFT join BDHIS_MINSA.dbo.T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
-                                on c.Numcnv=t.Numero_Documento_Paciente
-                                AND edad_reg='1' and t.Tipo_Edad ='M' and
-                                            Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
-                                ORDER BY Provnacido, Distnacido, Establecimiento
-                                DROP TABLE BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1";
-
-            $resume4 = "SELECT A.Provnacido, A.Distnacido, MIDENOMINADOR, MINUMERADOR
-                        FROM BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO A
-                        LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR_PREMATURO B ON A.Distnacido=B.Distnacido
-                        WHERE A.Provnacido = '$red'
-                        ORDER BY A.Provnacido,A.Distnacido
-                        DROP TABLE BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO
-                        DROP TABLE BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO
-                        DROP TABLE BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
-                        DROP TABLE BDHIS_MINSA.dbo.NUMERADOR_PREMATURO";
+            $resultado7 = "SELECT * FROM BDHIS_MINSA.dbo.MIPASO3 WHERE BAJO_PESO_PREMATURO='SI'
+                            AND NOMBRE_PROV='$red'
+                            ORDER BY NOMBRE_PROV, NOMBRE_DIST, NOMBRE_EESS
+                            DROP TABLE BDHIS_MINSA.dbo.FED_PADRON_NINO_PREMATURO
+                            DROP TABLE BDHIS_MINSA.dbo.FED_CNV_PREMATURO
+                            DROP TABLE BDHIS_MINSA.dbo.MIPASO1
+                            DROP TABLE BDHIS_MINSA.dbo.MIPASO2
+                            DROP TABLE BDHIS_MINSA.dbo.SUPLEMENTACION_PREMATUROS
+                            DROP TABLE BDHIS_MINSA.dbo.MIPASO3";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
-            $resultado2 = "SELECT C.Periodo, DATEADD(DAY,59,C.FECNACIDO) mide, C.SECTOR, C.Provnacido, C.Distnacido,C.Establecimiento, 
-                                p.MENOR_ENCONTRADO,FECNACIDO,Numcnv, CONCAT(P.APELLIDO_PATERNO_NINO,' ',P.APELLIDO_MATERNO_NINO,' ',P.NOMBRE_NINO)NOMBRES_MENOR,C.PESO, C.SEMANAGESTACION, 'SI' PREMATURO,
-                                T.Fecha_Atencion SUPLEMENTADO,T.Tipo_Doc_Paciente, P.TIPO_SEGURO, p.NOMBRE_EESS SE_ATIENDE               
-                                from BD_CNV.dbo.nominal_trama_cnv c INNER JOIN BD_PADRON_NOMINAL.dbo.padron_nino_cnv1 p
-                                ON  C.NUMCNV=p.num_cnv
-                                AND (c.SEMANAGESTACION IN ('34','35','36') OR (c.PESO>'1499' AND c.PESO<'2500')) AND YEAR(c.FECNACIDO)='2021' 
-                                    AND MONTH(DATEADD(DAY,59,c.FECNACIDO))='$mes' AND Provnacido in ('PASCO', 'OXAPAMPA', 'DANIEL ALCIDES CARRION')
-                                LEFT join BDHIS_MINSA.dbo.T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
-                                on c.Numcnv=t.Numero_Documento_Paciente
-                                AND edad_reg='1' and t.Tipo_Edad ='M' and
-                                            Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
-                                ORDER BY Provnacido, Distnacido, Establecimiento
-                                DROP TABLE BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1";
-            
-            $resume4 = "SELECT A.Provnacido, A.Distnacido, MIDENOMINADOR, MINUMERADOR
-                        FROM BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO A
-                        LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR_PREMATURO B ON A.Distnacido=B.Distnacido
-                        ORDER BY A.Provnacido,A.Distnacido
-                        DROP TABLE BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO
-                        DROP TABLE BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO
-                        DROP TABLE BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
-                        DROP TABLE BDHIS_MINSA.dbo.NUMERADOR_PREMATURO";
+            $resultado7 = "SELECT * FROM BDHIS_MINSA.dbo.MIPASO3 WHERE BAJO_PESO_PREMATURO='SI'
+                            ORDER BY NOMBRE_PROV, NOMBRE_DIST, NOMBRE_EESS
+                            DROP TABLE BDHIS_MINSA.dbo.FED_PADRON_NINO_PREMATURO
+                            DROP TABLE BDHIS_MINSA.dbo.FED_CNV_PREMATURO
+                            DROP TABLE BDHIS_MINSA.dbo.MIPASO1
+                            DROP TABLE BDHIS_MINSA.dbo.MIPASO2
+                            DROP TABLE BDHIS_MINSA.dbo.SUPLEMENTACION_PREMATUROS
+                            DROP TABLE BDHIS_MINSA.dbo.MIPASO3";
+
         }
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
-            $resultado2 = "SELECT C.Periodo, DATEADD(DAY,59,C.FECNACIDO) mide, C.SECTOR, C.Provnacido, C.Distnacido,C.Establecimiento, 
-                                p.MENOR_ENCONTRADO,FECNACIDO,Numcnv, CONCAT(P.APELLIDO_PATERNO_NINO,' ',P.APELLIDO_MATERNO_NINO,' ',P.NOMBRE_NINO)NOMBRES_MENOR,C.PESO, C.SEMANAGESTACION, 'SI' PREMATURO,
-                                T.Fecha_Atencion SUPLEMENTADO,T.Tipo_Doc_Paciente, P.TIPO_SEGURO, p.NOMBRE_EESS SE_ATIENDE               
-                                from BD_CNV.dbo.nominal_trama_cnv c INNER JOIN BD_PADRON_NOMINAL.dbo.padron_nino_cnv1 p
-                                ON  C.NUMCNV=p.num_cnv
-                                AND (c.SEMANAGESTACION IN ('34','35','36') OR (c.PESO>'1499' AND c.PESO<'2500')) AND YEAR(c.FECNACIDO)='2021' 
-                                    AND MONTH(DATEADD(DAY,59,c.FECNACIDO))='$mes' and Provnacido = '$red' and Distnacido = '$dist'
-                                LEFT join BDHIS_MINSA.dbo.T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA t
-                                on c.Numcnv=t.Numero_Documento_Paciente
-                                AND edad_reg='1' and t.Tipo_Edad ='M' and
-                                            Codigo_Item in ('Z298','U310','99199.17') AND Valor_Lab IN ('SF1','P01','PO1')
-                                ORDER BY Provnacido, Distnacido, Establecimiento
-                                DROP TABLE  BD_PADRON_NOMINAL.DBO.PADRON_NINO_CNV1";
-
-            $resume4 = "SELECT A.Provnacido, A.Distnacido, MIDENOMINADOR, MINUMERADOR
-                        FROM BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO A
-                        LEFT JOIN BDHIS_MINSA.dbo.NUMERADOR_PREMATURO B ON A.Distnacido=B.Distnacido
-                        WHERE A.Provnacido = '$red'
-                        ORDER BY A.Provnacido,A.Distnacido
-                        DROP TABLE BD_PADRON_NOMINAL.dbo.RESUME_PASO_UNO_PREMATURO
-                        DROP TABLE BDHIS_MINSA.dbo.RESUME_PASO_DOS_PREMATURO
-                        DROP TABLE BDHIS_MINSA.dbo.RESUME_DENOMINADOR_PREMATURO
-                        DROP TABLE BDHIS_MINSA.dbo.NUMERADOR_PREMATURO";
+            $resultado7 = "SELECT * FROM BDHIS_MINSA.dbo.MIPASO3 WHERE BAJO_PESO_PREMATURO='SI'
+                            AND NOMBRE_PROV='$red' AND NOMBRE_DIST='$dist'
+                            ORDER BY NOMBRE_PROV, NOMBRE_DIST, NOMBRE_EESS
+                            DROP TABLE BDHIS_MINSA.dbo.FED_PADRON_NINO_PREMATURO
+                            DROP TABLE BDHIS_MINSA.dbo.FED_CNV_PREMATURO
+                            DROP TABLE BDHIS_MINSA.dbo.MIPASO1
+                            DROP TABLE BDHIS_MINSA.dbo.MIPASO2
+                            DROP TABLE BDHIS_MINSA.dbo.SUPLEMENTACION_PREMATUROS
+                            DROP TABLE BDHIS_MINSA.dbo.MIPASO3";
         }
 
         $consulta1 = sqlsrv_query($conn2, $resultado);
         $consulta2 = sqlsrv_query($conn3, $resultado2);
-
-        $consult_resume1 = sqlsrv_query($conn2, $resume);
-        $consult_resume2 = sqlsrv_query($conn, $resume1);
-        $consult_resume3 = sqlsrv_query($conn, $resume2);
-        $consult_resume4 = sqlsrv_query($conn, $resume3);
-        $consult_resume5 = sqlsrv_query($conn, $resume4);
+        $consulta3 = sqlsrv_query($conn, $resultado3);
+        $consulta4 = sqlsrv_query($conn, $resultado4);
+        $consulta5 = sqlsrv_query($conn, $resultado5);
+        $consulta6 = sqlsrv_query($conn, $resultado6);
+        $consulta7 = sqlsrv_query($conn, $resultado7);
 
         $my_date_modify = "SELECT MAX(FECHA_MODIFICACION_REGISTRO) as DATE_MODIFY FROM NOMINAL_PADRON_NOMINAL";
         $consult = sqlsrv_query($conn2, $my_date_modify);
