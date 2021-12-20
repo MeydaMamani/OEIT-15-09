@@ -52,7 +52,7 @@
                             CONCAT(pn.APELLIDO_PATERNO_NINO,' ',pn.APELLIDO_MATERNO_NINO,' ', pn.NOMBRE_NINO) APELLIDOS_NOMBRES
                         INTO BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred
                         FROM NOMINAL_PADRON_NOMINAL PN
-                        WHERE YEAR(FECHA_NACIMIENTO_NINO)='2021' AND MONTH(FECHA_NACIMIENTO_NINO)='$mes2' AND MES='202111'
+                        WHERE YEAR(FECHA_NACIMIENTO_NINO)='2021' AND MONTH(FECHA_NACIMIENTO_NINO)='$mes2' AND MES='2021$mes2'
                         ;
                         with c as
                         (

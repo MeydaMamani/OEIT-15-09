@@ -50,7 +50,7 @@
                                         <img src="./img/user_cant.png" width="90" alt="">
                                     </div>
                                     <div class="mt-3 col-md-7 text-center">
-                                        <b class="font-45 total text-secondary"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-45 text-secondary"></i>
+                                        <b class="font-45 total text-secondary"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-45 text-secondary" style="margin-left: -8px;"></i>
                                     </div>
                                 </h4>
                             </div>
@@ -569,14 +569,14 @@
 
     <!-- MODAL INFORMACION-->
     <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-            <img src="./img/CRED.png" style="width: 100%;">
-          </div>
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="col-12 text-end"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <img src="./img/CRED.png" style="width: 100%;">
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <?php } ?>
 

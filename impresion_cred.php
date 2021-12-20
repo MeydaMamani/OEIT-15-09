@@ -56,7 +56,7 @@
                             CONCAT(pn.APELLIDO_PATERNO_NINO,' ',pn.APELLIDO_MATERNO_NINO,' ', pn.NOMBRE_NINO) APELLIDOS_NOMBRES
                         INTO BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred
                         FROM NOMINAL_PADRON_NOMINAL PN
-                        WHERE YEAR(FECHA_NACIMIENTO_NINO)='2021' AND MONTH(FECHA_NACIMIENTO_NINO)='$mes2' AND MES='202111'
+                        WHERE YEAR(FECHA_NACIMIENTO_NINO)='2021' AND MONTH(FECHA_NACIMIENTO_NINO)='$mes2' AND MES='2021$mes2'
                         ;
                         with c as
                         (
@@ -382,7 +382,7 @@
                                 drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes10
                                 drop table BDHIS_MINSA_EXTERNO.dbo.cred_mes11";
         }
-    
+        
         $consulta = sqlsrv_query($conn2, $resultado);
         $consulta2 = sqlsrv_query($conn, $resultado2);
         $consulta3 = sqlsrv_query($conn, $resultado3);
@@ -399,11 +399,11 @@
         $consulta14 = sqlsrv_query($conn, $resultado14);
         $consulta15 = sqlsrv_query($conn4, $resultado15);
     
-    $my_date_modify = "SELECT MAX(FECHA_MODIFICACION_REGISTRO) as DATE_MODIFY FROM NOMINAL_PADRON_NOMINAL";
-    $consult = sqlsrv_query($conn2, $my_date_modify);
-    while ($cons = sqlsrv_fetch_array($consult)){
-        $date_modify = $cons['DATE_MODIFY'] -> format('d/m/y');
-    }
+        $my_date_modify = "SELECT MAX(FECHA_MODIFICACION_REGISTRO) as DATE_MODIFY FROM NOMINAL_PADRON_NOMINAL";
+        $consult = sqlsrv_query($conn2, $my_date_modify);
+        while ($cons = sqlsrv_fetch_array($consult)){
+            $date_modify = $cons['DATE_MODIFY'] -> format('d/m/y');
+        }
 	
 	if(!empty($consulta15)){
 		$ficheroExcel="DEIT_PASCO CG_FT_CRED "._date("d-m-Y", false, 'America/Lima').".xls";
@@ -434,7 +434,7 @@
 	</table>
 	<table class="table table-hover">
         <thead>
-            <tr class="font-12 text-center" style="background: #e0ebd8;">
+            <tr class="font-12 text-center" style="background: #c6deef;">
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">#</th>    
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Provincia</th>
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">Distrito</th>
