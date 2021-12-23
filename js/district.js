@@ -2,6 +2,7 @@
 $(document).ready(function(){
     $('#red').select2();
     $('#distrito').select2();
+    $('#anio').select2();
     $('#mes').select2();
     $("#btn_buscar").click(function(){
         var red = $("#red").val();

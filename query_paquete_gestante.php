@@ -8,6 +8,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -79,8 +80,9 @@
                             from CNV_DOM_MADRE_PASCO A
                             LEFT JOIN BDHIS_MINSA.dbo.PASO1 B ON A.NU_DOC_MADRE=B.NUMERO_DOCUMENTO_PACIENTE where
                             Lugar_Nacido='ESTABLECIMIENTO DE SALUD' AND DUR_EMB_PARTO>='37' AND 
-                            (Institucion in ('GOBIERNO REGIONAL','MINSA')) AND Tipo_Doc_Madre='DNI/LE' AND PERIODO='2021$mes2'
+                            (Institucion in ('GOBIERNO REGIONAL','MINSA')) AND Tipo_Doc_Madre='DNI/LE' AND PERIODO='$anio$mes2'
                             AND Prov_Madre='$red'
+                            ORDER BY Prov_Madre, Dist_Madre, Nombre_EESS
                             DROP TABLE BDHIS_MINSA.dbo.SULFATO_FERROSO_AND_ACIDO_FOLICO
                             DROP TABLE BDHIS_MINSA.dbo.ENTREGA_SUPLEMENTO
                             DROP TABLE BDHIS_MINSA.dbo.PASO1";
@@ -96,7 +98,8 @@
                             from CNV_DOM_MADRE_PASCO A
                             LEFT JOIN BDHIS_MINSA.dbo.PASO1 B ON A.NU_DOC_MADRE=B.NUMERO_DOCUMENTO_PACIENTE where
                             Lugar_Nacido='ESTABLECIMIENTO DE SALUD' AND DUR_EMB_PARTO>='37' AND 
-                            (Institucion in ('GOBIERNO REGIONAL','MINSA')) AND Tipo_Doc_Madre='DNI/LE' AND PERIODO='2021$mes2'
+                            (Institucion in ('GOBIERNO REGIONAL','MINSA')) AND Tipo_Doc_Madre='DNI/LE' AND PERIODO='$anio$mes2'
+                            ORDER BY Prov_Madre, Dist_Madre, Nombre_EESS
                             DROP TABLE BDHIS_MINSA.dbo.SULFATO_FERROSO_AND_ACIDO_FOLICO
                             DROP TABLE BDHIS_MINSA.dbo.ENTREGA_SUPLEMENTO
                             DROP TABLE BDHIS_MINSA.dbo.PASO1";
@@ -113,8 +116,9 @@
                             from CNV_DOM_MADRE_PASCO A
                             LEFT JOIN BDHIS_MINSA.dbo.PASO1 B ON A.NU_DOC_MADRE=B.NUMERO_DOCUMENTO_PACIENTE where
                             Lugar_Nacido='ESTABLECIMIENTO DE SALUD' AND DUR_EMB_PARTO>='37' AND 
-                            (Institucion in ('GOBIERNO REGIONAL','MINSA')) AND Tipo_Doc_Madre='DNI/LE' AND PERIODO='2021$mes2'
+                            (Institucion in ('GOBIERNO REGIONAL','MINSA')) AND Tipo_Doc_Madre='DNI/LE' AND PERIODO='$anio$mes2'
                             AND Dist_Madre='$dist'
+                            ORDER BY Prov_Madre, Dist_Madre, Nombre_EESS
                             DROP TABLE BDHIS_MINSA.dbo.SULFATO_FERROSO_AND_ACIDO_FOLICO
                             DROP TABLE BDHIS_MINSA.dbo.ENTREGA_SUPLEMENTO
                             DROP TABLE BDHIS_MINSA.dbo.PASO1";

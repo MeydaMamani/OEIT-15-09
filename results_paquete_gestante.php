@@ -5,11 +5,31 @@
     include('./base.php');
     include('zone_setting.php');
     include('query_paquete_gestante.php');
-    $row_cont=0; $correctos=0; $incorrectos=0;
-    // while ($consulta = sqlsrv_fetch_array($consulta4)){  
-	// 	$row_cont++;
-		
-    // }  
+    $row_cont=0; $cumple=0; $no_cumple=0;
+    while ($consulta = sqlsrv_fetch_array($consulta4)){
+        $row_cont++;
+        if(!is_null($consulta['DOSAJE_HEMOGLOBINA']) && !is_null($consulta['TAMIZAJE_SIFILIS']) && !is_null($consulta['TAMIZAJE_VIH']) && 
+            !is_null($consulta['TAMIZAJE_BACTERIURIA']) && !is_null ($consulta['PERFIL_OBSTETRICO'])){
+            if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
+                !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
+                !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
+                    $cumple++;
+            }else{
+                $no_cumple++;
+            }
+        }else if(!is_null ($consulta['PERFIL_OBSTETRICO']) && (!is_null($consulta['DOSAJE_HEMOGLOBINA']) || !is_null($consulta['TAMIZAJE_SIFILIS']) ||
+                !is_null($consulta['TAMIZAJE_VIH']) || !is_null($consulta['TAMIZAJE_BACTERIURIA']))){
+            if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
+                    !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
+                    !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
+                        $no_cumple++;
+            }else{
+                $no_cumple++;
+            }
+        }else{
+            $no_cumple++;
+        }		
+    }  
   ?>
     <div class="page-wrapper">
         <div class="container">
@@ -24,78 +44,79 @@
             <div class="text-center mb-3">
                 <h3 class="mb-4">Paquete Completo Gestante - <?php echo $nombre_mes; ?></h3>
             </div>
-            <div class="mb-3">
-                <!-- <div class="row m-2">
-                    <div class="card col-md-3 datos_avance">
+            <div class="">
+                <div class="row m-2">
+                    <div class="card col-md-3">
                         <div class="card-body p-1">
                             <p class="card-title text-secondary text-center font-18 pt-2">Cantidad Registros</p>
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium mb-3 justify-content-center d-flex">
                                         <div class="col-md-5 text-end">
-                                            <img src="./img/user_cant.png" width="90" alt="">
+                                            <img src="./img/pregnant_total.png" width="110" alt="">
                                         </div>
-                                        <div class="mt-3 col-md-7 text-center">
-                                            <b class="font-49 total"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-49 text-secondary"></i>
+                                        <div class="mt-4 col-md-7 text-center">
+                                            <b class="font-45 total text-secondary"> <?php echo $row_cont; ?></b> <i class="mdi mdi-plus font-45 text-secondary" style="margin-left: -10px;"></i>
                                         </div>
                                     </h4>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card col-md-3 datos_avance">
+                    <div class="card col-md-3">
                         <div class="card-body p-1">
-                            <p class="card-title text-secondary text-center font-18 pt-2">Correctos</h4>
+                            <p class="card-title text-secondary text-center font-18 pt-2">Cumple</h4>
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium mb-3 justify-content-center d-flex">
                                         <div class="col-md-5 text-end">
-                                            <img src="./img/boy.png" width="90" alt="">
+                                            <img src="./img/11677442-a961-45c6-a9df-f7c12ab3598a.png" width="100" alt="">
                                         </div>
-                                        <div class="mt-3 col-md-7 text-center">
-                                            <b class="font-49 correcto"> <?php echo $correctos; ?></b> <i class="mdi mdi-check font-49 text-success"></i>
+                                        <div class="mt-4 col-md-7 text-center">
+                                            <b class="font-45 correcto text-success"> <?php echo $cumple; ?></b> <i class="mdi mdi-check font-45 text-success" style="margin-left: -10px;"></i>
                                         </div>
                                     </h4>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card col-md-3 datos_avance">
+                    <div class="card col-md-3">
                         <div class="card-body p-0">
-                        <p class="card-title text-secondary text-center font-18 pt-3">Incorrectos</h4>
+                            <p class="card-title text-secondary text-center font-18 pt-3">No Cumple</h4>
                             <div class="justify-content-center">
                                 <div class="align-self-center">
                                     <h4 class="font-medium mb-3 justify-content-center d-flex">
                                         <div class="col-md-5 text-end">
-                                            <img src="./img/boy_x.png" width="90" alt="">
+                                            <img src="./img/pregnant_correct.png" width="90" alt="" height="120">
                                         </div>
-                                        <div class="mt-3 col-md-7 text-center">
-                                            <b class="font-49 incorrecto"> <?php echo $incorrectos; ?></b> <i class="mdi mdi-close font-49 text-danger"></i>
+                                        <div class="mt-4 col-md-7 text-center">
+                                            <b class="font-45 incorrecto text-danger"> <?php echo $no_cumple; ?></b> <i class="mdi mdi-close font-45 text-danger"></i>
                                         </div>
                                     </h4>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card col-md-3 datos_avance">
+                    <div class="card col-md-3">
                         <div class="card-body p-1">
                             <div class="row pt-4">
                                 <div class="col-md-8 p-r-0 text-center">
-                                    <h2 class="font-light avance mb-3"><?php
-                                        if($correctos == 0 and $incorrectos == 0){ echo '0 %'; }else{
-                                            echo number_format((float)(($correctos/$row_cont)*100), 2, '.', ''), '%'; }
+                                    <h1 class="font-light avance mb-3 mt-2 text-primary"><?php
+                                        if($cumple == 0 and $row_cont == 0){ echo '0 %'; }else{
+                                            echo number_format((float)(($cumple/$row_cont)*100), 2, '.', ''), '%'; }
                                         ?> 
-                                    </h2>
-                                    <h4 class="text-muted">Avance</h4></div>
+                                    </h1>
+                                    <h2 class="text-muted">Avance</h2>
+                                </div>
                                 <div class="col-md-4 p-0 text-center align-self-center position-sticky">
-                                    <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php if($correctos == 0 and $incorrectos == 0){ echo '0'; }else{
-                                            echo number_format((float)(($correctos/$row_cont)*100), 0, '.', ''); }
+                                    <div id="chart" class="css-bar m-b-0 css-bar-info css-bar-<?php if($cumple == 0 and $row_cont == 0){ echo '0'; }else{
+                                            echo number_format((float)(($cumple/$row_cont)*100), 0, '.', ''); }
                                         ?>"><i class="mdi mdi-receipt"></i></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
             <div class="row mb-3">
 				<div class="col-lg-12 justify-content-center d-flex">
@@ -132,6 +153,7 @@
                         <th class="align-middle">1era Entrega Suplemento</th>
                         <th class="align-middle">2da Entrega Suplemento</th>
                         <th class="align-middle">3era Entrega Suplemento</th>
+                        <th class="align-middle">Cumple</th>
 					</tr>
                 </thead>
                 <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -265,12 +287,26 @@
                         <td class="align-middle"><?php echo $newdate17; ?></td>
                         <td class="align-middle"><?php echo $newdate18; ?></td>
                         <td class="align-middle"><?php 
-                            if(!is_null($consulta['DOSAJE_HEMOGLOBINA']) && !is_null($consulta['TAMIZAJE_SIFILIS']) && !is_null($consulta['TAMIZAJE_VIH']) && !is_null($consulta['TAMIZAJE_BACTERIURIA'])){
+                            if(!is_null($consulta['DOSAJE_HEMOGLOBINA']) && !is_null($consulta['TAMIZAJE_SIFILIS']) && !is_null($consulta['TAMIZAJE_VIH']) && 
+                                !is_null($consulta['TAMIZAJE_BACTERIURIA']) && !is_null ($consulta['PERFIL_OBSTETRICO'])){
                                 if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
                                     !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
                                     !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
                                         echo "<span class='badge bg-correct'>CUMPLE</span>";
+                                }else{
+                                    echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
                                 }
+                            }else if(!is_null ($consulta['PERFIL_OBSTETRICO']) && (!is_null($consulta['DOSAJE_HEMOGLOBINA']) || !is_null($consulta['TAMIZAJE_SIFILIS']) ||
+                                     !is_null($consulta['TAMIZAJE_VIH']) || !is_null($consulta['TAMIZAJE_BACTERIURIA']))){
+                                if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
+                                        !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
+                                        !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
+                                            echo "<span class='badge bg-correct'>CUMPLE</span>";
+                                }else{
+                                    echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                                }
+                            }else{
+                                echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
                             }
                         ?></td>
                     </tr>
