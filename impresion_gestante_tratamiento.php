@@ -30,8 +30,8 @@
         elseif ($red_1 == 3) { $red = 'PASCO';  }
         elseif ($red_1 == 4) { $red = 'TODOS'; }
 
-
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
+            $dist=$dist_1;
             $mes_ant = $mes-1;
             $resultado = "SELECT DISTINCT(Numero_Documento_Paciente) AS ATENDIDOS, Numero_Documento_Paciente,
                             Tipo_Doc_Paciente,Fecha_Atencion
@@ -53,7 +53,7 @@
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA T 
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.tmz TM ON (T.Numero_Documento_Paciente=TM.Numero_Documento_Paciente) and (t.Fecha_Atencion=tm.Fecha_Atencion)
                             LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.r456 R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
-                            where ANIO='2021' AND MES='$mes' AND T.Provincia_Establecimiento='$red' AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
+                            where ANIO='2021' AND MES='$mes' AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
                             and Tipo_Diagnostico='D') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))  ) a
                             where vif is not null
                             ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, ATENDIDOS
@@ -79,37 +79,50 @@
                             Tipo_Doc_Paciente,Numero_Documento_Paciente,Fecha_Atencion
                             INTO BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA 
-                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85','Y09')
+                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85',
+                            'X85','X86','X87','X88','X89','X90','91','X92','X93','X94','X95','X96','X97','X98','X99',
+                            'Y00','Y01','Y02','Y03','Y04','Y05','Y06','Y07','Y08','Y09')
                             and Tipo_Diagnostico='D'";
 
             $resultado7 = "SELECT  DISTINCT(Numero_Documento_Paciente) AS ATENDIDOS, 
                             Tipo_Doc_Paciente, Numero_Documento_Paciente, Fecha_Atencion
                             INTO BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA 
-                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85','Y09')
+                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85',
+                            'X86','X87','X88','X89','X90','91','X92','X93','X94','X95','X96','X97','X98','X99',
+                            'Y00','Y01','Y02','Y03','Y04','Y05','Y06','Y07','Y08','Y09')
                             and Tipo_Diagnostico IN('D','R') AND Id_Cita IN
                             (SELECT  ID_CITA
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA 
-                            where ANIO='2021' AND Codigo_Item in ('99215','99366','99207.04','Z504','99207.01','90834','90860',
+                            where ANIO='2021' AND Codigo_Item in ('99215','99366','99207','99207.04','Z504','99207.01','90834','90860',
                             '90806','C2111.01','96100.01','90847','C0011'))";
 
-            $resultado8 = "SELECT * FROM (
-                            SELECT  DISTINCT(T.Numero_Documento_Paciente) AS ATENDIDOS, T.Provincia_Establecimiento,T.Distrito_Establecimiento,
-                            T.Tipo_Doc_Paciente,T.Numero_Documento_Paciente,T.Fecha_Atencion, TM.Fecha_Atencion VIF, R.Fecha_Atencion R456,
-                            dx.Fecha_Atencion diagnostico, tto.Fecha_Atencion iniciotto
-                            FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA T
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TAMIZAJE TM ON (T.Numero_Documento_Paciente=TM.Numero_Documento_Paciente) and (t.Fecha_Atencion=tm.Fecha_Atencion)
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.SOSPECHA R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA dx ON (T.Numero_Documento_Paciente=dx.Numero_Documento_Paciente) and (t.Fecha_Atencion=dx.Fecha_Atencion)
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA tto ON (T.Numero_Documento_Paciente=tto.Numero_Documento_Paciente) and (t.Fecha_Atencion=tto.Fecha_Atencion)
-                            where ANIO='2021' AND MES in ('$mes_ant') AND T.Provincia_Establecimiento='$red' AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
-                            and Tipo_Diagnostico='D') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))  ) a
-                            where r456 is not null
+            $resultado8 = "SELECT * 
+                                INTO BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO
+                                FROM ( SELECT  DISTINCT(T.Numero_Documento_Paciente) AS ATENDIDOS, T.Provincia_Establecimiento,T.Distrito_Establecimiento,
+                                        T.Tipo_Doc_Paciente,T.Numero_Documento_Paciente,T.Fecha_Atencion, TM.Fecha_Atencion VIF, R.Fecha_Atencion R456,
+                                        dx.Fecha_Atencion diagnostico, tto.Fecha_Atencion iniciotto
+                                        FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA T
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TAMIZAJE TM ON (T.Numero_Documento_Paciente=TM.Numero_Documento_Paciente) and (t.Fecha_Atencion=tm.Fecha_Atencion)
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.SOSPECHA R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA dx ON (T.Numero_Documento_Paciente=dx.Numero_Documento_Paciente)
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA tto ON (T.Numero_Documento_Paciente=tto.Numero_Documento_Paciente)
+                                        where ANIO='2021' AND MES in ('$mes_ant') AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
+                                        and Tipo_Diagnostico='D') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))  ) a
+                                        where r456 is not null;
+                                    with c as ( select ATENDIDOS,  ROW_NUMBER() 
+                                            over(partition by ATENDIDOS order by iniciotto) as duplicado
+                                            from BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO )
+                                    delete  from c
+                                    where duplicado >1";
+
+            $resultado9 = "SELECT *, DATEDIFF (DAY, R456 , diagnostico) AS DIA1,  DATEDIFF (DAY, diagnostico , iniciotto) AS DIA2 FROM BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO
                             ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, ATENDIDOS
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.TAMIZAJE
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SOSPECHA
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA
-                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA";
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $mes_ant = $mes-1;
@@ -159,37 +172,50 @@
                             Tipo_Doc_Paciente,Numero_Documento_Paciente,Fecha_Atencion
                             INTO BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA 
-                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85','Y09')
+                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85',
+                            'X85','X86','X87','X88','X89','X90','91','X92','X93','X94','X95','X96','X97','X98','X99',
+                            'Y00','Y01','Y02','Y03','Y04','Y05','Y06','Y07','Y08','Y09')
                             and Tipo_Diagnostico='D'";
 
             $resultado7 = "SELECT  DISTINCT(Numero_Documento_Paciente) AS ATENDIDOS, 
                             Tipo_Doc_Paciente, Numero_Documento_Paciente, Fecha_Atencion
                             INTO BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA 
-                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85','Y09')
+                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85',
+                            'X86','X87','X88','X89','X90','91','X92','X93','X94','X95','X96','X97','X98','X99',
+                            'Y00','Y01','Y02','Y03','Y04','Y05','Y06','Y07','Y08','Y09')
                             and Tipo_Diagnostico IN('D','R') AND Id_Cita IN
                             (SELECT  ID_CITA
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA 
-                            where ANIO='2021' AND Codigo_Item in ('99215','99366','99207.04','Z504','99207.01','90834','90860',
+                            where ANIO='2021' AND Codigo_Item in ('99215','99366','99207','99207.04','Z504','99207.01','90834','90860',
                             '90806','C2111.01','96100.01','90847','C0011'))";
 
-            $resultado8 = "SELECT * FROM (
-                            SELECT  DISTINCT(T.Numero_Documento_Paciente) AS ATENDIDOS, T.Provincia_Establecimiento,T.Distrito_Establecimiento,
-                            T.Tipo_Doc_Paciente,T.Numero_Documento_Paciente,T.Fecha_Atencion, TM.Fecha_Atencion VIF, R.Fecha_Atencion R456,
-                            dx.Fecha_Atencion diagnostico, tto.Fecha_Atencion iniciotto
-                            FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA T
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TAMIZAJE TM ON (T.Numero_Documento_Paciente=TM.Numero_Documento_Paciente) and (t.Fecha_Atencion=tm.Fecha_Atencion)
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.SOSPECHA R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA dx ON (T.Numero_Documento_Paciente=dx.Numero_Documento_Paciente) and (t.Fecha_Atencion=dx.Fecha_Atencion)
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.ttoviolencia tto ON (T.Numero_Documento_Paciente=tto.Numero_Documento_Paciente) and (t.Fecha_Atencion=tto.Fecha_Atencion)
-                            where ANIO='2021' AND MES in ('$mes_ant') AND  ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
-                            and Tipo_Diagnostico='D') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))  ) a
-                            where r456 is not null
+            $resultado8 = "SELECT * 
+                                INTO BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO
+                                FROM ( SELECT  DISTINCT(T.Numero_Documento_Paciente) AS ATENDIDOS, T.Provincia_Establecimiento,T.Distrito_Establecimiento,
+                                        T.Tipo_Doc_Paciente,T.Numero_Documento_Paciente,T.Fecha_Atencion, TM.Fecha_Atencion VIF, R.Fecha_Atencion R456,
+                                        dx.Fecha_Atencion diagnostico, tto.Fecha_Atencion iniciotto
+                                        FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA T
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TAMIZAJE TM ON (T.Numero_Documento_Paciente=TM.Numero_Documento_Paciente) and (t.Fecha_Atencion=tm.Fecha_Atencion)
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.SOSPECHA R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA dx ON (T.Numero_Documento_Paciente=dx.Numero_Documento_Paciente)
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA tto ON (T.Numero_Documento_Paciente=tto.Numero_Documento_Paciente)
+                                        where ANIO='2021' AND MES in ('$mes_ant') AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
+                                        and Tipo_Diagnostico='D') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))  ) a
+                                        where r456 is not null;
+                                    with c as ( select ATENDIDOS,  ROW_NUMBER() 
+                                            over(partition by ATENDIDOS order by iniciotto) as duplicado
+                                            from BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO )
+                                    delete  from c
+                                    where duplicado >1";
+
+            $resultado9 = "SELECT *, DATEDIFF (DAY, R456 , diagnostico) AS DIA1,  DATEDIFF (DAY, diagnostico , iniciotto) AS DIA2 FROM BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO
                             ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, ATENDIDOS
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.TAMIZAJE
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SOSPECHA
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA
-                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA";
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO";
         }
         else if($dist_1 != 'TODOS'){
             $dist=$dist_1;
@@ -240,37 +266,50 @@
                             Tipo_Doc_Paciente,Numero_Documento_Paciente,Fecha_Atencion
                             INTO BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA 
-                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85','Y09')
+                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85',
+                            'X85','X86','X87','X88','X89','X90','91','X92','X93','X94','X95','X96','X97','X98','X99',
+                            'Y00','Y01','Y02','Y03','Y04','Y05','Y06','Y07','Y08','Y09')
                             and Tipo_Diagnostico='D'";
 
             $resultado7 = "SELECT  DISTINCT(Numero_Documento_Paciente) AS ATENDIDOS, 
                             Tipo_Doc_Paciente, Numero_Documento_Paciente, Fecha_Atencion
                             INTO BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA 
-                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85','Y09')
+                            where ANIO='2021' AND Codigo_Item in ('T741','T742','T743','T748','T749','Y070','Y078','X85',
+                            'X86','X87','X88','X89','X90','91','X92','X93','X94','X95','X96','X97','X98','X99',
+                            'Y00','Y01','Y02','Y03','Y04','Y05','Y06','Y07','Y08','Y09')
                             and Tipo_Diagnostico IN('D','R') AND Id_Cita IN
                             (SELECT  ID_CITA
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA 
-                            where ANIO='2021' AND Codigo_Item in ('99215','99366','99207.04','Z504','99207.01','90834','90860',
+                            where ANIO='2021' AND Codigo_Item in ('99215','99366','99207','99207.04','Z504','99207.01','90834','90860',
                             '90806','C2111.01','96100.01','90847','C0011'))";
 
-            $resultado8 = "SELECT * FROM (
-                            SELECT  DISTINCT(T.Numero_Documento_Paciente) AS ATENDIDOS, T.Provincia_Establecimiento,T.Distrito_Establecimiento,
-                            T.Tipo_Doc_Paciente,T.Numero_Documento_Paciente,T.Fecha_Atencion, TM.Fecha_Atencion VIF, R.Fecha_Atencion R456,
-                            dx.Fecha_Atencion diagnostico, tto.Fecha_Atencion iniciotto
-                            FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA T
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TAMIZAJE TM ON (T.Numero_Documento_Paciente=TM.Numero_Documento_Paciente) and (t.Fecha_Atencion=tm.Fecha_Atencion)
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.SOSPECHA R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA dx ON (T.Numero_Documento_Paciente=dx.Numero_Documento_Paciente) and (t.Fecha_Atencion=dx.Fecha_Atencion)
-                            LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA tto ON (T.Numero_Documento_Paciente=tto.Numero_Documento_Paciente) and (t.Fecha_Atencion=tto.Fecha_Atencion)
-                            where ANIO='2021' AND MES in ('$mes_ant') AND T.Distrito_Establecimiento='$dist' AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
-                            and Tipo_Diagnostico='D') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))  ) a
-                            where r456 is not null
+            $resultado8 = "SELECT * 
+                                INTO BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO
+                                FROM ( SELECT  DISTINCT(T.Numero_Documento_Paciente) AS ATENDIDOS, T.Provincia_Establecimiento,T.Distrito_Establecimiento,
+                                        T.Tipo_Doc_Paciente,T.Numero_Documento_Paciente,T.Fecha_Atencion, TM.Fecha_Atencion VIF, R.Fecha_Atencion R456,
+                                        dx.Fecha_Atencion diagnostico, tto.Fecha_Atencion iniciotto
+                                        FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA T
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TAMIZAJE TM ON (T.Numero_Documento_Paciente=TM.Numero_Documento_Paciente) and (t.Fecha_Atencion=tm.Fecha_Atencion)
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.SOSPECHA R ON (T.Numero_Documento_Paciente=r.Numero_Documento_Paciente) and (t.Fecha_Atencion=r.Fecha_Atencion)
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA dx ON (T.Numero_Documento_Paciente=dx.Numero_Documento_Paciente)
+                                        LEFT JOIN BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA tto ON (T.Numero_Documento_Paciente=tto.Numero_Documento_Paciente)
+                                        where ANIO='2021' AND MES in ('$mes_ant') AND T.Distrito_Establecimiento='$dist' AND ((Codigo_Item IN ('Z3491','Z3591','Z3492','Z3592','Z3493','Z3593'))
+                                        and Tipo_Diagnostico='D') and (Codigo_Unico NOT IN ('000000979','000000980','000000981'))  ) a
+                                        where r456 is not null;
+                                    with c as ( select ATENDIDOS,  ROW_NUMBER() 
+                                            over(partition by ATENDIDOS order by iniciotto) as duplicado
+                                            from BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO )
+                                    delete  from c
+                                    where duplicado >1";
+
+            $resultado9 = "SELECT *, DATEDIFF (DAY, R456 , diagnostico) AS DIA1,  DATEDIFF (DAY, diagnostico , iniciotto) AS DIA2 FROM BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO
                             ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, ATENDIDOS
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.TAMIZAJE
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.SOSPECHA
                             DROP TABLE BDHIS_MINSA_EXTERNO.dbo.DXVIOLENCIA
-                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA";
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.TTOVIOLENCIA
+                            DROP TABLE BDHIS_MINSA_EXTERNO.dbo.CONSOLIDADO";
         }
 
     if(isset($_POST["exportarSospecha"])) {
@@ -394,8 +433,9 @@
         $consulta6 = sqlsrv_query($conn, $resultado6);
         $consulta7 = sqlsrv_query($conn, $resultado7);
         $consulta8 = sqlsrv_query($conn, $resultado8);
+        $consulta9 = sqlsrv_query($conn, $resultado9);
 
-        if(!empty($consulta8)){
+        if(!empty($consulta9)){
             $ficheroExcel="DEIT_PASCO GESTANTES CON INICIO DE TRATAMIENTO "._date("d-m-Y", false, 'America/Lima').".xls";        
             header('Content-Type: application/vnd.ms-excel');
             header("Content-Type: application/octet-stream");
@@ -442,7 +482,7 @@
             <tr></tr>
             <?php  
                 $i=1;
-                while ($consulta = sqlsrv_fetch_array($consulta8)){
+                while ($consulta = sqlsrv_fetch_array($consulta9)){
                     if(is_null ($consulta['Provincia_Establecimiento']) ){
                         $newdate1 = '  -'; }
                     else{
@@ -501,19 +541,18 @@
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate8; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate9; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php 
-                    if(!is_null ($consulta['VIF']) && !is_null ($consulta['R456'])){
-                        if(!is_null ($consulta['diagnostico']) && !is_null ($consulta['iniciotto'])){
-                            if($consulta['VIF'] == $consulta['R456'] && $consulta['VIF'] == $consulta['diagnostico'] && $consulta['VIF'] == $consulta['iniciotto']){
+                    if(!is_null ($consulta['VIF']) && !is_null($consulta['R456']) && !is_null ($consulta['diagnostico']) && !is_null ($consulta['iniciotto'])){
+                        if($consulta['VIF'] == $consulta['R456']){
+                            if($consulta['DIA1'] <= 15 && $consulta['DIA2'] <= 7){
                                 echo "<span class='badge bg-correct'>CUMPLE</span>";
                             }else{
                                 echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
                             }
-    
                         }else{
                             echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
                         }
                     }else{
-                        echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                        echo "<span class='badge bg-incorrect'>NO CUMPLE</span>"; 
                     }
                 ?></td>
             </tr>

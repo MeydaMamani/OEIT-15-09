@@ -19,15 +19,16 @@
         }
     }
     $t=0; $v=0; $row_cont2=0;
-    while ($consulta = sqlsrv_fetch_array($consulta8)){
+    while ($consulta = sqlsrv_fetch_array($consulta9)){
         $row_cont2++;
         if(!is_null ($consulta['VIF']) && !is_null ($consulta['R456'])){
-            if($consulta['VIF'] == $consulta['R456']){
-                $v++;
-            }
+            if($consulta['VIF'] == $consulta['R456']){ $v++; }
+
             if(!is_null ($consulta['diagnostico']) && !is_null ($consulta['iniciotto'])){
-                if($consulta['VIF'] == $consulta['R456'] && $consulta['VIF'] == $consulta['diagnostico'] && $consulta['VIF'] == $consulta['iniciotto']){
-                    $t++;
+                if($consulta['VIF'] == $consulta['R456']){
+                    if($consulta['DIA1'] <= 15 && $consulta['DIA2'] <= 7){
+                        $t++;
+                    }
                 }
             }
         }
@@ -335,7 +336,7 @@
                                     <?php  
                                         include('consulta_gestante_tratamiento.php');
                                         $i=1;
-                                        while ($consulta = sqlsrv_fetch_array($consulta8)){
+                                        while ($consulta = sqlsrv_fetch_array($consulta9)){
                                             if(is_null ($consulta['Provincia_Establecimiento']) ){
                                                 $newdate1 = '  -'; }
                                             else{
@@ -394,19 +395,18 @@
                                         <td class="align-middle"><?php echo $newdate8; ?></td>
                                         <td class="align-middle"><?php echo $newdate9; ?></td>
                                         <td class="align-middle"><?php 
-                                            if(!is_null ($consulta['VIF']) && !is_null ($consulta['R456'])){
-                                                if(!is_null ($consulta['diagnostico']) && !is_null ($consulta['iniciotto'])){
-                                                    if($consulta['VIF'] == $consulta['R456'] && $consulta['VIF'] == $consulta['diagnostico'] && $consulta['VIF'] == $consulta['iniciotto']){
+                                            if(!is_null ($consulta['VIF']) && !is_null($consulta['R456']) && !is_null ($consulta['diagnostico']) && !is_null ($consulta['iniciotto'])){
+                                                if($consulta['VIF'] == $consulta['R456']){
+                                                    if($consulta['DIA1'] <= 15 && $consulta['DIA2'] <= 7){
                                                         echo "<span class='badge bg-correct'>CUMPLE</span>";
                                                     }else{
                                                         echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
                                                     }
-
                                                 }else{
                                                     echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
                                                 }
                                             }else{
-                                                echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                                                echo "<span class='badge bg-incorrect'>NO CUMPLE</span>"; 
                                             }
                                         ?></td>
                                     </tr>
@@ -432,73 +432,6 @@
         </div>
     </div>
 
-    <!-- MODAL CUADRO RESUMEN-->
-    <div class="modal fade" id="ModalResumen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 1250px;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cuadro Resumen</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md table-responsive">
-                            <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr class="text-light text-center" style="font-size: 12px; background: #5a6a77;">
-                                    <th class="align-middle">#</th>
-                                    <th class="align-middle">Provincia</th>
-                                    <th class="align-middle">Distrito</th>
-                                    <th class="align-middle">Gestantes Atendidas</th>
-                                    <th class="align-middle">Tamizaje Violencia</th>
-                                    <th class="align-middle">Problemas relacionados con violencia</th> 
-                                    <th class="align-middle">Diagnóstico de Tratamiento</th>
-                                    <th class="align-middle">Avance</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                include('consulta_resumen_gestante_tratamiento.php'); 
-                                $i=1;
-                                while ($consulta = sqlsrv_fetch_array($consulta2)){  
-                                    $violencia=$consulta['PROBLEMAS_RELACIONADOS_CON_LA_VIOLENCIA'];
-                                    $tratamiento=$consulta['DIAGNOSTICO_E_INICIO_DE_TRATAMIENTO'];
-                                ?>
-                                <tr style="font-size: 11px; text-align: center;">
-                                    <td class="align-middle"><?php echo $i++; ?></td>
-                                    <td class="align-middle"><?php echo utf8_encode($consulta['Provincia_Establecimiento']); ?></td>
-                                    <td class="align-middle"><?php echo utf8_encode($consulta['Distrito_Establecimiento']); ?></td>
-                                    <td class="align-middle"><?php echo $consulta['GESTANTES_ATENDIDAS']; ?></td>
-                                    <td class="align-middle"><?php echo $consulta['TAMIZAJE_VIOLENCIA']; ?></td>
-                                    <td class="align-middle"><?php echo $violencia; ?></td>
-                                    <td class="align-middle"><?php echo $tratamiento; ?></td>
-                                    <td class="align-middle"><?php 
-                                        if($tratamiento == 0 and $violencia == 0){
-                                        echo '0 %';
-                                        }else{
-                                        echo ($tratamiento/$violencia)* 100, ' %';
-                                        }                                
-                                    ?>
-                                    </td>
-                                </tr>
-                                <?php
-                                ;}
-                                include('cerrar2.php');
-                                ?>
-                            </tbody>
-                            </table>
-                        </div>
-                        <div class="col-md">
-                            <canvas id="myChart" style="width: 500px !important; height: 350px !important;"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- MODAL INFORMACION-->
     <div class="modal fade" id="ModalInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
