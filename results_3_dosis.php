@@ -150,7 +150,6 @@
                                     $newdate15 = '  -'; }
                                 else{
                                     $newdate15 = $consulta['FECHA_PARA_3RA_DOSIS'] -> format('d/m/y');}
-
         
                         ?>
                         <tr class="text-center font-12" id="table_fed">
@@ -168,7 +167,11 @@
                             <td class="align-middle"><?php echo $newdate11; ?></td>
                             <td class="align-middle"><?php echo $newdate12; ?></td>
                             <td class="align-middle"><?php echo $newdate13; ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate14); ?></td>
+                            <td class="align-middle"><?php 
+                                $dato = utf8_encode($newdate14);
+                                $resultado = str_replace("anios", "años", $dato);
+                                echo $resultado;
+                            ?></td>
                             <td class="align-middle" id="body_3_dose"><?php echo utf8_encode($newdate15); ?></td>
                         </tr>
                         <?php
