@@ -9,7 +9,7 @@
     while ($consulta = sqlsrv_fetch_array($consulta4)){
         $row_cont++;
         if(!is_null($consulta['DOSAJE_HEMOGLOBINA']) && !is_null($consulta['TAMIZAJE_SIFILIS']) && !is_null($consulta['TAMIZAJE_VIH']) && 
-            !is_null($consulta['TAMIZAJE_BACTERIURIA']) && !is_null ($consulta['PERFIL_OBSTETRICO'])){
+            !is_null($consulta['TAMIZAJE_BACTERIURIA'])){
             if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
                 !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
                 !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
@@ -22,13 +22,13 @@
             if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
                     !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
                     !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
-                        $no_cumple++;
+                    $cumple++;
             }else{
                 $no_cumple++;
             }
         }else{
             $no_cumple++;
-        }		
+        }
     }  
   ?>
     <div class="page-wrapper">
@@ -124,207 +124,208 @@
 						<input hidden name="red" value="<?php echo $_POST['red']; ?>">
 						<input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
 						<input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                        <input hidden name="anio" value="<?php echo $_POST['anio']; ?>">
 						<button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
 					</form>
 					<button type="submit" name="Limpiar" class="btn btn-outline-secondary btn-sm 1btn_buscar m-2" onclick="location.href='paquete_gestante.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
 				</div>
             </div>            
             <div class="col-12 table-responsive table_no_fed" id="bateria_completa">
-              <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
-                <thead>
-					<tr class="text-center font-12" style="background: #c9d0e2;">
-						<th class="align-middle">#</th>
-						<th class="align-middle">Provincia</th>
-						<th class="align-middle">Distrito</th>
-						<th class="align-middle">Establecimiento</th>
-						<th class="align-middle">Tipo Documento</th>
-						<th class="align-middle">Documento</th>
-						<th class="align-middle">Duración de Embarazo</th>
-						<th class="align-middle">Financiador Parto</th>
-                        <th class="align-middle">Dosaje Hemoglobina</th>
-                        <th class="align-middle">Tmz Sifilis</th>
-						<th class="align-middle">Tmz VIH</th>
-                        <th class="align-middle">Tmz Bacteriuria</th>
-                        <th class="align-middle">Perfil Obstetrico</th>
-                        <th class="align-middle">1er Tri APN Presencial</th>
-                        <th class="align-middle">2do Tri APN Presencial</th>
-                        <th class="align-middle">3er Tri 1APN Presencial</th>
-                        <th class="align-middle">3er Tri 2APN Presencial</th>
-                        <th class="align-middle">1era Entrega Suplemento</th>
-                        <th class="align-middle">2da Entrega Suplemento</th>
-                        <th class="align-middle">3era Entrega Suplemento</th>
-                        <th class="align-middle">Cumple</th>
-					</tr>
-                </thead>
-                <div class="float-end pb-1 col-md-3 table_no_fed">
-					<div class="mb-3">
-						<div id="inputbus" class="input-group input-group-sm">
-							<input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
-							<span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
-						</div>
-					</div>
-				</div>
-                <tbody>
-					<?php 
-						include('query_paquete_gestante.php');
-						$i=1;
-						while ($consulta = sqlsrv_fetch_array($consulta4)){  
-							if(is_null ($consulta['Prov_Madre']) ){
-								$newdate1 = '  -'; }
-								else{
-							$newdate1 = $consulta['Prov_Madre'];}
+                <table id="demo-foo-addrow2" class="table table-hover" data-page-size="20" data-limit-navigation="10">
+                    <thead>
+                        <tr class="text-center font-12" style="background: #c9d0e2;">
+                            <th class="align-middle">#</th>
+                            <th class="align-middle">Provincia</th>
+                            <th class="align-middle">Distrito</th>
+                            <th class="align-middle">Establecimiento</th>
+                            <th class="align-middle">Tipo Documento</th>
+                            <th class="align-middle">Documento</th>
+                            <th class="align-middle">Duración de Embarazo</th>
+                            <th class="align-middle">Financiador Parto</th>
+                            <th class="align-middle">Dosaje Hemoglobina</th>
+                            <th class="align-middle">Tmz Sifilis</th>
+                            <th class="align-middle">Tmz VIH</th>
+                            <th class="align-middle">Tmz Bacteriuria</th>
+                            <th class="align-middle">Perfil Obstetrico</th>
+                            <th class="align-middle">1er Tri APN Presencial</th>
+                            <th class="align-middle">2do Tri APN Presencial</th>
+                            <th class="align-middle">3er Tri 1APN Presencial</th>
+                            <th class="align-middle">3er Tri 2APN Presencial</th>
+                            <th class="align-middle">1era Entrega Suplemento</th>
+                            <th class="align-middle">2da Entrega Suplemento</th>
+                            <th class="align-middle">3era Entrega Suplemento</th>
+                            <th class="align-middle">Cumple</th>
+                        </tr>
+                    </thead>
+                    <div class="float-end pb-1 col-md-3 table_no_fed">
+                        <div class="mb-3">
+                            <div id="inputbus" class="input-group input-group-sm">
+                                <input id="demo-input-search2" type="text" placeholder="Buscar por Nombres o DNI..." autocomplete="off" class="form-control">
+                                <span class="input-group-text bg-light" id="basic-addon1"><i class="mdi mdi-magnify" style="font-size:15px"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <tbody>
+                        <?php 
+                            include('query_paquete_gestante.php');
+                            $i=1;
+                            while ($consulta = sqlsrv_fetch_array($consulta4)){  
+                                if(is_null ($consulta['Prov_Madre']) ){
+                                    $newdate1 = '  -'; }
+                                    else{
+                                $newdate1 = $consulta['Prov_Madre'];}
 
-							if(is_null ($consulta['Dist_Madre']) ){
-								$newdate2 = '  -'; }
-								else{
-							$newdate2 = $consulta['Dist_Madre'];}
+                                if(is_null ($consulta['Dist_Madre']) ){
+                                    $newdate2 = '  -'; }
+                                    else{
+                                $newdate2 = $consulta['Dist_Madre'];}
 
-							if(is_null ($consulta['Nombre_EESS']) ){
-								$newdate3 = '  -'; }
-								else{
-							$newdate3 = $consulta['Nombre_EESS'];}
+                                if(is_null ($consulta['Nombre_EESS']) ){
+                                    $newdate3 = '  -'; }
+                                    else{
+                                $newdate3 = $consulta['Nombre_EESS'];}
 
-							if(is_null ($consulta['Tipo_Doc_Madre']) ){
-								$newdate4 = '  -'; }
-								else{
-							$newdate4 = $consulta['Tipo_Doc_Madre'];}
+                                if(is_null ($consulta['Tipo_Doc_Madre']) ){
+                                    $newdate4 = '  -'; }
+                                    else{
+                                $newdate4 = $consulta['Tipo_Doc_Madre'];}
 
-							if(is_null ($consulta['NU_DOC_MADRE']) ){
-								$newdate5 = '  -'; }
-								else{
-							$newdate5 = $consulta['NU_DOC_MADRE'];}
+                                if(is_null ($consulta['NU_DOC_MADRE']) ){
+                                    $newdate5 = '  -'; }
+                                    else{
+                                $newdate5 = $consulta['NU_DOC_MADRE'];}
 
-                            if(is_null ($consulta['DUR_EMB_PARTO']) ){
-								$newdate6 = '  -'; }
-								else{
-							$newdate6 = $consulta['DUR_EMB_PARTO'];}
+                                if(is_null ($consulta['DUR_EMB_PARTO']) ){
+                                    $newdate6 = '  -'; }
+                                    else{
+                                $newdate6 = $consulta['DUR_EMB_PARTO'];}
 
-                            if(is_null ($consulta['Financiador_Parto']) ){
-								$newdate7 = '  -'; }
-								else{
-							$newdate7 = $consulta['Financiador_Parto'];}
+                                if(is_null ($consulta['Financiador_Parto']) ){
+                                    $newdate7 = '  -'; }
+                                    else{
+                                $newdate7 = $consulta['Financiador_Parto'];}
 
-                            if(is_null ($consulta['DOSAJE_HEMOGLOBINA']) ){
-								$newdate8 = '  -'; }
-								else{
-							$newdate8 = $consulta['DOSAJE_HEMOGLOBINA'] -> format('d/m/y');}
+                                if(is_null ($consulta['DOSAJE_HEMOGLOBINA']) ){
+                                    $newdate8 = '  -'; }
+                                    else{
+                                $newdate8 = $consulta['DOSAJE_HEMOGLOBINA'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['TAMIZAJE_SIFILIS']) ){
-								$newdate9 = '  -'; }
-								else{
-							$newdate9 = $consulta['TAMIZAJE_SIFILIS'] -> format('d/m/y');}
+                                if(is_null ($consulta['TAMIZAJE_SIFILIS']) ){
+                                    $newdate9 = '  -'; }
+                                    else{
+                                $newdate9 = $consulta['TAMIZAJE_SIFILIS'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['TAMIZAJE_VIH']) ){
-								$newdate10 = '  -'; }
-								else{
-							$newdate10 = $consulta['TAMIZAJE_VIH'] -> format('d/m/y');}
+                                if(is_null ($consulta['TAMIZAJE_VIH']) ){
+                                    $newdate10 = '  -'; }
+                                    else{
+                                $newdate10 = $consulta['TAMIZAJE_VIH'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['TAMIZAJE_BACTERIURIA']) ){
-								$newdate11 = '  -'; }
-								else{
-							$newdate11 = $consulta['TAMIZAJE_BACTERIURIA'] -> format('d/m/y');}
+                                if(is_null ($consulta['TAMIZAJE_BACTERIURIA']) ){
+                                    $newdate11 = '  -'; }
+                                    else{
+                                $newdate11 = $consulta['TAMIZAJE_BACTERIURIA'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['PERFIL_OBSTETRICO']) ){
-								$newdate19 = '  -'; }
-								else{
-							$newdate19 = $consulta['PERFIL_OBSTETRICO'] -> format('d/m/y');}
+                                if(is_null ($consulta['PERFIL_OBSTETRICO']) ){
+                                    $newdate19 = '  -'; }
+                                    else{
+                                $newdate19 = $consulta['PERFIL_OBSTETRICO'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) ){
-								$newdate12 = '  -'; }
-								else{
-							$newdate12 = $consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL'] -> format('d/m/y');}
+                                if(is_null ($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) ){
+                                    $newdate12 = '  -'; }
+                                    else{
+                                $newdate12 = $consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) ){
-								$newdate13 = '  -'; }
-								else{
-							$newdate13 = $consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL'] -> format('d/m/y');}
+                                if(is_null ($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) ){
+                                    $newdate13 = '  -'; }
+                                    else{
+                                $newdate13 = $consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) ){
-								$newdate14 = '  -'; }
-								else{
-							$newdate14 = $consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL'] -> format('d/m/y');}
+                                if(is_null ($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) ){
+                                    $newdate14 = '  -'; }
+                                    else{
+                                $newdate14 = $consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) ){
-								$newdate15 = '  -'; }
-								else{
-							$newdate15 = $consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL'] -> format('d/m/y');}
+                                if(is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) ){
+                                    $newdate15 = '  -'; }
+                                    else{
+                                $newdate15 = $consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['PRIMER_ENTREGA_SUPLEMENTO']) ){
-								$newdate16 = '  -'; }
-								else{
-							$newdate16 = $consulta['PRIMER_ENTREGA_SUPLEMENTO'] -> format('d/m/y');}
+                                if(is_null ($consulta['PRIMER_ENTREGA_SUPLEMENTO']) ){
+                                    $newdate16 = '  -'; }
+                                    else{
+                                $newdate16 = $consulta['PRIMER_ENTREGA_SUPLEMENTO'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) ){
-								$newdate17 = '  -'; }
-								else{
-							$newdate17 = $consulta['SEGUNDO_ENTREGA_SUPLEMENTO'] -> format('d/m/y');}
+                                if(is_null ($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) ){
+                                    $newdate17 = '  -'; }
+                                    else{
+                                $newdate17 = $consulta['SEGUNDO_ENTREGA_SUPLEMENTO'] -> format('d/m/y');}
 
-                            if(is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO']) ){
-								$newdate18 = '  -'; }
-								else{
-							$newdate18 = $consulta['TERCERA_ENTREGA_SUPLEMENTO'] -> format('d/m/y');}
-							
-					?>
-                    <tr class="text-center font-12" id="table_fed">
-                        <td class="align-middle"><?php echo $i++; ?></td>
-                        <td class="align-middle"><?php echo utf8_encode($newdate1); ?></td>
-                        <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
-                        <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
-                        <td class="align-middle"><?php echo $newdate4; ?></td>
-                        <td class="align-middle"><?php echo $newdate5; ?></td>                      
-                        <td class="align-middle"><?php echo $newdate6; ?></td>
-                        <td class="align-middle"><?php echo $newdate7; ?></td>
-                        <td class="align-middle"><?php echo $newdate8; ?></td>
-                        <td class="align-middle"><?php echo $newdate9; ?></td>
-                        <td class="align-middle"><?php echo $newdate10; ?></td>
-                        <td class="align-middle"><?php echo $newdate11; ?></td>
-                        <td class="align-middle"><?php echo $newdate19; ?></td>
-                        <td class="align-middle"><?php echo $newdate12; ?></td>
-                        <td class="align-middle"><?php echo $newdate13; ?></td>
-                        <td class="align-middle"><?php echo $newdate14; ?></td>
-                        <td class="align-middle"><?php echo $newdate15; ?></td>
-                        <td class="align-middle"><?php echo $newdate16; ?></td>
-                        <td class="align-middle"><?php echo $newdate17; ?></td>
-                        <td class="align-middle"><?php echo $newdate18; ?></td>
-                        <td class="align-middle"><?php 
-                            if(!is_null($consulta['DOSAJE_HEMOGLOBINA']) && !is_null($consulta['TAMIZAJE_SIFILIS']) && !is_null($consulta['TAMIZAJE_VIH']) && 
-                                !is_null($consulta['TAMIZAJE_BACTERIURIA']) && !is_null ($consulta['PERFIL_OBSTETRICO'])){
-                                if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
-                                    !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
-                                    !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
-                                        echo "<span class='badge bg-correct'>CUMPLE</span>";
-                                }else{
-                                    echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
-                                }
-                            }else if(!is_null ($consulta['PERFIL_OBSTETRICO']) && (!is_null($consulta['DOSAJE_HEMOGLOBINA']) || !is_null($consulta['TAMIZAJE_SIFILIS']) ||
-                                     !is_null($consulta['TAMIZAJE_VIH']) || !is_null($consulta['TAMIZAJE_BACTERIURIA']))){
-                                if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
+                                if(is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO']) ){
+                                    $newdate18 = '  -'; }
+                                    else{
+                                $newdate18 = $consulta['TERCERA_ENTREGA_SUPLEMENTO'] -> format('d/m/y');}
+                                
+                        ?>
+                        <tr class="text-center font-12" id="table_fed">
+                            <td class="align-middle"><?php echo $i++; ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate1); ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
+                            <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
+                            <td class="align-middle"><?php echo $newdate4; ?></td>
+                            <td class="align-middle"><?php echo $newdate5; ?></td>                      
+                            <td class="align-middle"><?php echo $newdate6; ?></td>
+                            <td class="align-middle"><?php echo $newdate7; ?></td>
+                            <td class="align-middle"><?php echo $newdate8; ?></td>
+                            <td class="align-middle"><?php echo $newdate9; ?></td>
+                            <td class="align-middle"><?php echo $newdate10; ?></td>
+                            <td class="align-middle"><?php echo $newdate11; ?></td>
+                            <td class="align-middle"><?php echo $newdate19; ?></td>
+                            <td class="align-middle"><?php echo $newdate12; ?></td>
+                            <td class="align-middle"><?php echo $newdate13; ?></td>
+                            <td class="align-middle"><?php echo $newdate14; ?></td>
+                            <td class="align-middle"><?php echo $newdate15; ?></td>
+                            <td class="align-middle"><?php echo $newdate16; ?></td>
+                            <td class="align-middle"><?php echo $newdate17; ?></td>
+                            <td class="align-middle"><?php echo $newdate18; ?></td>
+                            <td class="align-middle"><?php 
+                                if(!is_null($consulta['DOSAJE_HEMOGLOBINA']) && !is_null($consulta['TAMIZAJE_SIFILIS']) && !is_null($consulta['TAMIZAJE_VIH']) && 
+                                    !is_null($consulta['TAMIZAJE_BACTERIURIA'])){
+                                    if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
                                         !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
                                         !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
                                             echo "<span class='badge bg-correct'>CUMPLE</span>";
+                                    }else{
+                                        echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                                    }
+                                }else if(!is_null ($consulta['PERFIL_OBSTETRICO']) && (!is_null($consulta['DOSAJE_HEMOGLOBINA']) || !is_null($consulta['TAMIZAJE_SIFILIS']) ||
+                                        !is_null($consulta['TAMIZAJE_VIH']) || !is_null($consulta['TAMIZAJE_BACTERIURIA']))){
+                                    if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
+                                            !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
+                                            !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
+                                                echo "<span class='badge bg-correct'>CUMPLE</span>";
+                                    }else{
+                                        echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                                    }
                                 }else{
                                     echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
                                 }
-                            }else{
-                                echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
-                            }
-                        ?></td>
-                    </tr>
-                  <?php
-                      }
-                      include("cerrar.php");
-                  ?>
-                </tbody>
-                <tfoot>
-					<tr>
-						<td colspan="30">
-						<div class="">
-							<ul class="pagination"></ul>
-						</div>
-						</td>
-					</tr>
-                </tfoot>
-              </table>
+                            ?></td>
+                        </tr>
+                    <?php
+                        }
+                        include("cerrar.php");
+                    ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="30">
+                            <div class="">
+                                <ul class="pagination"></ul>
+                            </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>

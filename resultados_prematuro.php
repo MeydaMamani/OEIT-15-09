@@ -24,8 +24,8 @@
             <div class="row">
                 <div class="col-9"></div>
                 <div class="col-3">
-                    <marquee width="100%" direction="left" height="15px">
-                        <p class="font-12 text-secondary"><b>Fuente: </b> BD Padrón Nominal y BD CNV con Fecha: <?php echo date("d-m-y"); ?> a las 08:30 horas</p>
+                    <marquee width="100%" direction="left" height="18px">
+                        <p class="font-12 text-primary"><b>Fuente: </b> BD Padrón Nominal y BD CNV con Fecha: <?php echo date("d-m-y"); ?> a las 08:30 horas</p>
                     </marquee>
                 </div>
             </div>
@@ -138,6 +138,7 @@
                             <th class="align-middle">Suplementado</th>
                             <th class="align-middle">Prematuro</th>
                             <th class="align-middle" id="color_prematuro_head">Se Atiende</th>
+                            <th class="align-middle">Cumple</th>
                         </tr>
                     </thead>
                     <div class="float-end col-md-3 table_no_fed">

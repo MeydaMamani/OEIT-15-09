@@ -143,15 +143,15 @@
         <thead>
             <tr></tr>
             <tr class="text-center">
-                <th colspan="20" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
+                <th colspan="21" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
             </tr>
             <tr></tr>
             <tr class="text-center">
-                <th colspan="20" style="font-size: 28px; border: 1px solid #3A3838;">Paquete Gestante - <?php echo $nombre_mes; ?></th>
+                <th colspan="21" style="font-size: 28px; border: 1px solid #3A3838;">Paquete Gestante - <?php echo $nombre_mes; ?></th>
             </tr>
             <tr></tr>
             <tr>
-                <th colspan="20" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</th>
+                <th colspan="21" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</th>
             </tr>
             <tr></tr>
         </thead>
@@ -179,6 +179,7 @@
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">1era Entrega Suplemento</th>
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">2da Entrega Suplemento</th>
                 <th style="border: 1px solid #DDDDDD; font-size: 15px;">3era Entrega Suplemento</th>
+                <th style="border: 1px solid #DDDDDD; font-size: 15px;">Cumple</th>
             </tr>
         </thead>
         <tbody>
@@ -282,26 +283,57 @@
                     
             ?>
             <tr class="text-center font-12" id="table_fed">
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $i++; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate1); ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate2); ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate3); ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate4; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate5; ?></td>                      
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate6; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate7; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate8; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate9; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate10; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate11; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate19; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate12; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate13; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate14; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate15; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate16; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate17; ?></td>
-              <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate18; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $i++; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo  utf8_encode($newdate1); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php 
+                    $dato = utf8_encode($newdate2); 
+                    $resultado = str_replace("CONSTITUCI+ôN", "CONSITUCIÓN", $dato);
+                    echo $resultado;
+                ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php 
+                    $dato = utf8_encode($newdate3); 
+                    $resultado = str_replace("CONSTITUCI+ôN", "CONSITUCIÓN", $dato);
+                    echo $resultado;
+                ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate4; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate5; ?></td>                      
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate6; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate7; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate8; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate9; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate10; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate11; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate19; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate12; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate13; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate14; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate15; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate16; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate17; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate18; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php 
+                    if(!is_null($consulta['DOSAJE_HEMOGLOBINA']) && !is_null($consulta['TAMIZAJE_SIFILIS']) && !is_null($consulta['TAMIZAJE_VIH']) && 
+                        !is_null($consulta['TAMIZAJE_BACTERIURIA'])){
+                        if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
+                            !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
+                            !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
+                                echo "<span class='badge bg-correct'>CUMPLE</span>";
+                        }else{
+                            echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                        }
+                    }else if(!is_null ($consulta['PERFIL_OBSTETRICO']) && (!is_null($consulta['DOSAJE_HEMOGLOBINA']) || !is_null($consulta['TAMIZAJE_SIFILIS']) ||
+                            !is_null($consulta['TAMIZAJE_VIH']) || !is_null($consulta['TAMIZAJE_BACTERIURIA']))){
+                        if(!is_null($consulta['PRIMER_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['SEGUNDO_TRIMESTRE_APN_PRESENCIAL']) && !is_null($consulta['TERCER_TRIMESTRE_1APN_PRESENCIAL']) && 
+                                !is_null ($consulta['TERCER_TRIMESTRE_2APN_PRESENCIAL']) && !is_null($consulta['PRIMER_ENTREGA_SUPLEMENTO']) && !is_null($consulta['SEGUNDO_ENTREGA_SUPLEMENTO']) &&
+                                !is_null ($consulta['TERCERA_ENTREGA_SUPLEMENTO'])){
+                                    echo "<span class='badge bg-correct'>CUMPLE</span>";
+                        }else{
+                            echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                        }
+                    }else{
+                        echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                    }
+                ?></td>
             </tr>
           <?php
               }
