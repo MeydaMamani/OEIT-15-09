@@ -8,6 +8,7 @@
         global $conex;
         include('./base.php');
 
+    include('zone_setting.php');
     include('consulta_seg_neonatal.php');
     $row_cnt=0; $correctos=0; $incorrectos=0;
     while ($consulta = sqlsrv_fetch_array($consulta3)){
@@ -19,13 +20,13 @@
             <div class="row">
                 <div class="col-9"></div>
                 <div class="col-3">
-                    <marquee width="100%" direction="right" height="15px">
-                        <p class="font-12 text-secondary"><b>Fuente: </b> BD HisMinsa y BD CNV con Fecha: 31 de Octubre del 2021 a las 08:30 horas</p>
-                    </marquee>
+                    <marquee width="100%" direction="left" height="18px">
+						<p class="font-14 text-primary"><b>Fuente: </b> BD Padrón Nominal con Fecha <?php echo $date_modify; ?> y BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</p>
+					</marquee>
                 </div>
             </div>
             <div class="text-center p-2">
-              <h3>Seguimiento Tamizaje Neonatal - <?php echo $nombre_mes; ?></h3>
+                <h3>Seguimiento Tamizaje Neonatal - <?php echo $nombre_mes; ?></h3>
             </div>
             <div class="row">
                 <div class="col-4 align-middle"><b>Cantidad de Registros: </b><b class="total"> <?php echo $row_cnt; ?></b></div>
