@@ -5,11 +5,11 @@
     <div class="bd-example">
         <div class="row">
             <div class="col-lg-3 col-sm-2"></div>
-            <div class="col-lg-6 col-sm-8 p-4"><br><br>
+            <div class="col-lg-6 col-sm-8"><br><br>
                 <div class="card" style="border-color: #337ab7;">
-                    <h5 class="card-header text-white text-center" style="background: #337ab7;">Avance Vacunación Nominal</h5>
+                    <h5 class="card-header text-white text-center" style="background: #337ab7;">Avance de Vacunación Tercera Dosis</h5>
                     <div class="card-body">
-                        <form name="f1" action="results_n_vaccine_advance.php" method="post" class="_form_gestante">
+                        <form name="f0" action="results_n_vaccine_advance.php" method="post" class="_form_gestante">
                             <div class="row">
                                 <div class="col-md">
                                     <p style="font-size: 13px;" class="text-start"><b>Seleccione una Red: </b></p>
@@ -40,6 +40,6 @@
 </div>
 <script src="./js/records_menu.js"></script>
 <script src="./js/select2.js"></script>
-<script src="./js/district.js"></script>
+<script src="./js/district2.js"></script>
 </body>
 </html>

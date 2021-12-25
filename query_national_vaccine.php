@@ -5,10 +5,10 @@
     ini_set("default_charset", "UTF-8");
     mb_internal_encoding("UTF-8");
 
-    $tabla = "";
     if(isset($_POST['datos'])){
+        $tabla = "";
         $q = $_POST['datos'];
-      
+        
         $resultado = "SELECT TOP (20) TIPO_DOC, NUM_DOC, PACIENTE, ETNIA, FECHA_NACIMIENTO, ANIOS_EDAD_ATENCION, DESCRIPCION_VACUNA, DOSIS_APLICADA,
                         GRUPO_RIESGO, NOMBRE_ESTABLECIMIENTO, DEPARTAMENTO_ESTABLECIMIENTO, PROVINCIA_ESTABLECIMIENTO, DISTRITO_ESTABLECIMIENTO
                         FROM T_CONSOLIDADO_VACUNA_COVID
@@ -19,22 +19,22 @@
         $tabla .= '<div class="col-12 table-responsive">
                     <table id="demo-foo-addrow" class="table table-hover" data-page-size="20" data-limit-navigation="10">
                     <thead>
-                    <tr class="text-center font-12" style="background: #c9d0e2;">
-                        <th class="align-middle">#</th>
-                        <th class="align-middle">Departamento</th>
-                        <th class="align-middle">Provincia</th>
-                        <th class="align-middle">Distrito</th>
-                        <th class="align-middle">Nombre Establecimiento</th>
-                        <th class="align-middle">Tipo Documento</th>
-                        <th class="align-middle">Número Documento</th>
-                        <th class="align-middle">Paciente</th>
-                        <th class="align-middle">Etnia</th>
-                        <th class="align-middle">Fecha Nacimiento</th>
-                        <th class="align-middle">Edad</th>
-                        <th class="align-middle">Descripción Vacuna</th>
-                        <th class="align-middle">Dosis Aplicada</th>
-                        <th class="align-middle">Grupo Riesgo</th>
-                    </tr>
+                        <tr class="text-center font-12" style="background: #c9d0e2;">
+                            <th class="align-middle">#</th>
+                            <th class="align-middle">Departamento</th>
+                            <th class="align-middle">Provincia</th>
+                            <th class="align-middle">Distrito</th>
+                            <th class="align-middle">Nombre Establecimiento</th>
+                            <th class="align-middle">Tipo Documento</th>
+                            <th class="align-middle">Número Documento</th>
+                            <th class="align-middle">Paciente</th>
+                            <th class="align-middle">Etnia</th>
+                            <th class="align-middle">Fecha Nacimiento</th>
+                            <th class="align-middle">Edad</th>
+                            <th class="align-middle">Descripción Vacuna</th>
+                            <th class="align-middle">Dosis Aplicada</th>
+                            <th class="align-middle">Grupo Riesgo</th>
+                        </tr>
                     </thead>
                     <tbody>';
         $i=1;
@@ -119,7 +119,9 @@
                     <td class="align-middle">'. $newdate10 .'</td>
                     <td class="align-middle">'. $newdate11 .'</td>
                     <td class="align-middle">'. utf8_encode($newdate12) .'</td>
-                    <td class="align-middle">'. utf8_encode($newdate13) .'</td>
+                    <td class="align-middle">'. $dato = utf8_encode($newdate13);
+                                                $resultado = str_replace("a±os", "años", $dato);
+                                                echo $resultado   .'</td>
                     </tr>';
               }              
               sqlsrv_close($conn7);

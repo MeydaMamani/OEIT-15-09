@@ -17,11 +17,11 @@
                     </marquee>
                 </div>
             </div>
-            <div class="text-center p-3">
-                <h3>Aptos Para Tercera Dosis</h3>
+            <div class="text-center">
+                <h3>Avance de Vacunación Tercera Dosis</h3>
             </div>
             <div class="mb-3">
-                <div class="row m-2">
+                <!-- <div class="row m-2">
                     <div class="card col-md-3 datos_avance">
                         <div class="card-body p-1">
                             <div class="row pt-3">
@@ -94,10 +94,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="col-md-12 d-flex mb-3 mt-3 justify-content-center">
-                <form action="print_3_dosis.php" method="POST">
+                <form action="print_vaccine_advance.php" method="POST">
                     <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                     <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                     <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
@@ -238,7 +238,11 @@
                             <td class="align-middle"><?php echo $newdate11; ?></td>
                             <td class="align-middle"><?php echo $newdate12; ?></td>
                             <td class="align-middle"><?php echo $newdate13; ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate14); ?></td>
+                            <td class="align-middle"><?php 
+                                $dato = utf8_encode($newdate14);
+                                $resultado = str_replace("anios", "años", $dato);
+                                echo $resultado;
+                            ?></td>
                             <td class="align-middle" id="fields_brechas_body"><?php echo utf8_encode($newdate15); ?></td>
                         </tr>
                         <?php
