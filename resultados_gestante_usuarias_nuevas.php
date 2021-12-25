@@ -8,7 +8,11 @@
         $row_cont=0; $numerador=0; $cant_vif=0;
         while ($consulta = sqlsrv_fetch_array($consulta6)){  
             $row_cont++;
-            if(!is_null ($consulta['TMZ_VIF']) ){ $numerador++; }
+            if(!is_null($consulta['ATE_PLANIFICACION']) && !is_null($consulta['TMZ_VIF'])){
+                if($consulta['ATE_PLANIFICACION'] == $consulta['TMZ_VIF']){
+                    $numerador++;
+                }
+            }
         }  
 ?>
 
@@ -112,6 +116,7 @@
                             <th class="align-middle">Documento</th>
                             <th class="align-middle">Ate Planificación</th>
                             <th class="align-middle">Tmz VIF</th>
+                            <th class="align-middle">Cumple</th>
                         </tr>
                     </thead>
                     <div class="float-end pb-1 col-md-3 table_no_fed">
@@ -165,7 +170,18 @@
                             <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
                             <td class="align-middle"><?php echo $newdate4; ?></td>
                             <td class="align-middle"><?php echo $newdate5; ?></td>
-                            <td class="align-middle"><?php echo $newdate6; ?></td>                      
+                            <td class="align-middle"><?php echo $newdate6; ?></td>
+                            <td class="align-middle"><?php 
+                                if(!is_null($consulta['ATE_PLANIFICACION']) && !is_null($consulta['TMZ_VIF'])){
+                                    if($newdate5 == $newdate6){
+                                        echo "<span class='badge bg-correct'>CUMPLE</span>";
+                                    }else{
+                                        echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                                    }
+                                }else{
+                                    echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                                }
+                            ?></td>
                         </tr>
                         <?php
                             ;}              

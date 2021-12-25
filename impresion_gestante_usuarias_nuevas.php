@@ -139,15 +139,15 @@
             <thead>
                 <tr></tr>
                 <tr class="text-center">
-                    <th colspan="7" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
+                    <th colspan="8" style="font-size: 26px; border: 1px solid #3A3838;">DIRESA PASCO DEIT</th>
                 </tr>
                 <tr></tr>
                 <tr class="text-center">
-                    <th colspan="7" style="font-size: 26px; border: 1px solid #3A3838;">Usuarias Nuevas en el Servicio de Planificación Familiar con DX Violencia - <?php echo $nombre_mes; ?></th>
+                    <th colspan="8" style="font-size: 26px; border: 1px solid #3A3838;">Usuarias Nuevas en el Servicio de Planificación Familiar con DX Violencia - <?php echo $nombre_mes; ?></th>
                 </tr>
                 <tr></tr>
                 <tr>
-                    <th colspan="7" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</th>
+                    <th colspan="8" style="font-size: 15px; border: 1px solid #ddd; text-align: left;"><b>Fuente: </b> BD HisMinsa con Fecha: <?php echo _date("d/m/Y", false, 'America/Lima'); ?> a las 08:30 horas</th>
                 </tr>
                 <tr></tr>
             </tfoot>
@@ -163,6 +163,7 @@
                     <th style="border: 1px solid #DDDDDD; font-size: 15px;">DOCUMENTO</th>
                     <th style="border: 1px solid #DDDDDD; font-size: 15px;">ATE PLANIFICACIÓN</th>
                     <th style="border: 1px solid #DDDDDD; font-size: 15px;">TMZ VIF</th>
+                    <th style="border: 1px solid #DDDDDD; font-size: 15px;">Cumple</th>
                 </tr>
             </thead>
             <tbody>
@@ -207,7 +208,18 @@
                     <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate3); ?></td>
                     <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo str_pad($newdate4, 8, "o", STR_PAD_LEFT); ?></td>
                     <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate5; ?></td>
-                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate6; ?></td>                      
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate6; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php 
+                        if(!is_null($consulta['ATE_PLANIFICACION']) && !is_null($consulta['TMZ_VIF'])){
+                            if($newdate5 == $newdate6){
+                                echo "<span class='badge bg-correct'>CUMPLE</span>";
+                            }else{
+                                echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                            }
+                        }else{
+                            echo "<span class='badge bg-incorrect'>NO CUMPLE</span>";
+                        }
+                    ?></td>
                 </tr>
                 <?php
                     ;}
