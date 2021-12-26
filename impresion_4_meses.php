@@ -13,6 +13,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -38,7 +39,7 @@
         $resultado = "SELECT distinct(Numero_Documento_Paciente), 'PREMATURO' PREMATURO
                         INTO bdhis_minsa_externo.dbo.PREMATURO1
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where anio='2021' and codigo_item in ('P0711','P0712','P0713','P073')";
+                        where anio='$anio' and codigo_item in ('P0711','P0712','P0713','P073')";
 
         $resultado2 = "SELECT pn.NOMBRE_PROV, pn.NOMBRE_DIST,pn.NOMBRE_EESS,pn.MENOR_VISITADO,PN.MENOR_ENCONTRADO,pn.NUM_DNI,pn.NUM_CNV,
                         pn.FECHA_NACIMIENTO_NINO, 'DOCUMENTO' = CASE 
@@ -49,8 +50,8 @@
                         CONCAT(pn.APELLIDO_PATERNO_NINO,' ',pn.APELLIDO_MATERNO_NINO,' ', pn.NOMBRE_NINO) APELLIDOS_NOMBRES,
                         pn.TIPO_SEGURO, pn.NOMBRE_EESS ULTIMA_ATE_PN INTO BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41
                         from NOMINAL_PADRON_NOMINAL pn
-                        where YEAR  (DATEADD(DAY,130,FECHA_NACIMIENTO_NINO))='2021' and month(DATEADD(DAY,130,FECHA_NACIMIENTO_NINO))='$mes'
-                        and mes='2021$mes2';
+                        where YEAR  (DATEADD(DAY,130,FECHA_NACIMIENTO_NINO))='$anio' and month(DATEADD(DAY,130,FECHA_NACIMIENTO_NINO))='$mes'
+                        and mes='$anio$mes2';
                         with c as ( select DOCUMENTO,  ROW_NUMBER() 
                                 over(partition by DOCUMENTO order by DOCUMENTO) as duplicado
                         from BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR41 )
@@ -60,9 +61,9 @@
         $resultado3 = "SELECT Numero_Documento_Paciente, Fecha_Atencion, Tipo_Doc_Paciente,Edad_Dias_Paciente_FechaAtencion
                         INTO BDHIS_MINSA_EXTERNO.dbo.SUPLEMENTADO41
                         FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        -- WHERE ANIO='2021' AND (Fecha_Atencion>='2021-07-20' and Fecha_Atencion<='2021-08-31')
-                        WHERE ANIO='2021' AND (Fecha_Atencion >= CONVERT(DATE, DATEADD(dd, -110, CONCAT('2021$mes2', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/2021'),0)))))) 
-                        and Fecha_Atencion<=CONCAT('2021-$mes2-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/2021'),0)))))
+                        -- WHERE ANIO='$anio' AND (Fecha_Atencion>='$anio-07-20' and Fecha_Atencion<='$anio-08-31')
+                        WHERE ANIO='$anio' AND (Fecha_Atencion >= CONVERT(DATE, DATEADD(dd, -110, CONCAT('$anio$mes2', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/$anio'),0)))))) 
+                        and Fecha_Atencion<=CONCAT('$anio-$mes2-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/$anio'),0)))))
                         AND Tipo_Diagnostico='D' AND (Codigo_Item IN ('Z298','99199.17') AND VALOR_LAB IN ('SF1','PO1','P01')) AND EDAD_REG in ('3','4') AND Tipo_Edad='M'
                         ORDER BY Fecha_Atencion;
                         with c as ( select numero_documento_paciente,  ROW_NUMBER() 
@@ -247,7 +248,27 @@
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $i++; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate3; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate4); ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate5); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php 
+                    $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                    $data = utf8_encode($newdate5); 
+                    $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                    if($pos == true){
+                        $resultado = str_replace("+ë", "É", $data);
+                        echo $resultado;
+                    }else if($pos2 == true){
+                        $resultado = str_replace("+ì", "Í", $data);
+                        echo $resultado;
+                    }else if($pos3 == true){
+                        $resultado = str_replace("+ô", "Ó", $data);
+                        echo $resultado;
+                    }else if($pos4 == true){
+                        $resultado = str_replace("+ü", "Á", $data);
+                        echo $resultado;
+                    }else{
+                        $resultado = str_replace("+æ", "Ñ", $data);
+                        echo $resultado;
+                    }
+                ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_4_meses_body"><?php echo $newdate6; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_4_meses_body"><?php if ($newdate7 == 'SI') {
                         echo "Si"; }else{ echo "No"; }                                                                                          
@@ -258,10 +279,50 @@
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate10; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate11; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_4_meses_body"><?php echo $newdate16; ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate12); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php 
+                    $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                    $data = utf8_encode($newdate12); 
+                    $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                    if($pos == true){
+                        $resultado = str_replace("+ë", "É", $data);
+                        echo $resultado;
+                    }else if($pos2 == true){
+                        $resultado = str_replace("+ì", "Í", $data);
+                        echo $resultado;
+                    }else if($pos3 == true){
+                        $resultado = str_replace("+ô", "Ó", $data);
+                        echo $resultado;
+                    }else if($pos4 == true){
+                        $resultado = str_replace("+ü", "Á", $data);
+                        echo $resultado;
+                    }else{
+                        $resultado = str_replace("+æ", "Ñ", $data);
+                        echo $resultado;
+                    }
+                ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate13; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate14; ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;" id="fields_4_meses_body"><?php echo utf8_encode($newdate15); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;" id="fields_4_meses_body"><?php
+                     $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                     $data = utf8_encode($newdate15); 
+                     $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                     if($pos == true){
+                         $resultado = str_replace("+ë", "É", $data);
+                         echo $resultado;
+                     }else if($pos2 == true){
+                         $resultado = str_replace("+ì", "Í", $data);
+                         echo $resultado;
+                     }else if($pos3 == true){
+                         $resultado = str_replace("+ô", "Ó", $data);
+                         echo $resultado;
+                     }else if($pos4 == true){
+                         $resultado = str_replace("+ü", "Á", $data);
+                         echo $resultado;
+                     }else{
+                         $resultado = str_replace("+æ", "Ñ", $data);
+                         echo $resultado;
+                     }
+                ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php
                     if($newdate13 != 'PREMATURO'){ 
                         foreach (range(110, 130) as $numero) {

@@ -141,6 +141,7 @@
                         <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                         <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                         <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                        <input hidden name="anio" value="<?php echo $_POST['anio']; ?>">
                         <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                     </form>
                     <button type="submit" name="Limpiar" class="btn btn-outline-danger m-2 btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Informacion</button>
@@ -256,7 +257,27 @@
                             <td class="align-middle"><?php echo $i++; ?></td>
                             <td class="align-middle"><?php echo $newdate3; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate4); ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
+                            <td class="align-middle"><?php 
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate5); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
                             <td class="align-middle" id="fields_4_meses_body"><?php echo $newdate6; ?></td>
                             <td class="align-middle" id="fields_4_meses_body"><?php if ($newdate7 == 'SI') {
                                     echo "<span class='badge bg-correct'>Si</span>";
@@ -268,10 +289,50 @@
                             <td class="align-middle"><?php echo $newdate10; ?></td>
                             <td class="align-middle"><?php echo $newdate11; ?></td>
                             <td class="align-middle" id="fields_4_meses_body"><?php echo $newdate16; ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate12); ?></td>
+                            <td class="align-middle"><?php 
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate12); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
                             <td class="align-middle"><?php echo $newdate13; ?></td>
                             <td class="align-middle"><?php echo $newdate14; ?></td>
-                            <td class="align-middle" id="fields_4_meses_body"><?php echo utf8_encode($newdate15); ?></td>
+                            <td class="align-middle" id="fields_4_meses_body"><?php
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate15); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
                             <td class="align-middle"><?php
                                 if($newdate13 != 'PREMATURO'){ 
                                     foreach (range(110, 130) as $numero) {
@@ -350,20 +411,6 @@
                                 $tipo1 = strpos($tipo, '1');
                                 $tipo3 = strpos($tipo, '3');
                                 $tipo4 = strpos($tipo, '4');
-                                // echo '0 --', $tipo0, '<br>';
-                                // echo '1 --', $tipo1, '<br>';
-                                // echo '2 --', $tipo2, '<br>';
-                                // echo '3 --', $tipo3, '<br>';
-                                // echo '4 --', $tipo4, '<br>';
-                                // if(($tipo2 === 0 || $tipo2 > 0) && (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))
-                                //     || (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
-                                //     echo 'SOY SOLO 2', '<br>';
-                                // }
-                                // if(($tipo2 >= 0 && $tipo0 >= 0) || ($tipo2 >= 0 && $tipo1 >= 0) || ($tipo2 >= 0 && $tipo3 >= 0) || ($tipo2 >= 0 && $tipo4 >= 0) 
-                                //     || ($tipo2 == '' && $tipo0 >= 0) || ($tipo2 == '' && $tipo1 >= 0) || ($tipo2 == '' && $tipo3 >= 0) || ($tipo2 == '' && $tipo4 >= 0)){
-                                //     echo 'SOY TIPO ACOMPAÑADO ---', $i_fed, '****', $tipo,'<br>';
-                                // }
-
                                 if(($tipo2 === 0 || $tipo2 > 0) && (($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))
                                     || (($tipo == '') || ($tipo0 > 0 || $tipo0 === 0) || ($tipo1 > 0 || $tipo1 === 0) || ($tipo3 > 0 || $tipo3 === 0) || ($tipo4 > 0 || $tipo4 === 0))){
 
