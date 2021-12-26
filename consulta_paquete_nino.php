@@ -7,6 +7,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -49,7 +50,7 @@
                                     CONCAT(pn.APELLIDO_PATERNO_NINO,' ',pn.APELLIDO_MATERNO_NINO,' ', pn.NOMBRE_NINO) APELLIDOS_NOMBRES
                                     into BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred
                         FROM NOMINAL_PADRON_NOMINAL PN
-                        WHERE YEAR(FECHA_NACIMIENTO_NINO)='2021' AND MONTH(FECHA_NACIMIENTO_NINO)='$mes'  AND MES='2021$mes2';
+                        WHERE YEAR(FECHA_NACIMIENTO_NINO)='$anio' AND MONTH(FECHA_NACIMIENTO_NINO)='$mes'  AND MES='$anio$mes2';
                         with c as ( select DOCUMENTO,  ROW_NUMBER() over(partition by DOCUMENTO order by DOCUMENTO) as duplicado
                         from BDHIS_MINSA_EXTERNO.dbo.PADRON_EVALUAR_cred )
                         delete  from c
@@ -61,8 +62,8 @@
                         OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA 
                         into BDHIS_MINSA_EXTERNO.dbo.cred_rn1_2
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and Fecha_Atencion<= DATEADD(DD,14,Fecha_Nacimiento_Paciente)
-                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and Fecha_Atencion<= DATEADD(DD,14,Fecha_Nacimiento_Paciente)
+                        and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // --------------- CRED  3ER Y 4TO CONTROL RN
@@ -71,8 +72,8 @@
                             OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                             into BDHIS_MINSA_EXTERNO.dbo.cred_Rn3_4
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,15,Fecha_Nacimiento_Paciente) and dateadd(dd,28,Fecha_Nacimiento_Paciente))
-                            and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                            where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,15,Fecha_Nacimiento_Paciente) and dateadd(dd,28,Fecha_Nacimiento_Paciente))
+                            and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                             order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ------  CRED MENSULIZADO POR PERIOROD SEGUN FICHA  CRED1 
@@ -81,8 +82,8 @@
                         OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                         into BDHIS_MINSA_EXTERNO.dbo.cred_mes1
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,29,Fecha_Nacimiento_Paciente) and dateadd(dd,59,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,29,Fecha_Nacimiento_Paciente) and dateadd(dd,59,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ----------  CRED 2
@@ -91,8 +92,8 @@
                             OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                             into BDHIS_MINSA_EXTERNO.dbo.cred_mes2
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,60,Fecha_Nacimiento_Paciente) and dateadd(dd,89,Fecha_Nacimiento_Paciente))
-                            and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                            where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,60,Fecha_Nacimiento_Paciente) and dateadd(dd,89,Fecha_Nacimiento_Paciente))
+                            and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                             order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ----------  CRED 3
@@ -101,8 +102,8 @@
                         OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                         into BDHIS_MINSA_EXTERNO.dbo.cred_mes3
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,90,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,90,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
         
         // ----------  CRED 4
@@ -111,8 +112,8 @@
                         OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                         into BDHIS_MINSA_EXTERNO.dbo.cred_mes4
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,120,Fecha_Nacimiento_Paciente) and dateadd(dd,159,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,120,Fecha_Nacimiento_Paciente) and dateadd(dd,159,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ----------  CRED 5
@@ -121,8 +122,8 @@
                         OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                         into BDHIS_MINSA_EXTERNO.dbo.cred_mes5
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,150,Fecha_Nacimiento_Paciente) and dateadd(dd,179,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,150,Fecha_Nacimiento_Paciente) and dateadd(dd,179,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ----------  CRED 6
@@ -131,8 +132,8 @@
                         OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                         into BDHIS_MINSA_EXTERNO.dbo.cred_mes6
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,180,Fecha_Nacimiento_Paciente) and dateadd(dd,209,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,180,Fecha_Nacimiento_Paciente) and dateadd(dd,209,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ----------  CRED 7
@@ -141,8 +142,8 @@
                             OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                             into BDHIS_MINSA_EXTERNO.dbo.cred_mes7
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,210,Fecha_Nacimiento_Paciente) and dateadd(dd,239,Fecha_Nacimiento_Paciente))
-                            and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                            where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,210,Fecha_Nacimiento_Paciente) and dateadd(dd,239,Fecha_Nacimiento_Paciente))
+                            and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                             order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ----------  CRED 8
@@ -151,8 +152,8 @@
                             OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                             into BDHIS_MINSA_EXTERNO.dbo.cred_mes8
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,240,Fecha_Nacimiento_Paciente) and dateadd(dd,269,Fecha_Nacimiento_Paciente))
-                            and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                            where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,240,Fecha_Nacimiento_Paciente) and dateadd(dd,269,Fecha_Nacimiento_Paciente))
+                            and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                             order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ----------  CRED 9
@@ -161,8 +162,8 @@
                             OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                             into BDHIS_MINSA_EXTERNO.dbo.cred_mes9
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,270,Fecha_Nacimiento_Paciente) and dateadd(dd,299,Fecha_Nacimiento_Paciente))
-                            and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                            where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,270,Fecha_Nacimiento_Paciente) and dateadd(dd,299,Fecha_Nacimiento_Paciente))
+                            and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                             order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ----------  CRED 10
@@ -171,8 +172,8 @@
                         OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                         into BDHIS_MINSA_EXTERNO.dbo.cred_mes10
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,300,Fecha_Nacimiento_Paciente) and dateadd(dd,329,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,300,Fecha_Nacimiento_Paciente) and dateadd(dd,329,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ----------  CRED 11
@@ -181,8 +182,8 @@
                         OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                         into BDHIS_MINSA_EXTERNO.dbo.cred_mes11
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,330,Fecha_Nacimiento_Paciente) and dateadd(dd,364,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-$mes2-01'
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='Z001' and (Fecha_Atencion between dateadd(dd,330,Fecha_Nacimiento_Paciente) and dateadd(dd,364,Fecha_Nacimiento_Paciente))
+                        and Fecha_Nacimiento_Paciente>='$anio-$mes2-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ---------------  ANTINEUMOCOCICA  90670.....--1
@@ -190,9 +191,9 @@
                         Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
                         into BDHIS_MINSA_EXTERNO.dbo.v90670_1
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90670' 
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='90670' 
                         and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ---------------  ANTINEUMOCOCICA  90670.....--2
@@ -200,9 +201,9 @@
                         Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
                         into BDHIS_MINSA_EXTERNO.dbo.v90670_2
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90670' 
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='90670' 
                         and (Fecha_Atencion between dateadd(dd,119,Fecha_Nacimiento_Paciente) and dateadd(dd,159,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ---------------   90681.....--1
@@ -210,9 +211,9 @@
                         Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
                         into BDHIS_MINSA_EXTERNO.dbo.v90681_1
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90681' 
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='90681' 
                         and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ---------------   90681.....--2
@@ -220,9 +221,9 @@
                         Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
                         into BDHIS_MINSA_EXTERNO.dbo.v90681_2
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90681' 
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='90681' 
                         and (Fecha_Atencion between dateadd(dd,119,Fecha_Nacimiento_Paciente) and dateadd(dd,159,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ---------------   90712  -  90713.....--1
@@ -230,9 +231,9 @@
                         Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
                         into BDHIS_MINSA_EXTERNO.dbo.v90712_13_1
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item in('90712','90713')
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item in('90712','90713')
                         and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ---------------   90712  -  90713.....--2
@@ -240,9 +241,9 @@
                         Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
                         into BDHIS_MINSA_EXTERNO.dbo.v90712_13_2
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item in('90712','90713')
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item in('90712','90713')
                         and (Fecha_Atencion between dateadd(dd,119,Fecha_Nacimiento_Paciente) and dateadd(dd,169,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ---------------   90712  -  90713.....--3
@@ -250,9 +251,9 @@
                         Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
                         into BDHIS_MINSA_EXTERNO.dbo.v90712_13_3
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item in('90712','90713')
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item in('90712','90713')
                         and (Fecha_Atencion between dateadd(dd,170,Fecha_Nacimiento_Paciente) and dateadd(dd,209,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ---------------   90723.....--1
@@ -260,9 +261,9 @@
                         Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
                         into BDHIS_MINSA_EXTERNO.dbo.v90723_1
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90723' 
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='90723' 
                         and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ---------------------  90723  2    77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -270,9 +271,9 @@
                         Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
                         into BDHIS_MINSA_EXTERNO.dbo.v90723_2
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90723' 
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='90723' 
                         and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         //  ---------------------  90723  3    77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -280,9 +281,9 @@
                         Fecha_Atencion, Codigo_Item, DATEDIFF(DAY,Fecha_Nacimiento_Paciente,Fecha_Atencion) DIAS
                         into BDHIS_MINSA_EXTERNO.dbo.v90723_3
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and Tipo_Diagnostico='D' and Codigo_Item='90723' 
+                        where Anio='$anio'  and Tipo_Diagnostico='D' and Codigo_Item='90723' 
                         and (Fecha_Atencion between dateadd(dd,55,Fecha_Nacimiento_Paciente) and dateadd(dd,119,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ----------------------- suplementcion SUPLE 4 ---------------------------------------------------------------------------------------------------------------------------------
@@ -291,10 +292,10 @@
                         OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                         into BDHIS_MINSA_EXTERNO.dbo.suple4
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and (Tipo_Diagnostico='D' and Codigo_Item in ('Z298','99199.17') and Valor_Lab in ('SF1','SF2','SF3','SF4','SF5','SF6','SF7','SF8','SF9','S10','S11','S12',
+                        where Anio='$anio'  and (Tipo_Diagnostico='D' and Codigo_Item in ('Z298','99199.17') and Valor_Lab in ('SF1','SF2','SF3','SF4','SF5','SF6','SF7','SF8','SF9','S10','S11','S12',
                         'P01','P02','P03','P04','P05','P06','P07','P08','P09','P10','P11','P12','PO1','PO2','PO3','PO4','PO5','PO6','PO7','PO8','PO9'))
                         and (Fecha_Atencion between dateadd(dd,110,Fecha_Nacimiento_Paciente) and dateadd(dd,130,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         // ------    5 meses
@@ -303,10 +304,10 @@
                         OVER(PARTITION BY NUMERO_DOCUMENTO_PACIENTE ORDER BY FECHA_ATENCION) AS NUMEROFILA
                         into BDHIS_MINSA_EXTERNO.dbo.suple5
                         from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        where Anio='2021'  and (Tipo_Diagnostico='D' and Codigo_Item in ('Z298','99199.17') and Valor_Lab in ('SF1','SF2','SF3','SF4','SF5','SF6','SF7','SF8','SF9','S10','S11','S12',
+                        where Anio='$anio'  and (Tipo_Diagnostico='D' and Codigo_Item in ('Z298','99199.17') and Valor_Lab in ('SF1','SF2','SF3','SF4','SF5','SF6','SF7','SF8','SF9','S10','S11','S12',
                         'P01','P02','P03','P04','P05','P06','P07','P08','P09','P10','P11','P12','PO1','PO2','PO3','PO4','PO5','PO6','PO7','PO8','PO9'))
                         and (Fecha_Atencion between dateadd(dd,150,Fecha_Nacimiento_Paciente) and dateadd(dd,170,Fecha_Nacimiento_Paciente))
-                        and Fecha_Nacimiento_Paciente>='2021-01-01'
+                        and Fecha_Nacimiento_Paciente>='$anio-01-01'
                         order by Numero_Documento_Paciente, Fecha_Atencion";
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
