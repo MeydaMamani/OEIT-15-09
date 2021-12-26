@@ -491,7 +491,27 @@
                             <td class="align-middle"><?php echo $i_fed++; ?></td>
                             <td class="align-middle"><?php echo $newdate3; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate4); ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
+                            <td class="align-middle"><?php 
+                                 $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                 $data = utf8_encode($newdate5); 
+                                 $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                 if($pos == true){
+                                     $resultado = str_replace("+ë", "É", $data);
+                                     echo $resultado;
+                                 }else if($pos2 == true){
+                                     $resultado = str_replace("+ì", "Í", $data);
+                                     echo $resultado;
+                                 }else if($pos3 == true){
+                                     $resultado = str_replace("+ô", "Ó", $data);
+                                     echo $resultado;
+                                 }else if($pos4 == true){
+                                     $resultado = str_replace("+ü", "Á", $data);
+                                     echo $resultado;
+                                 }else{
+                                     $resultado = str_replace("+æ", "Ñ", $data);
+                                     echo $resultado;
+                                 }
+                            ?></td>
                             <td class="align-middle" id="color_fed_body"><?php echo $newdate6; ?></td>
                             <td class="align-middle" id="color_fed_body"><?php if ($newdate7 == 'SI') {
                                     echo "<span class='badge bg-correct'>Si</span>";
@@ -503,10 +523,50 @@
                             <td class="align-middle"><?php echo $newdate10; ?></td>
                             <td class="align-middle"><?php echo $newdate11; ?></td>
                             <td class="align-middle" id="color_fed_body"><?php echo $newdate16; ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate12); ?></td>
+                            <td class="align-middle"><?php 
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate12); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
                             <td class="align-middle"><?php echo $newdate13; ?></td>
                             <td class="align-middle"><?php echo $newdate14; ?></td>
-                            <td class="align-middle" id="color_fed_body"><?php echo utf8_encode($newdate15); ?></td>
+                            <td class="align-middle" id="color_fed_body"><?php
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate15); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
                             <td class="align-middle"><?php
                                 if($newdate13 != 'PREMATURO'){ 
                                     foreach (range(110, 130) as $numero) {
