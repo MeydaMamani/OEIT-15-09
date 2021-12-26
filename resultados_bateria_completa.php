@@ -108,6 +108,7 @@
 						<input hidden name="red" value="<?php echo $_POST['red']; ?>">
 						<input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
 						<input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+						<input hidden name="anio" value="<?php echo $_POST['anio']; ?>">
 						<button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
 					</form>
 					<button type="submit" name="Limpiar" class="btn btn-outline-primary btn-sm m-2" data-bs-toggle="modal" data-bs-target="#ModalResumen"><i class="fa fa-line-chart"></i> Cuadro Resumen</button>

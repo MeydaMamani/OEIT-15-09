@@ -6,6 +6,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -51,7 +52,7 @@
                           Min(CASE WHEN (a.Codigo_Item ='U1692' AND a.Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'PLANDEPARTO',
                           Min(CASE WHEN ((a.Codigo_Item IN('Z3491','Z3591') AND Tipo_Diagnostico='D' AND Valor_Lab='1') )THEN A.Fecha_Registro ELSE NULL END)'REGISTRADO_EL'
                         FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A
-                        WHERE (anio in ('2021') and Genero='f' and mes ='$mes' and Provincia_Establecimiento='$red')
+                        WHERE (anio in ('$anio') and Genero='f' and mes ='$mes' and Provincia_Establecimiento='$red')
                         GROUP BY Provincia_Establecimiento, Distrito_Establecimiento, Nombre_Establecimiento, Abrev_Tipo_Doc_Paciente,
                         Numero_Documento_Paciente, Fecha_Nacimiento_Paciente ) b
                         where GES_CAPT_OPO is not null
@@ -78,7 +79,7 @@
                         Min(CASE WHEN (a.Codigo_Item ='U1692' AND a.Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'PLANDEPARTO',
                         Min(CASE WHEN ((a.Codigo_Item IN('Z3491','Z3591') AND Tipo_Diagnostico='D' AND Valor_Lab='1') )THEN A.Fecha_Registro ELSE NULL END)'REGISTRADO_EL'
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A
-                        WHERE (anio in ('2021') and Genero='f' and mes ='$mes')                    
+                        WHERE (anio in ('$anio') and Genero='f' and mes ='$mes')
                         GROUP BY Provincia_Establecimiento, Distrito_Establecimiento, Nombre_Establecimiento, Abrev_Tipo_Doc_Paciente,
                               Numero_Documento_Paciente, Fecha_Nacimiento_Paciente ) b
                         WHERE GES_CAPT_OPO is not null
@@ -104,7 +105,7 @@
                           Min(CASE WHEN (a.Codigo_Item ='U1692' AND a.Tipo_Diagnostico='D' )THEN A.Fecha_Atencion ELSE NULL END)'PLANDEPARTO',
                           Min(CASE WHEN ((a.Codigo_Item IN('Z3491','Z3591') AND Tipo_Diagnostico='D' AND Valor_Lab='1') )THEN A.Fecha_Registro ELSE NULL END)'REGISTRADO_EL'
                         FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA A
-                        WHERE (anio in ('2021') and Genero='f' and mes ='$mes' and Provincia_Establecimiento='$red' and Distrito_Establecimiento='$dist')
+                        WHERE (anio in ('$anio') and Genero='f' and mes ='$mes' and Provincia_Establecimiento='$red' and Distrito_Establecimiento='$dist')
                         GROUP BY Provincia_Establecimiento, Distrito_Establecimiento, Nombre_Establecimiento, Abrev_Tipo_Doc_Paciente,
                         Numero_Documento_Paciente, Fecha_Nacimiento_Paciente ) b
                         where GES_CAPT_OPO is not null
