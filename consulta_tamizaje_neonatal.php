@@ -10,6 +10,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -52,8 +53,8 @@
                        apellido_materno_nino, nombre_nino, MENOR_ENCONTRADO,NOMBRE_EESS    
                        into  bdhis_minsa.dbo.padronneonatal
                        from nominal_padron_nominal
-                       where year(fecha_nacimiento_nino)='2021' AND MES='2021$mes2'
-                       AND YEAR(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='2021' AND MONTH(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$mes';
+                       where year(fecha_nacimiento_nino)='$anio' AND MES='$anio$mes2'
+                       AND YEAR(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$anio' AND MONTH(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$mes';
                        with c as ( select documento, ROW_NUMBER() over(partition by documento order by documento) as duplicado
                        from bdhis_minsa.dbo.padronneonatal )
                        delete  from c
@@ -62,7 +63,7 @@
         $resultado2 = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item 
                         into bdhis_minsa.dbo.atenciones
                         FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
+                        WHERE ANIO='$anio' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado3 = "SELECT p.nombre_prov, p.nombre_dist, p.documento, p.num_cnv, p.num_dni,p.tipo_seguro,p.fecha_nacimiento_nino, p.A_medir, 

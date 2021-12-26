@@ -12,6 +12,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -33,7 +34,7 @@
         elseif ($red_1 == 2) { $red = 'OXAPAMPA'; }
         elseif ($red_1 == 3) { $red = 'PASCO';  }
         elseif ($red_1 == 4) { $redt = 'PASCO';  }
-        
+
         $resultado = "SELECT nombre_prov,nombre_dist,num_cnv,NUM_DNI, NOMBRE_EESS_NACIMIENTO, 'DOCUMENTO' = CASE 
                             WHEN NUM_DNI IS NOT NULL
                             THEN NUM_DNI
@@ -43,8 +44,8 @@
                        apellido_materno_nino, nombre_nino, MENOR_ENCONTRADO,NOMBRE_EESS    
                        into  bdhis_minsa.dbo.padronneonatal
                        from nominal_padron_nominal
-                       where year(fecha_nacimiento_nino)='2021' AND MES='2021$mes2'
-                       AND YEAR(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='2021' AND MONTH(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$mes' ;
+                       where year(fecha_nacimiento_nino)='$anio' AND MES='$anio$mes2'
+                       AND YEAR(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$anio' AND MONTH(DATEADD(DAY,28,FECHA_NACIMIENTO_NINO))='$mes' ;
                        with c as ( select documento, ROW_NUMBER() over(partition by documento order by documento) as duplicado
                        from bdhis_minsa.dbo.padronneonatal )
                        delete  from c
@@ -53,7 +54,7 @@
         $resultado2 = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item 
                         into bdhis_minsa.dbo.atenciones
                         FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                        WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
+                        WHERE ANIO='$anio' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado3 = "SELECT p.nombre_prov, p.nombre_dist, p.documento, p.num_cnv, p.num_dni,p.tipo_seguro,p.fecha_nacimiento_nino, p.A_medir, 
@@ -213,15 +214,86 @@
                 <tr class="font-12 text-center">
                     <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $i++; ?></td>
                     <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate); ?></td>
-                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate1); ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php 
+                        $findme2 = "+ü";
+                        $data = utf8_encode($newdate1); 
+                        $pos2 = strpos($data, $findme2);
+                        if($pos2 == true){
+                            $resultado = str_replace("+ü", "Á", $data);
+                            echo $resultado;
+                        }else{
+                            $resultado = str_replace("+æ", "Ñ", $data);
+                            echo $resultado;
+                        }
+                    ?></td>
                     <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate2; ?></td>
-                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate3); ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php 
+                        $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                        $data = utf8_encode($newdate3); 
+                        $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                        if($pos == true){
+                            $resultado = str_replace("+ë", "É", $data);
+                            echo $resultado;
+                        }else if($pos2 == true){
+                            $resultado = str_replace("+ì", "Í", $data);
+                            echo $resultado;
+                        }else if($pos3 == true){
+                            $resultado = str_replace("+ô", "Ó", $data);
+                            echo $resultado;
+                        }else if($pos4 == true){
+                            $resultado = str_replace("+ü", "Á", $data);
+                            echo $resultado;
+                        }else{
+                            $resultado = str_replace("+æ", "Ñ", $data);
+                            echo $resultado;
+                        }
+                    ?></td>
                     <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate4; ?></td>                               
                     <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate5); ?></td>
                     <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="color_neonatal_body"><?php echo $newdate6; ?></td>
                     <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="color_neonatal_body"><?php echo $newdate7; ?></td>
-                    <td style="border: 1px solid #DDDDDD; font-size: 15px;" id="color_neonatal_body2"><?php echo utf8_encode($newdate8); ?></td>
-                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate9; ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;" id="color_neonatal_body2"><?php
+                        $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                        $data = utf8_encode($newdate8); 
+                        $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                        if($pos == true){
+                            $resultado = str_replace("+ë", "É", $data);
+                            echo $resultado;
+                        }else if($pos2 == true){
+                            $resultado = str_replace("+ì", "Í", $data);
+                            echo $resultado;
+                        }else if($pos3 == true){
+                            $resultado = str_replace("+ô", "Ó", $data);
+                            echo $resultado;
+                        }else if($pos4 == true){
+                            $resultado = str_replace("+ü", "Á", $data);
+                            echo $resultado;
+                        }else{
+                            $resultado = str_replace("+æ", "Ñ", $data);
+                            echo $resultado;
+                        }
+                    ?></td>
+                    <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php 
+                        $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                        $data = utf8_encode($newdate9); 
+                        $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                        if($pos == true){
+                            $resultado = str_replace("+ë", "É", $data);
+                            echo $resultado;
+                        }else if($pos2 == true){
+                            $resultado = str_replace("+ì", "Í", $data);
+                            echo $resultado;
+                        }else if($pos3 == true){
+                            $resultado = str_replace("+ô", "Ó", $data);
+                            echo $resultado;
+                        }else if($pos4 == true){
+                            $resultado = str_replace("+ü", "Á", $data);
+                            echo $resultado;
+                        }else{
+                            $resultado = str_replace("+æ", "Ñ", $data);
+                            echo $resultado;
+                        }
+                    ?></td>
                     <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate10; ?></td>
                     <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;">
                     <?php

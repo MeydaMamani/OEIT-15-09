@@ -144,6 +144,7 @@
                         <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                         <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                         <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                        <input hidden name="anio" value="<?php echo $_POST['anio']; ?>">
                         <button type="submit" id="export_data" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                     </form>
 					<button type="button" class="btn btn-outline-danger m-2 btn-sm btn_information" data-bs-toggle="modal" data-bs-target="#ModalInformacion"><i class="mdi mdi-format-list-bulleted"></i> Información</button>
@@ -246,31 +247,102 @@
 						<tr class="font-12 text-center">
 							<td class="align-middle"><?php echo $i++; ?></td>
 							<td class="align-middle"><?php echo utf8_encode($newdate); ?></td>
-							<td class="align-middle"><?php echo utf8_encode($newdate1); ?></td>
+							<td class="align-middle"><?php 
+                                $findme2 = "+ü";
+                                $data = utf8_encode($newdate1); 
+                                $pos2 = strpos($data, $findme2);
+                                if($pos2 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
 							<td class="align-middle"><?php echo $newdate2; ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
+                            <td class="align-middle"><?php
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate3); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
 							<td class="align-middle"><?php echo $newdate4; ?></td>                               
 							<td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
                             <td class="align-middle" id="color_neonatal_body"><?php echo $newdate6; ?></td>
 							<td class="align-middle" id="color_neonatal_body"><?php echo $newdate7; ?></td>
-							<td class="align-middle" id="color_neonatal_body2"><?php echo utf8_encode($newdate8); ?></td>
-							<td class="align-middle"><?php echo $newdate9; ?></td>
+							<td class="align-middle" id="color_neonatal_body2"><?php 
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate8); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
+							<td class="align-middle"><?php 
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate9); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
 							<td class="align-middle"><?php echo $newdate10; ?></td>
 							<td class="align-middle">
-							<?php
-								if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
-								echo "<span class='badge bg-incorrect'>No Cumple</span>";
-								}else {
-								$fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
-								$fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
-								$intvl = $fecha_nacimiento->diff($fecha_atencion);
-									if($intvl->days <= 6 && $intvl->days >=0){
-									echo "<span class='badge bg-correct'>Cumple</span>";
-									}else if($intvl->days > 6){
-									echo "<span class='badge bg-observed'>Observado</span>";
-									}
-								}
-							?>
+                                <?php
+                                    if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
+                                    echo "<span class='badge bg-incorrect'>No Cumple</span>";
+                                    }else {
+                                    $fecha_atencion  = new DateTime(date_format($consulta['Fecha_Atencion'], "d-m-Y"));
+                                    $fecha_nacimiento = new DateTime(date_format($consulta['fecha_nacimiento_nino'], "d-m-Y"));
+                                    $intvl = $fecha_nacimiento->diff($fecha_atencion);
+                                        if($intvl->days <= 6 && $intvl->days >=0){
+                                        echo "<span class='badge bg-correct'>Cumple</span>";
+                                        }else if($intvl->days > 6){
+                                        echo "<span class='badge bg-observed'>Observado</span>";
+                                        }
+                                    }
+                                ?>
 							</td>
 						</tr>
                         <?php
@@ -396,16 +468,87 @@
                         <tr class="font-12 text-center">
                             <td class="align-middle"><?php echo $i_fed++; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate); ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate1); ?></td>
-                            <td class="align-middle"><?php echo $newdate2; ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
-                            <td class="align-middle"><?php echo $newdate4; ?></td>                               
-                            <td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
-                            <td class="align-middle" id="color_fed_body"><?php echo $newdate6; ?></td>
-                            <td class="align-middle" id="color_fed_body"><?php echo $newdate7; ?></td>
-                            <td class="align-middle" id="color_fed_body"><?php echo utf8_encode($newdate8); ?></td>
-                            <td class="align-middle"><?php echo $newdate9; ?></td>
-                            <td class="align-middle"><?php echo $newdate10; ?></td>
+							<td class="align-middle"><?php 
+                                $findme2 = "+ü";
+                                $data = utf8_encode($newdate1); 
+                                $pos2 = strpos($data, $findme2);
+                                if($pos2 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
+							<td class="align-middle"><?php echo $newdate2; ?></td>
+                            <td class="align-middle"><?php
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate3); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
+							<td class="align-middle"><?php echo $newdate4; ?></td>                               
+							<td class="align-middle"><?php echo utf8_encode($newdate5); ?></td>
+                            <td class="align-middle" id="color_neonatal_body"><?php echo $newdate6; ?></td>
+							<td class="align-middle" id="color_neonatal_body"><?php echo $newdate7; ?></td>
+							<td class="align-middle" id="color_neonatal_body2"><?php 
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate8); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
+							<td class="align-middle"><?php 
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate9); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
+							<td class="align-middle"><?php echo $newdate10; ?></td>
                             <td class="align-middle">
                             <?php
                                 if(is_null($consulta['Fecha_Atencion']) || is_null($consulta['fecha_nacimiento_nino'])){
