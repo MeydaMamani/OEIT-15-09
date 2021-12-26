@@ -12,7 +12,7 @@
                         <form name="f1" action="resultados_prematuro.php" method="post" class="_form_gestante">
                             <div class="row">
                                 <div class="col-md">
-                                    <p style="font-size: 13px;" class="text-start"><b>Seleccione una Red: </b></p>
+                                    <p class="text-start font-13"><b>Seleccione una Red: </b></p>
                                     <select class="select_gestante form-select" name="red" id="red" onchange="cambia_distrito()" aria-label="Default select example">
                                         <option value="0" selected>Seleccione Red</option>
                                         <option value="1">DANIEL ALCIDES CARRION</option> 
@@ -22,7 +22,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md text-mobile">
-                                    <p style="font-size: 13px;" class="text-start"><b>Seleccione un Distrito: </b></p>
+                                    <p class="text-start font-13"><b>Seleccione un Distrito: </b></p>
                                     <select class="select_gestante form-select" name="distrito" id="distrito" aria-label="Default select example">
                                         <option value="-">-</option>
                                     </select>
@@ -30,7 +30,15 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p style="font-size: 13px;" class="text-start"><b>Seleccione mes a evaluar: </b></p>
+                                    <p class="text-start font-13"><b>Seleccione Año: </b></p>
+                                    <select class="select_gestante form-select" name="anio" id="anio" aria-label="Default select example">
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-start font-13"><b>Seleccione mes a evaluar: </b></p>
                                     <select class="select_gestante form-select" name="mes" id="mes" aria-label="Default select example">
                                         <option value="1">ENERO</option>
                                         <option value="2">FEBRERO</option>
