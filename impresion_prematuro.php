@@ -12,6 +12,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -44,7 +45,7 @@
                         MENOR_VISITADO,MENOR_ENCONTRADO,TIPO_SEGURO,MES
                         INTO BDHIS_MINSA.dbo.FED_PADRON_NINO_PREMATURO FROM NOMINAL_PADRON_NOMINAL A 
                         WHERE ((TIPO_SEGURO IN  ('0,', '0, 1,', '0, 1, 2,', '0, 1, 4,', '1,', '1, 2,', '1, 2, 3,', '1, 2, 4,', '1, 3,', '1, 3, 4,', '1, 4,')) OR TIPO_SEGURO IS NULL) 
-                        AND (MES IN ('2021$mes2'))";
+                        AND (MES IN ('$anio$mes2'))";
 
         $resultado2 = "SELECT PERIODO,Institucion,DPTO_EESS,PROV_EESS,DIST_EESS,CO_LOCAL,Nombre_EESS AS Establecimiento, NU_CNV,FE_NACIDO,Financiador_Parto,PESO_NACIDO,DUR_EMB_PARTO  FED_CNV_PREMATURO 
                         INTO BDHIS_MINSA.dbo.FED_CNV_PREMATURO
@@ -93,7 +94,7 @@
                         FROM BDHIS_MINSA.dbo.FED_PADRON_NINO_PREMATURO A 
                         LEFT JOIN BDHIS_MINSA.dbo.FED_CNV_PREMATURO B ON A.CNV_O_DNI=B.NU_CNV
                         LEFT JOIN BDHIS_MINSA.dbo.SUPLEMENTACION_PREMATUROS C ON A.CNV_O_DNI=C.Numero_Documento_Paciente
-                        WHERE YEAR(A.CUMPLE_59_DIAS)='2021' AND MONTH(A.CUMPLE_59_DIAS)='$mes'";
+                        WHERE YEAR(A.CUMPLE_59_DIAS)='$anio' AND MONTH(A.CUMPLE_59_DIAS)='$mes'";
 
         if(($red_1 == 1 or $red_1 == 2 or $red_1 == 3) and $dist_1 == 'TODOS'){
             $resultado7 = "SELECT * FROM BDHIS_MINSA.dbo.MIPASO3 WHERE BAJO_PESO_PREMATURO='SI'
@@ -258,16 +259,53 @@
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $i++; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate2); ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate3); ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate4); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php 
+                    $findme2 = "+ü";
+                    $data = utf8_encode($newdate4); 
+                    $pos2 = strpos($data, $findme2);
+                    if($pos2 == true){
+                        $resultado = str_replace("+ü", "Á", $data);
+                        echo $resultado;
+                    }else{
+                        $resultado = str_replace("+æ", "Ñ", $data);
+                        echo $resultado;
+                    }
+                ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate5; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate6; ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo utf8_encode($newdate7); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php 
+                    $findme2 = "+ü";
+                    $data = utf8_encode($newdate7); 
+                    $pos2 = strpos($data, $findme2);
+                    if($pos2 == true){
+                        $resultado = str_replace("+ü", "Á", $data);
+                        echo $resultado;
+                    }else{
+                        $resultado = str_replace("+æ", "Ñ", $data);
+                        echo $resultado;
+                    }
+                ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="color_prematuro_body"><?php echo utf8_encode($newdate8); ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="color_prematuro_body"><?php echo $newdate9; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="color_prematuro_body"><?php echo $newdate10; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate11; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate12; ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="color_prematuro_body"><?php echo utf8_encode($newdate13); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;" id="color_prematuro_body"><?php
+                    $findme = "+ô"; $findme2 = "+ü";
+                    $data = utf8_encode($newdate13); 
+                    $pos = strpos($data, $findme);
+                    $pos2 = strpos($data, $findme2);
+                    if($pos == true){
+                        $resultado = str_replace("+ô", "Ó", $data);
+                        echo $resultado;
+                    }else if($pos2 == true){
+                        $resultado = str_replace("+ü", "Á", $data);
+                        echo $resultado;
+                    }else{
+                        $resultado = str_replace("+æ", "Ñ", $data);
+                        echo $resultado;
+                    }
+                ?></td>
             </tr>
             <?php
                 ;}

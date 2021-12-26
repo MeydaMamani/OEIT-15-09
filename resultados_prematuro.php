@@ -139,7 +139,6 @@
                             <th class="align-middle">Suplementado</th>
                             <th class="align-middle">Prematuro</th>
                             <th class="align-middle" id="color_prematuro_head">Se Atiende</th>
-                            <th class="align-middle">Cumple</th>
                         </tr>
                     </thead>
                     <div class="float-end col-md-3 table_no_fed">
@@ -220,7 +219,18 @@
                             <td class="align-middle"><?php echo $i++; ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate4); ?></td>
+                            <td class="align-middle"><?php 
+                                $findme2 = "+ü";
+                                $data = utf8_encode($newdate4); 
+                                $pos2 = strpos($data, $findme2);
+                                if($pos2 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
                             <td class="align-middle"><?php 
                                 if($newdate5 == 1) { echo 'DNI'; }
                                 else if($newdate5 == 2) { echo 'CE'; }
@@ -230,13 +240,39 @@
                                 else if($newdate5 == 6) { echo 'CNV'; }
                              ?></td>
                             <td class="align-middle"><?php echo $newdate6; ?></td>
-                            <td class="align-middle"><?php echo utf8_encode($newdate7); ?></td>
+                            <td class="align-middle"><?php 
+                                $findme2 = "+ü";
+                                $data = utf8_encode($newdate7); 
+                                $pos2 = strpos($data, $findme2);
+                                if($pos2 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
                             <td class="align-middle" id="color_prematuro_body"><?php echo utf8_encode($newdate8); ?></td>
                             <td class="align-middle" id="color_prematuro_body"><?php echo $newdate9; ?></td>
                             <td class="align-middle" id="color_prematuro_body"><?php echo $newdate10; ?></td>
                             <td class="align-middle"><?php echo $newdate11; ?></td>
                             <td class="align-middle"><?php echo $newdate12; ?></td>
-                            <td class="align-middle" id="color_prematuro_body"><?php echo utf8_encode($newdate13); ?></td>
+                            <td class="align-middle" id="color_prematuro_body"><?php 
+                                $findme = "+ô"; $findme2 = "+ü";
+                                $data = utf8_encode($newdate13); 
+                                $pos = strpos($data, $findme);
+                                $pos2 = strpos($data, $findme2);
+                                if($pos == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
                         </tr>
                         <?php
                             ;}
