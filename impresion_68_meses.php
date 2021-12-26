@@ -13,6 +13,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -53,8 +54,8 @@
                         pn.TIPO_SEGURO, pn.NOMBRE_EESS AS ULTIMA_ATE_PN
                             into BDHIS_MINSA.dbo.PADRON_EVALUAR6
                         from NOMINAL_PADRON_NOMINAL AS pn
-                        where YEAR (DATEADD(DAY,269,FECHA_NACIMIENTO_NINO))='2021' and month(DATEADD(DAY,269,FECHA_NACIMIENTO_NINO))='$mes'
-                        and mes='2021$mes';
+                        where YEAR (DATEADD(DAY,269,FECHA_NACIMIENTO_NINO))='$anio' and month(DATEADD(DAY,269,FECHA_NACIMIENTO_NINO))='$mes'
+                        and mes='$anio$mes';
                         with c as ( select DOCUMENTO, nombre_dist, ROW_NUMBER() over(partition by DOCUMENTO order by DOCUMENTO) as duplicado
                         from BDHIS_MINSA.dbo.PADRON_EVALUAR6)
                         delete  from c
@@ -62,7 +63,7 @@
 
         $resultado2 = "SELECT A.Provincia_Establecimiento, A.Distrito_Establecimiento, A.Nombre_Establecimiento,
                         A.Abrev_Tipo_Doc_Paciente, A.Numero_Documento_Paciente, A.Fecha_Nacimiento_Paciente,
-                        Min(CASE WHEN (Codigo_Item ='85018' AND Tipo_Diagnostico='D' AND ANIO='2021' AND  EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' )THEN A.Fecha_Atencion ELSE NULL END)'85018',
+                        Min(CASE WHEN (Codigo_Item ='85018' AND Tipo_Diagnostico='D' AND ANIO='$anio' AND  EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' )THEN A.Fecha_Atencion ELSE NULL END)'85018',
                         Min(CASE WHEN (Codigo_Item IN ('D509','D500','D649','D508') AND Tipo_Diagnostico='D' AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' )THEN A.Fecha_Atencion ELSE NULL END)'D50X',
                         Min(CASE WHEN (Codigo_Item ='U310' AND Tipo_Diagnostico='D' AND VALOR_LAB IN ('SF1','PO1','P01','1') AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' )THEN A.Fecha_Atencion ELSE NULL END)'U310_SF1',
                         Min(CASE WHEN (Codigo_Item  IN('Z298','99199.17','99199.19') AND Tipo_Diagnostico='D' AND VALOR_LAB IN ('SF1','PO1','P01','1') AND EDAD_REG IN ('6','7','8') AND Tipo_Edad='M' )THEN A.Fecha_Atencion ELSE NULL END)'SUPLE'
@@ -70,8 +71,8 @@
                         --select * from BDHIS_MINSA.dbo.suple6
                         FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA AS A
                         WHERE
-                            ((a.fecha_atencion> '2021-05-01') and (a.fecha_atencion<= CONCAT('2021-$mes-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes/2021'),0)))))) AND
-                            ( (Codigo_Item ='85018' AND Tipo_Diagnostico='D' AND ANIO='2021' AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) OR
+                            ((a.fecha_atencion> '$anio-05-01') and (a.fecha_atencion<= CONCAT('$anio-$mes-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes/$anio'),0)))))) AND
+                            ( (Codigo_Item ='85018' AND Tipo_Diagnostico='D' AND ANIO='$anio' AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) OR
                             (Codigo_Item IN ('D509','D500','D649','D508') AND Tipo_Diagnostico='D'  AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) OR
                             (Codigo_Item IN('U310','99199.17') AND Tipo_Diagnostico='D' AND VALOR_LAB IN ('SF1','PO1','P01') AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) or
                             (Codigo_Item  IN('Z298','99199.17','99199.19') AND Tipo_Diagnostico='D' AND VALOR_LAB IN ('SF1','PO1','P01','1') AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) )
@@ -240,9 +241,49 @@
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate9; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate10; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate11; ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate12); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php
+                    $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                    $data = utf8_encode($newdate12); 
+                    $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                    if($pos == true){
+                        $resultado = str_replace("+ë", "É", $data);
+                        echo $resultado;
+                    }else if($pos2 == true){
+                        $resultado = str_replace("+ì", "Í", $data);
+                        echo $resultado;
+                    }else if($pos3 == true){
+                        $resultado = str_replace("+ô", "Ó", $data);
+                        echo $resultado;
+                    }else if($pos4 == true){
+                        $resultado = str_replace("+ü", "Á", $data);
+                        echo $resultado;
+                    }else{
+                        $resultado = str_replace("+æ", "Ñ", $data);
+                        echo $resultado;
+                    }
+                ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;" id="fields_68_meses_body"><?php echo $newdate13; ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;" id="fields_68_meses_body"><?php echo $newdate14; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;" id="fields_68_meses_body"><?php
+                    $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                    $data = utf8_encode($newdate14); 
+                    $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                    if($pos == true){
+                        $resultado = str_replace("+ë", "É", $data);
+                        echo $resultado;
+                    }else if($pos2 == true){
+                        $resultado = str_replace("+ì", "Í", $data);
+                        echo $resultado;
+                    }else if($pos3 == true){
+                        $resultado = str_replace("+ô", "Ó", $data);
+                        echo $resultado;
+                    }else if($pos4 == true){
+                        $resultado = str_replace("+ü", "Á", $data);
+                        echo $resultado;
+                    }else{
+                        $resultado = str_replace("+æ", "Ñ", $data);
+                        echo $resultado;
+                    }
+                ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate15); ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate16; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo $newdate17; ?></td>

@@ -12,6 +12,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -54,8 +55,8 @@
                         pn.TIPO_SEGURO, pn.NOMBRE_EESS AS ULTIMA_ATE_PN
                             into BDHIS_MINSA.dbo.PADRON_EVALUAR6
                         from NOMINAL_PADRON_NOMINAL AS pn
-                        where YEAR (DATEADD(DAY,269,FECHA_NACIMIENTO_NINO))='2021' and month(DATEADD(DAY,269,FECHA_NACIMIENTO_NINO))='$mes'
-                        and mes='2021$mes2';
+                        where YEAR (DATEADD(DAY,269,FECHA_NACIMIENTO_NINO))='$anio' and month(DATEADD(DAY,269,FECHA_NACIMIENTO_NINO))='$mes'
+                        and mes='$anio$mes2';
                         with c as ( select DOCUMENTO, nombre_dist, ROW_NUMBER() over(partition by DOCUMENTO order by DOCUMENTO) as duplicado
                         from BDHIS_MINSA.dbo.PADRON_EVALUAR6)
                         delete  from c
@@ -63,7 +64,7 @@
 
         $resultado2 = "SELECT A.Provincia_Establecimiento, A.Distrito_Establecimiento, A.Nombre_Establecimiento,
                         A.Abrev_Tipo_Doc_Paciente, A.Numero_Documento_Paciente, A.Fecha_Nacimiento_Paciente,
-                        Min(CASE WHEN (Codigo_Item ='85018' AND Tipo_Diagnostico='D' AND ANIO='2021' AND  EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' )THEN A.Fecha_Atencion ELSE NULL END)'85018',
+                        Min(CASE WHEN (Codigo_Item ='85018' AND Tipo_Diagnostico='D' AND ANIO='$anio' AND  EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' )THEN A.Fecha_Atencion ELSE NULL END)'85018',
                         Min(CASE WHEN (Codigo_Item IN ('D509','D500','D649','D508') AND Tipo_Diagnostico='D' AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' )THEN A.Fecha_Atencion ELSE NULL END)'D50X',
                         Min(CASE WHEN (Codigo_Item ='U310' AND Tipo_Diagnostico='D' AND VALOR_LAB IN ('SF1','PO1','P01','1') AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' )THEN A.Fecha_Atencion ELSE NULL END)'U310_SF1',
                         Min(CASE WHEN (Codigo_Item  IN('Z298','99199.17','99199.19') AND Tipo_Diagnostico='D' AND VALOR_LAB IN ('SF1','PO1','P01','1') AND EDAD_REG IN ('6','7','8') AND Tipo_Edad='M' )THEN A.Fecha_Atencion ELSE NULL END)'SUPLE'
@@ -71,9 +72,9 @@
                         --select * from BDHIS_MINSA.dbo.suple6
                         FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA AS A
                         WHERE
-                          ((a.fecha_atencion> CONVERT(DATE, DATEADD(dd, -170, CONCAT('2021$mes2', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/2021'),0))))))) and 
-                          (a.fecha_atencion<= CONCAT('2021-$mes2-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/2021'),0)))))) AND
-                          ( (Codigo_Item ='85018' AND Tipo_Diagnostico='D' AND ANIO='2021' AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) OR
+                          ((a.fecha_atencion> CONVERT(DATE, DATEADD(dd, -170, CONCAT('$anio$mes2', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/$anio'),0))))))) and 
+                          (a.fecha_atencion<= CONCAT('$anio-$mes2-', DAY(DATEADD(DD,-1,DATEADD(MM,DATEDIFF(MM,-1,'01/$mes2/$anio'),0)))))) AND
+                          ( (Codigo_Item ='85018' AND Tipo_Diagnostico='D' AND ANIO='$anio' AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) OR
                           (Codigo_Item IN ('D509','D500','D649','D508') AND Tipo_Diagnostico='D'  AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) OR
                           (Codigo_Item IN('U310','99199.17') AND Tipo_Diagnostico='D' AND VALOR_LAB IN ('SF1','PO1','P01') AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) or
                           (Codigo_Item  IN('Z298','99199.17','99199.19') AND Tipo_Diagnostico='D' AND VALOR_LAB IN ('SF1','PO1','P01','1') AND EDAD_REG IN ('5','6','7','8') AND Tipo_Edad='M' ) )
