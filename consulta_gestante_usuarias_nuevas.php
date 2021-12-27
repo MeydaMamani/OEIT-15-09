@@ -6,6 +6,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -51,7 +52,7 @@
                         from bdhis_minsa.dbo.TRAMAHIS h
                         left join bdhis_minsa.dbo.RENAES r ON TRY_CONVERT(INT,h.Codigo_Unico) = TRY_CONVERT(INT,R.Codigo_Unico)
                         where ltrim(rtrim(Codigo_Item)) in ('99208') and ltrim(rtrim(Tipo_Diagnostico)) in ('D')
-                        and month(try_convert(date,Fecha_Atencion))='$mes' and year(try_convert(date,Fecha_Atencion))='2021'
+                        and month(try_convert(date,Fecha_Atencion))='$mes' and year(try_convert(date,Fecha_Atencion))='$anio'
                         and Numero_Documento_Paciente is not null
                         AND Categoria_Establecimiento IN ('I-1','I-2','I-3','I-4')";
 
@@ -62,7 +63,7 @@
                           (	ltrim(rtrim(Codigo_Item)) = '96150' and ltrim(rtrim(Tipo_Diagnostico)) ='D' and ltrim(rtrim(valor_lab)) ='VIF'	)
                           or 
                           ( 	ltrim(rtrim(Codigo_Item)) = '96150.01' and ltrim(rtrim(Tipo_Diagnostico)) = 'D' )
-                        ) and month(try_convert(date,Fecha_Atencion))='$mes' and year(try_convert(date,Fecha_Atencion))='2021'";
+                        ) and month(try_convert(date,Fecha_Atencion))='$mes' and year(try_convert(date,Fecha_Atencion))='$anio'";
 
         $resultado5 = "SELECT  m.Provincia,m.Distrito,m.Nombre_Establecimiento,SUBSTRING(d.id,2,10)documento,d.fecha_cita ATE_PLANIFICACION,n.fecha_cita TMZ_VIF
                             intO PADRONINICIO 
