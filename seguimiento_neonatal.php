@@ -43,6 +43,14 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-md-6">
+                                    <p class="text-start font-13"><b>Seleccione Año: </b></p>
+                                    <select class="select_gestante form-select" name="anio" id="anio" aria-label="Default select example">
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
                                     <p style="font-size: 13px;" class="text-start"><b>Seleccione mes a evaluar: </b></p>
                                     <select class="select_gestante form-select" name="mes" id="mes" aria-label="Default select example">
                                         <option value="1">ENERO</option>
@@ -84,6 +92,14 @@
                                     </select>
                                 </div><br>
                                 <div class="col-md-5">
+                                    <p class="text-start font-13"><b>Seleccione Año: </b></p>
+                                    <select class="select_gestante form-select" name="anio2" id="anio2" aria-label="Default select example">
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-7">
                                     <p style="font-size: 13px;" class="text-start"><b>Seleccione mes a evaluar: </b></p>
                                     <select class="select_gestante form-select" name="mes2" id="mes2" aria-label="Default select example">
                                         <option value="1">ENERO</option>

@@ -13,6 +13,7 @@
         $sector = $_POST['sector'];
         $establecimiento = $_POST['establecimiento'];
         $mes = $_POST['mes2'];
+        $anio = $_POST['anio2'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -36,13 +37,13 @@
         $resultado = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item, Codigo_Unico 
                             into BDHIS_MINSA.dbo.atencionesneonatal1
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
+                            WHERE ANIO='$anio' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
         
         if(($sector != 'TODOS') and $establecimiento == 'TODOS'){
             $resultado2 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, CAST(FE_NACIDO as date)fecnacido
                             into BDHIS_MINSA.dbo.nacidoscnv1
                             FROM CNV_LUGARNACIDO_PASCO
-                            WHERE YEAR(FE_NACIDO)='2021' AND MONTH(FE_NACIDO)='$mes' AND Institucion='$sector'";
+                            WHERE YEAR(FE_NACIDO)='$anio' AND MONTH(FE_NACIDO)='$mes' AND Institucion='$sector'";
 
             $resultado3 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, fecnacido, 
                             a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
@@ -60,7 +61,7 @@
             $resultado2 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, CAST(FE_NACIDO as date)fecnacido
                             into BDHIS_MINSA.dbo.nacidoscnv1
                             FROM CNV_LUGARNACIDO_PASCO
-                            WHERE YEAR(FE_NACIDO)='2021' AND MONTH(FE_NACIDO)='$mes'";
+                            WHERE YEAR(FE_NACIDO)='$anio' AND MONTH(FE_NACIDO)='$mes'";
 
             $resultado3 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, fecnacido, 
                             a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
@@ -78,7 +79,7 @@
             $resultado2 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, CAST(FE_NACIDO as date)fecnacido
                             into BDHIS_MINSA.dbo.nacidoscnv1
                             FROM CNV_LUGARNACIDO_PASCO
-                            WHERE YEAR(FE_NACIDO)='2021' AND Ipress='$establecimiento' AND MONTH(FE_NACIDO)='$mes'";
+                            WHERE YEAR(FE_NACIDO)='$anio' AND Ipress='$establecimiento' AND MONTH(FE_NACIDO)='$mes'";
 
             $resultado3 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, fecnacido, 
                             a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
@@ -207,12 +208,52 @@
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate); ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate2); ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate3); ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate4); ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo
+                    $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                    $data = utf8_encode($newdate4); 
+                    $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                    if($pos == true){
+                        $resultado = str_replace("+ë", "É", $data);
+                        echo $resultado;
+                    }else if($pos2 == true){
+                        $resultado = str_replace("+ì", "Í", $data);
+                        echo $resultado;
+                    }else if($pos3 == true){
+                        $resultado = str_replace("+ô", "Ó", $data);
+                        echo $resultado;
+                    }else if($pos4 == true){
+                        $resultado = str_replace("+ü", "Á", $data);
+                        echo $resultado;
+                    }else{
+                        $resultado = str_replace("+æ", "Ñ", $data);
+                        echo $resultado;
+                    }
+                ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate5; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate6; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate7; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate8; ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate9; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php
+                    $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                    $data = utf8_encode($newdate9); 
+                    $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                    if($pos == true){
+                        $resultado = str_replace("+ë", "É", $data);
+                        echo $resultado;
+                    }else if($pos2 == true){
+                        $resultado = str_replace("+ì", "Í", $data);
+                        echo $resultado;
+                    }else if($pos3 == true){
+                        $resultado = str_replace("+ô", "Ó", $data);
+                        echo $resultado;
+                    }else if($pos4 == true){
+                        $resultado = str_replace("+ü", "Á", $data);
+                        echo $resultado;
+                    }else{
+                        $resultado = str_replace("+æ", "Ñ", $data);
+                        echo $resultado;
+                    }
+                ?></td>
             </tr>
             <?php
                 ;}

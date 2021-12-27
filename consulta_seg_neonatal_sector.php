@@ -10,6 +10,7 @@
         $sector = $_POST['sector'];
         $establecimiento = $_POST['establecimiento'];
         $mes = $_POST['mes2'];
+        $anio = $_POST['anio2'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -33,13 +34,13 @@
         $resultado = "SELECT Nombre_Establecimiento, Numero_Documento_Paciente,Fecha_Atencion,Codigo_Item, Codigo_Unico 
                             into BDHIS_MINSA.dbo.atencionesneonatal1
                             FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            WHERE ANIO='2021' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
+                            WHERE ANIO='$anio' AND Codigo_Item ='36416' AND Tipo_Diagnostico='D'";
         
         if(($sector != 'TODOS') and $establecimiento == 'TODOS'){
             $resultado2 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, CAST(FE_NACIDO as date)fecnacido
                             into BDHIS_MINSA.dbo.nacidoscnv1
                             FROM CNV_LUGARNACIDO_PASCO
-                            WHERE YEAR(FE_NACIDO)='2021' AND MONTH(FE_NACIDO)='$mes' AND Institucion='$sector'";
+                            WHERE YEAR(FE_NACIDO)='$anio' AND MONTH(FE_NACIDO)='$mes' AND Institucion='$sector'";
 
             $resultado3 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, fecnacido, 
                             a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
@@ -57,7 +58,7 @@
             $resultado2 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, CAST(FE_NACIDO as date)fecnacido
                             into BDHIS_MINSA.dbo.nacidoscnv1
                             FROM CNV_LUGARNACIDO_PASCO
-                            WHERE YEAR(FE_NACIDO)='2021' AND MONTH(FE_NACIDO)='$mes'";
+                            WHERE YEAR(FE_NACIDO)='$anio' AND MONTH(FE_NACIDO)='$mes'";
 
             $resultado3 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, fecnacido, 
                             a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
@@ -75,7 +76,7 @@
             $resultado2 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, CAST(FE_NACIDO as date)fecnacido
                             into BDHIS_MINSA.dbo.nacidoscnv1
                             FROM CNV_LUGARNACIDO_PASCO
-                            WHERE YEAR(FE_NACIDO)='2021' AND Ipress='$establecimiento' AND MONTH(FE_NACIDO)='$mes'";
+                            WHERE YEAR(FE_NACIDO)='$anio' AND Ipress='$establecimiento' AND MONTH(FE_NACIDO)='$mes'";
 
             $resultado3 = "SELECT Institucion, PROV_EESS,DIST_EESS, Nombre_EESS,Nu_cnv,Lugar_Nacido, fecnacido, 
                             a.Fecha_Atencion,a.Nombre_Establecimiento ATENDIDO_EN
