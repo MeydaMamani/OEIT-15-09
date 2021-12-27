@@ -13,6 +13,7 @@
         $red_1 = $_POST['red'];
         $dist_1 = $_POST['distrito'];
         $mes = $_POST['mes'];
+        $anio = $_POST['anio'];
 
         if($mes == 1){ $nombre_mes = 'Enero'; }
         else if($mes == 2){ $nombre_mes = 'Febrero'; }
@@ -44,22 +45,22 @@
             $resultado = "SELECT DISTINCT(Numero_Documento_Personal),Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Descripcion_Profesion, mes, 
                             concat(Nombres_Personal,' ',Apellido_Paterno_Paciente) PERSONAL
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            where mes='$mes'and anio='2021' AND Provincia_Establecimiento='$red'
+                            where mes='$mes'and anio='$anio' AND Provincia_Establecimiento='$red'
                                 and Codigo_Item in('99208','99402.04', 'Z3491','Z3492','Z3493','Z3591','Z3592','Z3593', 'z001',
                                 '90585', '90744', '90712', '90713', '90723', '90681', '90670', '90657', '90658','90707', '90717','90701','Z298')
                             AND ID_CITA not IN (SELECT Id_Cita FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA WHERE Codigo_Item in ('99499.01','99499.08','99499.10') 
-                            AND ANIO='2021' AND MES='$mes')
+                            AND ANIO='$anio' AND MES='$mes')
                             ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Numero_Documento_Personal";
         }
         else if ($red_1 == 4 and $dist_1 == 'TODOS') {
             $resultado = "SELECT DISTINCT(Numero_Documento_Personal),Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Descripcion_Profesion, mes, 
                             concat(Nombres_Personal,' ',Apellido_Paterno_Paciente) PERSONAL
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            where mes='$mes'and anio='2021'
+                            where mes='$mes'and anio='$anio'
                                 and Codigo_Item in('99208','99402.04', 'Z3491','Z3492','Z3493','Z3591','Z3592','Z3593', 'z001',
                                 '90585', '90744', '90712', '90713', '90723', '90681', '90670', '90657', '90658','90707', '90717','90701','Z298')
                             AND ID_CITA not IN (SELECT Id_Cita FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA WHERE Codigo_Item in ('99499.01','99499.08','99499.10') 
-                            AND ANIO='2021' AND MES='$mes')
+                            AND ANIO='$anio' AND MES='$mes')
                             ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Numero_Documento_Personal";
         }
         else if($dist_1 != 'TODOS'){
@@ -67,11 +68,11 @@
             $resultado = "SELECT DISTINCT(Numero_Documento_Personal),Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Descripcion_Profesion, mes, 
                             concat(Nombres_Personal,' ',Apellido_Paterno_Paciente) PERSONAL
                             from T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA
-                            where mes='$mes'and anio='2021' AND Provincia_Establecimiento='$red' AND  Distrito_Establecimiento='$dist'
+                            where mes='$mes'and anio='$anio' AND Provincia_Establecimiento='$red' AND  Distrito_Establecimiento='$dist'
                                 and Codigo_Item in('99208','99402.04', 'Z3491','Z3492','Z3493','Z3591','Z3592','Z3593', 'z001',
                                 '90585', '90744', '90712', '90713', '90723', '90681', '90670', '90657', '90658','90707', '90717','90701','Z298')
                             AND ID_CITA not IN (SELECT Id_Cita FROM T_CONSOLIDADO_NUEVA_TRAMA_HISMINSA WHERE Codigo_Item in ('99499.01','99499.08','99499.10') 
-                            AND ANIO='2021' AND MES='$mes')
+                            AND ANIO='$anio' AND MES='$mes')
                             ORDER BY Provincia_Establecimiento, Distrito_Establecimiento, Codigo_Unico, Nombre_Establecimiento, Numero_Documento_Personal";
         }
         
@@ -161,7 +162,27 @@
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate); ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo utf8_encode($newdate2); ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px; text-align: center;"><?php echo utf8_encode($newdate3); ?></td>
-                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate4; ?></td>
+                <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php
+                    $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                    $data = utf8_encode($newdate4); 
+                    $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                    if($pos == true){
+                        $resultado = str_replace("+ë", "É", $data);
+                        echo $resultado;
+                    }else if($pos2 == true){
+                        $resultado = str_replace("+ì", "Í", $data);
+                        echo $resultado;
+                    }else if($pos3 == true){
+                        $resultado = str_replace("+ô", "Ó", $data);
+                        echo $resultado;
+                    }else if($pos4 == true){
+                        $resultado = str_replace("+ü", "Á", $data);
+                        echo $resultado;
+                    }else{
+                        $resultado = str_replace("+æ", "Ñ", $data);
+                        echo $resultado;
+                    }
+                ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate5; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate6; ?></td>
                 <td style="border: 1px solid #DDDDDD; font-size: 15px;"><?php echo $newdate7; ?></td>

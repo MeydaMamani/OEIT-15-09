@@ -40,6 +40,7 @@
                         <input hidden name="red" value="<?php echo $_POST['red']; ?>">
                         <input hidden name="distrito" value="<?php echo $_POST['distrito']; ?>">
                         <input hidden name="mes" value="<?php echo $_POST['mes']; ?>">
+                        <input hidden name="anio" value="<?php echo $_POST['anio']; ?>">
                         <button type="submit" id="exportarCSV" name="exportarCSV" class="btn btn-outline-success btn-sm m-2 "><i class="mdi mdi-printer"></i> Imprimir Excel</button>
                     </form>
                     <button class="btn btn-outline-secondary btn-sm m-2" onclick="location.href='cant_prof_epp.php';"><i class="mdi mdi-arrow-left-bold"></i> Regresar</button>
@@ -113,7 +114,27 @@
                             <td class="align-middle"><?php echo utf8_encode($newdate); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate2); ?></td>
                             <td class="align-middle"><?php echo utf8_encode($newdate3); ?></td>
-                            <td class="align-middle"><?php echo $newdate4; ?></td>
+                            <td class="align-middle"><?php
+                                $findme = "+ë"; $findme2 = "+ì"; $findme3 = "+ô"; $findme4 = "+ü";
+                                $data = utf8_encode($newdate4); 
+                                $pos = strpos($data, $findme); $pos2 = strpos($data, $findme2); $pos3 = strpos($data, $findme3); $pos4 = strpos($data, $findme4);
+                                if($pos == true){
+                                    $resultado = str_replace("+ë", "É", $data);
+                                    echo $resultado;
+                                }else if($pos2 == true){
+                                    $resultado = str_replace("+ì", "Í", $data);
+                                    echo $resultado;
+                                }else if($pos3 == true){
+                                    $resultado = str_replace("+ô", "Ó", $data);
+                                    echo $resultado;
+                                }else if($pos4 == true){
+                                    $resultado = str_replace("+ü", "Á", $data);
+                                    echo $resultado;
+                                }else{
+                                    $resultado = str_replace("+æ", "Ñ", $data);
+                                    echo $resultado;
+                                }
+                            ?></td>
                             <td class="align-middle"><?php echo $newdate5; ?></td>
                             <td class="align-middle"><?php echo $newdate6; ?></td>
                             <td class="align-middle"><?php echo $newdate7; ?></td>
